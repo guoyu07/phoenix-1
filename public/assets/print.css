@@ -1,0 +1,17 @@
+/* 
+    CIS Summer School CSS Printer-Friendly conversion page
+    (C) Yectep Studios 2012. All rights reserved.
+    @version: v20704
+*/
+
+body {
+    background: none !important;
+}
+
+.print-hide {
+    display: none !important;
+}
+
+.print-invisible {
+    visibility: hidden !important;
+}

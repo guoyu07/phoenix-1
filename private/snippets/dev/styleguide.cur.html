@@ -1,0 +1,149 @@
+<div id="body" class="content-row spaced">
+    <div id="content" style="padding:0.5em;">
+        
+        <h1>Plume Style Guide</h1>
+        <p><cite>Written by Chester Li, yectepstudios (Revision 0)</cite></p>
+        <div id="toc" class="floatbox floatbox-right">
+            <p><strong>Table of Contents</strong></p>
+            <p class="no-bottom">
+                <ol class="numeral muted">
+                    <li><a href="#language">Design Language &amp; Introduction</a></li>
+                    <li><a href="#typography">Typography</a></li>
+                    <li><a href="#text">Text</a></li>
+                    <li><a href="#alerts">Alerts</a></li>
+                    <li><a href="#badges">Badges</a></li>
+                    <li><a href="#shields">Shields</a></li>
+                    <li><a href="#lists">Lists</a></li>
+                    <li><a href="#forms">Forms &amp; Labels</a></li>
+                    <li><a href="#floatboxes">Floatboxes</a></li>
+                    <li><a href="#summary">Closing Statement</a></li>
+                </ol>
+            </p>
+        </div>
+        <p>This style guide page aims to provide users with a constant experience across all pages by stylizing elements in a consistent fashion. Elements are styled in the way they should be presented and described appropriately.</p>
+        
+        <h3>plume <span class="muted">/plo͞om/</span></h3>
+        <blockquote>a long, soft feather or arrangement of feathers used by a bird for display</blockquote>
+        <cite>&ndash; Merriam-Webster</cite>
+        
+        <h2 id="language">Introduction</h2>
+        <p>Plume is a design package designed for <a href="http://www.cis.edu.hk/">Chinese International School's</a> Summer Programme. It evolves from a private Github package known as <code>cis_summer</code> and before that, <code>cisss</code>. The code package used to power the backend of the site is known as <code>Phoenix</code> and is currently under production. After debranding and removal of all client-associated items, the package will be opensourced on Github under a yet undecided name.</p>
+        <p>The default stylesheet, <code>screen.css</code> is used across all media. An additional stylesheet, <code>print.css</code> contains generic classes for printer-friendliness and is only used on printers.</p>
+        
+        <h3>A consistent design language</h3>
+        <p>In an effort to reduce guesswork and confusion, the stylesheet, class and ID definitions are defined in <strong>past tense</strong> for any action verbs and <strong>singular</strong> form for any nouns.</p>
+        <p>Other than syntax, general clarity, usability and legibility are the three key characteristics to keep in mind when designing any page built with Plume. Here are a few things to also keep in mind for best practise uses:</p>
+        <ul>
+            <li>The website shall be 100% W3C HTML5 and CSS3 compliant. Pre-CSS3 browser-specific selectors may be used where appropriate (eg: <code>-moz-border-radius</code>).</li>
+            <li>The website should be semantic. This means using a header tag for titles, cite tags for captions and citations, and list tags properly.</li>
+            <li>Ems shall be used over pixels where possible to avoid unpleasant surprises. This is part of a decision to move Plume as quickly as possible to a mobile-first and responsive design.</li>
+            <li>The page should not use more than 3 fonts. It starts to get confusing after that.</li>
+            <li>There should always be some sort of breadcrumb and navigation bar to provide spatial awareness with regards to the rest of the site.</li>
+            <li>Linguistically, the CIS Summer Programme will use 100% British spelling. This means we use "programme", "colour" and "enroll". Content-providers should be consistent with the site linguistic preferences. This also means that the site must use the <code>&lt;html lang="en-GB"&gt;</code> tag. Designers should note any linguistic preferences in the lang parameter.</li>
+        </ul>
+        
+        <h2 id="typography">Typography</h2>
+        <p>One of the most overlooked design aesthetics in web sites today is typography: that is, the use of different fonts for different purposes within the site. Fonts can help the user subconsciously identify differences between title and text, important and trial and so much more.</p>
+        <p>Web-enabled fonts (via <code>@font-face</code> in CSS) make the website feel unique, well-curated and well-maintained. However, not everyone can use this, which means we still need fallback fonts.</p>
+        <p>Plume uses <strong>2 main fonts</strong>, one for headings and another for general text.</p>
+        
+        <h3>Headings</h3>
+        <p>For headings, we use <strong>Nobile</strong> from <a href="http://www.google.com/webfonts" onclick="window.open(this.href);return false;">Google Web Fonts</a>. It looks like this:</p>
+        <p class="font-nobile featured muted centered">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789</p>
+        <p>This means that all heading tags, <code>&lt;h1&gt;</code> thru <code>&lt;h3&gt;</code> are by default styled with Nobile. The remaining header tags <code>&lt;h4&gt;</code> to <code>&lt;h6&gt;</code> are left to the designer's discretion.</p>
+        <div class="alert"><span class="badge">Note</span> In the event that Nobile can't be loaded, the fallback font is <strong>Helvetica Neue</strong>, then <strong>Helvetica</strong>.</div>
+        
+        <p>You can force use of this font on any element using <code>class="font-nobile"</code>, though it is not recommended.</p>
+        
+        <div class="padded-left floatbox floatbox-left">
+            <h1>H1. Page Heading</h1>
+            <h2>H2. Section Heading</h2>
+            <h3>H3. Subsection Heading</h3>
+        </div>
+        
+        <h3>General Text</h3>
+        <p>Throughout the reset of the design, also from Google Web Fonts, <strong>Open Sans</strong> is used. This font is very popular with modern websites, which also helps by providing some form of familiarity to some people.</p>
+        
+        <p>Any element can be styled with Open Sans with <code>class="font-open"</code>. It looks like this:</p>
+
+        <div class="line-break"></div>
+        
+        <p class="font-open featured muted centered">AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789</p>
+        
+        
+        <h2 id="text">Text</h2>
+        <p>Plain paragraph text is styled using the usual <code>&lt;p&gt;</code> syntax. Links are <a href="#">coloured</a> and will <a href="#" style="text-decoration:underline;">underline</a> upon rollover.</p>
+        <p>There's a number of cool things you can do with text. You can make it <span class="muted">less significant</span> with <code>class="muted"</code>, or <span class="small">smaller</span> with <code>class="small"</code>.<br />Of course you can go the other way and write things in <strong>bold font-face</strong> with <code>&lt;strong&gt;</code> and <span class="featured">feature text</span> using <code>class="featured"</code>.</p>
+        
+        <h2 id="alerts">Alerts</h2>
+        <p>An alert gives <strong>vital information</strong> about an action and draws the user's attention to it. Alerts should be particularly succinct and used appropriately to avoid notification fatigue.</p>
+        <div class="alert">This gives you some information. Use <code>&lt;div class="alert"&gt;</code> to create one.</div>
+        <div class="alert alert-red">A red alert <code>class="alert alert-red"</code> indicates that an action was performed but the response was not as expected.</div>
+        <div class="alert alert-green">Of course, a green alert <code>class="alert alert-green"</code> describes the details of a successful action.</div>
+        <div class="alert alert-yellow">Finally, a yellow alert <code>class="alert alert-yellow"</code> hints at potential problems ahead, or gives a warning to the user.</div>
+        
+        <h2 id="badges">Badges</h2>
+        <p>Unlike alerts, which are used to indicate results or possible outcomes of an action, badges gives general advice and information througout the page, regardless of whether they are related to actions. Badges require the use of the <code>&lt;span class="badge"&gt;</code> tag.</p>
+        <p>There are a number of badges which correspond to the same colouring scheme.</p>
+        <div id="badges-container" class="centered">
+            <p><span class="badge">Information</span> <span class="badge badge-red">Warning</span> <span class="badge badge-yellow">Caution</span> <span class="badge badge-green">Friendly</span></p>
+        </div>
+        <div class="alert" style="display:inline;float:left;margin:1em;"><span class="badge">Tip</span> Put these together for a more dramatic effect.</div>
+        <p>Badges do not encapsulate the descriptive text - alerts do that. These means they serve two different purposes. It's much better to "overload" on badges than it is to cause notification fatigue using alerts.</p>
+        
+        <div class="line-break"></div>
+        
+        <h2 id="shields">Shields</h2>
+        <p>Shields were born more of necessity with the CIS Summer Programme than anything else. They are an action item and  therefore have hover states.</p>
+        
+        <h2 id="lists">Lists</h2>
+        
+        <div class="floatbox floatbox-right">
+            <ul>
+                <li>An unordered list item</li>
+                <li>Another list item</li>
+            </ul>
+            <ol class="numeral">
+                <li>An ordered list with class numeral</li>
+                <li>A second item</li>
+            </ol>
+        </div>
+        <p>Unordered lists have a disc-shaped bullet point and are initialized with <code>&lt;ul&gt;</code>. Ordered lists however (<code>&lt;ol&gt;</code>), must have a default class (default: <code>class="numeral"</code>) to define its list style type.</p>
+        <p>By convention, lists should not be encapsulated in paragraph tags.</p>
+        <div class="line-break"></div>
+        
+        <h2 id="forms">Forms &amp; Labels</h2>
+        <p>Forms are interactive. They should invite the user to interact with each input element, while at the same time turning attention to its <strong>label</strong>. The label gives the user instructions and should be placed, ideally, as close to the input element itself as possible.</p>
+        <pre>&lt;form&gt;
+&lt;/form&gt;
+        </pre>
+        <form>
+            <div class="form-row">
+                <label for="text-input">Text input</label>
+                <input type="text" id="text-input" name="text_input" />
+            </div>
+            <div class="form-row">
+                <label for="text-input-2">Text input with help text</label>
+                <div class="form-help">
+                    <input type="text" id="text-input-2" name="text_input" />Inline help text
+                </div>
+            </div>
+            <div class="form-row form-red">
+                <div class="form-help no-label">
+                    <input type="text" id="text-input-3" name="text_input" class="input-red" />
+                    <span class="form-help-text red">Invalid <code>class="red"</code> input with lower help text (for longer descriptions)<br />
+                        These can extend downwards as necessary, imitating a paragraph.
+                    </span>
+                </div>
+            </div>
+            <div class="form-row form-green">
+                <label for="text-input-4">Green input</label>
+                <input type="text" id="text-input-4" name="text_input" class="input-green" />
+            </div>
+            <div class="form-row">
+                <label for="text-input-5">Disabled input</label>
+                <input type="text" id="text-input-5" name="text_input" disabled="disabled" value="Disabled text" />
+            </div>
+        </form>
+    </div>
+</div>
