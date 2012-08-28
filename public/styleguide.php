@@ -20,12 +20,18 @@ define('PHX_UX',        true);
 require_once(PTP . 'php/ignition.php');
 
 // Set page switch variables
-$p['title'] = 'Style Guide';
+$h['title'] = 'Style Guide';
 $n['styleguide'] = 'active';
 
+// Breadcrumb
+
+
 // Include header section
-echo UX::grabPage('common/header_public', $p, true);
-echo UX::grabPage('common/nav_public', $n, true);
+echo UX::makeHead($h, $n);
+
+// Page info
+echo UX::makeBreadcrumb(array(	'Extras'		=> 'javascript:;',
+								'Style Guide'	=> '/styleguide.php'));
 echo UX::grabPage('dev/styleguide', null, true);
 
 // Before footer grab time spent

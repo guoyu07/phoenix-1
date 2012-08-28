@@ -1,0 +1,265 @@
+/*
+    Responsive CSS page for smartphones (mainly)
+    Overrides regular CSS definitions
+*/
+
+// Default screens
+@media screen and (min-width: 980px) {
+
+    /** First define visbility/invisibility custom blocks */
+    .hide-screen {
+        display: none !important;
+    }
+    
+}
+
+// Older monitors and tablets
+@media screen and (max-width: 980px) and (min-width: 720px) {
+    
+    /** First define visbility/invisibility custom blocks */
+    .hide-transitional {
+        display: none !important;
+    }
+    
+    /* At this point fluidity is key */
+    div.navbar {
+        width: 100%;
+        height: auto;
+    }
+    
+    div.content-row {
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    label, form.short label {
+        width: 14em;
+    }
+    
+    div.no-label, form.short div.no-label {
+        margin-left: 15em !important;
+    }
+    
+    .col.c1 { width: 10%; }
+    .col.c2 { width: 20%; }
+    .col.c3 { width: 30%; }
+    .col.c4 { width: 40%; }
+    .col.c5 { width: 50%; }
+    .col.c6 { width: 60%; }
+    .col.c7 { width: 70%; }
+    .col.c8 { width: 80%; }
+    .col.c9 { width: 90%; }
+    .col.c10 { width: 100%; }
+
+}
+
+@media screen and (max-width: 720px) {
+
+    /** First define visbility/invisibility custom blocks */
+    .hide-smartphone {
+        display: none !important;
+    }
+    
+    .show-smartphone {
+        display: block !important;
+    }
+
+    body {
+        font-size: 12px;
+    }
+
+    p {
+        overflow: auto;
+    }
+
+    div.navbar {
+        position: relative !important;
+        background: none;
+        border: none;
+        -moz-box-shadow: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        height: auto !important;
+    }
+    
+    div.nav-buffer {
+        clear: both;
+        height: 0.5em !important;
+    }
+    
+    div.body-emulate, div#body {
+        -moz-border-radius: 0px;
+        -webkit-border-radius: 0px;
+        border-radius: 0 0 0 0;
+        width: 100%;
+        border-left: 0px;
+        border-right: 0px;
+    }
+
+    label {
+        font-size: 1em;
+        margin-left: 0;
+        width: 100%;
+        text-align: left;
+    }
+    
+    div.no-label {
+        margin-left: 0 !important;
+    }
+    
+    textarea, form.reversed textarea, form.short textarea {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 90%;
+    }
+
+    input, form.reversed input, form.short input,
+    select, form.reversed select, form.short select {
+        width: 100%;
+    }
+    
+    input[type=radio], input[type=checkbox] {
+        width: auto !important;
+    }
+    
+    .col-row {
+        display: block;
+    }
+    
+    .col {
+        display: block;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 1em;
+        margin: 0;
+        margin-top: 1em;
+        background-color: #fff;
+        border-top: 1px solid #ccc !important;
+        border-bottom: 1px solid #ccc !important;
+        border-left: 0px !important;
+        border-right: 0px !important;
+    }
+    
+    .col-row:first-child .col {
+        border-top: 1px solid #ccc;
+    }
+    
+    .col-row:last-child .col {
+        border-bottom: 1px solid #ccc;
+    }
+    
+    .col:first-child {
+        margin-top: 0;
+    }
+    
+    .col-row:first-child .col:first-child {
+        border-top-left-radius: 0em;
+    }
+    
+    .col-row:first-child .col:last-child {
+        border-top-right-radius: 0em;
+    }
+    
+    .col-row:last-child .col:first-child {
+        border-bottom-left-radius: 0em;
+    }
+    
+    .col-row:last-child .col:last-child {
+        border-bottom-right-radius: 0em;
+    }
+    
+    .col.c1,
+    .col.c2,
+    .col.c3,
+    .col.c4,
+    .col.c5,
+    .col.c6,
+    .col.c7,
+    .col.c8,
+    .col.c9,
+    .col.c10 { width: 100%; }
+    
+    div.footer {
+        clear: both;
+    }
+    
+    div.navbar.row > div.content-row {
+        width: 100%;
+    }
+    
+    div.content-row.spaced > h1:first-child, div.content-row.spaced > h2:first-child {
+        padding-left: 0.5em;
+    }
+    
+    div.body-emulate > h1:first-child, div.body-emulate > h2:first-child {
+        padding-left: 0 !important;
+    }
+    
+    div#body > h1:first-child, div#body > h2:first-child {
+        padding-left: 0 !important;
+    }
+    
+    div.content-row {
+        width: 100%;
+        overflow-x: auto;
+    }
+    
+    ul.nav {
+        margin: 0em;
+        list-style: none;
+    }
+    
+    ul.nav > li {
+        display: block;
+        background-color: #550000;
+        border-bottom: 1px solid #400a0a;
+        color: #fff;
+        text-shadow: -1px -1px #000;
+        width: 100%;
+    }
+    
+    ul.nav > li a {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        display: block;
+        padding: 0.2em 0 0.2em 1em;
+        font-size: 1em;
+        width: 100%;
+        line-height: 2.7em;
+    }
+    
+    img.float-left {
+        display: block !important;
+        float: none;
+        width: 100% !important;
+    }
+    
+    button {
+        padding: 0.4em 0.6em;
+    }
+    
+    h1 {
+        font-size: 2.3em;
+    }
+    
+    h2 {
+        font-size: 1.8em;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+    }
+    
+    div.floatbox {
+        display: block;
+        margin: 0 0 0 0;
+    }
+    
+    div.floatbox-right, div.floatbox-left {
+        float: none;
+    }
+}

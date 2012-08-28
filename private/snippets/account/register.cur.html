@@ -1,0 +1,363 @@
+<div class="content-row spaced">
+	<div class="alert alert-yellow"><span class="badge badge-yellow">Attention</span> Do you already have a family account or have registered a child previously? You can add multiple children under the same family account. To do so, just Sign In (use the button at the top of the page) and then click "Add Child Application" once you've logged in.</div>
+</div>
+
+<form class="validate" action="./register.php" method="post" id="reg-form" enctype="multipart/form-data">
+<div class="content-row spaced">
+    <h1>Create an Account</h1>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+	<div class="col-row" id="basic-info">
+		
+		<!-- Form block -->
+		<div id="form-basic" class="col c7">
+			<h2>Parent's Account Information</h2>
+			
+			{{error}}
+			
+			<p>Fields with a red asterisk (<span class="red strong">*</span>) are required. Please note that only online registrations are accepted - there is no paper application or brochure. Thank you for helping us be as green and ecofriendly as possible!</p>
+			
+				<div class="form-row" id="form-name">
+					<label for="name-input">Parent's name <span class="red strong">*</span></label>
+					<input type="text" id="name-input" name="name" class="required" />
+				</div>
+				<div class="form-row" id="form-email">
+					<label for="email-input">Email address <span class="red strong">*</span></label>
+					<input type="email" id="email-input" name="email" class="required" placeholder="name@example.com"/>
+				</div>
+				
+				<div class="alert alert-red hide no-label" id="email-invalid"><img src="/assets/icons/cross.png" title="[X]" /> Sorry, we already have an account registered with that address. If you want to enroll another child, you can register additional children if you login to your existing account.</div>
+				
+				<div class="form-row" id="form-pass">
+					<label for="pass-input">Password <span class="red strong">*</span></label>
+					<input type="password" id="pass-input" name="pass" class="required" />
+				</div>
+				<div class="form-hint no-label muted">
+                    <p>Must be a minimum of 6 characters.</p>
+                    <p><img src="/assets/icons/lock.png" alt="[Lock]" /> We protect your password with US military-approved security algorithms, the same as what many banks worldwide rely on and use. At no time can our staff see your password, and we will never ask for it. We have you covered - don't worry!</p>
+                </div>
+				
+				<div class="alert alert-red hide no-label" id="password-invalid"><img src="/assets/icons/cross.png" title="[X]" /> Your password must be a minimum of six characters. There are no further restrictions for your convenience.</div>
+				
+				<div class="form-row" id="form-confirm">
+					<label for="confirm-input">Confirm password <span class="red strong">*</span></label>
+					<input type="password" id="confirm-input" name="confirm" class="required" />
+				</div>
+				
+				<div class="alert alert-red hide no-label" id="confirm-invalid"><img src="/assets/icons/cross.png" title="[X]" /> Your passwords don't match.</div>
+		</div>
+		
+		<!-- Help block -->
+		<div id="help-basic" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h2>Need help?</h2>
+            <h3>Parent's name</h3>
+            <p>Parents: please enter your name. You'll be asked to provide a secondary emergency contact for each child at a later time.</p>
+            <h3>Email address</h3>
+            <p>Enter an email address that you check often as we will send important updates to that account (no spam ever, promise!). Make sure you allow emails ending in <strong>@summer.cis.edu.hk</strong> to get through.</p>
+            <p>We'll need to validate this email address by sending you a private link when you submit this form.</p>
+            <h3>Password</h3>
+            <p>We kindly request that to enhance security, your password have a minimum of six characters.</p>
+		</div>
+		
+	</div>
+
+	<div class="col-row" id="contact-info" style="margin-top:1em;">
+		
+		<!-- Form block -->
+		<div id="form-contact" class="col c7">
+			<h2>Contact Information</h2>
+			
+			<div class="form-row" id="form-locale">
+				<label for="locale-input">Country of Residence <span class="red strong">*</span></label>
+				<select id="locale-input" name="locale" class="required">
+                    <option value="HK" selected="selected">Hong Kong</option>
+{{countries}}
+				</select>
+			</div>
+			
+			<div class="form-row" id="form-address">
+				<label for="address-input">Home Address <span class="red strong">*</span></label>
+				<textarea id="address-input" name="address" class="required"></textarea>
+			</div>
+            <div class="form-hint muted no-label">Please no PO Boxes</div>
+            
+            <div class="form-row" id="form-hphone">
+            	<label for="hphone-input">Home Phone <span class="red strong">*</span></label>
+            	<input type="text" id="hphone-input" name="hphone" class="required" />
+            </div>
+			
+			<div class="form-row" id="form-mphone">
+				<label for="hphone-input">Local Mobile Phone &nbsp; <strong>+852</strong></label>
+				<input type="text" id="mphone-input" name="mphone" maxlength="8" />
+			</div>
+		</div>
+		
+		<!-- Help block -->
+		<div id="help-contact" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h3>Country of Residence</h3>
+            <p>Please select your family's country of residence for telephone and home address purposes.</p>
+            <h3>Home Address</h3>
+            <p>Please enter your family's home address - <strong>not your mailing address</strong>. This is used to verify you and your children's identity. Feel free to read our <a href="/policies.php?privacy" class="tipped" title="Opens in a new window" onclick="window.open(this.href);return false;">Privacy Policy</a>.</p>
+            <h3>Home Phone</h3>
+            <p>HK residents: enter your 8-digit phone number. Otherwise, enter your home phone number beginning with the country code, without the + sign and any parentheses or spaces.</p>
+            <p class="muted">Example: 13105551234 for US numbers.</p>
+            <h3>Local Mobile Phone</h3>
+            <p>Please enter your local Hong Kong mobile phone number (for SMS notifications). If you do not have one, leave this field blank.</p>
+		</div>
+	</div>
+
+	<div class="col-row" id="prefs-info" style="margin-top:1em;">
+		
+		<!-- Form block -->
+		<div id="form-prefs" class="col c7">
+			<h2>Your Preferences</h2>
+			
+			<p>You can change these preferences later as well.</p>
+			
+			<div class="form-row" id="form-language">
+				<label for="lang-input">Preferred Spoken Language <span class="red strong">*</span></label>
+				<select id="lang-input" name="lang" class="required">
+                    <option value="en" selected="selected">English</option>
+                    <option value="zh">Putonghua (Mandarin)</option>
+                    <option value="yue">Cantonese</option>
+				</select>
+			</div>
+			<div class="form-help no-label muted">Only English is supported in written communication.</div>
+			
+			<div class="form-row" id="form-email-noti" style="padding-top: 1.5em;">
+                <div class="no-label"><strong>Send email notifications and confirmations?</strong> <span class="red strong">*</span></span><br />
+				<label class="nested"><input type="radio" id="email-yes-input" name="notify_email" value="1" class="required" checked="checked" /> Yes please</label>
+				<label class="nested"><input type="radio" id="email-no-input" name="notify_email" value="0" class="required" /> No thanks</label></div>
+			</div>
+			<div class="no-label muted form-hint hide-smartphone"><a href="javascript:;" onclick="$('#notifications').slideToggle('');$.scrollTo('#notifications', 300, { offset: {top: -80} });">Learn more about notifications</a></div>
+			
+			<div class="form-row" id="form-sms-noti" style="padding-top: 1.5em;">
+			    <div class="no-label"><strong>Send SMS notifications and confirmations?</strong> <span class="red strong">*</span></span><br />
+				<label class="nested"><input type="radio" id="sms-yes-input" name="notify_sms" value="1" class="required" /> Yes please</label>
+				<label class="nested"><input type="radio" id="sms-no-input" name="notify_sms" value="0" class="required" checked="checked" /> No thanks</label></div>
+			</div>
+			<div class="no-label muted form-hint">Requires a local mobile phone number. We support all major carriers.<br /><a href="javascript:;" onclick="$('#notifications').slideToggle('');$.scrollTo('#notifications', 300, { offset: {top: -80} });" class="hide-smartphone">Learn more about notifications</a></div>
+
+			<div id="notifications" class="hide hide-smartphone">
+                <h3>All About Notifications</h3>
+                <p style="margin-top: 1.5em;">If you allow us, we will send you automated confirmations and notifications. You can turn these on or off at any time. Refer to the table below on what notifications will be sent for email and SMS options. For security purposes, you will need to validate your local mobile phone number (we'll send you a confirmation code) if you enable SMS notifications.</p>
+    			
+    			<table style="width: auto;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: right;">Action to Notify</th>
+                            <th style="text-align: center;">Email</th>
+                            <th style="text-align: center;">SMS</th>
+                            <th style="text-align: center;">Call</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: right;">Can you opt out?</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">General announcements and newsletters</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">When submitting a child's schedule</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">When a change request is denied/approved</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">When we receive a payment and credit your account</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">If your billing account has an unpaid item nearing due date</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">If you have an overdue unpaid item <strong>and</strong> it affects your enrolmentx</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">During typhoons, rainstorms or health warnings</td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">When a room change occurs on any of your schedules</td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right;">If a class a child is enrolled in is cancelled for any reason</td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="No" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
+                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="No" /></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+                <p style="padding-top: 1.5em;">We support the following Hong Kong mobile phone carriers:</p>
+                <table style="width:auto;">
+                    <thead>
+                        <tr>
+                            <th style="width:50%;">Carrier</th>
+                            <th style="width:50%;">Carrier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>China Mobile</td>
+                            <td>China Unicom</td>
+                        </tr>
+                        <tr>
+                            <td>CSL/1O1O/one2free</td>
+                            <td>Hutchison 3</td>
+                        </tr>
+                        <tr>
+                            <td>New World Mobility</td>
+                            <td>PCCW</td>
+                        </tr>
+                        <tr>
+                            <td>SmarTone</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="form-row" id="form-language" style="margin-top: 3em;">
+                <p>
+                    <button type="submit" class="button-green" style="float: right;">Submit Registration</button>
+                    <button type="reset" class="button" style="float: left;">Reset Form</button>
+                </p>
+                <div class="clear buffer">&nbsp;</div>
+            </div>
+		</div>
+		
+		<!-- Help block -->
+		<div id="help-prefs" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h3>Preferred Spoken Language</h3>
+            <p>While not always possible due to personnel reasons, we will try to call you in this language for your convenience. Please note that only English will be used in written communication.</p>
+            <h3>Notifications &amp; Confirmations</h3>
+            <p>Whether you'd like to turn on notifications through different media. <a href="javascript:;" onclick="$('#notifications').slideToggle('');$.scrollTo('#notifications', 300, { offset: {top: -80} });">Learn more about notifications</a></p>
+		</div>
+	</div>
+</div>
+</form>
+
+<script type="text/javascript">
+function emailCheck(email) {
+    var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+    return pattern.test(email);
+}
+
+$(document).ready(function() {
+
+    // Form-populate
+    var autoPopulate = {{form_json}};
+    jQuery.each(autoPopulate, function(key, data) {
+        if ((key !== 'pass') && (key !== 'confirm')) $('input[name=' + key + ']').val(data);
+    });
+    
+    $('input[name="name"]').focus();
+    
+    // Custom form validation
+    $('input[name="email"]').blur(function() {
+        $(this).parent().removeClass('form-red');
+        if (!emailCheck($(this).val())) {
+            $('#email-invalid').removeClass('alert-red alert-green').addClass('alert-red').html('<img src="/assets/icons/cross.png" title="[X]" /> Please input a valid email address.').show();
+            $(this).parent().addClass('form-red');
+            return null;
+        }
+        
+        $.getJSON('/rpc.php', {method: 'checkEmail', data: $('input[name="email"]').val()}, function(r) {
+            if (r.responseCode == 2200) {
+                if (r.response) {
+                    // Email's taken :(
+                    $('#email-invalid').removeClass('alert-red alert-green').addClass('alert-red').html('<img src="/assets/icons/cross.png" title="[X]" /> Sorry, the email you entered is already in use. If you already have an account and wish to enroll another child, please login and use the "Add an Application" button.').show();
+                    $(this).parent().addClass('form-red');
+                } else {
+                    $('#email-invalid').removeClass('alert-red alert-green').addClass('alert-green').html('<img src="/assets/icons/tick.png" title="[OK]" /> Email address is valid and ready for use.').show();
+                }
+            } else {
+                $('#email-invalid').removeClass('alert-red alert-green').addClass('alert-red').html('<img src="/assets/icons/cross.png" title="[X]" /> An error occured while validating the email address you entered. Proceed with caution or try again later.').show();
+                $(this).parent().addClass('form-red');
+            }
+        });
+    });
+    
+    $('input[name="pass"]').blur(function() {
+        $('#'+this.id).parent().removeClass('form-red');
+        $('#password-invalid').hide();
+        if ($(this).val().length < 6) {
+            $('#'+this.id).parent().addClass('form-red');
+            $('#'+this.id).parent().effect('pulsate', {times:2}, 400);
+            $('#password-invalid').show();
+            return false;
+        }   
+    });
+    
+    $('input[name="confirm"]').blur(function() {
+        $('#'+this.id).parent().removeClass('form-red');
+        $('#confirm-invalid').hide();
+        if ($(this).val() !== $('input[name="pass"]').val()) {
+            $('#'+this.id).parent().addClass('form-red');
+            $('#'+this.id).parent().effect('pulsate', {times:2}, 400);
+            $('#confirm-invalid').show();
+            return false;
+        }   
+    });
+    
+    $('form').submit(function(e) {
+        $('input[name="pass"]').parent().removeClass('form-red');
+        $('#password-invalid').hide();
+        $('#confirm-invalid').hide();
+        $('#form-invalid').hide();
+        
+        if ($('input[name="pass"]').val().length < 6) {
+            $('input[name="pass"]').parent().addClass('form-red');
+            $.scrollTo('input[name="pass"]', 300, {offset: {top:-80}, onAfter: function() {
+                $('input[name="pass"]').parent().effect('pulsate', {times:2}, 400);
+                $('input[name="pass"]').focus();
+            } });
+            $('#password-invalid').show();
+            $('#form-invalid').show();
+            e.preventDefault();
+            return false;
+        }   
+        
+        $('input[name="confirm"]').parent().removeClass('form-red');
+        if ($('input[name="confirm"]').val() !== $('input[name="pass"]').val()) {
+            $('input[name="confirm"]').parent().addClass('form-red');
+            $.scrollTo('input[name="confirm"]', 300, {offset: {top:-80}, onAfter: function() {
+                $('input[name="confirm"]').parent().effect('pulsate', {times:2}, 400);
+                $('input[name="confirm"]').focus();
+            } });
+            $('#confirm-invalid').show();
+            $('#form-invalid').show();
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+</script>

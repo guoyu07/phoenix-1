@@ -20,7 +20,7 @@ define('DB_PASS',   'Ci$L1n0d3VPS');
 /**
  * @package     Phoenix
  */
-define('DB_NAME',   'phoenix');
+define('DB_NAME',   'phoenix2');
 
 /**
  * @package     Phoenix

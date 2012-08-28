@@ -25,8 +25,9 @@ $b['body_class'] = 'billboarded';
 $n['homepage'] = 'active';
 
 // Include header section
-echo UX::grabPage('common/header_public', $h, true);
-echo UX::grabPage('common/nav_public', $n, true);
+echo UX::makeHead($h, $n);
+
+// The page
 echo UX::grabPage('public/home', $b, true);
 
 // Before footer grab time spent

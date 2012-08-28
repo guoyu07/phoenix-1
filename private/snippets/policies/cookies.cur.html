@@ -1,0 +1,117 @@
+<div id="body" class="content-row spaced">
+    <div id="content" style="padding:0.5em;">
+            
+    {{policytoc}}
+    
+    	<h1>Cookie Policy</h1>
+                
+        <p>Some countries around the world today have enacted laws to protect their citizens' privacy, especially through the use of website cookies. Cookies are small text-based files that store information commonly used to track users' data as they traverse through the Internet.</p>
+        
+        <p>The CIS Summer Programme website uses cookies for two reasons: (a) to authenticate users so we can provide them with interactive, customised information such as child information and course enrolmentx data, and (b) to report metrics on the computer and network environment of each visitor for internal use and improvements to the site.</p>
+        
+        <p>You may opt to remove our cookies for one session at the bottom of this page. Please note that this feature requires JavaScript.</p>
+        
+        <p>Below is a list of all the cookies that you may find our site uses, and their purposes. Your browser's settings may disable some of these tracking features.</p>
+        
+        <p>
+            <table style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Cookie name</th>
+                        <th>Set by</th>
+                        <th>Sample data</th>
+                        <th>Lifetime</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>SummerSession</td>
+                        <td>This website</td>
+                        <td>0b3991291135a765c56208a197de22de</td>
+                        <td>Until browser exits</td>
+                        <td>Cookie set to authenticate user from user and to provide security enhancements</td>
+                    </tr>
+                    <tr>
+                        <td>RecallEmail</td>
+                        <td>This website</td>
+                        <td>c29tZW9uZUBleGFtcGxlLmNvbXwxMzQ2MTAyOTM3</td>
+                        <td>30 days</td>
+                        <td>Encoded information to store "Remember my email" option</td>
+                    </tr>
+                    <tr>
+                        <td>OverrideIE</td>
+                        <td>This website</td>
+                        <td>1</td>
+                        <td>30 days</td>
+                        <td>Allows users of older Internet Explorer versions (IE6, IE7) to override our website's unsupport browser notice</td>
+                    </tr>
+                    <tr>
+                        <td>__utma<br />
+                        __utmb<br />
+                        __utmc<br />
+                        __utmv<br />
+                        __utmz</td>
+                        <td>Fonts provider<br />
+                        <a href="http://typekit.com" class="blank tipped" title="Go to typekit.com">Typekit.com</a></td>
+                        <td>269357556.typekit-member</td>
+                        <td>Up to 6 months</td>
+                        <td>Used by one of our font suppliers to determine licensing factors and anonymous tracking on usage</td>
+                    </tr>
+                    <tr>
+                        <td>__gauges_unique<br />
+                        __gauges_unique_*</td>
+                        <td>Metrics provider<br />
+                        <a href="http://gaug.es/" class="blank tipped" title="Go to gaug.es">Gaug.es</a></td>
+                        <td>1</td>
+                        <td>Up to 365 days</td>
+                        <td>Your computer and network metrics for our internal investigations and use only. We use this information to provide you the best service we can and only CIS authorised personnel have access to this information</td>
+                    </tr>
+                </tbody>
+            </table>
+        </p>
+        
+        <p>You may choose to reset all of the cookies that we set using the button below.</p>
+        
+        <div class="alert alert-red" id="reset_result">
+            <h3 class="red">Reset your cookies</h3>
+            <p>Please be reminded that this may adversely affect your current visit to the site including resetting preferences. Your next page load may also be slow as our service attempts to recreate these cookies for future use.</p>
+            <form id="reset_cookies" style="margin-bottom:1.5em;">
+                <button type="button" class="button button-red" id="reset">Reset All Cookies</button>
+                <button type="button" class="button hide button-green" id="cancel">Cancel Reset</button>
+            </form>
+        </div>
+         
+        <p class="no-bottom"><em>Last edited: {{last_edit}}</em></p>
+    </div>
+</div>
+<script type="text/javascript">
+var clicks = 0;
+
+$('#reset').click(function(e) {
+    e.preventDefault();
+    clicks = clicks + 1;
+    if (clicks < 2) {
+        $('#cancel').removeClass('hide');
+        $('#reset').html('Click again to confirm reset');
+        return null;
+    } else {
+        var cookies = document.cookie.split(";");
+        for(var i=0; i < cookies.length; i++) {
+            var equals = cookies[i].indexOf("="),
+                name = equals > -1 ? cookies[i].substr(0, e) : cookies[i];
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+        $('#reset_result').removeClass('alert-red').html('All cookies in relation to this site have been cleared. Thank you for visiting!');
+        return null;
+    }
+});
+
+$('#cancel').click(function(e) {
+    e.preventDefault();
+    clicks = 0;
+    $('#cancel').addClass('hide');
+    $('#reset').html('Reset All Cookies');
+    return true;
+});
+</script>

@@ -78,6 +78,62 @@ class UX {
         
     }
     
+    /**
+     * Upper page maker (includes provisions on announcements)
+     * @package		Phoenix
+     * @version		20819
+     */
+    public function makeHead($passToHeader, $passToNav, $ovrHeader = 'common/header_public', $ovrNav = 'common/nav_public') {
+    	// Get announcements
+    	$stmt = Data::prepare('SELECT * FROM `announcements` WHERE AnnounceActive = 1 ORDER BY AnnounceCTS DESC');
+    	$stmt->execute();
+    	$announces = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    	
+    	$an_html = '';
+    	
+    	if ($announces) {
+    		// We have announcements!
+    		foreach ($announces as $announcement) {
+    			// Get color
+    			switch ($announcement['AnnounceLevel']) {
+    				case 1:
+    					$class = " announce-yellow";
+    					break;
+    				case 2:
+    					$class = " announce-red";
+    					break;
+    				default:
+    					$class = "";
+    					break;
+    			}
+    			
+    			$an_html .= UX::grabPage('public/announce', array('class' => $class, 'text' => $announcement['AnnounceText']), false)."\n";
+    		}
+    	}
+    	
+    	$passToNav['announce'] = $an_html;
+    	
+    	return UX::grabPage($ovrHeader, $passToHeader, true).UX::grabPage($ovrNav, $passToNav, true);
+    }
+    
+    /**
+     * Breadcrumb maker
+     * @package		Phoenix
+     * @version		20819
+     */
+    public function makeBreadcrumb($crumb) {
+    	
+    	$bc = "";
+    	$i = 1;
+    	foreach ($crumb as $name => $url) {
+    		$bc .= "    	    <a href=\"".$url."\" title=\"".$name."\">".$name."</a>".(($i == sizeof($crumb)) ? "\n" : " /\n");
+    		$i++;
+    	}
+    	$bc_html = UX::grabPage('common/breadcrumb_basic', array('extras' => $bc), false);
+    	return $bc_html;
+    	
+    }
+    
     /*
      * Flushes the buffer as well as the UX push buffer
      *
