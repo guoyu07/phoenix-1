@@ -1,11 +1,12 @@
 <?php
 
 /**
- * CSS style definition guide as POC
+ * Staff signin page
  *
  * @author	Yectep Studios <info@yectep.hk>
  * @version	20707
  * @package Plume
+ * @subpackage Staff
  */
 
 
@@ -66,11 +67,11 @@ if (array_key_exists('msg', $_GET)) {
 			$error = '<div class="alert alert-red">Your account is not yet active. To activate your account, please refer to the original welcome email we sent to your account when you registered.</div>';
 		break;
 		default:
-			$error = '';
+			$error = '<div class="alert alert-yellow">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.</div>';
 		break;
 	}
 } else {
-	$error = '';
+	$error = '<div class="alert">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.</div>';
 }
 
 
@@ -78,8 +79,8 @@ if (array_key_exists('msg', $_GET)) {
 echo UX::makeHead($h, $n);
 
 // Page info
-echo UX::makeBreadcrumb(array(	'Sign In'		=> '/account/login.php'));
-echo UX::grabPage('account/login', array('error' => $error), true);
+echo UX::makeBreadcrumb(array(	'Sign In'		=> '/staff/index.php'));
+echo UX::grabPage('staff/login', array('error' => $error), true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);

@@ -76,23 +76,13 @@ if ($_POST) {
     }
 }
 
-// Get countries
-$stmt = Data::query('SELECT * FROM `countries` ORDER BY CountryName ASC');
-$stmt->execute();
-$countries = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$coptions = '';
-
-foreach($countries as $country) {
-    $coptions .= "\t\t\t\t<option value=\"".$country['CountryISO']."\">".$country['CountryName']."</option>\n";
-}
-
 
 // Include header section
 echo UX::makeHead($h, $n);
 
 // Page info
 echo UX::makeBreadcrumb(array(	'Create Family Account'		=> '/account/register.php'));
-echo UX::grabPage('account/register', array('error' => $error, 'countries' => $coptions, 'form_json' => json_encode($_POST)), true);
+echo UX::grabPage('account/register', array('error' => $error, 'form_json' => json_encode($_POST)), true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);
