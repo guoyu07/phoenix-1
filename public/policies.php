@@ -10,7 +10,6 @@
 
 
 define('PTP',   '../private/');
-define('BETA',  false);
 define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_NEWS',      true);
 define('PHX_UX',        true);

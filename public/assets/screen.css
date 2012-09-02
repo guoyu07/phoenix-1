@@ -9,32 +9,40 @@
  * Reset snippet from YUI2
  * Used in accordance with the YUI/BSD License.
  * **********************/
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,textarea,p,blockquote,th,td { 
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,
+pre,form,fieldset,textarea,p,blockquote,th,td { 
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: subpixel-antialiased; /** For chrome **/
+    -webkit-font-smoothing: subpixel-antialiased;
 }
+
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
 fieldset,img { 
     border: 0;
 }
+
 address,caption,cite,code,dfn,em,strong,th,var {
     font-style: normal;
     font-weight: normal;
 }
+
 ol,ul {
     list-style: none;
 }
+
 caption,th {
     text-align: left;
 }
+
 h1,h2,h3,h4,h5,h6 {
     font-size: 100%;
     font-weight: normal;
 }
+
 q:before,q:after { content: ''; }
 abbr,acronym { border: 0; }
 
@@ -54,10 +62,6 @@ body {
 p, ul, ol {
     line-height: 1.5em;
     margin-bottom: 1.2em;
-}
-
-p {
-    overflow: auto;
 }
 
 h1 {
@@ -648,7 +652,7 @@ div.navbar {
     background-repeat: repeat-x;
     background-image: -webkit-linear-gradient(#550000 0%, #360000 100%);
     background-image: -moz-linear-gradient(top, #550000, #360000);
-    height: 2.6em;
+    height: 2.8em;
     border-bottom: 1px solid #2f0303;
     -webkit-box-shadow: 0 0 3em 0 rgba(0,0,0,0.5);
     -moz-box-shadow: 0 0 3em 0 rgba(0,0,0,0.5);
@@ -841,6 +845,10 @@ h1.brand {
     background-color: rgba(120, 26, 26, 0.85);
 }
 
+p.overflown {
+    overflow: auto;
+}
+
 p.no-bottom {
     margin-bottom: 0;
 }
@@ -864,8 +872,8 @@ ul.nav > li a {
     -webkit-transition: color .2s ease-out;
     transition: color .2s ease-out;
     font-size: 1em;
-    padding: 0.6em 2em;
-    line-height: 2.7em;
+    padding: 0.7em 2em;
+    line-height: 2.9em;
 }
 
 ul.nav > li a:hover {
@@ -875,8 +883,11 @@ ul.nav > li a:hover {
 
 /* Variations of a theme */
 ul.nav > li.active {
-    color: #fff;
     background-color: #240606;
+}
+
+ul.nav > li.active a {
+    color: #fff;
 }
 
 ul.nav > li.right {

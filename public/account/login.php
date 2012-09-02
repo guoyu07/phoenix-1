@@ -10,7 +10,6 @@
 
 
 define('PTP',   '../../private/');
-define('BETA',  true);
 define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_NEWS',      true);
 define('PHX_UX',        true);
@@ -24,7 +23,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     
     // Does email address exist in the database?
     if (!Security::checkEmail($_POST['email'])) {
-        Common::logAction('http.post.login', 'failed', 'Email does not exist.');
+        Common::logAction('http.post.login', 'failed', 'EMAIL='.$_POST['email'], '[failed] inexistent');
         header('Location: ./login.php?msg=error_email');
         exit();
     }
@@ -32,12 +31,11 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     // Check password
     $login_check = Security::checkLogin($_POST['email'], $_POST['pass']);
     if (!$login_check) {
-        Common::logAction('http.post.login', 'failed', 'Password mismatch.');
         header('Location: ./login.php?msg=error_pass');
         exit();
     } elseif ($login_check == 0) {
         // Account is inactive
-        header('Location: ./login.php?msg=error_inactive');
+        header('Location: ./log in.php?msg=error_inactive');
         exit();
     }
     

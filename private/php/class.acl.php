@@ -35,7 +35,7 @@ class Security extends Common {
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        Common::logAction('backend.subroutine.acl', 'generate_session', 'ID='.$id.' [ok]');
+        Common::logAction('backend.subroutine.acl', 'success', 'FID='.$id, 'generate_session');
         $_SESSION['FID'] = $id;
         $_SESSION['AuthCheck'] = sha1($result['FamilyPassword'].$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
         
@@ -87,8 +87,7 @@ class Security extends Common {
                 }
             } else {
                 // Wrong password
-                echo sha1($pass.$result['FamilySalt'].$result['FamilyCTS'])." ".$result['FamilyPassword'];
-                exit();
+                Common::logAction('http.post.login', 'failed', 'FID='.$result['FamilyID'],  'invalid password');
                 return false;
             }
         }

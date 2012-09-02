@@ -22,8 +22,11 @@ class Common {
     
         // Turn on error reporting
         if (defined(BETA) && (BETA === true)) {
-            error_reporting(E_ALL | ~E_NOTICE);
+            error_reporting(E_ALL | E_NOTICE);
             ini_set('display_errors','On');
+        } else {
+            error_reporting(0);
+            ini_set('display_errors', 'Off');
         }
         
         // Script type switcher
@@ -64,29 +67,31 @@ class Common {
      * @package Phoenix
      * @version 20819
      */
-    public function logAction($action, $result, $remarks = '', $ip = false, $ua = false) {
+    public function logAction($action, $result, $user = 'UNK=unknown', $remarks = '', $ip = false, $ua = false) {
     
         // Set defaults
+        $user = ($user == NULL) ? 'UNK=unknown' : $user;
         $ip = (($ip === FALSE) ? $_SERVER['REMOTE_ADDR'] : $ip);
         $ua = (($ua === FALSE) ? $_SERVER['HTTP_USER_AGENT'] : $ua);
         
         // Try to get GeoIP location
         $record = geoip_record_by_name($ip);
-        $geo = (($record) ? $record['city'].', '.$record['country_code'] : 'Unknown');
+        $geo = (($record) ? $record['city'].', '.$record['country_code'] : '');
         
         // Add to database...
         try {
-            $stmt = Data::prepare("INSERT INTO `log` (`LogTS`, `LogIP`, `LogGeoResult`, `LogUA`, `LogAction`, `LogResult`, `LogRemarks`) VALUES (NOW(), :ip, :geo, :ua, :action, :result, :remarks)");
+            $stmt = Data::prepare("INSERT INTO `log` (`LogTS`, `LogIP`, `LogGeoResult`, `LogUA`, `LogIdent`, `LogAction`, `LogResult`, `LogRemarks`) VALUES (NOW(), :ip, :geo, :ua, :user, :action, :result, :remarks)");
             $stmt->bindParam('ip', $ip);
             $stmt->bindParam('geo', $geo);
             $stmt->bindParam('ua', $ua);
+            $stmt->bindParam('user', $user);
             $stmt->bindParam('action', $action);
             $stmt->bindParam('result', $result);
             $stmt->bindParam('remarks', $remarks);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            $this->throwNiceDataException($e);
+            Common::throwNiceDataException($e);
         }
     }
     
@@ -100,7 +105,7 @@ class Common {
     public function throwNiceDataException($e) {
         
         $pretext = "A database error occured. The data object handler responded with:\n\n" . $e->getMessage() . "\n\nBest stacktrace:\n" . $e->getTraceAsString();
-        $this->niceException($pretext);
+        Common::niceException($pretext);
         return null;
         
     }

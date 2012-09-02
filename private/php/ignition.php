@@ -19,6 +19,7 @@ define('DATE_FULL',			'j F Y');
 define('DATE_SHORT',		'd/m/y');
 
 // Define environmental constants
+define('BETA',              false);
 define('REGISTRATION_OPEN', true);
 
 // Require basic classes

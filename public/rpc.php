@@ -10,7 +10,6 @@
 
 
 define('PTP',   '../private/');
-define('BETA',  true);
 define('PHX_SCRIPT_TYPE',   'JSON');
 
 
