@@ -54,7 +54,6 @@ class Common {
         
         // Initiate security class
         Security::initiateSecurity();
-        
         return true;
         
     }
@@ -71,10 +70,15 @@ class Common {
         $ip = (($ip === FALSE) ? $_SERVER['REMOTE_ADDR'] : $ip);
         $ua = (($ua === FALSE) ? $_SERVER['HTTP_USER_AGENT'] : $ua);
         
+        // Try to get GeoIP location
+        $record = geoip_record_by_name($ip);
+        $geo = (($record) ? $record['city'].', '.$record['country_code'] : 'Unknown');
+        
         // Add to database...
         try {
-            $stmt = Data::prepare("INSERT INTO `log` (`LogTS`, `LogIP`, `LogUA`, `LogAction`, `LogResult`, `LogRemarks`) VALUES (NOW(), :ip, :ua, :action, :result, :remarks)");
+            $stmt = Data::prepare("INSERT INTO `log` (`LogTS`, `LogIP`, `LogGeoResult`, `LogUA`, `LogAction`, `LogResult`, `LogRemarks`) VALUES (NOW(), :ip, :geo, :ua, :action, :result, :remarks)");
             $stmt->bindParam('ip', $ip);
+            $stmt->bindParam('geo', $geo);
             $stmt->bindParam('ua', $ua);
             $stmt->bindParam('action', $action);
             $stmt->bindParam('result', $result);
