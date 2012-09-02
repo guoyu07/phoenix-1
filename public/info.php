@@ -1,4 +1,6 @@
 <?php
+
+
 switch ($_SERVER['QUERY_STRING']) {
     case "view_php":
         phpinfo();
