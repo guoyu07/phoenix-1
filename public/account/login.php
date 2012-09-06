@@ -4,7 +4,7 @@
  * CSS style definition guide as POC
  *
  * @author	Yectep Studios <info@yectep.hk>
- * @version	20707
+ * @version	20903
  * @package Plume
  */
 
@@ -23,19 +23,20 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     
     // Does email address exist in the database?
     if (!Security::checkEmail($_POST['email'])) {
-        Common::logAction('http.post.login', 'failed', 'EMAIL='.$_POST['email'], '[failed] inexistent');
+        Common::logAction('http.post.login', 'failed', 'EMAIL='.$_POST['email'], 'inexistent account');
         header('Location: ./login.php?msg=error_email');
         exit();
     }
     
     // Check password
     $login_check = Security::checkLogin($_POST['email'], $_POST['pass']);
-    if (!$login_check) {
+    
+    if ($login_check === false) {
         header('Location: ./login.php?msg=error_pass');
         exit();
     } elseif ($login_check == 0) {
         // Account is inactive
-        header('Location: ./log in.php?msg=error_inactive');
+        header('Location: ./login.php?msg=error_inactive');
         exit();
     }
     
@@ -52,6 +53,9 @@ $n['signin'] = 'active';
 // Error page
 if (array_key_exists('msg', $_GET)) {
 	switch ($_GET['msg']) {
+		case 'registered':
+			$error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> Thank you for registering. We just sent you a link to the email address you specified. You need to click that link to activate your account.</div>';
+		break;
 		case 'activated':
 			$error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> Thank you for activating your account. You may now sign in.</div>';
 		break;

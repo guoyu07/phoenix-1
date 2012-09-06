@@ -26,15 +26,4 @@ $(document).ready(function() {
 	   forgotPassword();
 	})
 });
-
-function forgotPassword() {
-    if ($('#email-input').val() == '') {
-        $('#pass-hint').hide().removeClass('alert-green alert-red').addClass('alert alert-red').html('Oops! Enter your email address first so we can look your account up. If you\'ve forgotten that too, send an email to <a href="mailto:tech@summer.cis.edu.hk">tech@summer.cis.edu.hk</a> for assistance.').fadeIn('fast');
-        $('#email-input').focus();
-    } else {
-        $('#pass-hint').hide().removeClass('alert-green alert-red').addClass('alert alert-green').html('Got it - we just sent an email to your account address containing a link you can use to reset your password. You should receive this within 15 minutes. If after checking your junk mailbox, you cannot locate this email, please contact <a href="mailto:tech@summer.cis.edu.hk">tech@summer.cis.edu.hk</a>').fadeIn('fast');
-        $('#form-pass').hide();
-        var reset = setTimeout(function (){ $('#form-pass').slideDown(); }, 3000);
-    }
-}
 </script>

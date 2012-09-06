@@ -125,125 +125,13 @@
 			</div>
 			<div class="form-help no-label muted">Only English is supported in written communication.</div>
 			
-			<div class="form-row" id="form-email-noti" style="padding-top: 1.5em;">
-                <div class="no-label"><strong>Send email notifications and confirmations?</strong> <span class="red strong">*</span><br />
-				<label class="nested"><input type="radio" id="email-yes-input" name="notify_email" value="1" class="required" checked="checked" /> Yes please</label>
-				<label class="nested"><input type="radio" id="email-no-input" name="notify_email" value="0" class="required" /> No thanks</label></div>
-			</div>
-			<div class="no-label muted form-hint hide-smartphone"><a href="javascript:;" onclick="$('#notifications').slideToggle('');$.scrollTo('#notifications', 300, { offset: {top: -80} });">Learn more about notifications</a></div>
-			
 			<div class="form-row" id="form-sms-noti" style="padding-top: 1.5em;">
 			    <div class="no-label"><strong>Send SMS notifications and confirmations?</strong> <span class="red strong">*</span><br />
 				<label class="nested"><input type="radio" id="sms-yes-input" name="notify_sms" value="1" class="required" /> Yes please</label>
 				<label class="nested"><input type="radio" id="sms-no-input" name="notify_sms" value="0" class="required" checked="checked" /> No thanks</label></div>
 			</div>
-			<div class="no-label muted form-hint">Requires a local mobile phone number. We support all major carriers.<br /><a href="javascript:;" onclick="$('#notifications').slideToggle('');$.scrollTo('#notifications', 300, { offset: {top: -80} });" class="hide-smartphone">Learn more about notifications</a></div>
+			<div class="no-label muted form-hint">Requires a local mobile phone number. We support major local carriers including: CSL/1O1O/one2free, 3, SmarTone, PCCW &amp; China Mobile.</div>
 
-			<div id="notifications" class="hide hide-smartphone">
-                <h3>All About Notifications</h3>
-                <p style="margin-top: 1.5em;">If you allow us, we will send you automated confirmations and notifications. You can turn these on or off at any time. Refer to the table below on what notifications will be sent for email and SMS options. For security purposes, you will need to validate your local mobile phone number (we'll send you a confirmation code) if you enable SMS notifications.</p>
-    			
-    			<table style="width: auto;">
-                    <thead>
-                        <tr>
-                            <th style="text-align: right;">Action to Notify</th>
-                            <th style="text-align: center;">Email</th>
-                            <th style="text-align: center;">SMS</th>
-                            <th style="text-align: center;">Call</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="text-align: right;">Can you opt out?</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">General announcements and newsletters</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">When submitting a child's schedule</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">When a change request is denied/approved</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">When we receive a payment and credit your account</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">If your billing account has an unpaid item nearing due date</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">If you have an overdue unpaid item <strong>and</strong> it affects your enrolmentx</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">During typhoons, rainstorms or health warnings</td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">When a room change occurs on any of your schedules</td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/cross.png" alt="No" /></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">If a class a child is enrolled in is cancelled for any reason</td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="No" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="Yes" /></td>
-                            <td style="text-align: center;"><img src="/assets/icons/tick.png" alt="No" /></td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-                <p style="padding-top: 1.5em;">We support the following Hong Kong mobile phone carriers:</p>
-                <table style="width:auto;">
-                    <thead>
-                        <tr>
-                            <th style="width:50%;">Carrier</th>
-                            <th style="width:50%;">Carrier</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>China Mobile</td>
-                            <td>China Unicom</td>
-                        </tr>
-                        <tr>
-                            <td>CSL/1O1O/one2free</td>
-                            <td>Hutchison 3</td>
-                        </tr>
-                        <tr>
-                            <td>New World Mobility</td>
-                            <td>PCCW</td>
-                        </tr>
-                        <tr>
-                            <td>SmarTone</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
             
             <div class="form-row" id="form-language" style="margin-top: 3em;">
                 <p>

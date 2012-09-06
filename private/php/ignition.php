@@ -19,8 +19,9 @@ define('DATE_FULL',			'j F Y');
 define('DATE_SHORT',		'd/m/y');
 
 // Define environmental constants
-define('BETA',              false);
-define('REGISTRATION_OPEN', true);
+define('BETA',              true);      // set to false to disable error outputting/debugging
+define('REGISTRATION_OPEN', true);      // set to false to disable registration
+define('MAILER_SENDMAIL',   true);      // set to false to disable Mandrill emailing
 
 // Require basic classes
 require_once('class.common.php');
