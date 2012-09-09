@@ -1,0 +1,118 @@
+<form class="validate" action="./register.php" method="post" id="reg-form" enctype="multipart/form-data">
+<div class="content-row spaced">
+    <h1>Course Application Mechanism</h1>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="basic-info">
+        
+        <!-- Form block -->
+        <div id="form-basic" class="col c7">
+            <h2>Application Information</h2>
+            
+            {{error}}
+        
+            <p>Thank you for your interest in applying to teach for the Summer Programme 2013. We have many exciting new things in store for teachers this year. Please
+            read our information manual to the right for more information before applying, as all course application will be carefully audited and processed during March 2013.</p>
+            
+            <h3>Load previous application</h3>
+            <p>To continue a previously started application, enter the Application ID and Key. We'll get the saved data from our database and load it right up.</p>
+            
+            <div class="alert alert-red" id="load-info"><img src="/assets/icons/cross.png" alt="[Error]" /> Sorry, couldn't find matching save data. Try again please.</div>
+            <div class="alert alert-green" id="load-info2"><img src="/assets/icons/tick.png" alt="[OK]" /> Alrighty, all your previous information has been loaded. Feel free to work on your application, then Save or Submit it at the bottom of the page.</div>
+            
+            <div class="form-row" id="appload-id-row">
+                <label for="appload-id">Application ID</label>
+                <input type="text" id="appload-id" name="app_id" />
+            </div>
+            
+            <div class="form-row" id="appload-key-row">
+                <label for="appload-key">Application Key</label>
+                <input type="text" id="appload-key" name="app_key" />
+            </div>
+            
+            <div class="form-row no-label" id="form-language">
+                    <button type="button" id="appload">Load Saved Data</button>
+            </div>
+            
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-basic" class="col c3">
+            <button id="btn-manual" class="button button-link button-blue" data-url="/assets/pdf/teachers_manual.pdf">Download Info Manual</button>
+        </div>
+        
+    </div>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="basic-info">
+        
+        <!-- Form block -->
+        <div id="form-basic" class="col c7">
+            
+            <h2>Course Information</h2>
+            
+            <div class="form-row" id="programme-row">
+                <label for="programme">Programme</label>
+                <select id="programme" name="programme">
+                    <option value="SP" selected="selected">Summer Programme</option>
+                    <option value="AP">Academic Programme</option>
+                </select>
+            </div>
+            
+            <div class="form-row" id="ap-subject-row">
+                <label for="ap-subject">AP Subject</label>
+                <select id="ap-subject" name="ap_subject">
+                    <option value="IBTC" selected="selected">IB Taster Course</option>
+                    <option value="IBRV">IB Review</option>
+                    <option value="UNIW">University Writing</option>
+                </select>
+            </div>
+            
+            <div class="form-row" id="sp-subject-row">
+                <label for="sp-subject">SP Subject</label>
+                <select id="sp-subject" name="sp_subject">
+                    <option value="ARTS" selected="selected">The Arts</option>
+                    <option value="LANG">Languages</option>
+                    <option value="MACT">Mathematics and Critical Thinking</option>
+                    <option value="SCIT">Science, Computers and Technology</option>
+                    <option value="PHED">Physical Education</option>
+                </select>
+            </div>
+            
+            <div class="form-row" id="course-name-row">
+                <label for="course-name">Course Name</label>
+                <input type="text" id="course-name" name="course_name" />
+            </div>
+            
+            <div class="form-row" id="course-synop-row">
+                <label for="course-synop">Synopsis</label>
+                <textarea name="course-synop" id="course_synop"></textarea>
+            </div>
+                
+                        
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-basic" class="col c3">
+            
+            <h3>Course Name</h3>
+            <p>We encourage all teachers to submit bilingual course names. Courses taught in or partially in Chinese must have a bilingual course name.</p>
+            
+            <h3>Synopsis</h3>
+            <p>Please include a short ()
+            
+        </div>
+        
+    </div>
+</div>
+
+
+<script type="text/javascript">
+function emailCheck(email) {
+    var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+    return pattern.test(email);
+}
+
+</script>

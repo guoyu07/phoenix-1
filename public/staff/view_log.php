@@ -45,7 +45,7 @@ $logtable = '';
 foreach($logdata as $event) {
     $logtable .= "\t\t<tr>
             <td>".strtoupper($event['LogTS'])."</td>
-            <td><a href=\"./view_log.php?addr=".$event['LogIP']."\" title=\"".$event['LogGeoResult']."\" class=\"tipped\">".$event['LogIP']."</a></td>
+            <td><a href=\"./view_log.php?addr=".$event['LogIP']."\">".$event['LogIP']."</a><br /><span class=\"muted small\">".$event['LogGeoResult']."</span></td>
             <td>".(($event['LogIdent'] == 'UNK=unknown') ? '<span class="muted"><em>Not recorded</em></span>' : '<a href="./view_log.php?perp='.base64_encode($event['LogIdent']).'">'.$event['LogIdent'].'</a>')."</td>
             <td>[".$event['LogAction'].": ".$event['LogResult']."] ".$event['LogRemarks']."</td>
         </tr>\n";

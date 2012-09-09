@@ -192,6 +192,11 @@ label.nested {
     vertical-align: top;
 }
 
+label.radio {
+    display: inline;
+    width: auto;
+}
+
 label:hover {
     cursor: pointer;
 }
