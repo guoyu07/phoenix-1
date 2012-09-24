@@ -8,8 +8,8 @@
     adapted code under the MIT license.
     **********************************************************
     
-    @version:   v20604
-    @date:      2012-06-04
+    @version:   v20923
+    @date:      2012-06-23
 */
 
 
