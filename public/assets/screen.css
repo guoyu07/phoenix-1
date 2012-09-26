@@ -57,9 +57,12 @@ body {
     font-family: 'Open Sans', 'Lucida Grande', Tahoma, sans-serif;
     font-size: 12px;
     color: #555;
+    -webkit-font-smoothing: antialiased;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.005);
 }
 
 p, ul, ol {
+	font-size: 1.1em;
     line-height: 1.5em;
     margin-bottom: 1.2em;
 }
@@ -69,8 +72,9 @@ h1 {
     margin-bottom: 0.5em;
     font-family: 'Adelle', 'Helvetica Neue', Helvetica, Arial;
     font-weight: 400;
-    font-size: 3em;
+    font-size: 2.6em;
     color: #7a0032;
+    text-shadow: 1px 1px 1px rgba(255, 173, 195, 0.3);
 }
 
 h2 {
@@ -79,7 +83,8 @@ h2 {
     font-family: 'Adelle', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
     color: #137ac9;
-    font-size: 1.8em;
+    font-size: 1.6em;
+    text-shadow: 1px 1px 0px rgba(65, 84, 95, 0.1);
 }
 
 h3 {
@@ -877,8 +882,8 @@ ul.nav > li a {
     -webkit-transition: color .2s ease-out;
     transition: color .2s ease-out;
     font-size: 1em;
-    padding: 0.7em 2em;
-    line-height: 2.9em;
+    padding: 0.8em 2em;
+    line-height: 2.65em;
 }
 
 ul.nav > li a:hover {
