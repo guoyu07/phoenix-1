@@ -1,2 +1,7 @@
 .DS_Store
 nup/
+/private/.DS_Store
+/private/php/.DS_Store
+/private/snippets/.DS_Store
+/public/.DS_Store
+/public/assets/.DS_Store
