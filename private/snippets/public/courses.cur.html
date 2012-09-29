@@ -1,0 +1,90 @@
+<div id="top_filters" class="content-row spaced">
+    <div id="content">
+    	<h1>Course Offering 2013</h1>
+    </div>
+</div>
+
+<div id="course_list" class="content-row spaced">
+	<div class="col-row">
+		<div class="col c7" style="vertical-align:bottom;padding:0em 0em 0em 1em;border:0px;background:transparent;">
+			LOLHI
+		</div>
+	</div>
+	<div class="col-row">
+	<div class="col c7" style="vertical-align:top;padding:0em;border:0px;background:transparent;">
+		<table class="courses">
+			<thead>
+				<tr>
+					<th style="width:15%;">Course Code</th>
+					<th style="width:55%;">Course Name</th>
+					<th style="width:30%;">Instructor(s)</th>
+				</tr>
+			</thead>
+			<tbody>
+{{courses}}				
+			</tbody>
+		</table>
+	</div>
+	<div class="col c3" style="">
+		<form class="inline">
+			<div id="scroller-anchor"></div>
+			<div id="scroller"> 
+				<div id="search" style="width:250px;">
+					<h3 style="margin-top:0.5em;">Course Search</h3>
+					<p>Now showing <strong>18</strong> of 208 courses.<br /><a href="#">Return to top</a></p>
+					<input type="text" style="width:80%;" placeholder="Search by course or instructor..." />
+				</div>
+				<div id="filters" style="width:250px;">
+					<h3>Select Your Filters</h3>
+					<p>I'll show courses that match the checked criteria.</p>
+					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
+					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
+					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Mathematics &amp; Critical Thinking">MSCT</acronym></label>
+					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #560069;"></div> <acronym class="tipped" title="Science, Computers &amp; Technology">SCIT</acronym></label>
+					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
+					
+					<p style="margin-top:1em;"><span style="margin-right:0.5em;">For ages:</span>
+						<select style="width:auto;">
+							<option selected="selected" value="4">4</option>
+							<option>5</option>
+							<option>5</option>
+							<option>5</option>
+							<option>5</option>
+							<option>5</option>
+						</select> to <select style="width:auto;">
+							<option selected="selected" value="4">4</option>
+							<option>5</option>
+							<option>5</option>
+							<option>5</option>
+							<option>5</option>
+							<option>5</option>
+						</select>
+					</p>
+					
+					<p>Show courses taught by...</p>
+					<p><select style="width:80%;">
+						<option selected="selected" value="%">(All instructors)</option>
+						<option value="15">Chester Li</option>
+						<option>Some Ridiculously Long Name Teacher from Outer Space</option>
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$('.course-row').click(function (e) {
+
+	/* Hide it all */
+	$('.course-synopsis').slideUp('fast');
+	
+	/* Toggle content */
+	var courseid = $(this).data('courseid');
+	$('.courseexpand-' + courseid).slideToggle('fast');
+	return true;
+	
+})
+
+</script>

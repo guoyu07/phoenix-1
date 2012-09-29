@@ -4,7 +4,7 @@
 */
 
 // Default screens
-@media screen and (min-width: 980px) {
+@media screen and (min-width: 981px) {
 
     /** First define visbility/invisibility custom blocks */
     .hide-screen {
@@ -14,7 +14,7 @@
 }
 
 // Older monitors and tablets
-@media screen and (max-width: 980px) and (min-width: 720px) {
+@media screen and (max-width: 980px) and (min-width: 721px) {
     
     /** First define visbility/invisibility custom blocks */
     .hide-transitional {

@@ -106,5 +106,30 @@ $(document).ready(function() {
         return true;
     });
     
-    //
+    // Scroller
+    function moveScroller() {
+	    var move = function() {
+	        var st = $(window).scrollTop() + 36;
+	        var ot = $("#scroller-anchor").offset().top;
+	        var s = $("#scroller");
+	        if(st > ot) {
+	            s.css({
+	                position: "fixed",
+	                top: "2.8em"
+	            });
+	        } else {
+	            if(st <= ot) {
+	                s.css({
+	                    position: "relative",
+	                    top: "0em"
+	                });
+	            }
+	        }
+	    };
+	    $(window).scroll(move);
+	    move();
+	}
+	
+	moveScroller();
+
 });

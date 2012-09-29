@@ -58,11 +58,11 @@ body {
     font-size: 12px;
     color: #555;
     -webkit-font-smoothing: antialiased;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.005);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.01);
 }
 
 p, ul, ol {
-	font-size: 1.1em;
+	font-size: 1em;
     line-height: 1.5em;
     margin-bottom: 1.2em;
 }
@@ -70,11 +70,12 @@ p, ul, ol {
 h1 {
     margin-top: 0.2em;
     margin-bottom: 0.5em;
-    font-family: 'Adelle', 'Helvetica Neue', Helvetica, Arial;
-    font-weight: 400;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial;
+    font-weight: 700;
     font-size: 2.6em;
+    letter-spacing: -2px;
     color: #7a0032;
-    text-shadow: 1px 1px 1px rgba(255, 173, 195, 0.3);
+    text-shadow: 1px 1px 0px rgba(104, 1, 42, 0.15);
 }
 
 h2 {
@@ -83,8 +84,9 @@ h2 {
     font-family: 'Adelle', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 700;
     color: #137ac9;
-    font-size: 1.6em;
-    text-shadow: 1px 1px 0px rgba(65, 84, 95, 0.1);
+    font-size: 1.8em;
+    letter-spacing: -1px;
+    text-shadow: 1px 1px 0px rgba(12, 86, 142, 0.15);
 }
 
 h3 {
@@ -216,6 +218,12 @@ form.reversed label {
     margin: 0.3em 0.5em 0.4em 0;
 }
 
+form.inline label {
+	min-width: 26%;
+	width: auto;
+	text-align: left
+}
+
 input[type=text], input[type=email], input[type=password], select, textarea {
     font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
     font-size: 1em;
@@ -266,6 +274,13 @@ select {
 
 select > option {
     font-weight: 400;
+}
+
+form.inline select {
+	padding: 0.2em 0.5em;
+	-moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
 
 textarea {
@@ -408,7 +423,7 @@ table th {
 }
 
 table tr:nth-child(even) td {
-    background-color: #fef1f1;
+    background-color: #fef6f6;
     border: 1px inset #dadada;
 }
 
@@ -600,6 +615,10 @@ table.open tr th {
 
 .clear {
     clear: both;
+}
+
+.metalink, .metalink:hover {
+	cursor: pointer;
 }
 
 /* ID definitions */
@@ -798,12 +817,17 @@ div#breadcrumb a:hover {
 
 /* Badges */
 span.badge {
-    font-size: 0.8em;
-    padding: 0.1em 0.8em;;
-    color: #d6e2ff;
+    font-size: 0.84em;
+    padding: 0.08em 0.5em;
+    color: #f0f0f0;
+    background-color: #9f9f9f;
+    border-radius: 0.25em;
+    margin-right: 0.4em;
+}
+
+span.badge.badge-blue {
+	color: #d6e2ff;
     background-color: #137ac9;
-    border-radius: 0.3em;
-    margin-right: 0.5em;
 }
 
 span.badge.badge-red {
@@ -883,7 +907,7 @@ ul.nav > li a {
     transition: color .2s ease-out;
     font-size: 1em;
     padding: 0.8em 2em;
-    line-height: 2.65em;
+    line-height: 2.8em;
 }
 
 ul.nav > li a:hover {
@@ -962,4 +986,32 @@ div.form-green input, div.form-green select, div.form-green textarea {
 
 div.form-green label {
     color: #10940c;
+}
+
+div.course-colorbox {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+}
+
+div.course-cb-msct {
+	background-color: #003669;
+}
+
+/* Course waterfall tables */
+table.courses {
+	font-size: 1em;
+}
+
+table.courses th, table.courses td {
+	vertical-align: top;
+}
+
+table.courses tr.metalink:hover td {
+	background-color: #ffebeb;
+}
+
+table.courses div.course-synopsis {
+	font-size: 0.95em;
+	color: #444;
 }
