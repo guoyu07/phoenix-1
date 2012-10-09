@@ -3,22 +3,30 @@
     Overrides regular CSS definitions
 */
 
-// Default screens
+/* Default screens */
 @media screen and (min-width: 981px) {
 
     /** First define visbility/invisibility custom blocks */
-    .hide-screen {
+    .hide-modern {
         display: none !important;
+    }
+    
+    .show-modern {
+	    display: block !important;
     }
     
 }
 
-// Older monitors and tablets
+/* Older monitors and tablets */
 @media screen and (max-width: 980px) and (min-width: 721px) {
     
     /** First define visbility/invisibility custom blocks */
     .hide-transitional {
         display: none !important;
+    }
+    
+    .show-transitional {
+	    display: block !important;
     }
     
     /* At this point fluidity is key */
@@ -113,11 +121,17 @@
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         width: 90%;
+        -moz-border-radius: 0.5em 0.5em 0.5em 0.5em !important;
+        -webkit-border-radius: 0.5em 0.5em 0.5em 0.5em !important;
+        border-radius: 0.5em 0.5em 0.5em 0.5em !important;
     }
 
     input, form.reversed input, form.short input,
     select, form.reversed select, form.short select {
         width: 100%;
+        -moz-border-radius: 0.5em 0.5em 0.5em 0.5em !important;
+        -webkit-border-radius: 0.5em 0.5em 0.5em 0.5em !important;
+        border-radius: 0.5em 0.5em 0.5em 0.5em !important;
     }
     
     input[type=radio], input[type=checkbox] {
@@ -261,5 +275,11 @@
     
     div.floatbox-right, div.floatbox-left {
         float: none;
+    }
+    
+    div.alert, div.announce {
+        -moz-border-radius: 0 0 0 0;
+        -webkit-border-radius: 0 0 0 0;
+        border-radius: 0 0 0 0;
     }
 }

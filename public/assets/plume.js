@@ -65,10 +65,11 @@ WebFontConfig = {
 $(document).ready(function() {
 
     // Button link generator
-    $('.button-link').click(function() {
+    $('.button-link').click(function(e) {
+        e.preventDefault();
         if($(this).data('blank-url')) {
             window.open('/ext.php?url=' + encodeURI($(this).data('blank-url')));
-            return true;
+            return false;
         } else if ($(this).data('url')) {
             window.location = $(this).data('url');
             return true;
@@ -106,30 +107,5 @@ $(document).ready(function() {
         return true;
     });
     
-    // Scroller
-    function moveScroller() {
-	    var move = function() {
-	        var st = $(window).scrollTop() + 36;
-	        var ot = $("#scroller-anchor").offset().top;
-	        var s = $("#scroller");
-	        if(st > ot) {
-	            s.css({
-	                position: "fixed",
-	                top: "2.8em"
-	            });
-	        } else {
-	            if(st <= ot) {
-	                s.css({
-	                    position: "relative",
-	                    top: "0em"
-	                });
-	            }
-	        }
-	    };
-	    $(window).scroll(move);
-	    move();
-	}
-	
-	moveScroller();
 
 });

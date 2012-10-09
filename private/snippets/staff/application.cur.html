@@ -1,6 +1,6 @@
 <form class="validate" action="./register.php" method="post" id="reg-form" enctype="multipart/form-data">
 <div class="content-row spaced">
-    <h1>Course Application Mechanism</h1>
+    <h1>Summer Programme 2013 Course Application</h1>
 </div>
 
 <div class="content-row spaced" style="display:table;">
@@ -39,7 +39,10 @@
         
         <!-- Help block -->
         <div id="help-basic" class="col c3">
-            <button id="btn-manual" class="button button-link button-blue" data-url="/assets/pdf/teachers_manual.pdf">Download Info Manual</button>
+            <button id="btn-manual" class="button button-link button-blue" data-blank-url="/assets/pdf/teachers_manual.pdf">Download Info Manual</button>
+            
+            <h3>Load Application</h3>
+            <p>A previous application can be loaded, edited and saved if you have the original application email that we sent you the first time you visited this page. Simply enter the Application ID and Application Key as per your email receipt and the system will load your latest saved application data.</p>
         </div>
         
     </div>
@@ -68,12 +71,6 @@
         
         <!-- Help block -->
         <div id="help-basic" class="col c3">
-            
-            <h3>Course Name</h3>
-            <p>We encourage all teachers to submit bilingual course names. Courses taught in or partially in Chinese must have a bilingual course name.</p>
-            
-            <h3>Synopsis</h3>
-            <p>Please include a short ()
             
         </div>
         
@@ -127,6 +124,11 @@
                 <label for="course-synop">Synopsis</label>
                 <textarea name="course-synop" id="course_synop"></textarea>
             </div>
+            
+            <div class="form-row" id="course-synop-desc">
+                <label for="course-desc">Description</label>
+                <textarea name="course-desc" id="course_description"></textarea>
+            </div>
                 
                         
         </div>
@@ -138,7 +140,10 @@
             <p>We encourage all teachers to submit bilingual course names. Courses taught in or partially in Chinese must have a bilingual course name.</p>
             
             <h3>Synopsis</h3>
-            <p>Please include a short ()
+            <p>Please include a short (less than 50 words) description of your course, to be displayed on the course list page.</p>
+            
+            <h3>Description</h3>
+            <p>Include items such as what the class will be going over, 
             
         </div>
         
