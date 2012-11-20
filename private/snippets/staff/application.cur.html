@@ -83,7 +83,7 @@
     <div class="col-row" id="basic-info">
         
         <!-- Form block -->
-        <div id="form-basic" class="col c7">
+        <div id="form-info" class="col c7">
             
             <h2>Course Information</h2>
             
@@ -98,20 +98,20 @@
             <div class="form-row" id="ap-subject-row">
                 <label for="ap-subject">AP Subject</label>
                 <select id="ap-subject" name="ap_subject">
-                    <option value="IBTC" selected="selected">IB Taster Course</option>
-                    <option value="IBRV">IB Review</option>
-                    <option value="UNIW">University Writing</option>
+                    <option value="IBTC" selected="selected">IBTC - IB Taster Course</option>
+                    <option value="IBRV">IBRV - IB Review</option>
+                    <option value="UNIW">UNIW - University Writing</option>
                 </select>
             </div>
             
             <div class="form-row" id="sp-subject-row">
                 <label for="sp-subject">SP Subject</label>
                 <select id="sp-subject" name="sp_subject">
-                    <option value="ARTS" selected="selected">The Arts</option>
-                    <option value="LANG">Languages</option>
-                    <option value="MACT">Mathematics and Critical Thinking</option>
-                    <option value="SCIT">Science, Computers and Technology</option>
-                    <option value="PHED">Physical Education</option>
+                    <option value="ARTS" selected="selected">ARTS - The Arts</option>
+                    <option value="LANG">LANG - Languages</option>
+                    <option value="MACT">MSCT - Mathematics and Critical Thinking</option>
+                    <option value="SCIT">SCIT - Science, Computers and Technology</option>
+                    <option value="PHED">PHED - Physical Education</option>
                 </select>
             </div>
             
@@ -125,16 +125,15 @@
                 <textarea name="course-synop" id="course_synop"></textarea>
             </div>
             
-            <div class="form-row" id="course-synop-desc">
+            <div class="form-row" id="course-desc-row">
                 <label for="course-desc">Description</label>
-                <textarea name="course-desc" id="course_description"></textarea>
+                <textarea name="course-desc" id="course_description" style="height:20em;"></textarea>
             </div>
-                
-                        
+            
         </div>
         
         <!-- Help block -->
-        <div id="help-basic" class="col c3">
+        <div id="help-info" class="col c3">
             
             <h3>Course Name</h3>
             <p>We encourage all teachers to submit bilingual course names. Courses taught in or partially in Chinese must have a bilingual course name.</p>
@@ -144,6 +143,61 @@
             
             <h3>Description</h3>
             <p>Include items such as what the class will be going over, 
+            
+        </div>
+        
+    </div>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="course-details">
+        
+        <!-- Form block -->
+        <div id="form-details" class="col c7">
+            
+            <h2>Course Details</h2>
+            
+            <div class="form-row" id="course-language-loi-row">
+                <label for="course-lang-loi">Language of Instruction</label>
+                <select id="course-lang-loi" name="loi">
+                    <option value="EN" selected="selected">English</option>
+                    <option value="ZH">Putonghua</option>
+                    <option value="BI">Bilingual English/Putonghua</option>
+                    <option value="FR">French</option>
+                    <option value="ES">Spanish</option>
+                </select>
+            </div>
+            
+            <div class="form-row" id="difficulty-row">
+                <label for="course-difficulty">Difficulty Level</label>
+                <select id="course-difficulty" name="difficulty">
+                    <option value="0">Beginner</option>
+                    <option value="1">Intermediate</option>
+                    <option value="2">Advanced</option>
+                    <option value="9" selected="selected">Irrelevant</option>
+                </select>
+            </div>
+            
+            <div class="form-row" id="course-prereqs-row">
+                <label for="course-prereqs">Prerequisites</label>
+                <textarea name="course-prereqs" id="prerequisites"></textarea>
+            </div>
+            
+            <div class="form-row" id="course-outcomes-row">
+                <label for="course-outcomes">Course Outcomes</label>
+                <textarea name="course-outcomes" id="outcomes"></textarea>
+            </div>
+            
+            <div class="form-row" id="course-equipment-row">
+			    <div class="no-label"><strong>Course Markers</strong><br />
+				<label class="nested"><input type="checkbox" id="course-computers" name="use_computers" value="1" /> Students will use computers</label>
+				<label class="nested"><input type="checkbox" id="course-physical" name="use_activity" value="1" /> Students will perform physical activity</label></div>
+			</div>
+                       
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-details" class="col c3">
             
         </div>
         
