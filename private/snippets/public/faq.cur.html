@@ -1,0 +1,98 @@
+<div class="content-row spaced">
+    <h1>Sign In</h1>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row">
+        <div id="faq-list" class="col c2" style="border: 1px solid #ccc;background-color: #fafafa;padding:0;">
+            <h3 style="margin: 0.5em;">FAQ Topics</h3>
+            <ul class="faq_menu">
+                <li class="active" data-activate="accounts-profiles"><span>1.</span> Accounts &amp; Profiles</li>
+                <li data-activate="enrollment"><span>2.</span> Enrollment</li>
+                <li data-activate="billing"><span>3.</span> Payment and Billing</li>
+                <li data-activate="summer-program"><span>4.</span> Summer Program</li>
+                <li data-activate="academic-program"><span>5.</span> Academic Program</li>
+                <li data-activate="operations"><span>6.</span> Day-to-day Operations</li>
+            </ul>
+        </div>
+
+        <div id="faq-content" class="col c8" style="border: 1px solid #ccc;border-left: 0;">
+
+            <div id="accounts-profiles" class="faq_content">
+                <h2>FAQ: Accounts &amp; Profiles</h2>
+
+                <h3>How do I create an account and register my child for the CIS Summer Program?</h3>
+                <p>Use our online registration platform, which is in many ways the same as last year's. Every family can create an account, and register as many children as they like under that one single account, including a single "running-total" invoice. Click the Register button up top to begin.</p>
+
+                <h3>I created my account but cannot find my confirmation email. What can I do?</h3>
+                <p>To protect other users and yourself, our system will require you to validate the email address you give us. We do so by sending you a confirmation email which contains a link that you can click (or copy and paste into your web browser) that will automatically activate your account. Please check your spam and trash mailboxes in case our email is filtered by accident. If you cannot find it, please send us an email: our contact details are on the front page.</p>
+
+                <h3>I forgot my email or password. How can I get help?</h3>
+                <p>If you cannot remember your password, but know the email address you used during registration, please use the online Forgot Password function on our <a href="/account/login.php" class="tipped" title="Go to recover your password">login page</a>. If you cannot remember your email address, please call us: the details are on our home page.</p>
+
+                <h3>I'm having trouble once logged in. What's the best way to get help?</h3>
+                <p>In order to us to process as many help requests as possible, please use the online Help Centre once you've logged in. This will allow us to track issues quickly. All change requests <strong>must be made via the Help Centre</strong>.</p>
+                <p>Of course, if you still require assistance, or have general inquiries, please email us at the general address given on the home page.</p>
+
+            </div>
+
+            <div id="enrollment" class="hide faq_content">
+                <h2>FAQ: Enrollment</h2>
+
+                <h3>What is a PTE request and how do I submit one?</h3>
+                <p>A PTE enrollment (short for <em>Permission to Enroll</em>) is an class registration given to your child by the Summer Program office based on particular situations, under which your child would normally not be able to register. For example, their birthday may be a few days or weeks off from a class that has some flexibility in age ranges - in this case, you would submit a PTE request if you like.</p>
+
+                <p>To do so, create a PTE ticket in the Help Centre. Our office staff will review your request and issue a response. PTE's are non-negotiable, as some courses, especially SCIT classes, may have strict age limits due to lab safety or other issues. Please understand that we are not able to PTE students under the minimum age of <strong>5 years</strong>, as this is a school requirement.</p>
+
+                <h3>How do I know whether my enrollments were successful and my children are on the class list?</h3>
+                <p>You can view each of your children's confirmed schedules at any time, just by logging in and selecting their respective profiles. After submitting registration, enrollments are confirmed unless a payment is not made by the due date. Based on availability, your enrollments may be dropped without notice by the office if payment is not received on time!</p>
+
+                <h3>What is the maximum class size and teacher-to-student ratio?</h3>
+                <p>While teachers themselves select an appropriate maximum class size, we encourage all teachers to accept no more than eighteen students into each class. From previous experience, many classes are much smaller than that. In the 2012 Program, the teacher-student ratio was less than 1:8.</p>
+
+                <h3>My plans have changed. How do I cancel or change my child's schedule?</h3>
+                <p>You can cancel, change, add or remove courses to any of your children's schedule prior to the payment due date, or we receive payment. After the earlier of these dates, you should email or call our office to ensure that your request is processed promptly. Please note that late cancellation or change charges <a href="/schedule.php" class="tipped" title="Dates and Fees Information">may apply</a>.</p>
+
+
+            </div>
+
+            <div id="billing" class="hide faq_content">
+                <h2>FAQ: Payment and Billing</h2>
+
+                <h3>What are the accepted methods of payment?</h3>
+                <p>We encourage all families to pay by self-reporting a mailed cheque (see below). When our office opens, you may also pay by cheque in person at our office, miscellaneous charges via cash by hand, or for families living outside Hong Kong, arrange a bank transfer (charges may apply).</p>
+                <p>At this time, CIS does not offer payment by credit/debit card, Internet payment, or money order. Please make crossed cheques payable to <strong>Chinese International School</strong>.</p>
+
+                <h3>What is self-reporting payment?</h3>
+                <p>To reduce delays in payment processing, we encourage you to use our new cheque payment format. Upon logging in to our website and going to your invoice, you may write a cheque for the amount of the invoice and enter some basic cheque information, including cheque number and value, securely into our system so we have a record that it will be coming soon. After submitting this information to our system, you will have five business days for our office to receive your cheque before the system automatically cancels this payment and marks it as invalid.</p>
+
+                <p>You will still have to mail in a physical cheque for security purposes, however, by giving us advance notice to expect your cheque, we will be able to process it much faster, which guarantees your children's enrollment and ensures you have no unpaid items.</p>
+
+            </div>
+
+            <div id="summer-program" class="hide faq_content">
+                <h2>FAQ: Summer Program</h2>
+            </div>
+
+            <div id="academic-program" class="hide faq_content">
+                <h2>FAQ: The Academic Program</h2>
+            </div>
+
+            <div id="operations" class="hide faq_content">
+                <h2>FAQ: Daily Operations</h2>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.faq_menu > li').click(function () {
+        $('.faq_content').hide();
+        $('li.active').removeClass('active');
+        $(this).addClass('active');
+        $('#' + $(this).data('activate')).fadeIn();
+    })
+})
+</script>

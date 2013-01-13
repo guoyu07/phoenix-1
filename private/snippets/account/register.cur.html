@@ -128,14 +128,17 @@
 			<div class="form-help no-label muted">Only English is supported in written communication.</div>
 			
 			<div class="form-row" id="form-sms-noti" style="padding-top: 1.5em;">
-			    <div class="no-label"><strong>Send SMS notifications and confirmations?</strong> <span class="red strong">*</span><br />
-				<label class="nested"><input type="radio" id="sms-yes-input" name="notify_sms" value="1" class="required" /> Yes please</label>
-				<label class="nested"><input type="radio" id="sms-no-input" name="notify_sms" value="0" class="required" checked="checked" /> No thanks</label></div>
+			    <div class="no-label"><strong>Expected Mode of Transportation</strong> <span class="red strong">*</span><br />
+    				<label class="nested"><input type="radio" id="trans-bus" name="transport" value="bus" class="required" checked="checked" /> School Bus</label>
+    				<label class="nested"><input type="radio" id="trans-car" name="transport" value="car" class="required" /> Car/Taxi</label>
+                    <label class="nested"><input type="radio" id="trans-public" name="transport" value="public" class="required" /> Public Transit</label>
+                    <label class="nested"><input type="radio" id="trans-foot" name="transport" value="foot" class="required" /> By Foot</label>
+                </div>
 			</div>
-			<div class="no-label muted form-hint">Requires a local mobile phone number. We support major local carriers including: CSL/1O1O/one2free, 3, SmarTone, PCCW &amp; China Mobile.</div>
+			<div class="no-label muted form-hint">We are interested your children's probable mode of transportation so we can gauge and prevent traffic congestion on Braemar Hill as other schools may still be in session.</div>
 
             
-            <div class="form-row" id="form-language" style="margin-top: 3em;">
+            <div class="form-row" id="form-buttons" style="margin-top: 3em;">
                 <p>
                     <button type="submit" class="button-green" style="float: right;">Submit Registration</button>
                     <button type="reset" class="button" style="float: left;">Reset Form</button>

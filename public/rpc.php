@@ -1,7 +1,7 @@
 <?php
 
 /**
- * CSS style definition guide as POC
+ * Remote procedure call JSON/AJAXified script
  *
  * @author	Yectep Studios <info@yectep.hk>
  * @version	20923
@@ -47,7 +47,7 @@ if (isset($_REQUEST['method'])) {
             // Email check
             if (isset($_REQUEST['data'])) {
                 $output["responseCode"] = 2200;
-                if (Security::checkEmail($_REQUEST['data'])) $output["response"] = true;
+                if (ACL::checkEmail($_REQUEST['data'])) $output["response"] = true;
                 else $output["response"] = false;
             } else {
                 $output["responseCode"] = 2400;
@@ -59,7 +59,7 @@ if (isset($_REQUEST['method'])) {
         
             // Reset password request
             if (isset($_REQUEST['data'])) {
-                if (Security::checkEmail($_REQUEST['data'])) {
+                if (ACL::checkEmail($_REQUEST['data'])) {
                     // Email exists, send link to reset
                     $stmt = Data::prepare('SELECT `FamilySalt` FROM `families` WHERE `FamilyEmail` = :email');
                     $stmt->bindParam('email', $_REQUEST['data']);

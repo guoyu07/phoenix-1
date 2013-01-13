@@ -133,6 +133,23 @@ class UX {
     	return $bc_html;
     	
     }
+
+    /**
+     * News article maker
+     * @package     Phoenix
+     * @version     20819
+     */
+    public function makeNews($newsItem) {
+        $news_html = UX::grabPage('common/news_article',
+                        array(  'title'     => $newsItem['NewsTitle'],
+                                'content'   => $newsItem['NewsContent'],
+                                'ts_short'  => date(DATE_FULL, strtotime($newsItem['NewsLETS'])),
+                                'ts_long'   => date(DATETIME_FULL, strtotime($newsItem['NewsLETS']))
+                        ),
+                        false);
+        return $news_html;
+        
+    }
     
     /*
      * Flushes the buffer as well as the UX push buffer
@@ -145,7 +162,7 @@ class UX {
     /**
     * Placeholder for < PHP 5.4.0 under FastCGI
     */
-    function getallheaders() 
+    private function getallheaders() 
     {
        foreach ($_SERVER as $name => $value) 
        {

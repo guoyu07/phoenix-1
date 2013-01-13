@@ -6,6 +6,7 @@
 	 * @version 1.9
 	 * @package PegasusPHP
 	 *
+	 *
 	 * Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld.com)
 	 *
 	 * This program is free software; you can redistribute it and/or

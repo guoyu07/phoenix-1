@@ -3,19 +3,20 @@
 /**
  * <p>The Security class provides security and access control services
  * to the entire package. Requires Common class.</p>
+ * <p>ACL and Security class as of 04JAN13 require SSO access.</p>
  *
  * @author      Yectep Studios <info@yectep.hk>
- * @version     20627
+ * @version     30104
  * @package     Phoenix
  */
-class Security extends Common {
+class ACL extends Security {
 
     /**
      * Begins ACL class and handles sessions
      *
      * @access      public
      */
-    public function initiateSecurity() {
+    static public function initiateSecurity() {
     
         // Begin session
         session_name('SummerSession');
@@ -29,105 +30,143 @@ class Security extends Common {
      * Generates a session key based on UA and IP and logs the action
      *
      */
-    public function generateSession($id) {
-        $stmt = Data::prepare('SELECT FamilyPassword FROM `families` WHERE FamilyID = :id');
+    static public function genSession($id) {
+        $stmt = Data::prepare('SELECT ObjHash FROM `sso_objects` WHERE ObjID = :id');
         $stmt->bindParam('id', $id);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        Common::logAction('backend.subroutine.acl', 'success', 'FID='.$id, 'generate_session');
-        $_SESSION['FID'] = $id;
-        $_SESSION['AuthCheck'] = sha1($result['FamilyPassword'].$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
+        Common::logAction('backend.subroutine.acl', 'success', 'SSOID='.$id, 'via ACL::generateSession');
+        $_SESSION['SSOID'] = $id;
+        $_SESSION['AuthCheck'] = hash("sha256", $result['ObjHash'].$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
         
         // Should always return true
         return true;
     }
     
     /**
-     * Looks up whether an account exists via email
+     * Looks up SSO object ID by email and (optionally) object type. Success returns SSOID.
      *
      * @package		Phoenix
      * @version		20820
      */
-    public function checkEmail($email) {
-    	$stmt = Data::prepare('SELECT COUNT(*) FROM `families` WHERE FamilyEmail = :email');
-    	$stmt->bindParam('email', $email);
-    	$stmt->execute();
-    	$num = $stmt->fetchColumn();
-    	if ($num == 1) {
-        	return true;
-    	} else {
-        	return false;
-    	}
-    }
-    
-    
-    /**
-     * Fetches user data
-     *
-     * @package		Phoenix
-     * @version		20903
-     */
-    public function getUserData($email) {
-    	$stmt = Data::prepare('SELECT `FamilyID`  as "FID", `FamilyEmail` as "email", `FamilyName` as "name", `FamilySalt` as "salt", `FamilyPassword` as "password", `FamilyAccountStatus` as "status", UNIX_TIMESTAMP(`FamilyCTS`) as "ts_created", UNIX_TIMESTAMP(`FamilyLATS`) as "ts_lastaction", UNIX_TIMESTAMP(`FamilyLLTS`) as "ts_lastlogin", `FamilyAddress` as "address", `FamilyCountry` as "from_hk", `FamilyPhoneHome` as "hphone", `FamilyPhoneMobile` as "mphone", `FamilyLanguage` as "language", `FamilyIC` as "comments" FROM `families` WHERE FamilyEmail = :email');
-    	$stmt->bindParam('email', $email);
-    	$stmt->execute();
-    	return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-    
-    
-    
-    /**
-     * Logs a user in
-     *
-     * @package		Phoenix
-     * @version		20827
-     */
-    public function checkLogin($email, $pass) {
-        $stmt = Data::prepare('SELECT FamilyID, FamilySalt, FamilyPassword, FamilyAccountStatus FROM `families` WHERE FamilyEmail = :email');
-        $stmt->bindParam('email', $email);
+    static public function checkSsoEmail($email, $portalType = 'public') {
+        // Get email
+        $stmt = Data::prepare('SELECT `ObjID` FROM `sso_objects` WHERE ObjEmail = :email AND ObjPortal = :type');
+        $stmt->bindParam('email', $email, PDO::PARAM_STR);
+        $stmt->bindParam('type', $portalType, PDO::PARAM_STR);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        // Check email
-        if (sizeof($result) !== 4) {
-            return false;
+        $objResult = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (sizeof($objResult) > 0) {
+            return $objResult[0]['ObjID'];
         } else {
-            if (sha1($result['FamilySalt'].$pass) == $result['FamilyPassword']) {
-                // Check account status
-                if ($result['FamilyAccountStatus'] == 1) {
-                    return $result['FamilyID'];
-                } else {
-                    // Non-activated
-                    Common::logAction('http.post.login', 'failed', 'FID='.$result['FamilyID'],  'not activated');
-                    return 0;
-                }
-            } else {
-                // Wrong password
-                Common::logAction('http.post.login', 'failed', 'FID='.$result['FamilyID'],  'invalid password');
-                return false;
-            }
+            return false;
         }
     }
+
+    /**
+     * Creates an SSO object of the specified type
+     * @package     Phoenix
+     * @version     30104
+     */
+    static public function makeSsoObject($email, $password, $type = 'family', $portal = "public") {
+        // Get Object Type ID
+        $typeId = self::getSsoTypeByName($type);
+        if (!$typeId) return false;
+
+        // Does user already exist in specified portal?
+        if (self::checkSsoEmail($email, $portal)) return false;
+
+        try {
+            // Get password hash
+            $passhash = self::getHash($password);
+    
+            $stmt = Data::prepare('INSERT INTO sso_objects (ObjType, ObjPortal, ObjEmail, ObjHash, ObjCTS, ObjLLTS, ObjPassUpdateTS) VALUES (:type, :portal, :email, :hash, NOW(), NOW(), NOW())');
+            $stmt->bindParam('email', $email, PDO::PARAM_STR);
+            $stmt->bindParam('portal', $portal, PDO::PARAM_STR);
+            $stmt->bindParam('hash', $passhash);
+            $stmt->bindParam('type', $typeId, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            Common::niceException('Failed to create SsoObject in ACL::makeSsoObject');
+        }
+
+        return true;
+
+    }
+
+    /**
+     * Verifies SSO authentication, generate and store session information
+     *
+     * @package     Phoenix
+     * @version     30104
+     */
+    static public function checkPassword($ssoid, $plainpass) {
+        // Get information based on SSOID
+        $stmt = Data::prepare('SELECT * FROM sso_objects WHERE ObjID = :ssoid LIMIT 1');
+        $stmt->bindParam('ssoid', $ssoid, PDO::PARAM_INT);
+        $stmt->execute();
+        $objData = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Compare password
+        return self::checkHash($plainpass, $objData['ObjHash']);
+    }
+
+    /**
+     * Logs a user out based on their session
+     * @package     Phoenix
+     */
+    static public function logout() {
+        Common::logAction('http.logout.acl', 'success', 'SSOID='.$_SESSION['SSOID'], 'via ACL class');
+        setcookie(session_name(), '', time()-(3600*24));
+        return session_destroy();
+    }
+
+    /**
+     * Performs an SSO login
+     * @package     Phoenix
+     */
+    static public function login($email, $plainpass, $portal = 'public') {
+        $ssoid = self::checkSsoEmail($email, $portal);
+ 
+        // If email is invalid
+        if (!$ssoid) return null;
+        
+        // Check password
+        if (!self::checkPassword($ssoid, $plainpass)) return false;
+        else return $ssoid;
+
+    }
     
     
     /**
-     * Generate salt
-     *
-     * @package     Phoenix
-     * @version     20904
+     * Verifies an active SSO session information including IP and UA validation
      */
-    public function generateSalt() {
-        
-        $vars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 !@#$%^&*()-=|\}{[]/?.>,<'";
-        $salt = substr($vars, rand(0,(strlen($vars)-1)), 1).substr($vars, rand(0,(strlen($vars)-1)), 1).
-                substr($vars, rand(0,(strlen($vars)-1)), 1).substr($vars, rand(0,(strlen($vars)-1)), 1).
-                substr($vars, rand(0,(strlen($vars)-1)), 1).substr($vars, rand(0,(strlen($vars)-1)), 1).
-                substr($vars, rand(0,(strlen($vars)-1)), 1).substr($vars, rand(0,(strlen($vars)-1)), 1).
-                substr($vars, rand(0,(strlen($vars)-1)), 1).substr($vars, rand(0,(strlen($vars)-1)), 1);
-        
-        return ($salt);
-        
+    static public function checkLogin() {
+        $stmt = Data::prepare('SELECT ObjHash FROM `sso_objects` WHERE ObjID = :id');
+        $stmt->bindValue('id', $_SESSION['SSOID']);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Compare has with session value
+        if ($_SESSION['AuthCheck'] == hash("sha256", $result['ObjHash'].$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /* =============== INTERNAL PRIVATE FUNCTIONS ============== */
+
+    static private function getSsoTypeByName($name) {
+        $stmt = Data::prepare('SELECT TypeID FROM sso_types WHERE TypeName = :name');
+        $stmt->bindParam('name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+        $return = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (sizeof($return) > 0) return $return['TypeID'];
+        else return false;
     }
     
 }

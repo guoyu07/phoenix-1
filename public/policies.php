@@ -47,10 +47,11 @@ switch ($_SERVER['QUERY_STRING']) {
         $inc = 'weather';
         $h['title'] = 'Weather Warnings';
         $bc = UX::makeBreadcrumb(array('Weather Warnings' => '/policies.php?weather'));
+    break;
 	case 'agepte':
 		$inc = 'agepte';
 		$h['title'] = 'Age and PTE';
-		$bc = UX::makeBreadcrumb(array('Student Age &amp; Permission to Enroll Policy' => '/policies.php?pte'));
+		$bc = UX::makeBreadcrumb(array('Student Age &amp; Permission to Enroll Policy' => '/policies.php?agepte'));
 	break;
 	default:
 		header('Location: /policies.php?terms');

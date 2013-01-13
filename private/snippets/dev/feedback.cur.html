@@ -1,0 +1,49 @@
+<div id="body" class="content-row spaced">
+    <div id="content" style="padding:0.5em;">
+        <h1>Provide Feedback</h1>
+
+        {{blurb}}
+
+        <form action="/feedback.php?submit" method="post" enctype="multipart/form-data" class="validate" id="feedback-form">
+            <div class="form-row">
+                <label for="fb-name">Your Name <span class="red strong">*</span></label>
+                <input type="text" id="fb-name" class="required" name="feedback_name" />
+            </div>
+            <div class="form-row">
+                <label for="fb-email">Your Email</label>
+                <div class="form-help">
+                    <input type="email" id="fb-email" name="feedback_email" />Required if you require a response.
+                </div>
+            </div>
+            <div class="form-row">
+                <label for="fb-topic">Feedback Topic <span class="red strong">*</span></label>
+                <select id="fb-topic" name="feedback_topic" class="required">
+                    <option selected="selected">(Select a Topic)</option>
+                    <option value="policies">Policies and PTE System</option>
+                    <option value="pricing">Tuition, Fees and Payment</option>
+                    <option value="website">Website Design Feedback</option>
+                    <option value="general">General Feedback</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="fb-comments">Your Comments <span class="red strong">*</span></label>
+                <textarea id="fb-comments" name="feedback_comments" style="height:20em;" class="required"></textarea>
+            </div>
+            <div class="form-row no-label">
+                <label class="nested"><input type="checkbox" value="1" name="feedback_reply" /> I would like staff to follow-up on this issue.</label>
+            </div>
+            <div class="form-row" id="form-buttons" style="margin-top: 2em;">
+                <p>
+                    <button type="submit" class="button-green" style="float: right;">Submit Feedback</button>
+                    <button type="reset" class="button" style="float: left;">Reset Form</button>
+                </p>
+                <div class="clear buffer">&nbsp;</div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#fb-email').focus();
+});

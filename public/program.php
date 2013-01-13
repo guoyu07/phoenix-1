@@ -19,14 +19,14 @@ define('PHX_UX',        true);
 require_once(PTP . 'php/ignition.php');
 
 // Set page switch variables
-$h['title'] = 'Programme Details';
-$n['programme'] = 'active';
+$h['title'] = 'Program Details';
+$n['program'] = 'active';
 
 // Include header section
 echo UX::makeHead($h, $n);
 
 // Page info
-echo UX::makeBreadcrumb(array(	'Programme Details'		=> '/programme.php' ));
+echo UX::makeBreadcrumb(array(	'Program Details'		=> '/program.php' ));
 echo UX::grabPage('public/programme', null, true);
 
 // Before footer grab time spent

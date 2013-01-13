@@ -1,9 +1,5 @@
 <?php
 
-//require_once('class.mandrill.php');
-
-define('MANDRILL_KEY',  'd4fd5695-5805-43fa-8fd7-2a2f0c30fa9b');
-
 /**
  * The Mailer class provides Mandrill app integration for 
  * transactional email services.
@@ -38,7 +34,7 @@ class Mailer {
      * @param mixed $email  Email address (To) field
      * @param str   $sujb
      */
-    public function send($to, $subj, $body, $fromText = "CIS Summer Programme", $fromAddr = "noreply@summer.cis.edu.hk") {
+    public function send($to, $subj, $body, $fromText = "CIS Summer Program", $fromAddr = "noreply@summer.cis.edu.hk") {
         
         $args = array(
             'key' => MANDRILL_KEY,
@@ -61,7 +57,6 @@ class Mailer {
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($args));
             
             

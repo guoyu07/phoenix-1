@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<meta charset="utf-8">
+<title>phpDocumentor » Phoenix</title>
+<meta name="author" content="Mike van Riel">
+<meta name="description" content="">
+<link href="../css/template.css" rel="stylesheet" media="all">
+<script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script><script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script><script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script><script src="../js/bootstrap.js" type="text/javascript"></script><script src="../js/template.js" type="text/javascript"></script><script src="../js/prettify/prettify.min.js" type="text/javascript"></script><link rel="shortcut icon" href="../img/favicon.ico">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png">
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner"><div class="container">
+<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a><a class="brand" href="../index.html">phpDocumentor</a><div class="nav-collapse"><ul class="nav">
+<li class="dropdown">
+<a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                    API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a>Packages</a></li>
+<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
+<li><a href="../packages/Mandrill.html"><i class="icon-folder-open"></i> Mandrill</a></li>
+<li><a href="../packages/PegasusPHP%0ACopyright%20(C)%202008-2010%20Chris%20Schuld%20%20(chris@chrisschuld.html"><i class="icon-folder-open"></i> PegasusPHP
+Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
+<li><a href="../packages/Phoenix.html"><i class="icon-folder-open"></i> Phoenix</a></li>
+<li><a href="../packages/Plume.html"><i class="icon-folder-open"></i> Plume</a></li>
+</ul>
+</li>
+<li class="dropdown" id="charts-menu">
+<a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                    Charts <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="../graph_class.html"><i class="icon-list-alt"></i> Class hierarchy diagram</a></li></ul>
+</li>
+<li class="dropdown" id="reports-menu">
+<a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reports <b class="caret"></b></a><ul class="dropdown-menu">
+<li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
+                <span class="label label-info">77</span></a></li>
+<li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
+                <ul></ul></a></li>
+<li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
+                <span class="label label-info">0</span></a></li>
+</ul>
+</li>
+</ul></div>
+</div></div>
+<div class="go_to_top"><a href="#___" style="color: inherit">Back to top  <i class="icon-upload icon-white"></i></a></div>
+</div>
+<div id="___" class="container">
+<noscript><div class="alert alert-warning">
+                            Javascript is disabled; several features are only available
+                            if Javascript is enabled.
+                        </div></noscript>
+<div class="row">
+<div class="span4">
+<div class="btn-group view pull-right" data-toggle="buttons-radio">
+<button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button><button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+</div>
+<ul class="side-nav nav nav-list">
+<li class="nav-header">
+<i class="icon-map-marker"></i> Packages</li>
+<li>
+<a href="../packages/Phoenix.html" title="Phoenix"><i class="icon-folder-open"></i>Phoenix</a><ul class="nav nav-list nav-packages"></ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-class"></i> Classes</li>
+<li><a href="#ACL" title="&lt;p&gt;The Security class provides security and access control services
+to the entire package.">ACL</a></li>
+<li><a href="#Common" title="The Common class provides default page construction common functions
+and classes.">Common</a></li>
+<li><a href="#Data" title="Database class">Data</a></li>
+<li><a href="#Mailer" title="The Mailer class provides Mandrill app integration for
+transactional email services.">Mailer</a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#constant_AUTH_ALGORITHM" title="AUTH_ALGORITHM :: "><span class="description">AUTH_ALGORITHM</span><pre>AUTH_ALGORITHM</pre></a></li>
+<li class="constant  "><a href="#constant_AUTH_ITERATIONS" title="AUTH_ITERATIONS :: "><span class="description">AUTH_ITERATIONS</span><pre>AUTH_ITERATIONS</pre></a></li>
+<li class="constant  "><a href="#constant_BETA" title="BETA :: "><span class="description">BETA</span><pre>BETA</pre></a></li>
+<li class="constant  "><a href="#constant_DATETIME_FULL" title="DATETIME_FULL :: "><span class="description">DATETIME_FULL</span><pre>DATETIME_FULL</pre></a></li>
+<li class="constant  "><a href="#constant_DATETIME_SHORT" title="DATETIME_SHORT :: "><span class="description">DATETIME_SHORT</span><pre>DATETIME_SHORT</pre></a></li>
+<li class="constant  "><a href="#constant_DATE_FULL" title="DATE_FULL :: "><span class="description">DATE_FULL</span><pre>DATE_FULL</pre></a></li>
+<li class="constant  "><a href="#constant_DATE_SHORT" title="DATE_SHORT :: "><span class="description">DATE_SHORT</span><pre>DATE_SHORT</pre></a></li>
+<li class="constant  "><a href="#constant_DB_DSN" title="DB_DSN :: "><span class="description">DB_DSN</span><pre>DB_DSN</pre></a></li>
+<li class="constant  "><a href="#constant_DB_HOST" title="DB_HOST :: "><span class="description">DB_HOST</span><pre>DB_HOST</pre></a></li>
+<li class="constant  "><a href="#constant_DB_NAME" title="DB_NAME :: "><span class="description">DB_NAME</span><pre>DB_NAME</pre></a></li>
+<li class="constant  "><a href="#constant_DB_PASS" title="DB_PASS :: "><span class="description">DB_PASS</span><pre>DB_PASS</pre></a></li>
+<li class="constant  "><a href="#constant_DB_USER" title="DB_USER :: "><span class="description">DB_USER</span><pre>DB_USER</pre></a></li>
+<li class="constant  "><a href="#constant_HASH_ALGORITHM_INDEX" title="HASH_ALGORITHM_INDEX :: "><span class="description">HASH_ALGORITHM_INDEX</span><pre>HASH_ALGORITHM_INDEX</pre></a></li>
+<li class="constant  "><a href="#constant_HASH_ITERATION_INDEX" title="HASH_ITERATION_INDEX :: "><span class="description">HASH_ITERATION_INDEX</span><pre>HASH_ITERATION_INDEX</pre></a></li>
+<li class="constant  "><a href="#constant_HASH_PBKDF2_INDEX" title="HASH_PBKDF2_INDEX :: "><span class="description">HASH_PBKDF2_INDEX</span><pre>HASH_PBKDF2_INDEX</pre></a></li>
+<li class="constant  "><a href="#constant_HASH_SALT_INDEX" title="HASH_SALT_INDEX :: "><span class="description">HASH_SALT_INDEX</span><pre>HASH_SALT_INDEX</pre></a></li>
+<li class="constant  "><a href="#constant_HASH_SECTIONS" title="HASH_SECTIONS :: "><span class="description">HASH_SECTIONS</span><pre>HASH_SECTIONS</pre></a></li>
+<li class="constant  "><a href="#constant_MAILER_SENDMAIL" title="MAILER_SENDMAIL :: "><span class="description">MAILER_SENDMAIL</span><pre>MAILER_SENDMAIL</pre></a></li>
+<li class="constant  "><a href="#constant_MANDRILL_KEY" title="MANDRILL_KEY :: "><span class="description">MANDRILL_KEY</span><pre>MANDRILL_KEY</pre></a></li>
+<li class="constant  "><a href="#constant_PBKDF2_HASH_ALGORITHM" title="PBKDF2_HASH_ALGORITHM :: "><span class="description">PBKDF2_HASH_ALGORITHM</span><pre>PBKDF2_HASH_ALGORITHM</pre></a></li>
+<li class="constant  "><a href="#constant_PBKDF2_HASH_BYTES" title="PBKDF2_HASH_BYTES :: "><span class="description">PBKDF2_HASH_BYTES</span><pre>PBKDF2_HASH_BYTES</pre></a></li>
+<li class="constant  "><a href="#constant_PBKDF2_ITERATIONS" title="PBKDF2_ITERATIONS :: "><span class="description">PBKDF2_ITERATIONS</span><pre>PBKDF2_ITERATIONS</pre></a></li>
+<li class="constant  "><a href="#constant_PBKDF2_SALT_BYTES" title="PBKDF2_SALT_BYTES :: "><span class="description">PBKDF2_SALT_BYTES</span><pre>PBKDF2_SALT_BYTES</pre></a></li>
+<li class="constant  "><a href="#constant_REGISTRATION_OPEN" title="REGISTRATION_OPEN :: "><span class="description">REGISTRATION_OPEN</span><pre>REGISTRATION_OPEN</pre></a></li>
+<li class="constant  "><a href="#constant_SITE_DISABLED" title="SITE_DISABLED :: "><span class="description">SITE_DISABLED</span><pre>SITE_DISABLED</pre></a></li>
+</ul>
+</div>
+<div class="span8 package-contents">
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/Phoenix.html">Phoenix</a></li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="ACL" class="element ajax clickable class">
+<h1>ACL<a href="../classes/ACL.html">¶</a>
+</h1>
+<p class="short_description"><p>The Security class provides security and access control services
+to the entire package.</p>
+<div class="details collapse"></div>
+<a href="../classes/ACL.html" class="more">« More »</a>
+</div>
+<div id="Common" class="element ajax clickable class">
+<h1>Common<a href="../classes/Common.html">¶</a>
+</h1>
+<p class="short_description">The Common class provides default page construction common functions
+and classes.</p>
+<div class="details collapse"></div>
+<a href="../classes/Common.html" class="more">« More »</a>
+</div>
+<div id="Data" class="element ajax clickable class">
+<h1>Data<a href="../classes/Data.html">¶</a>
+</h1>
+<p class="short_description">Database class</p>
+<div class="details collapse"></div>
+<a href="../classes/Data.html" class="more">« More »</a>
+</div>
+<div id="Mailer" class="element ajax clickable class">
+<h1>Mailer<a href="../classes/Mailer.html">¶</a>
+</h1>
+<p class="short_description">The Mailer class provides Mandrill app integration for
+transactional email services.</p>
+<div class="details collapse"></div>
+<a href="../classes/Mailer.html" class="more">« More »</a>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_AUTH_ALGORITHM"> </a><div class="element clickable constant  constant_AUTH_ALGORITHM" data-toggle="collapse" data-target=".constant_AUTH_ALGORITHM .collapse">
+<h2>AUTH_ALGORITHM</h2>
+<pre>AUTH_ALGORITHM </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_AUTH_ITERATIONS"> </a><div class="element clickable constant  constant_AUTH_ITERATIONS" data-toggle="collapse" data-target=".constant_AUTH_ITERATIONS .collapse">
+<h2>AUTH_ITERATIONS</h2>
+<pre>AUTH_ITERATIONS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_BETA"> </a><div class="element clickable constant  constant_BETA" data-toggle="collapse" data-target=".constant_BETA .collapse">
+<h2>BETA</h2>
+<pre>BETA </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DATETIME_FULL"> </a><div class="element clickable constant  constant_DATETIME_FULL" data-toggle="collapse" data-target=".constant_DATETIME_FULL .collapse">
+<h2>DATETIME_FULL</h2>
+<pre>DATETIME_FULL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DATETIME_SHORT"> </a><div class="element clickable constant  constant_DATETIME_SHORT" data-toggle="collapse" data-target=".constant_DATETIME_SHORT .collapse">
+<h2>DATETIME_SHORT</h2>
+<pre>DATETIME_SHORT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DATE_FULL"> </a><div class="element clickable constant  constant_DATE_FULL" data-toggle="collapse" data-target=".constant_DATE_FULL .collapse">
+<h2>DATE_FULL</h2>
+<pre>DATE_FULL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DATE_SHORT"> </a><div class="element clickable constant  constant_DATE_SHORT" data-toggle="collapse" data-target=".constant_DATE_SHORT .collapse">
+<h2>DATE_SHORT</h2>
+<pre>DATE_SHORT </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DB_DSN"> </a><div class="element clickable constant  constant_DB_DSN" data-toggle="collapse" data-target=".constant_DB_DSN .collapse">
+<h2>DB_DSN</h2>
+<pre>DB_DSN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DB_HOST"> </a><div class="element clickable constant  constant_DB_HOST" data-toggle="collapse" data-target=".constant_DB_HOST .collapse">
+<h2>DB_HOST</h2>
+<pre>DB_HOST </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DB_NAME"> </a><div class="element clickable constant  constant_DB_NAME" data-toggle="collapse" data-target=".constant_DB_NAME .collapse">
+<h2>DB_NAME</h2>
+<pre>DB_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DB_PASS"> </a><div class="element clickable constant  constant_DB_PASS" data-toggle="collapse" data-target=".constant_DB_PASS .collapse">
+<h2>DB_PASS</h2>
+<pre>DB_PASS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_DB_USER"> </a><div class="element clickable constant  constant_DB_USER" data-toggle="collapse" data-target=".constant_DB_USER .collapse">
+<h2>DB_USER</h2>
+<pre>DB_USER </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HASH_ALGORITHM_INDEX"> </a><div class="element clickable constant  constant_HASH_ALGORITHM_INDEX" data-toggle="collapse" data-target=".constant_HASH_ALGORITHM_INDEX .collapse">
+<h2>HASH_ALGORITHM_INDEX</h2>
+<pre>HASH_ALGORITHM_INDEX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HASH_ITERATION_INDEX"> </a><div class="element clickable constant  constant_HASH_ITERATION_INDEX" data-toggle="collapse" data-target=".constant_HASH_ITERATION_INDEX .collapse">
+<h2>HASH_ITERATION_INDEX</h2>
+<pre>HASH_ITERATION_INDEX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HASH_PBKDF2_INDEX"> </a><div class="element clickable constant  constant_HASH_PBKDF2_INDEX" data-toggle="collapse" data-target=".constant_HASH_PBKDF2_INDEX .collapse">
+<h2>HASH_PBKDF2_INDEX</h2>
+<pre>HASH_PBKDF2_INDEX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HASH_SALT_INDEX"> </a><div class="element clickable constant  constant_HASH_SALT_INDEX" data-toggle="collapse" data-target=".constant_HASH_SALT_INDEX .collapse">
+<h2>HASH_SALT_INDEX</h2>
+<pre>HASH_SALT_INDEX </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_HASH_SECTIONS"> </a><div class="element clickable constant  constant_HASH_SECTIONS" data-toggle="collapse" data-target=".constant_HASH_SECTIONS .collapse">
+<h2>HASH_SECTIONS</h2>
+<pre>HASH_SECTIONS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MAILER_SENDMAIL"> </a><div class="element clickable constant  constant_MAILER_SENDMAIL" data-toggle="collapse" data-target=".constant_MAILER_SENDMAIL .collapse">
+<h2>MAILER_SENDMAIL</h2>
+<pre>MAILER_SENDMAIL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MANDRILL_KEY"> </a><div class="element clickable constant  constant_MANDRILL_KEY" data-toggle="collapse" data-target=".constant_MANDRILL_KEY .collapse">
+<h2>MANDRILL_KEY</h2>
+<pre>MANDRILL_KEY </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_PBKDF2_HASH_ALGORITHM"> </a><div class="element clickable constant  constant_PBKDF2_HASH_ALGORITHM" data-toggle="collapse" data-target=".constant_PBKDF2_HASH_ALGORITHM .collapse">
+<h2>PBKDF2_HASH_ALGORITHM</h2>
+<pre>PBKDF2_HASH_ALGORITHM </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_PBKDF2_HASH_BYTES"> </a><div class="element clickable constant  constant_PBKDF2_HASH_BYTES" data-toggle="collapse" data-target=".constant_PBKDF2_HASH_BYTES .collapse">
+<h2>PBKDF2_HASH_BYTES</h2>
+<pre>PBKDF2_HASH_BYTES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_PBKDF2_ITERATIONS"> </a><div class="element clickable constant  constant_PBKDF2_ITERATIONS" data-toggle="collapse" data-target=".constant_PBKDF2_ITERATIONS .collapse">
+<h2>PBKDF2_ITERATIONS</h2>
+<pre>PBKDF2_ITERATIONS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_PBKDF2_SALT_BYTES"> </a><div class="element clickable constant  constant_PBKDF2_SALT_BYTES" data-toggle="collapse" data-target=".constant_PBKDF2_SALT_BYTES .collapse">
+<h2>PBKDF2_SALT_BYTES</h2>
+<pre>PBKDF2_SALT_BYTES </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_REGISTRATION_OPEN"> </a><div class="element clickable constant  constant_REGISTRATION_OPEN" data-toggle="collapse" data-target=".constant_REGISTRATION_OPEN .collapse">
+<h2>REGISTRATION_OPEN</h2>
+<pre>REGISTRATION_OPEN </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_SITE_DISABLED"> </a><div class="element clickable constant  constant_SITE_DISABLED" data-toggle="collapse" data-target=".constant_SITE_DISABLED .collapse">
+<h2>SITE_DISABLED</h2>
+<pre>SITE_DISABLED </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row"><footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
+            generated on 2013-01-04T16:35:38+08:00.<br></footer></div>
+</div>
+</body>
+</html>

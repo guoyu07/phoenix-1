@@ -22,14 +22,14 @@ require_once(PTP . 'php/ignition.php');
 if (isset($_POST['email']) && isset($_POST['pass'])) {
     
     // Does email address exist in the database?
-    if (!Security::checkEmail($_POST['email'])) {
+    if (!ACL::checkEmail($_POST['email'])) {
         Common::logAction('http.post.login', 'failed', 'EMAIL='.$_POST['email'], 'inexistent account');
         header('Location: ./login.php?msg=error_email');
         exit();
     }
     
     // Check password
-    $login_check = Security::checkLogin($_POST['email'], $_POST['pass']);
+    $login_check = ACL::checkLogin($_POST['email'], $_POST['pass']);
     
     if ($login_check === false) {
         header('Location: ./login.php?msg=error_pass');
@@ -41,7 +41,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     }
     
     // Everything's good, set session info and we're good to transfer to dashboard
-    Security::generateSession($login_check);
+    ACL::generateSession($login_check);
     header('Location: ./dashboard.php');
     
 }

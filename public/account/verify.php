@@ -23,8 +23,8 @@ if (!isset($_GET['email']) || !isset($_GET['v'])) {
 }
 
 // No such email?
-if (Security::checkEmail($_GET['email'])) {
-    $famInfo = Security::getUserData($_GET['email']);
+if (ACL::checkEmail($_GET['email'])) {
+    $famInfo = ACL::getUserData($_GET['email']);
     if (sha1($famInfo['password']) == $_GET['v']) {
         try {
             $stmt = Data::prepare('UPDATE `families` SET `FamilyAccountStatus` = 1 WHERE `FamilyEmail` = :email AND `FamilyAccountStatus` = 0');

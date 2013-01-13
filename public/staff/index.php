@@ -21,29 +21,25 @@ require_once(PTP . 'php/ignition.php');
 // If a request has been submitted, try perfomring a login
 if (isset($_POST['email']) && isset($_POST['pass'])) {
     
-    // Does email address exist in the database?
-    if (!Security::checkEmail($_POST['email'])) {
-        Common::logAction('http.post.stafflogin', 'failed', 'EMAIL='.$_POST['email'], '[failed] inexistent');
-        header('Location: ./login.php?msg=error_email');
-        exit();
-    }
+    // Perform a login
+    $login = ACL::login($_POST['email'], $_POST['pass'], 'staff');
     
-    // Check password
-    $login_check = Security::checkLogin($_POST['email'], $_POST['pass']);
-    if (!$login_check) {
-        Common::logAction('http.post.login', 'failed', 'password mismatch.');
-        header('Location: ./login.php?msg=error_pass');
+    if ($login === null) {
+        Common::logAction('http.staff.login', 'failure', 'E='.$_POST['email'], 'No matching portal email');
+        header('Location: ./index.php?msg=error_email');
         exit();
-    } elseif ($login_check == 0) {
-        // Account is inactive
-        header('Location: ./login.php?msg=error_inactive');
+    } elseif ($login === false) {
+        Common::logAction('http.staff.login', 'failure', 'E='.$_POST['email'], 'Invalid password match');
+        header('Location: ./index.php?msg=error_pass');
         exit();
+    } else {
+        Common::logAction('http.staff.login', 'success', 'SSOID='.$login);
     }
     
     // Everything's good, set session info and we're good to transfer to dashboard
-    Security::generateSession($login_check);
+    ACL::genSession($login);
     header('Location: ./dashboard.php');
-    
+    exit();
 }
 
 // Set page switch variables
@@ -57,13 +53,13 @@ if (array_key_exists('msg', $_GET)) {
 			$error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> Thank you for activating your account. You may now sign in.</div>';
 		break;
 		case 'error_email':
-			$error = '<div class="alert alert-red"><strong>Whoops!</strong> The email address you used doesn\'t exist. Have you made an account yet?</div>';
+			$error = '<div class="alert alert-red"><strong>Whoops!</strong> The email address you used doesn\'t exist. Please remember this login is for staff only.</div>';
 		break;
 		case 'error_pass':
-			$error = '<div class="alert alert-red">The password you entered doesn\'t match the one we have on file. Please try again. If you forgot your password, use the Forgot Password link.</div>';
+			$error = '<div class="alert alert-red"><img src="/assets/icons/cross.png" title="[!]" /> The password you entered doesn\'t match the one we have on file. Please try again. If you forgot your password, use the Forgot Password link.</div>';
 		break;
-		case 'error_inactive':
-			$error = '<div class="alert alert-red">Your account is not yet active. To activate your account, please refer to the original welcome email we sent to your account when you registered.</div>';
+		case 'error_nologin':
+			$error = '<div class="alert alert-red">Please login to access this resource.</div>';
 		break;
 		default:
 			$error = '<div class="alert alert-yellow">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.</div>';
@@ -75,17 +71,17 @@ if (array_key_exists('msg', $_GET)) {
 
 
 // Include header section
-echo UX::makeHead($h, $n);
+echo UX::makeHead($h, $n, 'common/header_staff', 'common/nav_public_staff');
 
 // Page info
-echo UX::makeBreadcrumb(array(	'Sign In'		=> '/staff/index.php'));
+echo UX::makeBreadcrumb(array(	'Staff Portal'   => '/staff',   'Sign In'		=> '/staff/index.php'));
 echo UX::grabPage('staff/login', array('error' => $error), true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);
 $time = round(($t['end'] - $t['start']), 3);
 
-echo UX::grabPage('common/masthead', array('time' => $time), true);
+echo UX::grabPage('common/masthead_staff', array('time' => $time), true);
 echo UX::grabPage('common/footer', null, true);
 
 ?>

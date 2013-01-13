@@ -1,53 +1,96 @@
 <form class="validate" action="./register.php" method="post" id="reg-form" enctype="multipart/form-data">
 <div class="content-row spaced">
-    <h1>Summer Programme 2013 Course Application</h1>
+    <h1>Summer Program 2013 Course Application</h1>
 </div>
 
-<div class="content-row spaced" style="display:table;">
+<div id="application_starter" class="content-row spaced" style="display:table;">
     <div class="col-row" id="basic-info">
         
         <!-- Form block -->
         <div id="form-basic" class="col c7">
             <h2>Application Information</h2>
+
+            <div class="alert alert-red"><span class="badge badge-red">Attention</span> Due to safety issues, the following equipment types of courses cannot be allowed: design/shop use, cooking and food preparation, swimming pool use.</div>
             
             {{error}}
         
-            <p>Thank you for your interest in applying to teach for the Summer Programme 2013. We have many exciting new things in store for teachers this year. Please
-            read our information manual to the right for more information before applying, as all course application will be carefully audited and processed during March 2013.</p>
+            <p>Thank you for your interest in applying to teach for the Summer Program 2013. We have many exciting new things in store for teachers this year. Please download and read our information manual to the right for more information before applying, as all course application will be carefully audited and processed during March 2013.</p>
+
+            <p>The information manual contains valuable information on the application process as well as important and helpful items for during the program.</p>
+
+            <div class="alert">If you have any questions, please email us at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a></div>
             
-            <h3>Load previous application</h3>
-            <p>To continue a previously started application, enter the Application ID and Key. We'll get the saved data from our database and load it right up.</p>
-            
-            <div class="alert alert-red" id="load-info"><img src="/assets/icons/cross.png" alt="[Error]" /> Sorry, couldn't find matching save data. Try again please.</div>
-            <div class="alert alert-green" id="load-info2"><img src="/assets/icons/tick.png" alt="[OK]" /> Alrighty, all your previous information has been loaded. Feel free to work on your application, then Save or Submit it at the bottom of the page.</div>
-            
-            <div class="form-row" id="appload-id-row">
-                <label for="appload-id">Application ID</label>
-                <input type="text" id="appload-id" name="app_id" />
-            </div>
-            
-            <div class="form-row" id="appload-key-row">
-                <label for="appload-key">Application Key</label>
-                <input type="text" id="appload-key" name="app_key" />
-            </div>
-            
-            <div class="form-row no-label" id="form-language">
-                    <button type="button" id="appload">Load Saved Data</button>
+            <p><button type="button" class="button" id="btn_load_app">Load Saved Application</button> <button type="button" class="button button-green" id="btn_new_app">Start New Application&hellip;</button></p>
+
+            <div id="application_loader" class="application-load hide">
+                <h3>Load previous application</h3>
+                <p>To continue a previously started application, enter the Application ID. We'll get the saved data from our database and load it right up.</p>
+                
+                <div class="alert alert-red hide load-info" id="load-info"><img src="/assets/icons/cross.png" alt="[Error]" /> Sorry, couldn't find matching save data. Try again please.</div>
+                <div class="alert alert-green hide load-info" id="load-info2"><img src="/assets/icons/tick.png" alt="[OK]" /> Success: all previously saved data has been loaded.</div>
+                
+                <div class="form-row" id="appload-id-row">
+                    <label for="appload-id">Application ID</label>
+                    <input type="text" id="appload-id" name="app_id" />
+                </div>
+                
+                <div class="form-row no-label" id="form-language">
+                        <button type="button" id="appload">Load Saved Data</button>
+                </div>
             </div>
             
         </div>
         
         <!-- Help block -->
         <div id="help-basic" class="col c3">
-            <button id="btn-manual" class="button button-link button-blue" data-blank-url="/assets/pdf/teachers_manual.pdf">Download Info Manual</button>
+            <button id="btn-manual" class="button button-link button-blue" data-blank-url="/assets/files/summer-2013-teacher-manual.pdf">Download Teaching Info Manual</button>
             
-            <h3>Load Application</h3>
-            <p>A previous application can be loaded, edited and saved if you have the original application email that we sent you the first time you visited this page. Simply enter the Application ID and Application Key as per your email receipt and the system will load your latest saved application data.</p>
+            <div class="application-load hide">
+                <h3>Load Application</h3>
+                <p>To edit a previously saved or submitted application, enter the Application ID that was provided to you in the original confirmation email.</p>
+                <p>If you can't find it, please email our help desk at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a>.</p>
+            </div>
         </div>
         
     </div>
 </div>
 
+<div id="application_status" class="content-row hide">
+    <div id="application_announce" class="announce">
+        Your application was successfully saved for future editing. Please refer to the first email sent to you for instructions on how to reload this data.
+    </div>
+
+    <div class="form-row">
+                <label>Debugging Information</label>
+                <textarea id="submit_information"></textarea>
+            </div>
+</div>
+
+<div id="application_submit_terms" class="content-row hide">
+    <div class="col-row">
+        <div class="col c10">
+            <h2>Terms and Conditions of Instruction</h2>
+            <p>Please read through <strong>each one</strong> carefully and tick only if you understand and agree to each term and condition.</p>
+
+            <p>
+                <label class="full"><input type="checkbox" id="term-1" /> I have read the teaching information manual.</label>
+                <label class="full"><input type="checkbox" id="term-2" /> I understand that the information I submit now or later will be used to determine whether my application was successful.</label>
+                <label class="full"><input type="checkbox" id="term-3" /> If selected, I will attend and teach all offered and operating classes. If I am unable to do so with a cogent reason, I will give the Office ample time to find a substitute, or offer one myself.</label>
+                <label class="full"><input type="checkbox" id="term-4"> I understand that my attendance is recorded when I take class roll in each period, and this is used to automatically calculate my pay.</label>
+                <label class="full"><input type="checkbox" id="term-5"> I understand that I may cancel classes prior to 1 May 2012, but no later, unless special circumstances arise.</label>
+                <label class="full"><input type="checkbox" id="term-6"> I will teach in the room that I am assigned.</label>
+                <label class="full"><input type="checkbox" id="term-7"> I will send students and parents who want to switch classes/courses to the Office.</label>
+                <label class="full"><input type="checkbox" id="term-8"> I will follow CIS teaching instructions and standards as applicable to the summer program.</label>
+            </p>
+
+            <p>
+                <button type="button" class="float-left button button-red">Submit Application</button>
+                <button type="button" class="float-right button">Cancel and Revert</button></p>
+        </div>
+    </div>
+</div>
+
+<div id="application_content" class="hide">
 <div class="content-row spaced" style="display:table;">
     <div class="col-row" id="basic-info">
         
@@ -57,13 +100,19 @@
             <h2>Instructor Information</h2>
             
             <div class="form-row" id="i-name-row">
-                <label for="instructor-name">Your Name</label>
+                <label for="instructor-name">Lead Instructor Name <strong class="red">*</strong></label>
                 <input type="text" id="instructor-name" name="teacher_name" />
             </div>
             
             <div class="form-row" id="i-email-row">
-                <label for="instructor-email">Your Email</label>
+                <label for="instructor-email">Lead Instructor Email</label>
                 <input type="email" id="instructor-email" name="teacher_email" />
+            </div>
+
+            <div class="form-row" id="i-subteacher-row">
+                <label for="instructor-suppl">Other Teacher Names</label>
+                <input type="text" id="instructor-suppl" name="teacher_suppl" />
+                <div class="no-label form-help"><em>Please separate names with a comma (space optional).</em></div>
             </div>
                 
                        
@@ -71,7 +120,9 @@
         
         <!-- Help block -->
         <div id="help-basic" class="col c3">
-            
+            <h3>Lead/Course Instruction</h3>
+            <p>Please note that multiple people teaching the same period are not allowed. For courses where different periods may be taught by different teachers, please give us the lead instructor details. The lead instructor does not need to necessarily be a senior position: we need a single point of contact for more efficient communication.</p>
+            <p>If you alone will teach this course, simply enter your details in the lead instructor information and leave "Other Teachers" blank.</p>
         </div>
         
     </div>
@@ -86,31 +137,34 @@
         <div id="form-info" class="col c7">
             
             <h2>Course Information</h2>
+
+            <p>For any of these information boxes, please be as specific as you can, as it not only helps the secretaries select courses, but also for parents to get a better understanding of what they will be signing up their children for. An example is provided in the Teaching Information Manual (download above).</p>
             
-            <div class="form-row" id="programme-row">
-                <label for="programme">Programme</label>
-                <select id="programme" name="programme">
-                    <option value="SP" selected="selected">Summer Programme</option>
-                    <option value="AP">Academic Programme</option>
+            <div class="form-row" id="program-row">
+                <label for="program">Program</label>
+                <select id="program" name="program">
+                    <option selected="selected">(Select a Program)</option>
+                    <option value="SP">Summer Program</option>
+                    <option value="AP">Academic Program</option>
                 </select>
             </div>
             
-            <div class="form-row" id="ap-subject-row">
+            <div class="form-row hide program-row ap-row" id="ap-subject-row">
                 <label for="ap-subject">AP Subject</label>
                 <select id="ap-subject" name="ap_subject">
                     <option value="IBTC" selected="selected">IBTC - IB Taster Course</option>
-                    <option value="IBRV">IBRV - IB Review</option>
-                    <option value="UNIW">UNIW - University Writing</option>
+                    <option value="SATS">SATS - SAT Subject Test Prep (SAT II)</option>
+                    <option value="IBRV">PATH - Career Pathways</option>
+                    <option value="UNIW">CISO - CIS 101</option>
                 </select>
             </div>
             
-            <div class="form-row" id="sp-subject-row">
+            <div class="form-row hide program-row sp-row" id="sp-subject-row">
                 <label for="sp-subject">SP Subject</label>
                 <select id="sp-subject" name="sp_subject">
                     <option value="ARTS" selected="selected">ARTS - The Arts</option>
                     <option value="LANG">LANG - Languages</option>
-                    <option value="MACT">MSCT - Mathematics and Critical Thinking</option>
-                    <option value="SCIT">SCIT - Science, Computers and Technology</option>
+                    <option value="MACT">MSCT - Maths, Science and Technology</option>
                     <option value="PHED">PHED - Physical Education</option>
                 </select>
             </div>
@@ -122,12 +176,29 @@
             
             <div class="form-row" id="course-synop-row">
                 <label for="course-synop">Synopsis</label>
-                <textarea name="course-synop" id="course_synop"></textarea>
+                <textarea name="course_synop" id="course-synop"></textarea>
+                <div class="form-help no-label">Word Count: <span id="synop_word_count">0</span></div>
             </div>
             
             <div class="form-row" id="course-desc-row">
                 <label for="course-desc">Description</label>
-                <textarea name="course-desc" id="course_description" style="height:20em;"></textarea>
+                <textarea name="course_desc" id="course-description" style="height:20em;"></textarea>
+            </div>
+
+            <div class="form-row" id="course-outcomes-row">
+                <label for="course-outcomes">Learning Outcomes</label>
+                <textarea name="course_outcomes" id="course-outcomes" style="height:15em;"></textarea>
+            </div>
+
+            <div class="form-row" id="course-prereq-row">
+                <label for="course-prereqs">Pre-Requisites</label>
+                <textarea name="course_prereqs" id="course-prereqs" style="height:15em;"></textarea>
+            </div>
+
+            <div class="form-row" id="course-plan-row">
+                <label for="course-plan">Brief Weekly Plan</label>
+                <textarea name="course_plan" id="course-plan" style="height:15em;"></textarea>
+                <div class="form-help no-label">Not shown to parents.</div>
             </div>
             
         </div>
@@ -136,16 +207,182 @@
         <div id="help-info" class="col c3">
             
             <h3>Course Name</h3>
-            <p>We encourage all teachers to submit bilingual course names. Courses taught in or partially in Chinese must have a bilingual course name.</p>
+            <p>Courses taught in or partially in Chinese must have bilingual course information: please use traditional Chinese (繁體) wherever possible.</p>
             
             <h3>Synopsis</h3>
-            <p>Please include a short (less than 50 words) description of your course, to be displayed on the course list page.</p>
+            <p>Please include a short (less than 20 words) description of your course, to be displayed on the course list page. This is your chance to sell your course!</p>
             
             <h3>Description</h3>
-            <p>Include items such as what the class will be going over, 
+            <p>Write an overview of your course, including expected outcomes after taking your course, a rationale, and any other information parents may find useful.</p>
+
+            <h3>Learning Outcomes</h3>
+            <p>Please indicate intended learning outcomes. Specifically, what knowledge and skills you want and expect your students to demonstrate?</p>
+
+            <h3>Prerequisites</h3>
+            <p>Include any specific knowledge or skills that you believe students will need in order to best enjoy and benefit most from attending your course.</p>
+
+            <h3>Brief Weekly Plan</h3>
+            <p><em class="muted">Not shown to parents - for office use only.</em> Please give us a brief outline of what your course will cover, including specifics of your course (what students may make in your class, what books they might read, etc...)</p>
             
         </div>
         
+    </div>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="basic-info">
+        
+        <!-- Form block -->
+        <div id="form-timeroom" class="col c7">
+            
+            <h2>Timeslot Selection</h2>
+
+            <div class="program-row alert alert-red"><span class="badge badge-red">Warning</span> Please select a program type before adding timeslots!</div>
+            
+            <h3>Add Timeslot</h3>
+            <p>You may add as many class offering times as you wish, and tailor each one for a specific age group. This year, the maximum age range is restricted to 4 years (inclusive) to ensure quality for students of all ages.</p>
+
+            <label for="offer-week">Offered Week</label>
+            <select id="offer-week">
+                <option selected="selected" value="1">24/6-28/6 Week 1</option>
+                <option value="2">2/7-5/7 Week 2 (July 1 no school)</option>
+                <option value="3">8/7-12/7 Week 3</option>
+                <option value="4">15/7-19/7 Week 4</option>
+            </select>
+
+            <div class="program-row sp-row hide">
+                <div class="form-row program-row sp-row hide" id="sp-times-row">
+                    <label for="sp-times">SP Periods</label>
+                    <select id="sp-times">
+                        <optgroup label="Single Periods (1 hr)">
+                            <option selected="selected" value="1">08:30-09:25 Period 1</option>
+                            <option value="2">09:30-10:25 Period 2</option>
+                            <option value="3">11:00-11:55 Period 3</option>
+                            <option value="4">12:00-12:55 Period 4</option>
+                        </optgroup>
+                        <optgroup label="Double Periods (2 hrs)">
+                            <option value="8">08:30-10:25 Periods 1-2</option>
+                            <option value="9">11:00-12:55 Periods 3-4</option>
+                        </optgroup>
+                    </select>
+                </div>
+    
+                <div class="form-row" id="sp-age-row">
+                    <label for="sp-age">Age Range (Inclusive)</label>
+                    <select id="sp-age">
+                        <option value="5-8" selected="selected">Ages 5-8</option>
+                        <option value="6-9">Ages 6-9</option>
+                        <option value="7-10">Ages 7-10</option>
+                        <option value="8-11">Ages 8-11</option>
+                        <option value="9-12">Ages 9-12</option>
+                        <option value="10-13">Ages 10-13</option>
+                        <option value="11-14">Ages 11-14</option>
+                        <option value="12-15">Ages 12-15</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="program-row ap-row hide">
+                <p>For AP courses, the applicable year group range is determined based on your subject type, done automatically for your convenience. For any concerns, please notify us in the comments section at the bottom of this form.</p>
+
+                <div class="form-row program-row ap-row hide" id="ap-times-row">
+                    <label for="ap-times">AP Session</label>
+                    <select id="ap-times">
+                        <option selected="selected" value="A">09:00-11:00 Session A</option>
+                        <option value="B">11:30-13:30 Session B</option>
+                        <option value="C">14:00-16:00 Session C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row" id="room-request-row">
+                <label for="room-request">Preferred Room</label>
+                <select id="room-request">
+                    {{rooms}}
+                </select>
+            </div>
+
+            <div class="form-row" id="max-size-row">
+                <label for="max-size">Student Limit</label>
+                <select id="max-size">
+                    <option value="9">&lt;10 (put reason in comments)</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12" selected="selected">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">&gt;18 (put reason in comments)</option>
+                </select>
+            </div>
+
+            <div class="form-row no-label" id="form-add-timeslot">
+                    <button type="button" id="add_timeslot">Add Timeslot</button>
+            </div>
+
+            <h3>Current Offerings</h3>
+            <table id="class_timeslots">
+                <thead>
+                    <tr>
+                        <th>Week</th>
+                        <th>Time</th>
+                        <th>Ages/Years</th>
+                        <th>Max Students</th>
+                        <th>Room</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="class_timeslots_body">
+                </tbody>
+            </table>
+            
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-timeroom" class="col c3">
+        </div>
+        
+    </div>
+</div>
+
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="course-budget">
+
+        <!-- Form block -->
+        <div id="budget-details" class="col c7">
+
+            <h2>Budget Information</h2>
+
+            <p>This year, there is no specified maximum spending per student as in previous years. However, we intend to keep course costs to a minimum, and so <strong>reimbursement will be given on purchases with prior approval only</strong>. Here, please give us an estimate and indication of what you intend to spend on your course. Costs should be given as a total, not per student.</p>
+
+            <div class="form-row" id="course-costs-row">
+                <label for="course-costs">Course Cost Breakdown</label>
+                <textarea id="course-costs" name="course_costs"></textarea>
+                <div class="no-label form-help"><em>On each line, indicate a budget item and cost per period, per week.</em></div>
+            </div>
+
+            <div class="form-row" id="course-total-row">
+                <label for="course-total">Total Cost for Course Delivery</label>
+                <input type="text" id="course-total" name="course_cost_total" placeholder="Number in HKD. Example: 800" />
+                <div class="no-label form-help">Based on the information provided, we anticipate at least <strong id="min_student_number">7 students</strong> will be required to run your course.</div>
+            </div>
+
+        </div>
+
+        <!-- Help block -->
+        <div id="budget-help" class="col c3">
+
+            <h3>Course Cost Breakdown</h3>
+            <p>Please include any items that you will buy or subscribe to during your course. All items should be a grand total, per period/week and not per student.</p>
+
+            <h3>Total Cost Per Period</h3>
+            <p>Sum of the costs given in the breakdown above. Please leave as a whole number!</p>
+
+        </div>
+
     </div>
 </div>
 
@@ -168,47 +405,276 @@
                 </select>
             </div>
             
-            <div class="form-row" id="difficulty-row">
+            <div class="form-row program-row sp-row" id="difficulty-row">
                 <label for="course-difficulty">Difficulty Level</label>
                 <select id="course-difficulty" name="difficulty">
                     <option value="0">Beginner</option>
                     <option value="1">Intermediate</option>
                     <option value="2">Advanced</option>
-                    <option value="9" selected="selected">Irrelevant</option>
+                    <option value="9" selected="selected">Not applicable</option>
                 </select>
             </div>
             
-            <div class="form-row" id="course-prereqs-row">
-                <label for="course-prereqs">Prerequisites</label>
-                <textarea name="course-prereqs" id="prerequisites"></textarea>
-            </div>
-            
-            <div class="form-row" id="course-outcomes-row">
-                <label for="course-outcomes">Course Outcomes</label>
-                <textarea name="course-outcomes" id="outcomes"></textarea>
-            </div>
-            
             <div class="form-row" id="course-equipment-row">
-			    <div class="no-label"><strong>Course Markers</strong><br />
-				<label class="nested"><input type="checkbox" id="course-computers" name="use_computers" value="1" /> Students will use computers</label>
-				<label class="nested"><input type="checkbox" id="course-physical" name="use_activity" value="1" /> Students will perform physical activity</label></div>
-			</div>
+                <div class="no-label"><strong>Course Markers</strong><br />
+                    <label class="nested"><input type="checkbox" id="course-computers" name="use_computers" value="1" /> Students will use computers</label>
+                    <label class="nested"><input type="checkbox" id="course-instruments" name="use_instruments" value="1" /> Students will use musical instruments</label>
+                    <label class="nested"><input type="checkbox" id="course-physical" name="use_activity" value="1" /> Students will perform physical activity</label>
+                    <label class="nested"><input type="checkbox" id="course-room-proj" name="use_projectors" value="1" /> I need a projector/smartboard</label>
+                    <label class="nested"><input type="checkbox" id="course-room-maclab" name="use_maclab" value="1" /> I need the Multimedia Lab (1609)</label>
+                </div>
+            </div>
+
+            <p>If you have any of the following concerns, please make sure you detail these in the comments below. If you have any other concerns, please write to us as well. Items to include: to request a higher maximum student count (>20), larger age range (>4 years difference), large course budget, rooming concerns, special software, etc&hellip;</p>
+            
+            <div class="form-row" id="course-comments-row">
+                <label for="course-comments">Comments for Secretaries</label>
+                <textarea name="course_comments" id="comments" style="height:24em;"></textarea>
+            </div>
+
+            <p><button type="button" class="float-right button button-green" id="submit-app">Submit Completed Application</button> <button type="button" class="float-left button" id="save-app">Save for Later</button></p>
                        
         </div>
         
         <!-- Help block -->
         <div id="help-details" class="col c3">
-            
+
+            <h3>Language of Instruction</h3>
+            <p>Select the language that the course will be taught in</p>
+
+            <h3>Difficulty Level</h3>
+            <p>Select the age-appropriate difficulty of the course. It is only required for LANG courses, and optional for all others.</p>
+
+            <h3>Course Markers</h3>
+            <p>Select all that apply to your course. These are displayed to parents as indicators so they can make informed course selections.</p>
+
         </div>
         
     </div>
 </div>
+</div>
+
+</form>
 
 
 <script type="text/javascript">
+// Application variables
+var offerings = [];
+var selProgram = 'SP';
+var curSubject = '';
+
+// Functions
+function changeProgram(newProgram) {
+    if (newProgram == 'SP') {
+        $('.program-row').hide();
+        selProgram = 'SP';
+        $('.sp-row').fadeIn('fast');
+    } else {
+        $('.program-row').hide();
+        selProgram = 'AP';
+        $('.ap-row').fadeIn('fast');
+    }
+    // Reset values
+    offerings = [];
+    curSubject = '';
+}
+
+// Application Triggers
+$('#btn_load_app').click(function (e) {
+    e.preventDefault();
+    $('.application-load').fadeIn('fast');
+    $('#appload-id').focus();
+    return false;
+});
+
+$('#appload').click(function (e) {
+    e.preventDefault();
+    $('.load-info').hide();
+    $.post('/staff/app_responder.php', {method: 'load', data: $('#appload-id').val() }, function (data) {
+        if (data.status == 'success') {
+            $('#load-info2').fadeIn('fast');
+            $('#appload-id').prop('disabled', 'disabled');
+            $('#appload').hide();
+            // Shortcuts
+            var f = data.last_save.form_data;
+            var t = data.last_save.times_data;
+
+            // Load information
+            $('#instructor-name').val(f.teacher_name);
+            $('#instructor-email').val(f.teacher_email);
+            $('#instructor-suppl').val(f.teacher_suppl);
+            $('#program').val(f.program);
+            ((f.program == 'SP') ? $('#sp-subject').val(f.sp_subject) : $('#ap-subject').val(f.ap_subject) );
+            changeProgram(f.program);
+            $('#course-name').val(f.course_name);
+            $('#course-synop').val(f.course_synop);
+            $('#course-description').val(f.course_desc);
+            $('#course-outcomes').val(f.course_outcomes);
+            $('#course-prereqs').val(f.course_prereqs);
+            $('#course-plan').val(f.course_plan);
+            $('#course-costs').val(f.course_costs);
+            $('#course-total').val(f.course_cost_total);
+            $('#comments').val(f.course_comments);
+            $('#course-lang-loi').val(f.loi);
+            $('#course-difficulty').val(f.difficulty);
+            ((f.use_computers == '1') ? $('#course-computers').prop('checked', true) : $('#course-computers').prop('checked', false));
+            ((f.use_instruments == '1') ? $('#course-instruments').prop('checked', true) : $('#course-instruments').prop('checked', false));
+            ((f.use_activity == '1') ? $('#course-physical').prop('checked', true) : $('#course-physical').prop('checked', false));
+            ((f.use_projectors == '1') ? $('#course-room-proj').prop('checked', true) : $('#course-room-proj').prop('checked', false));
+            ((f.use_maclab == '1') ? $('#course-room-maclab').prop('checked', true) : $('#course-room-maclab').prop('checked', false));
+
+            // Load timeslots
+            offerings = t;
+            redrawClasses();
+
+
+            // Open up form
+            $('#application_content').fadeIn('fast');
+        } else {
+            $('#load-info').fadeIn('fast');
+        }
+        console.log(data);
+    });
+    return false;
+});
+
+$('#btn_new_app').click(function () {
+    $('#application_content').fadeIn('fast');
+    return false;
+});
+
+// Program selector
+$('#program').change(function() {
+    changeProgram($(this).val());
+});
+
+// Reset offerings on subject change
+$('#sp-subject').change(function() {
+    var newSubject = $(this).val();
+    if (curSubject == '') { curSubject = newSubject; return; }
+    if (!confirm("Changing subjects will cause your course offering times to reset. Continue?")) {
+        $(this).val(curSubject);
+        return;
+    }
+    offerings = [];
+    curSubject = newSubject;
+});
+
+$('#ap-subject').change(function() {
+    var newSubject = $(this).val();
+    if (curSubject == '') { curSubject = newSubject; return; }
+    if (!confirm("Changing subjects will cause your course offering times to reset. Continue?")) {
+        $(this).val(curSubject);
+        return;
+    }
+    offerings = [];
+    curSubject = newSubject;
+});
+
+counter = function() {
+    var value = $('#course_synop').val();
+
+    if (value.length == 0) {
+        $('#synop_word_count').removeClass('red');
+        $('#synop_word_count').html('0');
+        return;
+    }
+
+    var regex = /\s+/gi;
+    var wordCount = value.trim().replace(regex, ' ').split(' ').length;
+    if (wordCount > 20) {
+        $('#synop_word_count').addClass('red strong');
+    } else {
+        $('#synop_word_count').removeClass('red');
+    }
+    $('#synop_word_count').html(wordCount);
+}
+
+$('#course_synop').change(counter);
+$('#course_synop').keydown(counter);
+$('#course_synop').keyup(counter);
+$('#course_synop').keypress(counter);
+$('#course_synop').blur(counter);
+$('#course_synop').focus(counter);
+
+$('#course-total').change(function () {
+    var totalCost = $('#course-total').val();
+    var addStudents = parseInt(totalCost)/600;
+    var addInt = Math.ceil(addStudents);
+    $('#min_student_number').html((addInt + 7) + ' students');
+})
+
+// Timeslot addition
+$('#add_timeslot').click(function() {
+    var ageRange = '';
+    if (selProgram == 'SP') {
+        ageRange = $('select#sp-age').val();
+    } else {
+        if ($('#ap-subject').val() == 'IBTC') ageRange = '10-11';
+        else if ($('#ap-subject').val() == 'SATS') ageRange = '11-12';
+        else if ($('#ap-subject').val() == 'PATH') ageRange = '10-12';
+        else if ($('#ap-subject').val() == 'CISO') ageRange = '10-12';
+        else ageRange = '10-12';
+    }
+
+    offerings.push({
+        'week' : $('select#offer-week').val(),
+        'period' : ((selProgram == 'SP') ? $('select#sp-times').val() : $('select#ap-times').val()),
+        'ages' : ageRange,
+        'max_students' : $('#max-size').val(),
+        'pref_room' : $('#room-request').val()
+    });
+    redrawClasses();
+});
+
+// Remove items
+function removeOffering(item) {
+    offerings.splice(item,1);
+    redrawClasses();
+}
+
+// Redraw offerings table
+function redrawClasses() {
+    $('#class_timeslots_body').html('');
+    $.each(offerings, function(i, v) {
+        $('#class_timeslots_body').append("\t\t\t<tr>\n" +
+            "<td>"+v['week']+"</td>" +
+            "<td>"+((v['period'].match(/\d/)) ? 'Period' : 'Session')+" "+((v['period'].match(/8/)) ? '1-2' : ((v['period'].match(/9/)) ? '3-4' : v['period']))+"</td>" +
+            "<td>"+((selProgram == 'SP') ? 'Ages' : 'Years')+" "+v['ages']+"</td>" +
+            "<td>"+v['max_students']+"</td>" +
+            "<td>"+v['pref_room']+"</td>" +
+            "<td><a href=\"javascript:;\" onclick=\"removeOffering("+i+");\">Remove</a></td>\n</tr>");
+    });
+    return;
+}
+
+
 function emailCheck(email) {
     var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
     return pattern.test(email);
 }
+
+// Page action buttons
+$('#save-app').click(function (e) {
+    e.preventDefault();
+    var saveObj = { 'form_data':    $('form#reg-form').serializeObject(),
+                    'class_data':   offerings };
+    $('#submit_information').html(JSON.stringify(saveObj));
+    $('#application_content').hide();
+    $('#application_starter').hide();
+    $.post('/staff/app_responder.php', {
+        'method':   'save',
+        'data':     JSON.stringify(saveObj) 
+    }, function(data) {
+        $('#submit_information').append(JSON.stringify(data));
+    });
+    $('#application_announce').removeClass('announce-red announce-green').addClass('announce-green').html('Your application has been saved. If this is the first time saving your data, you will receive a confirmation email shortly.<br />Follow instructions in that email to reload your saved data. See you!');
+    $('#application_status').fadeIn('fast');
+});
+
+$('#submit-app').click(function (e) {
+    e.preventDefault();
+    $('#submit_information').html($('form#reg-form').serialize()+'&offering_details='+JSON.stringify(offerings));
+});
 
 </script>

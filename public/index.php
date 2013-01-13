@@ -8,7 +8,6 @@
  * @package Plume
  */
 
-
 define('PTP',   '../private/');
 define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_NEWS',      true);
@@ -22,6 +21,14 @@ require_once(PTP . 'php/ignition.php');
 $h['title'] = 'Welcome';
 $b['body_class'] = 'billboarded';
 $n['homepage'] = 'active';
+
+// Get news and format it
+$newsArray = Common::fetchNews();
+$b['news_html'] = '';
+
+foreach($newsArray as $item) {
+    $b['news_html'] .= UX::makeNews($item);
+}
 
 // Include header section
 echo UX::makeHead($h, $n);

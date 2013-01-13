@@ -28,14 +28,16 @@ class Common {
             error_reporting(0);
             ini_set('display_errors', 'Off');
         }
+
+        // Set default timezone
+        date_default_timezone_set('Asia/Hong_Kong');
         
         // Script type switcher
         switch($scriptType) {
             case 'HTML':
-                date_default_timezone_set('Asia/Hong_Kong');
                 ob_start('ob_gzhandler');
-                header('Pragma: no-cache');
                 header('Content-Type: text/html; charset=utf-8');
+                header('X-UA-Compatible: IE=edge,chrome=1');
             break;
             case 'JSON':
                 header('Content-Type: application/json');
@@ -56,7 +58,7 @@ class Common {
         }
         
         // Initiate security class
-        Security::initiateSecurity();
+        ACL::initiateSecurity();
         return true;
         
     }
@@ -122,6 +124,24 @@ class Common {
         require_once('class.ux.php');
         echo UX::grabPage('dev/error', array('pretext' => $pretext), true);
         exit();
+    }
+
+    /**
+     * Loads news items
+     *
+     * @package Phoenix
+     * @version 21220
+     */
+    public function fetchNews($start = 0, $for = 5) {
+        try {
+            $stmt = Data::prepare("SELECT * FROM `news` ORDER BY `NewsCTS` DESC LIMIT :start,:for");
+            $stmt->bindParam('for', $for, PDO::PARAM_INT);
+            $stmt->bindParam('start', $start, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            Common::throwNiceDataException($e);
+        }
     }
 }
 

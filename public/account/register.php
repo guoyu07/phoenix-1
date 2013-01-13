@@ -65,7 +65,7 @@ if ($_POST) {
                 $_POST['email'] = '';
                 
                 
-            } else if (Security::checkEmail($_POST['email'])) {
+            } else if (ACL::checkEmail($_POST['email'])) {
                 // Email exists
                 $error = '<div class="alert alert-red">The email address you used (<strong>'.$_POST['email'].'</strong>) is already registered. If you own this account, please login to add a child to your account.</div>';
                 $_POST['email'] = '';
@@ -90,7 +90,7 @@ if ($_POST) {
             } else {
             
                 // We are good, insert, email and off we go!
-                $salt = Security::generateSalt();
+                $salt = ACL::generateSalt();
                 $country = (($_POST['locale'] == "HK") ? "HK" : "NO");
                 $sms = (($_POST['notify_sms'] == 1) ? 1 : 0);
                 $pass = sha1($salt.$_POST['pass']);
@@ -98,7 +98,7 @@ if ($_POST) {
                 
                 try {
                     $stmt = Data::prepare("INSERT INTO `families` (`FamilyEmail`, `FamilySalt`, `FamilyPassword`, `FamilyAccountStatus`, `FamilyCTS`, `FamilyLATS`, `FamilyLLTS`, `FamilyName`, `FamilyAddress`, `FamilyCountry`, `FamilyPhoneHome`, `FamilyPhoneMobile`, `FamilyLanguage`, `FamilyNotiEmail`, `FamilyNotiMobile`)
-VALUES (:email, :salt, :pass, 0, NOW(), NOW(), NOW(), :name, :addr, :cty, :hphone, :mphone, :lang, 1, :sms)");
+                        VALUES (:email, :salt, :pass, 0, NOW(), NOW(), NOW(), :name, :addr, :cty, :hphone, :mphone, :lang, 1, 0)");
                     $stmt->bindParam('email', $_POST['email'], PDO::PARAM_STR);
                     $stmt->bindParam('salt', $salt);
                     $stmt->bindParam('pass', $pass);
@@ -108,7 +108,6 @@ VALUES (:email, :salt, :pass, 0, NOW(), NOW(), NOW(), :name, :addr, :cty, :hphon
                     $stmt->bindParam('hphone', $_POST['hphone']);
                     $stmt->bindParam('mphone', $mphone);
                     $stmt->bindParam('lang', $_POST['lang']);
-                    $stmt->bindParam('sms', $sms);
                     $stmt->execute();
                 } catch (PDOException $e) {
                     Common::throwNiceDataException($e);

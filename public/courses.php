@@ -14,7 +14,6 @@ define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_NEWS',      true);
 define('PHX_UX',        true);
 
-
 // Include common ignition class
 require_once(PTP . 'php/ignition.php');
 

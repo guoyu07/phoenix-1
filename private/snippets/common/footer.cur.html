@@ -1,25 +1,28 @@
 <div class="txt-center hide hide-screen hide-transitional show-smartphone" style="width:100%;padding:1em 0 1em 0;background-color:#000;color:#fff;">
 	<div style="padding:0 0.5em 0 0.5em; font-size: 0.9em;">
-		<strong>Mobile-friendly version</strong> &ndash; Some minor features may be disabled.<br /><a href="mailto:tech@summer.cis.edu.hk">Email Tech Support</a>
+		<strong>Mobile-friendly version</strong> &ndash; Some features may be unavailable<br />
+		Copyright &copy; Chinese International School<br />
+		<span style="color:#999;">Built by yectepstudios</span> &bull; <a href="/feedback.php">Provide feedback</a>
 	</div>
 </div>
 
 <script type="text/javascript">
-/* Footer scripts */
-$('.tipped').tipTip({delay: 100});
+$(document).ready(function() {
+	$('.tipped').tipTip({delay: 100});
 
-/* Metrics */
-var _gauges = _gauges || [];
-(function() {
-	var t   = document.createElement('script');
-	t.type  = 'text/javascript';
-	t.async = true;
-	t.id    = 'gauges-tracker';
-	t.setAttribute('data-site-id', '4f23afc5cb25bc1f4c000001');
-	t.src = '//secure.gaug.es/track.js';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(t, s);
-})();
+	/* Metrics */
+	var _gauges = _gauges || [];
+	(function() {
+		var t   = document.createElement('script');
+		t.type  = 'text/javascript';
+		t.async = true;
+		t.id    = 'gauges-tracker';
+		t.setAttribute('data-site-id', '4f23afc5cb25bc1f4c000001');
+		t.src = '//secure.gaug.es/track.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(t, s);
+	})();
+});
 </script>
 </body>
 </html>
