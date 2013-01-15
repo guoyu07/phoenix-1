@@ -41,6 +41,7 @@ require_once('class.browser.php');
 if (defined('PHX_UX')) require_once('class.ux.php');
 if (defined('PHX_COURSES')) require_once('class.courses.php');
 if (defined('PHX_ENROL')) require_once('class.enrolment.php');
+if (defined('PHX_LAOSHI')) require_once('class.laoshi.php');
 if (defined('PHX_MAILER')) require_once('class.mailer.php');
 if (defined('PHX_STUDENT')) require_once('class.student.php');
 if (defined('PHX_STAFF')) require_once('class.staff.php');

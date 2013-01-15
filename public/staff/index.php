@@ -49,8 +49,8 @@ $n['signin'] = 'active';
 // Error page
 if (array_key_exists('msg', $_GET)) {
 	switch ($_GET['msg']) {
-		case 'activated':
-			$error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> Thank you for activating your account. You may now sign in.</div>';
+		case 'logout':
+			$error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> You have been successfully logged out. See you next time!</div>';
 		break;
 		case 'error_email':
 			$error = '<div class="alert alert-red"><strong>Whoops!</strong> The email address you used doesn\'t exist. Please remember this login is for staff only.</div>';

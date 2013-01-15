@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Staff signin page
+ * Course applications
  *
- * @author	Yectep Studios <info@yectep.hk>
- * @version	20707
+ * @author  Yectep Studios <info@yectep.hk>
+ * @version 30104
  * @package Plume
  * @subpackage Staff
  */
@@ -13,14 +13,24 @@
 define('PTP',   '../../private/');
 define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_UX',        true);
+define('PHX_LAOSHI',    true);
 
 
 // Include common ignition class
 require_once(PTP . 'php/ignition.php');
 
-// Set page switch variables
-$h['title'] = 'Sign In';
-$n['staffsignin'] = 'active';
+// We require a staff login for this page
+if (!ACL::checkLogin('staff')) {
+    header('Location: ./index.php?msg=error_nologin');
+    exit();
+} else {
+    $_laoshi = new Laoshi($_SESSION['SSOID']);
+    $_laoshi->perms(16);
+}
+
+// Triage and get default staff page
+$h['title'] = 'Event Log';
+$n['my_name'] = $_laoshi->staff['StaffName'];
 
 // Prepare WHERE statement
 $where_array = array();
@@ -36,7 +46,7 @@ if (isset($_GET['addr'])) {
 $where = ((sizeof($where_array) > 0) ? ' WHERE '.implode(' AND ', $where_array) : '');
 
 // Get log data
-$stmt = Data::prepare('SELECT *, DATE_FORMAT(CONVERT_TZ(`LogTS`, "+00:00", "+08:00"), "%d%b%y %H:%i:%s") as `LogTS` FROM `log`'.$where);
+$stmt = Data::prepare('SELECT *, DATE_FORMAT(CONVERT_TZ(`LogTS`, "+00:00", "+08:00"), "%d%b%y %H:%i:%s") as `LogTS` FROM `log`'.$where.' ORDER BY LogTS DESC LIMIT 0,50');
 $stmt->execute();
 $logdata = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -53,10 +63,10 @@ foreach($logdata as $event) {
 
 
 // Include header section
-echo UX::makeHead($h, $n);
+echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 
 // Page info
-echo UX::makeBreadcrumb(array(	'Staff Center'		=> '/staff/',
+echo UX::makeBreadcrumb(array(	'Staff Portal'		=> '/staff/',
                                 'Event Viewer'  => '/staff/view_log.php'));
 echo UX::grabPage('staff/view_log', array('logs' => $logtable), true);
 

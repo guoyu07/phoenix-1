@@ -110,7 +110,35 @@ class ACL extends Security {
         $objData = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Compare password
-        return self::checkHash($plainpass, $objData['ObjHash']);
+        $passCheck = self::checkHash($plainpass, $objData['ObjHash']);
+
+        if ($passCheck) {
+            $stmt = Data::prepare('UPDATE `sso_objects` SET ObjLLTS = NOW() WHERE ObjID = :ssoid LIMIT 1');
+            $stmt->bindParam('ssoid', $ssoid, PDO::PARAM_INT);
+            $stmt->execute();
+        }
+
+        return $passCheck;
+    }
+
+    /**
+     * Gets SSO object
+     */
+    static public function getSsoObject($objId) {
+        $stmt = Data::prepare('SELECT * FROM `sso_objects` WHERE `ObjID` = :objid LIMIT 1');
+        $stmt->bindParam('objid', $objId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Gets SSO Object Type
+     */
+    static public function getSsoType($typeId) {
+        $stmt = Data::prepare('SELECT * FROM `sso_types` WHERE `TypeID` = :typeid LIMIT 1');
+        $stmt->bindParam('typeid', $typeId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -143,8 +171,9 @@ class ACL extends Security {
     /**
      * Verifies an active SSO session information including IP and UA validation
      */
-    static public function checkLogin() {
-        $stmt = Data::prepare('SELECT ObjHash FROM `sso_objects` WHERE ObjID = :id');
+    static public function checkLogin($portal = 'families') {
+        $stmt = Data::prepare('SELECT ObjHash FROM `sso_objects` WHERE ObjID = :id AND ObjPortal = :portal');
+        $stmt->bindValue('portal', $portal);
         $stmt->bindValue('id', $_SESSION['SSOID']);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -155,6 +184,21 @@ class ACL extends Security {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get array of permissions allowed determined by the object type
+     */
+    static public function getPermsByType($typeId) {
+        $stmt = Data::prepare('SELECT `acl_perms`.* FROM `acl`, `acl_perms` WHERE `acl_perms`.`PermID` = `acl`.`PermID` AND `acl`.`TypeID` = :typeid');
+        $stmt->bindParam('typeid', $typeId);
+        $stmt->execute();
+        $permsRaw = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $permsAllow = array();
+        foreach($permsRaw as $perm) {
+            $permsAllow[$perm['PermID']] = $perm['PermName'];
+        }
+        return $permsAllow;
     }
 
     /* =============== INTERNAL PRIVATE FUNCTIONS ============== */

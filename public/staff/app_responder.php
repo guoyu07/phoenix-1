@@ -37,11 +37,15 @@ if (!isset($_POST) || !array_key_exists('method', $_POST)) {
             $result['msg'] = 'Invalid email provided: '.$data['form_data']['teacher_email'];
         } else {
             // Email is OK, check App ID
-            $app_info = explode('|',base64_decode($data['form_data']['app_id']));
-            $stmt = Data::prepare('SELECT * FROM `applications` WHERE `AppID` = :id LIMIT 1');
-            $stmt->bindParam('id', $app_info[0], PDO::PARAM_INT);
-            $stmt->execute();
-            $old_info = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($data['app_id']) {
+                $app_info = explode('|',base64_decode($data['app_id']));
+                $stmt = Data::prepare('SELECT * FROM `applications` WHERE `AppID` = :id LIMIT 1');
+                $stmt->bindParam('id', $app_info[0], PDO::PARAM_INT);
+                $stmt->execute();
+                $old_info = $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                $old_info = false;
+            }
 
             if (!$old_info) {
                 // Treat as new application
@@ -66,7 +70,21 @@ if (!isset($_POST) || !array_key_exists('method', $_POST)) {
 
             } else {
                 // Update saved information
-                $result['old_info'] = $old_info;
+                try {
+                    $stmt = Data::prepare('UPDATE `applications` SET `AppEmail` = :email, `AppFormJSON` = :formjson, `AppCourseJSON` = :coursejson, `AppLETS` = NOW(), `AppSaveCount` = (`AppSaveCount`+1) WHERE `AppID` = :appid LIMIT 1');
+                    $stmt->bindValue('appid', $old_info['AppID']);
+                    $stmt->bindValue('email', $data['form_data']['teacher_email']);
+                    $stmt->bindValue('formjson', json_encode($data['form_data']));
+                    $stmt->bindValue('coursejson', json_encode($data['class_data']));
+                    $stmt->execute();
+
+                    $result['status'] = 'success';
+                    $result['msg'] = 'Course updated.';
+
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['msg'] = 'Error occured during update: '.$e->getMessage();
+                }
             }
         }
 
@@ -75,7 +93,7 @@ if (!isset($_POST) || !array_key_exists('method', $_POST)) {
         $reloadData = explode("|", base64_decode($_POST['data']));
 
         // Check CRC
-        $stmt = Data::prepare('SELECT * FROM `applications` WHERE `AppID` = :appid');
+        $stmt = Data::prepare('SELECT * FROM `applications` WHERE `AppID` = :appid AND `AppStatus` = "saved"');
         $stmt->bindParam('appid', $reloadData[0]);
         $stmt->execute();
         $realData = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -89,8 +107,78 @@ if (!isset($_POST) || !array_key_exists('method', $_POST)) {
         }
 
     } elseif ($_POST['method'] == 'submit') {
-        // Submit application
+        // Save application
+        // Split data
+        $data = json_decode($_POST['data'], true);
+        if (!filter_var($data['form_data']['teacher_email'], FILTER_VALIDATE_EMAIL)) {
+            $result['status'] = 'failed';
+            $result['msg'] = 'Invalid email provided: '.$data['form_data']['teacher_email'];
+        } else {
+            // Email is OK, check App ID
+            if ($data['app_id']) {
+                $app_info = explode('|',base64_decode($data['app_id']));
+                $stmt = Data::prepare('SELECT * FROM `applications` WHERE `AppID` = :id LIMIT 1');
+                $stmt->bindParam('id', $app_info[0], PDO::PARAM_INT);
+                $stmt->execute();
+                $old_info = $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                $old_info = false;
+            }
 
+            if (!$old_info) {
+                // Treat as new application
+                $stmt = Data::prepare('INSERT INTO `applications` (`AppEmail`, `AppFormJSON`, `AppCourseJSON`, `AppCTS`, `AppLETS`, `AppSaveCount`, `AppStatus`) VALUES(:email, :formjson, :coursejson, NOW(), NOW(), 1, "submitted")');
+                $stmt->bindValue('email', $data['form_data']['teacher_email']);
+                $stmt->bindValue('formjson', json_encode($data['form_data']));
+                $stmt->bindValue('coursejson', json_encode($data['class_data']));
+                $stmt->execute();
+
+                // Build submission email body
+                $submitBody = array('name' => $data['form_data']['teacher_name'],
+                                    'course_name' => $data['form_data']['course_name'],
+                                    'email' => $data['form_data']['teacher_email'],
+                                    'synopsis' => $data['form_data']['course_synop'],
+                                    'offering_count' => sizeof($data['class_data']),
+                                    'submission_timestamp' => date(DATETIME_FULL)
+                                    );
+
+                $body = UX::grabPage('text_snippets/email_application_submit', $submitBody, true);
+                Mailer::send(array('email' => $data['form_data']['teacher_email']), '[Summer] Application Submission Confirmed!', $body);
+
+                $result['status'] = 'success';
+                $result['msg'] = 'Course submitted.';   
+
+            } else {
+                // Update saved information
+                try {
+                    $stmt = Data::prepare('UPDATE `applications` SET `AppEmail` = :email, `AppFormJSON` = :formjson, `AppCourseJSON` = :coursejson, `AppLETS` = NOW(), `AppSaveCount` = (`AppSaveCount`+1), `AppStatus` = "submitted" WHERE `AppID` = :appid LIMIT 1');
+                    $stmt->bindValue('appid', $old_info['AppID']);
+                    $stmt->bindValue('email', $data['form_data']['teacher_email']);
+                    $stmt->bindValue('formjson', json_encode($data['form_data']));
+                    $stmt->bindValue('coursejson', json_encode($data['class_data']));
+                    $stmt->execute();
+
+                    // Build submission email body
+                    $submitBody = array('name' => $data['form_data']['teacher_name'],
+                                        'course_name' => $data['form_data']['course_name'],
+                                        'email' => $data['form_data']['teacher_email'],
+                                        'synopsis' => $data['form_data']['course_synop'],
+                                        'offering_count' => sizeof($data['class_data']),
+                                        'submission_timestamp' => date(DATETIME_FULL)
+                                        );
+
+                    $body = UX::grabPage('text_snippets/email_application_submit', $submitBody, true);
+                    Mailer::send(array('email' => $data['form_data']['teacher_email']), '[Summer] Application Submission Confirmed!', $body);
+
+                    $result['status'] = 'success';
+                    $result['msg'] = 'Course submitted.';
+
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['msg'] = 'Error occured during update: '.$e->getMessage();
+                }
+            }
+        }
 
     } else {
         // Wrong method

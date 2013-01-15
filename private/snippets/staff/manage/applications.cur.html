@@ -1,0 +1,23 @@
+<div id="course_list" class="content-row spaced body-emulate">
+    <h1>Course Applications</h1>
+    <p>All saved and submitted applications will be shown below. Saved items are muted and italicized: they cannot be clicked into since the teacher might not have finished filling things out yet. Submitted items are ranked by submission date and time.</p>
+    <div class="alert alert-yellow">Approved applications (those already added to the <a href="/staff/manage/courses.php">Course List</a>) are <strong>not shown</strong> in this list.</div>
+
+    <p>Total application count: <strong>{{count_submitted}}</strong> submitted and <strong>{{count_saved}}</strong> pending (saved) courses.</p>
+
+    <table class="applications">
+        <thead>
+            <tr>
+                <th style="width:15%;">Subject</th>
+                <th style="width:30%;">Course Name</th>
+                <th style="width:20%;">Lead Instructor</th>
+                <th style="width:15%;">Total Spaces</th>
+                <th style="width:20%;">Date Submitted</th>
+            </tr>
+        </thead>
+        <tbody>
+{{courses_submitted}}
+{{courses_saved}}             
+        </tbody>
+    </table>
+</div>

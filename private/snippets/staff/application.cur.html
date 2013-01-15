@@ -26,7 +26,8 @@
                 <h3>Load previous application</h3>
                 <p>To continue a previously started application, enter the Application ID. We'll get the saved data from our database and load it right up.</p>
                 
-                <div class="alert alert-red hide load-info" id="load-info"><img src="/assets/icons/cross.png" alt="[Error]" /> Sorry, couldn't find matching save data. Try again please.</div>
+                <div class="alert alert-red hide load-info" id="load-info"><img src="/assets/icons/cross.png" alt="[Error]" /> Sorry, couldn't find matching save data. Please check your Application ID and try again. Please note that submitted applications cannot be loaded.</div>
+
                 <div class="alert alert-green hide load-info" id="load-info2"><img src="/assets/icons/tick.png" alt="[OK]" /> Success: all previously saved data has been loaded.</div>
                 
                 <div class="form-row" id="appload-id-row">
@@ -59,11 +60,6 @@
     <div id="application_announce" class="announce">
         Your application was successfully saved for future editing. Please refer to the first email sent to you for instructions on how to reload this data.
     </div>
-
-    <div class="form-row">
-                <label>Debugging Information</label>
-                <textarea id="submit_information"></textarea>
-            </div>
 </div>
 
 <div id="application_submit_terms" class="content-row hide">
@@ -72,20 +68,22 @@
             <h2>Terms and Conditions of Instruction</h2>
             <p>Please read through <strong>each one</strong> carefully and tick only if you understand and agree to each term and condition.</p>
 
+            <div id="terms-incomplete" class="alert alert-red hide">You must agree to all these terms before submitting this application.</div>
+
             <p>
-                <label class="full"><input type="checkbox" id="term-1" /> I have read the teaching information manual.</label>
-                <label class="full"><input type="checkbox" id="term-2" /> I understand that the information I submit now or later will be used to determine whether my application was successful.</label>
-                <label class="full"><input type="checkbox" id="term-3" /> If selected, I will attend and teach all offered and operating classes. If I am unable to do so with a cogent reason, I will give the Office ample time to find a substitute, or offer one myself.</label>
-                <label class="full"><input type="checkbox" id="term-4"> I understand that my attendance is recorded when I take class roll in each period, and this is used to automatically calculate my pay.</label>
-                <label class="full"><input type="checkbox" id="term-5"> I understand that I may cancel classes prior to 1 May 2012, but no later, unless special circumstances arise.</label>
-                <label class="full"><input type="checkbox" id="term-6"> I will teach in the room that I am assigned.</label>
-                <label class="full"><input type="checkbox" id="term-7"> I will send students and parents who want to switch classes/courses to the Office.</label>
-                <label class="full"><input type="checkbox" id="term-8"> I will follow CIS teaching instructions and standards as applicable to the summer program.</label>
+                <label class="full"><input type="checkbox" id="term-1" class="termbox" /> I have read the teaching information manual.</label>
+                <label class="full"><input type="checkbox" id="term-2" class="termbox" /> I understand that the information I submit now or later will be used to determine whether my application was successful.</label>
+                <label class="full"><input type="checkbox" id="term-3" class="termbox" /> If selected, I will attend and teach all offered and operating classes. If I am unable to do so with a cogent reason, I will give the Office ample time to find a substitute, or offer one myself.</label>
+                <label class="full"><input type="checkbox" id="term-4" class="termbox" /> I understand that my attendance is recorded when I take class roll in each period, and this is used to automatically calculate my pay.</label>
+                <label class="full"><input type="checkbox" id="term-5" class="termbox" /> I understand that I may cancel classes prior to 1 May 2012, but no later, unless special circumstances arise.</label>
+                <label class="full"><input type="checkbox" id="term-6"  class="termbox" /> I will teach in the room that I am assigned.</label>
+                <label class="full"><input type="checkbox" id="term-7" class="termbox" /> I will send students and parents who want to switch classes/courses to the Office.</label>
+                <label class="full"><input type="checkbox" id="term-8" class="termbox" /> I will follow CIS teaching instructions and standards as applicable to the summer program.</label>
             </p>
 
             <p>
-                <button type="button" class="float-left button button-red">Submit Application</button>
-                <button type="button" class="float-right button">Cancel and Revert</button></p>
+                <button type="button" class="float-left button button-red" id="submission-confirm">Submit Application</button>
+                <button type="button" class="float-right button" id="submission-cancel">Cancel and Revert</button></p>
         </div>
     </div>
 </div>
@@ -572,7 +570,7 @@ $('#ap-subject').change(function() {
 });
 
 counter = function() {
-    var value = $('#course_synop').val();
+    var value = $('#course-synop').val();
 
     if (value.length == 0) {
         $('#synop_word_count').removeClass('red');
@@ -590,12 +588,12 @@ counter = function() {
     $('#synop_word_count').html(wordCount);
 }
 
-$('#course_synop').change(counter);
-$('#course_synop').keydown(counter);
-$('#course_synop').keyup(counter);
-$('#course_synop').keypress(counter);
-$('#course_synop').blur(counter);
-$('#course_synop').focus(counter);
+$('#course-synop').change(counter);
+$('#course-synop').keydown(counter);
+$('#course-synop').keyup(counter);
+$('#course-synop').keypress(counter);
+$('#course-synop').blur(counter);
+$('#course-synop').focus(counter);
 
 $('#course-total').change(function () {
     var totalCost = $('#course-total').val();
@@ -658,23 +656,75 @@ function emailCheck(email) {
 $('#save-app').click(function (e) {
     e.preventDefault();
     var saveObj = { 'form_data':    $('form#reg-form').serializeObject(),
-                    'class_data':   offerings };
-    $('#submit_information').html(JSON.stringify(saveObj));
+                    'class_data':   offerings,
+                    'app_id':       (($('#appload-id').val().length > 1) ? $('#appload-id').val() : null) };
     $('#application_content').hide();
     $('#application_starter').hide();
     $.post('/staff/app_responder.php', {
         'method':   'save',
         'data':     JSON.stringify(saveObj) 
     }, function(data) {
-        $('#submit_information').append(JSON.stringify(data));
+        if (data.status == "success") {
+            $('#application_announce').removeClass('announce-red announce-green').addClass('announce-green').html('Your application has been saved. If this is the first time saving your data, you will receive a confirmation email shortly.<br />Follow instructions in that email to reload your saved data. See you soon!');
+            $('#application_status').fadeIn('fast');
+        } else {
+            $('#application_announce').removeClass('announce-red announce-green').addClass('announce-red').html('Sorry, it seems like an error occured while trying to save your application.<br />Please refresh the page and try again.');
+            $('#application_status').fadeIn('fast');
+        }
     });
-    $('#application_announce').removeClass('announce-red announce-green').addClass('announce-green').html('Your application has been saved. If this is the first time saving your data, you will receive a confirmation email shortly.<br />Follow instructions in that email to reload your saved data. See you!');
-    $('#application_status').fadeIn('fast');
 });
 
 $('#submit-app').click(function (e) {
     e.preventDefault();
+    $('#application_content').hide();
+    $('#application_starter').hide();
+    $('#application_submit_terms').fadeIn('fast');
     $('#submit_information').html($('form#reg-form').serialize()+'&offering_details='+JSON.stringify(offerings));
 });
+
+$('#submission-cancel').click(function (e) {
+    e.preventDefault();
+    $('#application_submit_terms').hide();
+    $('#application_content').show();
+    $('#application_starter').show();
+    $('.termbox').prop('checked',false);
+    return false;
+});
+
+$('#submission-confirm').click(function (e) {
+    e.preventDefault();
+    var continueSubmit = true;
+    $('.termbox').each(function () {
+        if (!$(this).prop('checked')) {
+            $('#terms-incomplete').fadeIn('fast');
+            continueSubmit = false;
+            return false;
+        }
+    });
+
+    if (continueSubmit) {
+        $('#application_submit_terms').hide();
+        // All terms clicked, submit
+        var saveObj = { 'form_data':    $('form#reg-form').serializeObject(),
+                        'class_data':   offerings,
+                        'app_id':       (($('#appload-id').val().length > 1) ? $('#appload-id').val() : null) };
+        $('#application_content').hide();
+        $('#application_starter').hide();
+        $.post('/staff/app_responder.php', {
+            'method':   'submit',
+            'data':     JSON.stringify(saveObj)
+        }, function(data) {
+            if (data.status == "success") {
+                $('#application_announce').removeClass('announce-red announce-green').addClass('announce-green').html('Thank you for submitting your application.<br />You should soon receive an email which serves as a notification that we have received your course details.');
+                $('#application_status').fadeIn('fast');
+            } else {
+                $('#application_announce').removeClass('announce-red announce-green').addClass('announce-red').html('Sorry, an error seems to have occured during submission. Refresh the page and try again.');
+                $('#application_status').fadeIn('fast');
+            }
+        });
+    } else {
+        return false;
+    }
+})
 
 </script>

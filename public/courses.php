@@ -45,7 +45,7 @@ while ($i <= 200) {
 }
 
 // Page output
-echo UX::grabPage('public/courses', array('courses' => $courses), true);
+echo UX::grabPage('public/courses', null, true);
 
 echo UX::grabPage('common/masthead', array('time' => $time), true);
 echo UX::grabPage('common/footer', null, true);

@@ -561,8 +561,8 @@ table.open tr th {
     font-family: 'Open Sans', Tahoma, Verdana, sans-serif;
 }
 
-.font-nobile {
-    font-family: 'Nobile', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+.font-adelle {
+    font-family: Adelle, 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .title {
@@ -977,6 +977,48 @@ ul.nav > li.active a {
 
 ul.nav > li.right {
     float: right;
+}
+
+ul.nav > li > ul.subnav {
+    display: block;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    -o-transition: opacity .2s linear;
+    -ms-transition: opacity .2s linear;
+    -moz-transition: opacity .2s linear;
+    -webkit-transition: opacity .2s linear;
+    transition: opacity .2s linear;
+    list-style: none;
+    background-color: #5c0700;
+    margin: 0;
+    line-height: 2.8em;
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.4);
+}
+
+ul.nav > li:hover > ul.subnav {
+    opacity: 1;
+    height: auto;
+}
+
+ul.nav > li > ul.subnav > li {
+    display: block;
+    padding: 0;
+    -o-transition: background .2s linear;
+    -ms-transition: background .2s linear;
+    -moz-transition: background .2s linear;
+    -webkit-transition: background .2s linear;
+    transition: background .2s linear;
+}
+
+ul.nav > li > ul.subnav > li:hover {
+    background-color: #240606;
+}
+
+ul.nav > li > ul.subnav > li a {
+    display: block;
+    width: 100%;
+    padding: 0 2em;
 }
 
 ul.faq_menu {

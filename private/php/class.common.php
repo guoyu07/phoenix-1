@@ -121,7 +121,7 @@ class Common {
      * @param string $pretext Unformatted (for insertion within a <pre> tag) error technical information. Use stacktraces where applicable.
      */
     private function niceException($pretext = 'No further information supplied') {
-        require_once('class.ux.php');
+        require_once(PTP . 'class.ux.php');
         echo UX::grabPage('dev/error', array('pretext' => $pretext), true);
         exit();
     }
