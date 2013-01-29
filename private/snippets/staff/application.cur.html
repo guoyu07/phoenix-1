@@ -150,9 +150,10 @@
             <div class="form-row hide program-row ap-row" id="ap-subject-row">
                 <label for="ap-subject">AP Subject</label>
                 <select id="ap-subject" name="ap_subject">
-                    <option value="IBTC" selected="selected">IBTC - IB Taster Course</option>
+                    <option value="IBTC" selected="selected">IBTC - IBDP Taster Course</option>
+                    <option value="IBRV">IBRV - IBDP Revision</option>
                     <option value="SATS">SATS - SAT Subject Test Prep (SAT II)</option>
-                    <option value="IBRV">PATH - Career Pathways</option>
+                    <option value="PATH">PATH - Career Pathways</option>
                     <option value="UNIW">CISO - CIS 101</option>
                 </select>
             </div>
@@ -205,7 +206,7 @@
         <div id="help-info" class="col c3">
             
             <h3>Course Name</h3>
-            <p>Courses taught in or partially in Chinese must have bilingual course information: please use traditional Chinese (繁體) wherever possible.</p>
+            <p>Courses taught in or partially in Chinese must have bilingual course information: please use Traditional Chinese (繁體) wherever possible.</p>
             
             <h3>Synopsis</h3>
             <p>Please include a short (less than 20 words) description of your course, to be displayed on the course list page. This is your chance to sell your course!</p>
@@ -236,6 +237,10 @@
             <h2>Timeslot Selection</h2>
 
             <div class="program-row alert alert-red"><span class="badge badge-red">Warning</span> Please select a program type before adding timeslots!</div>
+
+            <p>Please all <strong>all of your classes</strong> here. Select different weeks, periods, age groups and keep clicking "Add Timeslot". There is no need to submit multiple copies of the same course. This will only add to your processing time!</p>
+
+            <div class="alert"><span class="badge badge-blue">Example</span> If you plan to offer your course over all four weeks, once each in Period 1, 2 and 3 (but not 4), you should have a total of 12 offered timeslots on this page.</div>
             
             <h3>Add Timeslot</h3>
             <p>You may add as many class offering times as you wish, and tailor each one for a specific age group. This year, the maximum age range is restricted to 4 years (inclusive) to ensure quality for students of all ages.</p>
@@ -250,7 +255,7 @@
 
             <div class="program-row sp-row hide">
                 <div class="form-row program-row sp-row hide" id="sp-times-row">
-                    <label for="sp-times">SP Periods</label>
+                    <label for="sp-times">Select Timeslot Period(s)</label>
                     <select id="sp-times">
                         <optgroup label="Single Periods (1 hr)">
                             <option selected="selected" value="1">08:30-09:25 Period 1</option>
@@ -268,23 +273,19 @@
                 <div class="form-row" id="sp-age-row">
                     <label for="sp-age">Age Range (Inclusive)</label>
                     <select id="sp-age">
-                        <option value="5-8" selected="selected">Ages 5-8</option>
-                        <option value="6-9">Ages 6-9</option>
-                        <option value="7-10">Ages 7-10</option>
-                        <option value="8-11">Ages 8-11</option>
-                        <option value="9-12">Ages 9-12</option>
-                        <option value="10-13">Ages 10-13</option>
-                        <option value="11-14">Ages 11-14</option>
+                        <option value="4-6" selected="selected">Ages 4-6</option>
+                        <option value="7-9">Ages 7-9</option>
+                        <option value="10-12">Ages 10-12</option>
                         <option value="12-15">Ages 12-15</option>
                     </select>
                 </div>
             </div>
 
             <div class="program-row ap-row hide">
-                <p>For AP courses, the applicable year group range is determined based on your subject type, done automatically for your convenience. For any concerns, please notify us in the comments section at the bottom of this form.</p>
+                <p>For Academic Program courses, the applicable year group range is determined based on your subject type, done automatically for your convenience. For any concerns, please notify us in the comments section at the bottom of this form.</p>
 
                 <div class="form-row program-row ap-row hide" id="ap-times-row">
-                    <label for="ap-times">AP Session</label>
+                    <label for="ap-times">Select a Session</label>
                     <select id="ap-times">
                         <option selected="selected" value="A">09:00-11:00 Session A</option>
                         <option value="B">11:30-13:30 Session B</option>
@@ -430,7 +431,7 @@
                 <textarea name="course_comments" id="comments" style="height:24em;"></textarea>
             </div>
 
-            <p><button type="button" class="float-right button button-green" id="submit-app">Submit Completed Application</button> <button type="button" class="float-left button" id="save-app">Save for Later</button></p>
+            <p><button type="button" class="float-right button button-red" id="submit-app">Submit Completed Application</button> <button type="button" class="float-right button button-green" id="save-app">Save for Later</button></p>
                        
         </div>
         
@@ -623,6 +624,7 @@ $('#add_timeslot').click(function() {
         'pref_room' : $('#room-request').val()
     });
     redrawClasses();
+    laoshi.toast('Timeslot added. Feel free to add another!');
 });
 
 // Remove items

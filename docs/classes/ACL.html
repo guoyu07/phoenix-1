@@ -20,12 +20,12 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
+<li><a href="../packages/BarcodeQR.html"><i class="icon-folder-open"></i> BarcodeQR</a></li>
 <li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/Mandrill.html"><i class="icon-folder-open"></i> Mandrill</a></li>
 <li><a href="../packages/PegasusPHP%0ACopyright%20(C)%202008-2010%20Chris%20Schuld%20%20(chris@chrisschuld.html"><i class="icon-folder-open"></i> PegasusPHP
 Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li><a href="../packages/Phoenix.html"><i class="icon-folder-open"></i> Phoenix</a></li>
-<li><a href="../packages/Plume.html"><i class="icon-folder-open"></i> Plume</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -36,7 +36,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">77</span></a></li>
+                <span class="label label-info">81</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -61,20 +61,27 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
-<li class="method public "><a href="#method_checkEmail" title="checkEmail :: Looks up whether an account exists via email"><span class="description">Looks up whether an account exists via email</span><pre>checkEmail()</pre></a></li>
-<li class="method public "><a href="#method_checkLogin" title="checkLogin :: Logs a user in"><span class="description">Logs a user in</span><pre>checkLogin()</pre></a></li>
-<li class="method public inherited"><a href="#method_checkPassword" title="checkPassword :: "><span class="description">checkPassword()
-        </span><pre>checkPassword()</pre></a></li>
-<li class="method public "><a href="#method_generateSalt" title="generateSalt :: Generate salt"><span class="description">Generate salt</span><pre>generateSalt()</pre></a></li>
-<li class="method public "><a href="#method_generateSession" title="generateSession :: Generates a session key based on UA and IP and logs the action"><span class="description">Generates a session key based on UA and IP and logs the action</span><pre>generateSession()</pre></a></li>
+<li class="method public inherited"><a href="#method_checkHash" title="checkHash :: "><span class="description">checkHash()
+        </span><pre>checkHash()</pre></a></li>
+<li class="method public "><a href="#method_checkLogin" title="checkLogin :: Verifies an active SSO session information including IP and UA validation"><span class="description">Verifies an active SSO session information including IP and UA validation</span><pre>checkLogin()</pre></a></li>
+<li class="method public "><a href="#method_checkPassword" title="checkPassword :: Verifies SSO authentication, generate and store session information"><span class="description">Verifies SSO authentication, generate and store session information</span><pre>checkPassword()</pre></a></li>
+<li class="method public "><a href="#method_checkSsoEmail" title="checkSsoEmail :: Looks up SSO object ID by email and (optionally) object type."><span class="description">Looks up SSO object ID by email and (optionally) object type.</span><pre>checkSsoEmail()</pre></a></li>
+<li class="method public "><a href="#method_genSession" title="genSession :: Generates a session key based on UA and IP and logs the action"><span class="description">Generates a session key based on UA and IP and logs the action</span><pre>genSession()</pre></a></li>
 <li class="method public inherited"><a href="#method_getHash" title="getHash :: "><span class="description">getHash()
         </span><pre>getHash()</pre></a></li>
-<li class="method public "><a href="#method_getUserData" title="getUserData :: Fetches user data"><span class="description">Fetches user data</span><pre>getUserData()</pre></a></li>
+<li class="method public "><a href="#method_getPermsByType" title="getPermsByType :: Get array of permissions allowed determined by the object type"><span class="description">Get array of permissions allowed determined by the object type</span><pre>getPermsByType()</pre></a></li>
+<li class="method public "><a href="#method_getSsoObject" title="getSsoObject :: Gets SSO object"><span class="description">Gets SSO object</span><pre>getSsoObject()</pre></a></li>
+<li class="method public "><a href="#method_getSsoType" title="getSsoType :: Gets SSO Object Type"><span class="description">Gets SSO Object Type</span><pre>getSsoType()</pre></a></li>
 <li class="method public "><a href="#method_initiateSecurity" title="initiateSecurity :: Begins ACL class and handles sessions"><span class="description">Begins ACL class and handles sessions</span><pre>initiateSecurity()</pre></a></li>
+<li class="method public "><a href="#method_login" title="login :: Performs an SSO login"><span class="description">Performs an SSO login</span><pre>login()</pre></a></li>
+<li class="method public "><a href="#method_logout" title="logout :: Logs a user out based on their session"><span class="description">Logs a user out based on their session</span><pre>logout()</pre></a></li>
+<li class="method public "><a href="#method_makeSsoObject" title="makeSsoObject :: Creates an SSO object of the specified type"><span class="description">Creates an SSO object of the specified type</span><pre>makeSsoObject()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
+<li class="method private "><a href="#method_getSsoTypeByName" title="getSsoTypeByName :: "><span class="description">getSsoTypeByName()
+        </span><pre>getSsoTypeByName()</pre></a></li>
 <li class="method private inherited"><a href="#method_pbkdf2" title="pbkdf2 :: "><span class="description">pbkdf2()
         </span><pre>pbkdf2()</pre></a></li>
 <li class="method private inherited"><a href="#method_slow_equals" title="slow_equals :: "><span class="description">slow_equals()
@@ -116,12 +123,61 @@ to the entire package.</p>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
-<a id="method_checkEmail"></a><div class="element clickable method public method_checkEmail" data-toggle="collapse" data-target=".method_checkEmail .collapse">
-<h2>Looks up whether an account exists via email</h2>
-<pre>checkEmail($email, $isStaff) </pre>
-<div class="labels"></div>
+<a id="method_checkHash"></a><div class="element clickable method public method_checkHash" data-toggle="collapse" data-target=".method_checkHash .collapse">
+<h2>checkHash()
+        </h2>
+<pre>checkHash($password, $good_hash) </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Security::checkHash()</td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$password</h4></div>
+<div class="subelement argument"><h4>$good_hash</h4></div>
+</div></div>
+</div>
+<a id="method_checkLogin"></a><div class="element clickable method public method_checkLogin" data-toggle="collapse" data-target=".method_checkLogin .collapse">
+<h2>Verifies an active SSO session information including IP and UA validation</h2>
+<pre>checkLogin($portal) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$portal</h4></div>
+</div></div>
+</div>
+<a id="method_checkPassword"></a><div class="element clickable method public method_checkPassword" data-toggle="collapse" data-target=".method_checkPassword .collapse">
+<h2>Verifies SSO authentication, generate and store session information</h2>
+<pre>checkPassword($ssoid, $plainpass) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Phoenix.html">Phoenix</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>30104</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$ssoid</h4></div>
+<div class="subelement argument"><h4>$plainpass</h4></div>
+</div></div>
+</div>
+<a id="method_checkSsoEmail"></a><div class="element clickable method public method_checkSsoEmail" data-toggle="collapse" data-target=".method_checkSsoEmail .collapse">
+<h2>Looks up SSO object ID by email and (optionally) object type.</h2>
+<pre>checkSsoEmail($email, $portalType) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>Success returns SSOID.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
@@ -134,68 +190,13 @@ to the entire package.</p>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$email</h4></div>
-<div class="subelement argument"><h4>$isStaff</h4></div>
+<div class="subelement argument"><h4>$portalType</h4></div>
 </div></div>
 </div>
-<a id="method_checkLogin"></a><div class="element clickable method public method_checkLogin" data-toggle="collapse" data-target=".method_checkLogin .collapse">
-<h2>Logs a user in</h2>
-<pre>checkLogin($email, $pass) </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>package</th>
-<td><a href="../packages/Phoenix.html">Phoenix</a></td>
-</tr>
-<tr>
-<th>version</th>
-<td>20827</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$email</h4></div>
-<div class="subelement argument"><h4>$pass</h4></div>
-</div></div>
-</div>
-<a id="method_checkPassword"></a><div class="element clickable method public method_checkPassword" data-toggle="collapse" data-target=".method_checkPassword .collapse">
-<h2>checkPassword()
-        </h2>
-<pre>checkPassword($password, $good_hash) </pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\Security::checkPassword()</td>
-</tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$password</h4></div>
-<div class="subelement argument"><h4>$good_hash</h4></div>
-</div></div>
-</div>
-<a id="method_generateSalt"></a><div class="element clickable method public method_generateSalt" data-toggle="collapse" data-target=".method_generateSalt .collapse">
-<h2>Generate salt</h2>
-<pre>generateSalt() </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>package</th>
-<td><a href="../packages/Phoenix.html">Phoenix</a></td>
-</tr>
-<tr>
-<th>version</th>
-<td>20904</td>
-</tr>
-</table>
-</div></div>
-</div>
-<a id="method_generateSession"></a><div class="element clickable method public method_generateSession" data-toggle="collapse" data-target=".method_generateSession .collapse">
+<a id="method_genSession"></a><div class="element clickable method public method_genSession" data-toggle="collapse" data-target=".method_genSession .collapse">
 <h2>Generates a session key based on UA and IP and logs the action</h2>
-<pre>generateSession($id) </pre>
-<div class="labels"></div>
+<pre>genSession($id) </pre>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
@@ -206,7 +207,9 @@ to the entire package.</p>
 <h2>getHash()
         </h2>
 <pre>getHash($password) </pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
@@ -217,10 +220,80 @@ to the entire package.</p>
 <div class="subelement argument"><h4>$password</h4></div>
 </div></div>
 </div>
-<a id="method_getUserData"></a><div class="element clickable method public method_getUserData" data-toggle="collapse" data-target=".method_getUserData .collapse">
-<h2>Fetches user data</h2>
-<pre>getUserData($email) </pre>
-<div class="labels"></div>
+<a id="method_getPermsByType"></a><div class="element clickable method public method_getPermsByType" data-toggle="collapse" data-target=".method_getPermsByType .collapse">
+<h2>Get array of permissions allowed determined by the object type</h2>
+<pre>getPermsByType($typeId) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$typeId</h4></div>
+</div></div>
+</div>
+<a id="method_getSsoObject"></a><div class="element clickable method public method_getSsoObject" data-toggle="collapse" data-target=".method_getSsoObject .collapse">
+<h2>Gets SSO object</h2>
+<pre>getSsoObject($objId) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$objId</h4></div>
+</div></div>
+</div>
+<a id="method_getSsoType"></a><div class="element clickable method public method_getSsoType" data-toggle="collapse" data-target=".method_getSsoType .collapse">
+<h2>Gets SSO Object Type</h2>
+<pre>getSsoType($typeId) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$typeId</h4></div>
+</div></div>
+</div>
+<a id="method_initiateSecurity"></a><div class="element clickable method public method_initiateSecurity" data-toggle="collapse" data-target=".method_initiateSecurity .collapse">
+<h2>Begins ACL class and handles sessions</h2>
+<pre>initiateSecurity() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>access</th>
+<td>public</td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_login"></a><div class="element clickable method public method_login" data-toggle="collapse" data-target=".method_login .collapse">
+<h2>Performs an SSO login</h2>
+<pre>login($email, $plainpass, $portal) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/Phoenix.html">Phoenix</a></td>
+</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$email</h4></div>
+<div class="subelement argument"><h4>$plainpass</h4></div>
+<div class="subelement argument"><h4>$portal</h4></div>
+</div></div>
+</div>
+<a id="method_logout"></a><div class="element clickable method public method_logout" data-toggle="collapse" data-target=".method_logout .collapse">
+<h2>Logs a user out based on their session</h2>
+<pre>logout() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>package</th>
+<td><a href="../packages/Phoenix.html">Phoenix</a></td>
+</tr></table>
+</div></div>
+</div>
+<a id="method_makeSsoObject"></a><div class="element clickable method public method_makeSsoObject" data-toggle="collapse" data-target=".method_makeSsoObject .collapse">
+<h2>Creates an SSO object of the specified type</h2>
+<pre>makeSsoObject($email, $password, $type, $portal) </pre>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <table class="table table-bordered">
@@ -230,30 +303,34 @@ to the entire package.</p>
 </tr>
 <tr>
 <th>version</th>
-<td>20903</td>
+<td>30104</td>
 </tr>
 </table>
 <h3>Parameters</h3>
 <div class="subelement argument"><h4>$email</h4></div>
+<div class="subelement argument"><h4>$password</h4></div>
+<div class="subelement argument"><h4>$type</h4></div>
+<div class="subelement argument"><h4>$portal</h4></div>
 </div></div>
 </div>
-<a id="method_initiateSecurity"></a><div class="element clickable method public method_initiateSecurity" data-toggle="collapse" data-target=".method_initiateSecurity .collapse">
-<h2>Begins ACL class and handles sessions</h2>
-<pre>initiateSecurity() </pre>
-<div class="labels"></div>
+<a id="method_getSsoTypeByName"></a><div class="element clickable method private method_getSsoTypeByName" data-toggle="collapse" data-target=".method_getSsoTypeByName .collapse">
+<h2>getSsoTypeByName()
+        </h2>
+<pre>getSsoTypeByName($name) </pre>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>access</th>
-<td>public</td>
-</tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$name</h4></div>
 </div></div>
 </div>
 <a id="method_pbkdf2"></a><div class="element clickable method private method_pbkdf2" data-toggle="collapse" data-target=".method_pbkdf2 .collapse">
 <h2>pbkdf2()
         </h2>
 <pre>pbkdf2($algorithm, $password, $salt, $count, $key_length, $raw_output) </pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
@@ -273,7 +350,9 @@ to the entire package.</p>
 <h2>slow_equals()
         </h2>
 <pre>slow_equals($a, $b) </pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <table class="table table-bordered"><tr>
@@ -292,7 +371,7 @@ to the entire package.</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-04T16:35:38+08:00.<br></footer></div>
+            generated on 2013-01-14T18:51:16-08:00.<br></footer></div>
 </div>
 </body>
 </html>

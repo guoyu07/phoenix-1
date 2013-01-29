@@ -41,7 +41,15 @@ echo UX::makeHead($h, $n, 'common/header_staff', 'common/nav_public_staff');
 
 // Page info
 echo UX::makeBreadcrumb(array(	'Staff Portal'		=> '/staff/index.php', 'Course Application' => '/staff/application.php'));
-echo UX::grabPage('staff/application', $p, true);
+
+if ((time() > strtotime("2013-02-10 19:00+0800")) || (time() < strtotime("2013-01-17 07:00+0800"))) {
+    $p['curtime'] = date(DATETIME_FULL, time());
+    $p['maxtime'] = date(DATETIME_FULL, strtotime("2013-02-10 19:00+0800"));
+    $p['mintime'] = date(DATETIME_FULL, strtotime("2013-01-17 07:00+0800"));
+    echo UX::grabPage('staff/application_closed', $p, true);
+} else {
+    echo UX::grabPage('staff/application', $p, true);
+}
 
 // Before footer grab time spent
 $t['end'] = microtime(true);

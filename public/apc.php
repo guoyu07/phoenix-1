@@ -1,4 +1,33 @@
 <?php
+
+/**
+ * Course applications
+ *
+ * @author  Yectep Studios <info@yectep.hk>
+ * @version 30104
+ * @package Plume
+ * @subpackage Staff
+ */
+
+
+define('PTP',   '../private/');
+define('PHX_SCRIPT_TYPE',   'HTML');
+define('PHX_LAOSHI',    true);
+define('PHX_UX',        true);
+
+
+// Include common ignition class
+require_once(PTP . 'php/ignition.php');
+
+// We require a staff login for this page
+if (!ACL::checkLogin('staff')) {
+    header('Location: /staff/index.php?msg=error_nologin&redir='.urlencode('http://summer.cis.edu.hk/apc.php'));
+    exit();
+} else {
+    $_laoshi = new Laoshi($_SESSION['SSOID']);
+    $_laoshi->perms(17);
+}
+
 /*
   +----------------------------------------------------------------------+
   | APC                                                                  |

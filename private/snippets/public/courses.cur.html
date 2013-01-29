@@ -27,42 +27,48 @@
 			<div id="scroller"> 
 				<div id="search" style="width:250px;">
 					<h3 style="margin-top:0.5em;">Course Search</h3>
-					<p>Now showing <strong>18</strong> of 208 courses.<br /><a href="#">Return to top</a></p>
+					<p>Now showing <strong>0</strong> of 0 courses.<br /><a href="#">Return to top</a></p>
 					<input type="text" style="width:80%;" placeholder="Search by course or instructor..." />
 				</div>
 				<div id="filters" style="width:250px;">
 					<h3>Select Your Filters</h3>
 					<p>I'll show courses that match the checked criteria.</p>
-					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
-					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
-					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Mathematics &amp; Critical Thinking">MSCT</acronym></label>
-					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #560069;"></div> <acronym class="tipped" title="Science, Computers &amp; Technology">SCIT</acronym></label>
-					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
-					
-					<p style="margin-top:1em;"><span style="margin-right:0.5em;">For ages:</span>
-						<select style="width:auto;">
-							<option selected="selected" value="4">4</option>
-							<option>5</option>
-							<option>5</option>
-							<option>5</option>
-							<option>5</option>
-							<option>5</option>
-						</select> to <select style="width:auto;">
-							<option selected="selected" value="4">4</option>
-							<option>5</option>
-							<option>5</option>
-							<option>5</option>
-							<option>5</option>
-							<option>5</option>
-						</select>
-					</p>
-					
-					<p>Show courses taught by...</p>
-					<p><select style="width:80%;">
-						<option selected="selected" value="%">(All instructors)</option>
-						<option value="15">Chester Li</option>
-						<option>Some Ridiculously Long Name Teacher from Outer Space</option>
-					</select>
+                    <select id="program">
+                        <option value="SP" selected="selected">Summer Program</option>
+                        <option value="AP">Academic Program</option>
+                    </select>
+
+                    <div id="sp-selectors">
+    					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
+    					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
+    					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Maths, Science &amp; Technology">MSCT</acronym></label>
+    					<label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
+
+                        <p style="margin-top:1em;"><span style="margin-right:0.5em;">For age:</span>
+                            <select style="width:auto;">
+                                <option selected="selected" value="4">4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                                <option>13</option>
+                                <option>14</option>
+                                <option>15</option>
+                            </select>
+                        </p>
+                    </div>
+
+                    <div id="ap-selectors" class="hide">
+                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #d16700;"></div> <acronym class="tipped" title="CIS 101">CISO</acronym></label>
+                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #8c0064;"></div> <acronym class="tipped" title="Career Pathways">PATH</acronym></label>
+                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #0b4eff;"></div> <acronym class="tipped" title="IBDP Taster Courses">IBTC</acronym></label>
+                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #108900;"></div> <acronym class="tipped" title="SAT Subject Test Prep">SATS</acronym></label>
+                        <p class="muted" style="margin-top:1em;">Academic Program courses are year-based. <a href="/faq.php#AP">View FAQ</a>.</p>
+                    </div>
 				</div>
 			</div>
 		</form>
@@ -71,16 +77,28 @@
 </div>
 
 <script type="text/javascript">
-$('.course-row').click(function (e) {
+$(document).ready(function () {
+    $('.course-row').click(function (e) {
 
-	/* Hide it all */
-	$('.course-synopsis').slideUp('fast');
-	
-	/* Toggle content */
-	var courseid = $(this).data('courseid');
-	$('.courseexpand-' + courseid).slideToggle('fast');
-	return true;
-	
+    	/* Hide it all */
+    	$('.course-synopsis').slideUp('fast');
+    	
+    	/* Toggle content */
+    	var courseid = $(this).data('courseid');
+    	$('.courseexpand-' + courseid).slideToggle('fast');
+    	return true;
+    	
+    });
+
+    $('#program').change(function () {
+        if ($(this).val() == 'SP') {
+            $('#ap-selectors').hide();
+            $('#sp-selectors').fadeIn();
+        } else {
+            $('#sp-selectors').hide();
+            $('#ap-selectors').fadeIn();
+        }
+    })
 });
 
 // Scroller

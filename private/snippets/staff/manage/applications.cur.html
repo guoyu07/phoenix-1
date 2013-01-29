@@ -8,11 +8,12 @@
     <table class="applications">
         <thead>
             <tr>
-                <th style="width:15%;">Subject</th>
+                <th style="width:10%;">Subject</th>
                 <th style="width:30%;">Course Name</th>
-                <th style="width:20%;">Lead Instructor</th>
-                <th style="width:15%;">Total Spaces</th>
+                <th style="width:18%;">Lead Instructor</th>
+                <th style="width:10%;">Spaces</th>
                 <th style="width:20%;">Date Submitted</th>
+                <th style="width:12%;"></th>
             </tr>
         </thead>
         <tbody>
@@ -21,3 +22,16 @@
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+jQuery(document).ready(function ($) {
+
+    // Archive
+    $('.archiver').click(function() {
+        var archive = laoshi.rpc({method: 'archive_application', data: $(this).data('appid')});
+        laoshi.toast('Application successfully archived.');
+        $(this).parent().parent().remove();
+    });
+
+});
+</script>

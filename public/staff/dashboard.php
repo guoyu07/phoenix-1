@@ -33,7 +33,15 @@ $n['dashboard'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
 // Default page
-$p['content'] = UX::grabPage($_laoshi->fetchDefaultPage());
+$d['my_name'] = $_laoshi->staff['StaffName'];
+$d['my_email'] = $_laoshi->sso['ObjEmail'];
+$d['pass_age'] = Common::relativeTime(strtotime($_laoshi->sso['ObjPassUpdateTS']));
+$d['pev'] = '<span class="muted">'.$_laoshi->sso['ObjHash'].'</span>';
+$d['type'] = $_laoshi->sso['ObjType']['TypeName'];
+$d['last_visit'] = Common::relativeTime(strtotime($_laoshi->sso['ObjLLTS']));
+$d['account_cts'] = Common::relativeTime(strtotime($_laoshi->sso['ObjCTS']));
+
+$p['content'] = UX::grabPage($_laoshi->fetchDefaultPage(), $d);
 
 
 // Include header section

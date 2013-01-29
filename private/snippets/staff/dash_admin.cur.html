@@ -1,9 +1,8 @@
 
 <div class="dashblock">
-    <div class="dashblock-title">Secretary QuickLinks</div>
+    <div class="dashblock-title">Administrative QuickLinks</div>
     <div class="dashblock-content">
         <strong><a href="/staff/manage/applications.php">Course Applications</a></strong><br />
-        <strong><a href="/staff/manage/courses.php">Class Registrar</a></strong><br />
     </div>
 </div>
 
@@ -11,7 +10,22 @@
     <div class="dashblock-title">My Account Information</div>
     <div class="dashblock-content">
         <p class="no-bottom">
-            <strong>Last login: </strong><span id="last-visit"></span>
+            <strong>{{my_name}}</strong><br />
+            <a href="mailto:{{my_email}}">{{my_email}}</a><br /><br />
+            <strong>Account created:</strong> {{account_cts}}<br />
+            <strong>Last login:</strong> <span id="last-visit">{{last_visit}}</span><br />
+            <strong>Last password change:</strong> {{pass_age}}<br />
+        </p>
+    </div>
+</div>
+
+<div class="dashblock">
+    <div class="dashblock-title">Account Debugging</div>
+    <div class="dashblock-content">
+        <p class="no-bottom">
+            <strong>Account Type:</strong> {{type}}</span><br />
+            <strong><acronym class="tipped" title="Password Encrypted Value">PEV</acronym>:</strong><br />
+            <pre>{{pev}}</pre>
         </p>
     </div>
 </div>

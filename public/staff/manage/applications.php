@@ -22,15 +22,15 @@ require_once(PTP . 'php/ignition.php');
 
 // We require a staff login for this page
 if (!ACL::checkLogin('staff')) {
-    header('Location: ./index.php?msg=error_nologin');
+    header('Location: /staff/index.php?msg=error_nologin');
     exit();
 } else {
     $_laoshi = new Laoshi($_SESSION['SSOID']);
     $_laoshi->perms(6, 7, 8);
 }
 
-// Triage and get default staff page
-$h['title'] = 'My Dashboard';
+// Set default info
+$h['title'] = 'Applications';
 $n['management'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
@@ -54,7 +54,7 @@ foreach($saved as $course) {
 }
 
 // Page info
-echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/index.php', 'My Dashboard' => "/staff/dashboard.php"));
+echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Course Applications' => "/staff/manage/applications.php"));
 echo UX::grabPage('staff/manage/applications', $p, true);
 
 // Before footer grab time spent

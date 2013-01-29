@@ -1,0 +1,449 @@
+<form id="brochure-insertion" method="./application_view.php" class="validate" method="post" enctype="multipart/form-data">
+<div id="application_content" class="content-row spaced" style="display:table;">
+    <div class="col-row">
+        <div class="col c5">
+            <h2>Teacher Application</h2>
+
+            <p>This is the information that was submitted by the teacher. You cannot edit this information but if you need, please consider emailing the teacher concerned for further information.</p>
+
+            <button type="button" class="copy button-blue" data-copy="all">Copy Everything</button>
+
+            <h3>Instructor(s) Details</h3>
+
+            <p>
+                <strong>Lead Instructor</strong><br />
+                {{teacher_name}} &lt;<a href="mailto:{{teacher_email}}">{{teacher_email}}</a>&gt;<br /><br />
+
+                <strong>Ancillary Instructors</strong><br />
+                {{teacher_suppl}}
+            </p>
+
+            <h3>Course Information</h3>
+
+            <p>
+                <strong>Subject &amp; Course Name</strong><br />
+                <span class="badge tipped" title="{{subject_name}}">{{program}}: {{subject_code}}</span> {{course_name}}<br />
+                <a href="javascript:;" data-copy="basic" class="copy">Copy subject/name &raquo;</a>
+            </p>
+
+            <p>
+                <strong>Synopsis</strong><br />
+                <pre>{{course_synop}}</pre><br />
+                <a href="javascript:;" data-copy="synop" class="copy">Copy synopsis&raquo;</a>
+            </p>
+
+            <p>
+                <strong>Course Description</strong><br />
+                <pre>{{course_desc}}</pre>
+                <a href="javascript:;" data-copy="desc" class="copy">Copy course description &raquo;</a>
+            </p>
+
+            <p>
+                <strong>Expected Outcomes</strong><br />
+                <pre>{{course_outcomes}}</pre><br />
+                <a href="javascript:;" data-copy="outcomes" class="copy">Copy expected outcomes &raquo;</a>
+            </p>
+
+            <p>
+                <strong>Pre-Requisites</strong><br />
+                <pre>{{course_prereqs}}</pre><br />
+                <a href="javascript:;" data-copy="prereqs" class="copy">Copy pre-requisites&raquo;</a>
+            </p>
+
+            <p>
+                <strong>Brief Weekly Plan</strong><br />
+                <pre>{{course_plan}}</pre><br />
+                <a href="javascript:;" data-copy="plan" class="copy">Copy to comments &raquo;</a>
+            </p>
+
+            <h3>Budget Information</h3>
+            <div class="alert alert-yellow"><span class="badge badge-yellow">Note</span> This information won't be copied, however, you can add it to the internal comments by clicking Copy below.</div>
+
+            <p>
+                <strong>Budget Plan</strong><br />
+                <pre>{{course_costs}}</pre><br />
+                <a href="javascript:;" data-copy="budget" class="copy">Copy to comments &raquo;</a>
+            </p>
+
+            <p>
+                <strong>Expected Course Expenditure</strong> <em class="muted">in HKD</em><br />
+                <span class="featured red">${{course_cost_total}}</span>
+            </p>
+
+        </div>
+        <div class="col c5">
+            <h2>Course Brochure</h2>
+
+            <p>On this side is the "official" course information to be published for parents to see and will form the basis of the master timetable. When you submit this form, I'll check to make sure everything is in order, then add it to the system. At the same time, I'll add all the timeslot offerings (below), and hide the course from parents until you enable viewing at a later time.</p>
+
+            <h3>Course Brochure</h3>
+            <p>This information is shown to parents in the main listing of course. Please keep things to a minimum length if possible to reduce eyestrain!</p>
+
+            <!-- Name and subject -->
+            <label for="course-name" class="nested">Course Name</label>
+            <input type="text" id="course-name" name="course_name" class="required" />
+
+            <label for="course-subject" class="nested">Course Subject</label>
+            <select id="course-subject" class="required" name="course_subject">
+                <option value="">(Select a Subject and Program)</option>
+                <optgroup label="Senior Academic Program">
+                    <option value="IBTC">IBTC - IBDP Taster Course</option>
+                    <option value="IBRV">IBRV - IBDP Revision</option>
+                    <option value="SATS">SATS - SAT Subject Test Prep (SAT II)</option>
+                    <option value="PATH">PATH - Career Pathways</option>
+                    <option value="UNIW">CISO - CIS 101</option>
+                </optgroup>
+                <optgroup label="Summer Program">
+                    <option value="ARTS">ARTS - The Arts</option>
+                    <option value="LANG">LANG - Languages</option>
+                    <option value="MACT">MSCT - Maths, Science and Technology</option>
+                    <option value="PHED">PHED - Physical Education</option>
+                </optgroup>
+            </select>
+            <label for="course-synop" class="nested">Brief Synopsis</label>
+            <textarea name="course_synop" id="course-synop" class="required" style="width:80%;height:5em;"></textarea>
+
+            <h3>Single-View Information</h3>
+            <p>These items are shown when a parent clicks on a particular course to view course timeslot schedules, and to know more about the course. Be as precise as possible.</p>
+
+            <p><span class="badge badge-blue">Protips</span> For the course description,very basic HTML is allowed as follows:</p>
+
+            <table style="font-size: 0.9em;">
+                <thead>
+                    <tr>
+                        <th>This HTML...</th>
+                        <th>Generates this:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;strong&gt;bolded text&lt;/strong&gt;</code></td>
+                        <td><strong>bolded text</strong></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;em&gt;italicised text&lt;/em&gt;</code></td>
+                        <td><em>italicised text</em></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;blockquote&gt;quote&lt;/blockquote&gt;</code></td>
+                        <td><blockquote>quote</blockquote></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <label for="course-desc" class="nested">Course Description</label>
+            <textarea name="course_desc" id="course-desc" class="required" style="width:80%;height:15em;"></textarea>
+
+            <label for="course-outcomes" class="nested">Expected Outcomes</label>
+            <textarea name="course_outcomes" id="course-outcomes" class="required" style="width:80%;height:10em;"></textarea>
+
+            <label for="course-prereqs" class="nested">Pre-Requisites</label>
+            <textarea name="course_prereqs" id="course-prereqs" class="required" style="width:80%;"></textarea>
+
+            <label for="course-fee-extra" class="nested">Extra Fees</label>
+            <select id="course-fee-extra" class="required" name="course_fee_extra">
+                <option value="0" selected="selected">$0</option>
+                <option value="50">$50 - Computer Use Fee</option>
+                <option value="30">$30 - Arts Supplies/Materials Fee</option>
+            </select>
+
+
+            <h3>Budget &amp; Internal Audit Info</h3>
+            <p>None of this information is shown to parents but can be edited or accessed by various staff.</p>
+
+            <label for="course-comments" class="nested">Internal Comments <span class="muted">(Secretaries Eyes Only)</label>
+            <textarea name="course_ic" id="course-comments" class="required" style="width:80%;height:15em;"></textarea>
+
+        </div>
+    </div>
+</div>
+
+<!-- Timeslots -->
+<div id="application_timeslots" class="content-row spaced body-emulate">
+
+    <h2>Offered Timeslots</h2>
+    <p>This section is <strong>interactive</strong>. It comes preloaded with the original information provided by the teacher. There's no "editing" of line items: to change items, add one with corrected information and then delete the old one.</p>
+
+    <p><span class="badge badge-red">Tip</span> Don't edit rooms yet. They're hidden until schedule downloads are enabled for parents and can be edited <strong>much more easily</strong> later.</p>
+
+    <div id="save-warning" class="alert alert-red hide"><span class="badge badge-red">Warning</span> You've made changes you have not saved.</div>
+
+    <h3>Add Timeslot</h3>
+    <p>Feel free to add timeslots to merge with other applications.</p>
+
+    <label for="offer-week">Offered Week</label>
+    <select id="offer-week">
+        <option selected="selected" value="1">24/6-28/6 Week 1</option>
+        <option value="2">2/7-5/7 Week 2 (July 1 no school)</option>
+        <option value="3">8/7-12/7 Week 3</option>
+        <option value="4">15/7-19/7 Week 4</option>
+    </select>
+
+    <div class="program-row sp-row hide">
+        <div class="form-row program-row sp-row hide" id="sp-times-row">
+            <label for="sp-times">Select Timeslot Period(s)</label>
+            <select id="sp-times">
+                <optgroup label="Single Periods (1 hr)">
+                    <option selected="selected" value="1">08:30-09:25 Period 1</option>
+                    <option value="2">09:30-10:25 Period 2</option>
+                    <option value="3">11:00-11:55 Period 3</option>
+                    <option value="4">12:00-12:55 Period 4</option>
+                </optgroup>
+                <optgroup label="Double Periods (2 hrs)">
+                    <option value="8">08:30-10:25 Periods 1-2</option>
+                    <option value="9">11:00-12:55 Periods 3-4</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="form-row" id="sp-age-row">
+            <label for="sp-age">Age Range (Inclusive)</label>
+            <select id="sp-age">
+                <option value="4-6" selected="selected">Ages 4-6</option>
+                <option value="7-9">Ages 7-9</option>
+                <option value="10-12">Ages 10-12</option>
+                <option value="12-15">Ages 12-15</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="program-row ap-row hide">
+        <div class="form-row program-row ap-row hide" id="ap-times-row">
+            <label for="ap-times">Select a Session</label>
+            <select id="ap-times">
+                <option selected="selected" value="A">09:00-11:00 Session A</option>
+                <option value="B">11:30-13:30 Session B</option>
+                <option value="C">14:00-16:00 Session C</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row" id="room-request-row">
+        <label for="room-request">Preferred Room</label>
+        <select id="room-request">
+            {{rooms}}
+        </select>
+    </div>
+
+    <div class="form-row" id="max-size-row">
+        <label for="max-size">Student Limit</label>
+        <select id="max-size">
+            <option value="9">&lt;10 (put reason in comments)</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12" selected="selected">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">&gt;18 (put reason in comments)</option>
+        </select>
+    </div>
+
+    <div class="form-row no-label" id="form-add-timeslot">
+            <button type="button" id="add_timeslot">Add Timeslot</button>
+    </div>
+
+    <table id="class_timeslots">
+        <thead>
+            <tr>
+                <th>Week</th>
+                <th>Time</th>
+                <th>Ages/Years</th>
+                <th>Max Students</th>
+                <th>Room</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="class_timeslots_body">
+        </tbody>
+    </table>
+
+    <p>Total student limit count: <strong id="total_student_limit">?</strong>
+
+</div>
+
+<div id="sanity_check" class="content-row spaced body-emulate">
+    <h2>Sanity Check</h2>
+
+    <p>When you're done filling in the form, this tool will analyse all the items. If everything is green for go, then you can submit the course. Don't worry, you can edit everything later - but why not get it right the first time?</p>
+
+    <button class="button" type="button" id="btn_validate">Validate and Prepare Course</button>
+
+    <div class="hide" id="sanity_results">
+        <p>
+            <ol id="sanity_list">
+            </ol>
+    </div>
+
+    <button class="button button-green btn-submitable hide" type="button" id="btn_submit">Submit {{subject_code}} Course to Brochure</button>
+    <button class="button button-red btn-submitable hide" type="button" id="btn_reset">Cancel Action: Reload Application</button>
+
+</div>
+</form>
+
+<script type="text/javascript">
+var courseJson = {{course_json}};
+var offerings = {{class_json}};
+var selProgram = courseJson.course_info.program;
+
+$(document).ready(function () {
+    if (selProgram == 'SP') {
+        $('.sp-row').show();
+    } else {
+        $('.ap-row').show();
+    }
+
+    $('.copy').click(function() {
+        // What are we copying?
+        if ($(this).data('copy') == 'basic') {
+            // Course name and subject
+            $('#course-name').val(courseJson.course_info.course_name);
+            $('#course-subject').val('{{subject_code}}');
+        } else if ($(this).data('copy') == 'synop') {
+            // Course synopsis
+            $('#course-synop').html(courseJson.course_info.course_synop);
+        } else if ($(this).data('copy') == 'desc') {
+            // Course description
+            $('#course-desc').html(courseJson.course_info.course_desc);
+        } else if ($(this).data('copy') == 'outcomes') {
+            // Course expected outcomes
+            $('#course-outcomes').html(courseJson.course_info.course_outcomes);
+        } else if ($(this).data('copy') == 'prereqs') {
+            // Course prerequisites
+            $('#course-prereqs').html(courseJson.course_info.course_prereqs);
+        } else if ($(this).data('copy') == 'plan') {
+            // Course description
+            $('#course-comments').append("\n=====WEEKLY PLAN=====\n(Copied from course app)\n" + courseJson.course_info.course_plan + "\n");
+        } else if ($(this).data('copy') == 'budget') {
+            // Course description
+            $('#course-comments').append("\n=======BUDGET=======\n(Copied from course app)\n" + courseJson.course_info.course_costs + "\n");
+        } else if ($(this).data('copy') == 'all') {
+            // Everything!
+            $('#course-name').val(courseJson.course_info.course_name);
+            $('#course-subject').val('{{subject_code}}');
+            $('#course-synop').html(courseJson.course_info.course_synop);
+            $('#course-desc').html(courseJson.course_info.course_desc);
+            $('#course-outcomes').html(courseJson.course_info.course_outcomes);
+            $('#course-prereqs').html(courseJson.course_info.course_prereqs);
+            $('#course-comments').append("\n=====WEEKLY PLAN=====\n(Copied from course app)\n" + courseJson.course_info.course_plan + "\n");
+            $('#course-comments').append("\n=======BUDGET=======\n(Copied from course app)\n" + courseJson.course_info.course_costs + "\n");
+            laoshi.toast('Everything successfully copied. <strong>Remember to review!</strong>')
+        } else {
+            laoshi.toast('An error occured while copying this data.');
+        }
+    });
+
+    // Timeslot addition
+    $('#add_timeslot').click(function() {
+        var ageRange = '';
+        if (selProgram == 'SP') {
+            ageRange = $('select#sp-age').val();
+        } else {
+            if ($('#ap-subject').val() == 'IBTC') ageRange = '10-11';
+            else if ($('#ap-subject').val() == 'SATS') ageRange = '11-12';
+            else if ($('#ap-subject').val() == 'PATH') ageRange = '10-12';
+            else if ($('#ap-subject').val() == 'CISO') ageRange = '10-12';
+            else ageRange = '10-12';
+        }
+
+        offerings.push({
+            'week' : $('select#offer-week').val(),
+            'period' : ((selProgram == 'SP') ? $('select#sp-times').val() : $('select#ap-times').val()),
+            'ages' : ageRange,
+            'max_students' : $('#max-size').val(),
+            'pref_room' : $('#room-request').val()
+        });
+        $('#save-warning').slideDown();
+        laoshi.toast('Offering slot added to timetable. <strong>Changes not saved until course submission!</strong>');
+        redrawClasses();
+    });
+
+    $('#btn_validate').click(function (e) {
+        e.preventDefault();
+        runSanityCheck();
+        return false;
+    })
+
+    $('#btn_reset').click(function () {
+        location.reload();
+    });
+
+    redrawClasses();
+
+});
+
+// Redraw offerings table
+function redrawClasses() {
+    var studentLimit = 0;
+    $('#class_timeslots_body').html('');
+    $.each(offerings, function(i, v) {
+        studentLimit = studentLimit + parseInt(v['max_students']);
+        $('#class_timeslots_body').append("\t\t\t<tr>\n" +
+            "<td>"+v['week']+"</td>" +
+            "<td>"+((v['period'].match(/\d/)) ? 'Period' : 'Session')+" "+((v['period'].match(/8/)) ? '1-2' : ((v['period'].match(/9/)) ? '3-4' : v['period']))+"</td>" +
+            "<td>"+((selProgram == 'SP') ? 'Ages' : 'Years')+" "+v['ages']+"</td>" +
+            "<td>"+v['max_students']+"</td>" +
+            "<td>"+v['pref_room']+"</td>" +
+            "<td><a href=\"javascript:;\" onclick=\"removeOffering("+i+");\">Remove</a></td>\n</tr>");
+    });
+    $('#total_student_limit').html(studentLimit);
+    return;
+}
+
+// Remove items
+function removeOffering(item) {
+    offerings.splice(item,1);
+    $('#save-warning').slideDown();
+    laoshi.toast('Class timeslot offering removed. <strong>Changes not saved until course submission!</strong>');
+    redrawClasses();
+}
+
+
+
+// Sanity check
+function runSanityCheck() {
+    var insane = false;
+    $('#sanity_list').html('');
+    ((!check('#course-name')) ? insane = missing('<strong>Course Name</strong> seems to be missing.') : pass('<strong>Course Name</strong> is all set.')); 
+    ((!check('#course-subject')) ? insane = missing('<strong>Subject/Program Selection</strong> seems to be missing.') : pass('<strong>Subject/Program Selection</strong> is all set.')); 
+    ((!check('#course-synop')) ? insane = missing('<strong>Brief Synopsis</strong> seems to be missing.') : pass('<strong>Synopsis</strong> is all set.')); 
+    ((!check('#course-desc')) ? insane = missing('<strong>Course Description</strong> seems to be missing.') : pass('<strong>Course Description</strong> is all set.')); 
+    ((!check('#course-outcomes')) ? insane = missing('<strong>Expected Outcomes</strong> seems to be missing.') : pass('<strong>Expected Outcomes</strong> are all set.')); 
+    ((!check('#course-prereqs')) ? insane = missing('<strong>Course Description</strong> seems to be missing.') : pass('<strong>Course Description</strong> is all set.'));  
+    ((offerings.length == 0) ? insane = missing('<strong>No classes are offered!</strong> You must offer at least one timeslot for this course.') : pass('<strong>' + offerings.length + '</strong> times offered for this course. Good to go.')); 
+    $('#sanity_results').slideDown();
+
+    if (insane) {
+        $('#btn_reset').fadeIn();
+        return;
+    } else {
+        // Ready for launch
+        $('#application_content').hide();
+        $('#application_timeslots').hide();
+        $('#btn_validate').hide();
+        $('.btn-submitable').fadeIn();
+    }
+}
+
+function check(curId) {
+    if ($(curId).val() == '') {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function missing(msg) {
+    $('#sanity_list').append('<li><img src="/assets/icons/cross.png" alt="[X]"> <span class="red">' + msg + '</span></li>');
+    return true;
+}
+
+function pass(msg) {
+    $('#sanity_list').append('<li><img src="/assets/icons/tick.png" alt="[OK]"> ' + msg + '</li>'); 
+}
+
+
+</script>

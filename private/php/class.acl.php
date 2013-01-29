@@ -36,7 +36,6 @@ class ACL extends Security {
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        Common::logAction('backend.subroutine.acl', 'success', 'SSOID='.$id, 'via ACL::generateSession');
         $_SESSION['SSOID'] = $id;
         $_SESSION['AuthCheck'] = hash("sha256", $result['ObjHash'].$_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']);
         

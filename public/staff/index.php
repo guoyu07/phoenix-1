@@ -26,7 +26,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     
     if ($login === null) {
         Common::logAction('http.staff.login', 'failure', 'E='.$_POST['email'], 'No matching portal email');
-        header('Location: ./index.php?msg=error_email');
+        header('Location: ./index.php?msg=error_email'.(($_POST['redirect'] !== '*') ? '&redir='.htmlentities($_POST['redirect']) : ''));
         exit();
     } elseif ($login === false) {
         Common::logAction('http.staff.login', 'failure', 'E='.$_POST['email'], 'Invalid password match');
@@ -36,9 +36,12 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
         Common::logAction('http.staff.login', 'success', 'SSOID='.$login);
     }
     
-    // Everything's good, set session info and we're good to transfer to dashboard
+    // Everything's good, set session info and we're good to transfer to dashboard...or somewhere else if need be
     ACL::genSession($login);
-    header('Location: ./dashboard.php');
+    if ($_POST['redirect'] == '*')
+        header('Location: ./dashboard.php');
+    else
+        header('Location: '.$_POST['redirect']);
     exit();
 }
 
@@ -66,7 +69,7 @@ if (array_key_exists('msg', $_GET)) {
 		break;
 	}
 } else {
-	$error = '<div class="alert">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.</div>';
+	$error = '<div class="alert">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.<br /><br /><strong>Teachers:</strong> Your accounts from last year will not be used. We will physically give you instructions before school is let out in June. You\'ll be able to collect your account temporary password at the Office then.</div>';
 }
 
 
@@ -75,7 +78,7 @@ echo UX::makeHead($h, $n, 'common/header_staff', 'common/nav_public_staff');
 
 // Page info
 echo UX::makeBreadcrumb(array(	'Staff Portal'   => '/staff',   'Sign In'		=> '/staff/index.php'));
-echo UX::grabPage('staff/login', array('error' => $error), true);
+echo UX::grabPage('staff/login', array('error' => $error, 'redirect' => ((!empty($_GET['redir'])) ? $_GET['redir'] : '*')), true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);

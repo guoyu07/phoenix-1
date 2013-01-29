@@ -20,12 +20,12 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
+<li><a href="packages/BarcodeQR.html"><i class="icon-folder-open"></i> BarcodeQR</a></li>
 <li><a href="packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="packages/Mandrill.html"><i class="icon-folder-open"></i> Mandrill</a></li>
 <li><a href="packages/PegasusPHP%0ACopyright%20(C)%202008-2010%20Chris%20Schuld%20%20(chris@chrisschuld.html"><i class="icon-folder-open"></i> PegasusPHP
 Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li><a href="packages/Phoenix.html"><i class="icon-folder-open"></i> Phoenix</a></li>
-<li><a href="packages/Plume.html"><i class="icon-folder-open"></i> Plume</a></li>
 </ul>
 </li>
 <li class="dropdown" id="charts-menu">
@@ -36,7 +36,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">77</span></a></li>
+                <span class="label label-info">81</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -59,22 +59,18 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <button class="btn critical">Critical</button><button class="btn error">Error</button><button class="btn notice">Notice</button>
 </div></li>
 <li class="nav-header">Navigation</li>
-<li><a href="#private/php/class.acl.php"><i class="icon-file"></i>private/php/class.acl.php</a></li>
-<li><a href="#private/php/class.browser.php"><i class="icon-file"></i>private/php/class.browser.php</a></li>
-<li><a href="#private/php/class.common.php"><i class="icon-file"></i>private/php/class.common.php</a></li>
-<li><a href="#private/php/class.courses.php"><i class="icon-file"></i>private/php/class.courses.php</a></li>
-<li><a href="#private/php/class.enrollment.php"><i class="icon-file"></i>private/php/class.enrollment.php</a></li>
-<li><a href="#private/php/class.laoshi.php"><i class="icon-file"></i>private/php/class.laoshi.php</a></li>
-<li><a href="#private/php/class.mailer.php"><i class="icon-file"></i>private/php/class.mailer.php</a></li>
-<li><a href="#private/php/class.mandrill.php"><i class="icon-file"></i>private/php/class.mandrill.php</a></li>
-<li><a href="#private/php/class.security.php"><i class="icon-file"></i>private/php/class.security.php</a></li>
-<li><a href="#private/php/class.student.php"><i class="icon-file"></i>private/php/class.student.php</a></li>
-<li><a href="#private/php/class.ux.php"><i class="icon-file"></i>private/php/class.ux.php</a></li>
-<li><a href="#public/apc.php"><i class="icon-file"></i>public/apc.php</a></li>
-<li><a href="#public/info.php"><i class="icon-file"></i>public/info.php</a></li>
-<li><a href="#public/staff/dashboard.php"><i class="icon-file"></i>public/staff/dashboard.php</a></li>
-<li><a href="#public/staff/list_students.php"><i class="icon-file"></i>public/staff/list_students.php</a></li>
-<li><a href="#public/tools/hashgen.php"><i class="icon-file"></i>public/tools/hashgen.php</a></li>
+<li><a href="#class.acl.php"><i class="icon-file"></i>class.acl.php</a></li>
+<li><a href="#class.browser.php"><i class="icon-file"></i>class.browser.php</a></li>
+<li><a href="#class.common.php"><i class="icon-file"></i>class.common.php</a></li>
+<li><a href="#class.courses.php"><i class="icon-file"></i>class.courses.php</a></li>
+<li><a href="#class.enrollment.php"><i class="icon-file"></i>class.enrollment.php</a></li>
+<li><a href="#class.laoshi.php"><i class="icon-file"></i>class.laoshi.php</a></li>
+<li><a href="#class.mailer.php"><i class="icon-file"></i>class.mailer.php</a></li>
+<li><a href="#class.mandrill.php"><i class="icon-file"></i>class.mandrill.php</a></li>
+<li><a href="#class.qr.php"><i class="icon-file"></i>class.qr.php</a></li>
+<li><a href="#class.security.php"><i class="icon-file"></i>class.security.php</a></li>
+<li><a href="#class.student.php"><i class="icon-file"></i>class.student.php</a></li>
+<li><a href="#class.ux.php"><i class="icon-file"></i>class.ux.php</a></li>
 </ul></div>
 <div class="span8">
 <ul class="breadcrumb">
@@ -84,8 +80,8 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li>Compilation Errors</li>
 </ul>
 <div class="package-contents">
-<a name="private/php/class.acl.php" id="private/php/class.acl.php"></a><h3>
-<i class="icon-file"></i>private/php/class.acl.php<small style="float: right;padding-right: 10px;">7</small>
+<a name="class.acl.php" id="class.acl.php"></a><h3>
+<i class="icon-file"></i>class.acl.php<small style="float: right;padding-right: 10px;">18</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -97,44 +93,99 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.acl.php</td>
+<td>No page-level DocBlock was found in file class.acl.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>29</td>
-<td>Argument $id is missing from the Docblock of generateSession()</td>
+<td>Argument $id is missing from the Docblock of genSession()</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>47</td>
-<td>Argument $email is missing from the Docblock of checkEmail()</td>
+<td>Argument $email is missing from the Docblock of checkSsoEmail()</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>47</td>
-<td>Argument $isStaff is missing from the Docblock of checkEmail()</td>
+<td>Argument $portalType is missing from the Docblock of checkSsoEmail()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>70</td>
-<td>Argument $email is missing from the Docblock of getUserData()</td>
+<td>68</td>
+<td>Argument $email is missing from the Docblock of makeSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>85</td>
-<td>Argument $email is missing from the Docblock of checkLogin()</td>
+<td>68</td>
+<td>Argument $password is missing from the Docblock of makeSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>85</td>
-<td>Argument $pass is missing from the Docblock of checkLogin()</td>
+<td>68</td>
+<td>Argument $type is missing from the Docblock of makeSsoObject()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>68</td>
+<td>Argument $portal is missing from the Docblock of makeSsoObject()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>99</td>
+<td>Argument $ssoid is missing from the Docblock of checkPassword()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>99</td>
+<td>Argument $plainpass is missing from the Docblock of checkPassword()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>124</td>
+<td>Argument $objId is missing from the Docblock of getSsoObject()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>134</td>
+<td>Argument $typeId is missing from the Docblock of getSsoType()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>154</td>
+<td>Argument $email is missing from the Docblock of login()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>154</td>
+<td>Argument $plainpass is missing from the Docblock of login()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>154</td>
+<td>Argument $portal is missing from the Docblock of login()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>171</td>
+<td>Argument $portal is missing from the Docblock of checkLogin()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>189</td>
+<td>Argument $typeId is missing from the Docblock of getPermsByType()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>206</td>
+<td>No DocBlock was found for method getSsoTypeByName()</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.browser.php" id="private/php/class.browser.php"></a><h3>
-<i class="icon-file"></i>private/php/class.browser.php<small style="float: right;padding-right: 10px;">11</small>
+<a name="class.browser.php" id="class.browser.php"></a><h3>
+<i class="icon-file"></i>class.browser.php<small style="float: right;padding-right: 10px;">11</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -146,64 +197,64 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.browser.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>136</td>
-<td>No DocBlock was found for property $_agent</td>
+<td>No page-level DocBlock was found in file class.browser.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>137</td>
-<td>No DocBlock was found for property $_browser_name</td>
+<td>No DocBlock was found for property $_agent</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>138</td>
-<td>No DocBlock was found for property $_version</td>
+<td>No DocBlock was found for property $_browser_name</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>139</td>
-<td>No DocBlock was found for property $_platform</td>
+<td>No DocBlock was found for property $_version</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>140</td>
-<td>No DocBlock was found for property $_os</td>
+<td>No DocBlock was found for property $_platform</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>141</td>
-<td>No DocBlock was found for property $_is_aol</td>
+<td>No DocBlock was found for property $_os</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>142</td>
-<td>No DocBlock was found for property $_is_mobile</td>
+<td>No DocBlock was found for property $_is_aol</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>143</td>
-<td>No DocBlock was found for property $_is_robot</td>
+<td>No DocBlock was found for property $_is_mobile</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>144</td>
+<td>No DocBlock was found for property $_is_robot</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>145</td>
 <td>No DocBlock was found for property $_aol_version</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>207</td>
+<td>208</td>
 <td>No DocBlock was found for method Browser()</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.common.php" id="private/php/class.common.php"></a><h3>
-<i class="icon-file"></i>private/php/class.common.php<small style="float: right;padding-right: 10px;">9</small>
+<a name="class.common.php" id="class.common.php"></a><h3>
+<i class="icon-file"></i>class.common.php<small style="float: right;padding-right: 10px;">9</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -215,7 +266,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.common.php</td>
+<td>No page-level DocBlock was found in file class.common.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
@@ -261,8 +312,8 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.courses.php" id="private/php/class.courses.php"></a><h3>
-<i class="icon-file"></i>private/php/class.courses.php<small style="float: right;padding-right: 10px;">2</small>
+<a name="class.courses.php" id="class.courses.php"></a><h3>
+<i class="icon-file"></i>class.courses.php<small style="float: right;padding-right: 10px;">3</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -274,20 +325,25 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.courses.php</td>
+<td>No page-level DocBlock was found in file class.courses.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
 <td>12</td>
 <td>No DocBlock was found for \Courses</td>
 </tr>
+<tr class="error">
+<td>error</td>
+<td>33</td>
+<td>Argument $status is missing from the Docblock of getApps()</td>
+</tr>
 </tbody>
 </table></div>
 </div>
 <div class="package-contents"></div>
 <div class="package-contents">
-<a name="private/php/class.enrollment.php" id="private/php/class.enrollment.php"></a><h3>
-<i class="icon-file"></i>private/php/class.enrollment.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="class.enrollment.php" id="class.enrollment.php"></a><h3>
+<i class="icon-file"></i>class.enrollment.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -298,30 +354,13 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tbody><tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.enrollment.php</td>
+<td>No page-level DocBlock was found in file class.enrollment.php</td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.laoshi.php" id="private/php/class.laoshi.php"></a><h3>
-<i class="icon-file"></i>private/php/class.laoshi.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.laoshi.php</td>
-</tr></tbody>
-</table></div>
-</div>
-<div class="package-contents">
-<a name="private/php/class.mailer.php" id="private/php/class.mailer.php"></a><h3>
-<i class="icon-file"></i>private/php/class.mailer.php<small style="float: right;padding-right: 10px;">8</small>
+<a name="class.laoshi.php" id="class.laoshi.php"></a><h3>
+<i class="icon-file"></i>class.laoshi.php<small style="float: right;padding-right: 10px;">8</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -333,7 +372,61 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.mailer.php</td>
+<td>No page-level DocBlock was found in file class.laoshi.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>13</td>
+<td>No DocBlock was found for property $sso</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>14</td>
+<td>No DocBlock was found for property $myPerms</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>16</td>
+<td>Argument $objId is missing from the Docblock of __construct()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>30</td>
+<td>No DocBlock was found for method fetchDefaultPage()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>43</td>
+<td>No DocBlock was found for method fetchNavPage()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>60</td>
+<td>No DocBlock was found for method perms()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>73</td>
+<td>No DocBlock was found for method getStaff()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="class.mailer.php" id="class.mailer.php"></a><h3>
+<i class="icon-file"></i>class.mailer.php<small style="float: right;padding-right: 10px;">8</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file class.mailer.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
@@ -374,8 +467,8 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.mandrill.php" id="private/php/class.mandrill.php"></a><h3>
-<i class="icon-file"></i>private/php/class.mandrill.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="class.mandrill.php" id="class.mandrill.php"></a><h3>
+<i class="icon-file"></i>class.mandrill.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -386,13 +479,30 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tbody><tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.mandrill.php</td>
+<td>No page-level DocBlock was found in file class.mandrill.php</td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.security.php" id="private/php/class.security.php"></a><h3>
-<i class="icon-file"></i>private/php/class.security.php<small style="float: right;padding-right: 10px;">5</small>
+<a name="class.qr.php" id="class.qr.php"></a><h3>
+<i class="icon-file"></i>class.qr.php<small style="float: right;padding-right: 10px;">1</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody><tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file class.qr.php</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="class.security.php" id="class.security.php"></a><h3>
+<i class="icon-file"></i>class.security.php<small style="float: right;padding-right: 10px;">5</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -414,7 +524,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>49</td>
-<td>No DocBlock was found for method checkPassword()</td>
+<td>No DocBlock was found for method checkHash()</td>
 </tr>
 <tr class="error">
 <td>error</td>
@@ -430,8 +540,8 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.student.php" id="private/php/class.student.php"></a><h3>
-<i class="icon-file"></i>private/php/class.student.php<small style="float: right;padding-right: 10px;">1</small>
+<a name="class.student.php" id="class.student.php"></a><h3>
+<i class="icon-file"></i>class.student.php<small style="float: right;padding-right: 10px;">1</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -442,13 +552,13 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tbody><tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.student.php</td>
+<td>No page-level DocBlock was found in file class.student.php</td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="package-contents">
-<a name="private/php/class.ux.php" id="private/php/class.ux.php"></a><h3>
-<i class="icon-file"></i>private/php/class.ux.php<small style="float: right;padding-right: 10px;">15</small>
+<a name="class.ux.php" id="class.ux.php"></a><h3>
+<i class="icon-file"></i>class.ux.php<small style="float: right;padding-right: 10px;">15</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -460,7 +570,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <tr class="error">
 <td>error</td>
 <td>0</td>
-<td>No page-level DocBlock was found in file private/php/class.ux.php</td>
+<td>No page-level DocBlock was found in file class.ux.php</td>
 </tr>
 <tr class="error">
 <td>error</td>
@@ -536,170 +646,12 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </table></div>
 </div>
 <div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents">
-<a name="public/apc.php" id="public/apc.php"></a><h3>
-<i class="icon-file"></i>public/apc.php<small style="float: right;padding-right: 10px;">12</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file public/apc.php</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>58</td>
-<td>No DocBlock was found for function \defaults()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>207</td>
-<td>No DocBlock was found for function \duration()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>231</td>
-<td>No DocBlock was found for function \graphics_avail()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>240</td>
-<td>No DocBlock was found for function \fill_arc()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>269</td>
-<td>No DocBlock was found for function \text_arc()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>282</td>
-<td>No DocBlock was found for function \fill_box()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>450</td>
-<td>No DocBlock was found for function \bsize()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>459</td>
-<td>No DocBlock was found for function \sortheader()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>470</td>
-<td>No DocBlock was found for function \menu_entry()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>481</td>
-<td>No DocBlock was found for function \put_login_link()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>504</td>
-<td>No DocBlock was found for function \block_sort()</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents">
-<a name="public/info.php" id="public/info.php"></a><h3>
-<i class="icon-file"></i>public/info.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file public/info.php</td>
-</tr></tbody>
-</table></div>
-</div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents">
-<a name="public/staff/dashboard.php" id="public/staff/dashboard.php"></a><h3>
-<i class="icon-file"></i>public/staff/dashboard.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file public/staff/dashboard.php</td>
-</tr></tbody>
-</table></div>
-</div>
-<div class="package-contents"></div>
-<div class="package-contents">
-<a name="public/staff/list_students.php" id="public/staff/list_students.php"></a><h3>
-<i class="icon-file"></i>public/staff/list_students.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file public/staff/list_students.php</td>
-</tr></tbody>
-</table></div>
-</div>
-<div class="package-contents"></div>
-<div class="package-contents"></div>
-<div class="package-contents">
-<a name="public/tools/hashgen.php" id="public/tools/hashgen.php"></a><h3>
-<i class="icon-file"></i>public/tools/hashgen.php<small style="float: right;padding-right: 10px;">1</small>
-</h3>
-<div><table class="table markers table-bordered">
-<thead><tr>
-<th>Type</th>
-<th>Line</th>
-<th>Description</th>
-</tr></thead>
-<tbody><tr class="error">
-<td>error</td>
-<td>0</td>
-<td>No page-level DocBlock was found in file public/tools/hashgen.php</td>
-</tr></tbody>
-</table></div>
-</div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-04T16:35:38+08:00.<br></footer></div>
+            generated on 2013-01-14T18:51:16-08:00.<br></footer></div>
 </div>
 </body>
 </html>
