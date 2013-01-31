@@ -28,7 +28,7 @@ class ACL extends Security {
     
     /**
      * Generates a session key based on UA and IP and logs the action
-     *
+     * @param   int $id     Single-sign-on user ID number
      */
     static public function genSession($id) {
         $stmt = Data::prepare('SELECT ObjHash FROM `sso_objects` WHERE ObjID = :id');
@@ -45,9 +45,8 @@ class ACL extends Security {
     
     /**
      * Looks up SSO object ID by email and (optionally) object type. Success returns SSOID.
-     *
-     * @package		Phoenix
-     * @version		20820
+     * @param   string  $email      Email address to lookup SSO object by
+     * @param   string  $portalType Portal type to authenticate against (eg: public, staff...)
      */
     static public function checkSsoEmail($email, $portalType = 'public') {
         // Get email
@@ -187,6 +186,8 @@ class ACL extends Security {
 
     /**
      * Get array of permissions allowed determined by the object type
+     * @param   int $typeId     Group ID of permissions to look up as an array
+     * @return  mixed           Permissions array based on ID => name of permission
      */
     static public function getPermsByType($typeId) {
         $stmt = Data::prepare('SELECT `acl_perms`.* FROM `acl`, `acl_perms` WHERE `acl_perms`.`PermID` = `acl`.`PermID` AND `acl`.`TypeID` = :typeid');

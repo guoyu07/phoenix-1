@@ -1,15 +1,15 @@
 <?php
 
-/*
-* The Courses class contains features and methods
-* to load multiple course data, teacher data and
-* class data.
-*
-* @author      Yectep Studios <info@yectep.hk>
-* @version     20930
-* @package     Phoenix
-*
-*/
+/**
+ * The Courses class contains features and methods
+ * to load multiple course data, teacher data and
+ * class data.
+ *
+ * @author      Yectep Studios <info@yectep.hk>
+ * @version     20930
+ * @package     Phoenix
+ *
+ */
 class Courses {
 
     /**

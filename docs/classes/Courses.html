@@ -36,7 +36,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">81</span></a></li>
+                <span class="label label-info">84</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -60,8 +60,13 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <ul class="side-nav nav nav-list"><li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
+<li class="method public "><a href="#method_getAppDataById" title="getAppDataById :: Gets and returns a data array (similar to load app) for a particular submitted application based on ID"><span class="description">Gets and returns a data array (similar to load app) for a particular submitted application based on ID</span><pre>getAppDataById()</pre></a></li>
 <li class="method public "><a href="#method_getApps" title="getApps :: Gets all applications based on a certain status"><span class="description">Gets all applications based on a certain status</span><pre>getApps()</pre></a></li>
+<li class="method public "><a href="#method_getClassesOfCourseById" title="getClassesOfCourseById :: Get course classes"><span class="description">Get course classes</span><pre>getClassesOfCourseById()</pre></a></li>
+<li class="method public "><a href="#method_getCourseList" title="getCourseList :: Get list of courses"><span class="description">Get list of courses</span><pre>getCourseList()</pre></a></li>
 <li class="method public "><a href="#method_getRoomList" title="getRoomList :: Returns an array of rooms available for use based on the rooms table."><span class="description">Returns an array of rooms available for use based on the rooms table.</span><pre>getRoomList()</pre></a></li>
+<li class="method public "><a href="#method_getSubjectName" title="getSubjectName :: Get name of subject"><span class="description">Get name of subject</span><pre>getSubjectName()</pre></a></li>
+<li class="method public "><a href="#method_getTeacherById" title="getTeacherById :: Get teacher info (email and display name)"><span class="description">Get teacher info (email and display name)</span><pre>getTeacherById()</pre></a></li>
 </ul>
 </li></ul>
 </div>
@@ -75,9 +80,41 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <span class="divider">\</span><a href="../classes/Courses.html">Courses</a>
 </li>
 </ul>
-<div class="element class"><div class="details">
+<div class="element class">
+<p class="short_description">The Courses class contains features and methods
+to load multiple course data, teacher data and
+class data.</p>
+<div class="details">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>author</th>
+<td><a href="mailto:info@yectep.hk">Yectep Studios</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>20930</td>
+</tr>
+<tr>
+<th>package</th>
+<td><a href="../packages/Phoenix.html">Phoenix</a></td>
+</tr>
+</table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_getAppDataById"></a><div class="element clickable method public method_getAppDataById" data-toggle="collapse" data-target=".method_getAppDataById .collapse">
+<h2>Gets and returns a data array (similar to load app) for a particular submitted application based on ID</h2>
+<pre>getAppDataById(int $id) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code>
+</div>
+</div></div>
+</div>
 <a id="method_getApps"></a><div class="element clickable method public method_getApps" data-toggle="collapse" data-target=".method_getApps .collapse">
 <h2>Gets all applications based on a certain status</h2>
 <pre>getApps($status) </pre>
@@ -88,23 +125,63 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <div class="subelement argument"><h4>$status</h4></div>
 </div></div>
 </div>
+<a id="method_getClassesOfCourseById"></a><div class="element clickable method public method_getClassesOfCourseById" data-toggle="collapse" data-target=".method_getClassesOfCourseById .collapse">
+<h2>Get course classes</h2>
+<pre>getClassesOfCourseById($id) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+</div></div>
+</div>
+<a id="method_getCourseList"></a><div class="element clickable method public method_getCourseList" data-toggle="collapse" data-target=".method_getCourseList .collapse">
+<h2>Get list of courses</h2>
+<pre>getCourseList() </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="method_getRoomList"></a><div class="element clickable method public method_getRoomList" data-toggle="collapse" data-target=".method_getRoomList .collapse">
 <h2>Returns an array of rooms available for use based on the rooms table.</h2>
 <pre>getRoomList() : mixed</pre>
-<div class="labels"></div>
+<div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Returns</h3>
 <div class="subelement response"><code>mixed</code></div>
 </div></div>
 </div>
+<a id="method_getSubjectName"></a><div class="element clickable method public method_getSubjectName" data-toggle="collapse" data-target=".method_getSubjectName .collapse">
+<h2>Get name of subject</h2>
+<pre>getSubjectName(string $code) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$code</h4>
+<code>string</code>
+</div>
 </div></div>
+</div>
+<a id="method_getTeacherById"></a><div class="element clickable method public method_getTeacherById" data-toggle="collapse" data-target=".method_getTeacherById .collapse">
+<h2>Get teacher info (email and display name)</h2>
+<pre>getTeacherById($id) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$id</h4></div>
+</div></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-14T18:51:16-08:00.<br></footer></div>
+            generated on 2013-01-28T19:39:27-08:00.<br></footer></div>
 </div>
 </body>
 </html>

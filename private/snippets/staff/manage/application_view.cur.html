@@ -56,6 +56,12 @@
                 <a href="javascript:;" data-copy="plan" class="copy">Copy to comments &raquo;</a>
             </p>
 
+            <p>
+                <strong>Language of Instruction</strong><br />
+                <em>{{loi}}</em ><br />
+                <a href="javascript:;" data-copy="loi" class="copy">Copy language &raquo;</a>
+            </p>
+
             <h3>Budget Information</h3>
             <div class="alert alert-yellow"><span class="badge badge-yellow">Note</span> This information won't be copied, however, you can add it to the internal comments by clicking Copy below.</div>
 
@@ -145,6 +151,15 @@
                 <option value="0" selected="selected">$0</option>
                 <option value="50">$50 - Computer Use Fee</option>
                 <option value="30">$30 - Arts Supplies/Materials Fee</option>
+            </select>
+
+            <label for="course-loi" class="nested">Language of Instruction</label>
+            <select id="course-loi" class="required" name="course_loi">
+                <option value="EN" selected="selected">English</option>
+                <option value="ZH">Putonghua</option>
+                <option value="BI">Bilingual Putonghua/English</option>
+                <option value="FR">French</option>
+                <option value="ES">Spanish</option>
             </select>
 
 

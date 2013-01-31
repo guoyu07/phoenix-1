@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a12" title="">
-  <file path="class.acl.php" hash="e11c4e0b6133ce7111460ccfab85809e" package="Default">
+  <file path="class.acl.php" hash="18aa8df65583dbabdc75c27acdc6d310" package="Default">
     <class final="false" abstract="false" namespace="global" line="12" package="Phoenix">
       <extends>\Security</extends>
       <name>ACL</name>
@@ -37,165 +37,165 @@ to the entire package.</description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="53" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="52" package="Phoenix">
         <name>checkSsoEmail</name>
         <full_name>checkSsoEmail</full_name>
-        <docblock line="47">
+        <docblock line="46">
           <description>Looks up SSO object ID by email and (optionally) object type.</description>
           <long-description>&lt;p&gt;Success returns SSOID.&lt;/p&gt;</long-description>
-          <tag line="47" name="package" description="Phoenix"/>
-          <tag line="47" name="version" description="20820"/>
+          <tag line="46" name="package" description="Phoenix"/>
+          <tag line="46" name="version" description="20820"/>
         </docblock>
-        <argument line="53">
+        <argument line="52">
           <name>$email</name>
           <default/>
           <type/>
         </argument>
-        <argument line="53">
+        <argument line="52">
           <name>$portalType</name>
           <default>'public'</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="73" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="72" package="Phoenix">
         <name>makeSsoObject</name>
         <full_name>makeSsoObject</full_name>
-        <docblock line="68">
+        <docblock line="67">
           <description>Creates an SSO object of the specified type</description>
           <long-description/>
-          <tag line="68" name="package" description="Phoenix"/>
-          <tag line="68" name="version" description="30104"/>
+          <tag line="67" name="package" description="Phoenix"/>
+          <tag line="67" name="version" description="30104"/>
         </docblock>
-        <argument line="73">
+        <argument line="72">
           <name>$email</name>
           <default/>
           <type/>
         </argument>
-        <argument line="73">
+        <argument line="72">
           <name>$password</name>
           <default/>
           <type/>
         </argument>
-        <argument line="73">
+        <argument line="72">
           <name>$type</name>
           <default>'family'</default>
           <type/>
         </argument>
-        <argument line="73">
+        <argument line="72">
           <name>$portal</name>
           <default>"public"</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="105" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="104" package="Phoenix">
         <name>checkPassword</name>
         <full_name>checkPassword</full_name>
-        <docblock line="99">
+        <docblock line="98">
           <description>Verifies SSO authentication, generate and store session information</description>
           <long-description/>
-          <tag line="99" name="package" description="Phoenix"/>
-          <tag line="99" name="version" description="30104"/>
+          <tag line="98" name="package" description="Phoenix"/>
+          <tag line="98" name="version" description="30104"/>
         </docblock>
-        <argument line="105">
+        <argument line="104">
           <name>$ssoid</name>
           <default/>
           <type/>
         </argument>
-        <argument line="105">
+        <argument line="104">
           <name>$plainpass</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="127" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="126" package="Phoenix">
         <name>getSsoObject</name>
         <full_name>getSsoObject</full_name>
-        <docblock line="124">
+        <docblock line="123">
           <description>Gets SSO object</description>
           <long-description/>
         </docblock>
-        <argument line="127">
+        <argument line="126">
           <name>$objId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="137" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="136" package="Phoenix">
         <name>getSsoType</name>
         <full_name>getSsoType</full_name>
-        <docblock line="134">
+        <docblock line="133">
           <description>Gets SSO Object Type</description>
           <long-description/>
         </docblock>
-        <argument line="137">
+        <argument line="136">
           <name>$typeId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="148" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="147" package="Phoenix">
         <name>logout</name>
         <full_name>logout</full_name>
-        <docblock line="144">
+        <docblock line="143">
           <description>Logs a user out based on their session</description>
           <long-description/>
-          <tag line="144" name="package" description="Phoenix"/>
+          <tag line="143" name="package" description="Phoenix"/>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="158" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="157" package="Phoenix">
         <name>login</name>
         <full_name>login</full_name>
-        <docblock line="154">
+        <docblock line="153">
           <description>Performs an SSO login</description>
           <long-description/>
-          <tag line="154" name="package" description="Phoenix"/>
+          <tag line="153" name="package" description="Phoenix"/>
         </docblock>
-        <argument line="158">
+        <argument line="157">
           <name>$email</name>
           <default/>
           <type/>
         </argument>
-        <argument line="158">
+        <argument line="157">
           <name>$plainpass</name>
           <default/>
           <type/>
         </argument>
-        <argument line="158">
+        <argument line="157">
           <name>$portal</name>
           <default>'public'</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="174" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="173" package="Phoenix">
         <name>checkLogin</name>
         <full_name>checkLogin</full_name>
-        <docblock line="171">
+        <docblock line="170">
           <description>Verifies an active SSO session information including IP and UA validation</description>
           <long-description/>
         </docblock>
-        <argument line="174">
+        <argument line="173">
           <name>$portal</name>
           <default>'families'</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="192" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="191" package="Phoenix">
         <name>getPermsByType</name>
         <full_name>getPermsByType</full_name>
-        <docblock line="189">
+        <docblock line="188">
           <description>Get array of permissions allowed determined by the object type</description>
           <long-description/>
         </docblock>
-        <argument line="192">
+        <argument line="191">
           <name>$typeId</name>
           <default/>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="206" package="Phoenix">
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="205" package="Phoenix">
         <name>getSsoTypeByName</name>
         <full_name>getSsoTypeByName</full_name>
-        <argument line="206">
+        <argument line="205">
           <name>$name</name>
           <default/>
           <type/>
@@ -205,22 +205,22 @@ to the entire package.</description>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file class.acl.php</error>
       <error line="29" code="50015">Argument $id is missing from the Docblock of genSession()</error>
-      <error line="47" code="50015">Argument $email is missing from the Docblock of checkSsoEmail()</error>
-      <error line="47" code="50015">Argument $portalType is missing from the Docblock of checkSsoEmail()</error>
-      <error line="68" code="50015">Argument $email is missing from the Docblock of makeSsoObject()</error>
-      <error line="68" code="50015">Argument $password is missing from the Docblock of makeSsoObject()</error>
-      <error line="68" code="50015">Argument $type is missing from the Docblock of makeSsoObject()</error>
-      <error line="68" code="50015">Argument $portal is missing from the Docblock of makeSsoObject()</error>
-      <error line="99" code="50015">Argument $ssoid is missing from the Docblock of checkPassword()</error>
-      <error line="99" code="50015">Argument $plainpass is missing from the Docblock of checkPassword()</error>
-      <error line="124" code="50015">Argument $objId is missing from the Docblock of getSsoObject()</error>
-      <error line="134" code="50015">Argument $typeId is missing from the Docblock of getSsoType()</error>
-      <error line="154" code="50015">Argument $email is missing from the Docblock of login()</error>
-      <error line="154" code="50015">Argument $plainpass is missing from the Docblock of login()</error>
-      <error line="154" code="50015">Argument $portal is missing from the Docblock of login()</error>
-      <error line="171" code="50015">Argument $portal is missing from the Docblock of checkLogin()</error>
-      <error line="189" code="50015">Argument $typeId is missing from the Docblock of getPermsByType()</error>
-      <error line="206" code="50010">No DocBlock was found for method getSsoTypeByName()</error>
+      <error line="46" code="50015">Argument $email is missing from the Docblock of checkSsoEmail()</error>
+      <error line="46" code="50015">Argument $portalType is missing from the Docblock of checkSsoEmail()</error>
+      <error line="67" code="50015">Argument $email is missing from the Docblock of makeSsoObject()</error>
+      <error line="67" code="50015">Argument $password is missing from the Docblock of makeSsoObject()</error>
+      <error line="67" code="50015">Argument $type is missing from the Docblock of makeSsoObject()</error>
+      <error line="67" code="50015">Argument $portal is missing from the Docblock of makeSsoObject()</error>
+      <error line="98" code="50015">Argument $ssoid is missing from the Docblock of checkPassword()</error>
+      <error line="98" code="50015">Argument $plainpass is missing from the Docblock of checkPassword()</error>
+      <error line="123" code="50015">Argument $objId is missing from the Docblock of getSsoObject()</error>
+      <error line="133" code="50015">Argument $typeId is missing from the Docblock of getSsoType()</error>
+      <error line="153" code="50015">Argument $email is missing from the Docblock of login()</error>
+      <error line="153" code="50015">Argument $plainpass is missing from the Docblock of login()</error>
+      <error line="153" code="50015">Argument $portal is missing from the Docblock of login()</error>
+      <error line="170" code="50015">Argument $portal is missing from the Docblock of checkLogin()</error>
+      <error line="188" code="50015">Argument $typeId is missing from the Docblock of getPermsByType()</error>
+      <error line="205" code="50010">No DocBlock was found for method getSsoTypeByName()</error>
     </parse_markers>
   </file>
   <file path="class.browser.php" hash="62e85960e71c4dc3ac2adfa4d316ca52" package="Default">
@@ -1194,7 +1194,7 @@ NOTE: (http://browser.netscape.com/ - Official support ended on March 1st, 2008)
       <error line="208" code="50010">No DocBlock was found for method Browser()</error>
     </parse_markers>
   </file>
-  <file path="class.common.php" hash="86dc8b262f4b5b4af4266596d1102c30" package="Default">
+  <file path="class.common.php" hash="287b8181007e2ced1dbe3021897c88b9" package="Default">
     <include line="124" type="Require Once" package="Default">
       <name/>
     </include>
@@ -1326,6 +1326,36 @@ and classes.</description>
           <type/>
         </argument>
       </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="150" package="Phoenix">
+        <name>relativeTime</name>
+        <full_name>relativeTime</full_name>
+        <docblock line="147">
+          <description>Relative datetime strings from Zachstronaut</description>
+          <long-description/>
+        </docblock>
+        <argument line="150">
+          <name>$ptime</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="177" package="Phoenix">
+        <name>cleanse</name>
+        <full_name>cleanse</full_name>
+        <docblock line="174">
+          <description>Strips HTML and performs nl2br on a string.</description>
+          <long-description>&lt;p&gt;Allows &lt;strong&gt;, &lt;em&gt; and&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;&lt;/p&gt;
+
+&lt;p&gt;blockquote&gt;&lt;/p&gt;</long-description>
+        </docblock>
+        <argument line="177">
+          <name>$str</name>
+          <default/>
+          <type/>
+        </argument>
+      </method>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file class.common.php</error>
@@ -1337,42 +1367,120 @@ and classes.</description>
       <error line="66" code="50015">Argument $ua is missing from the Docblock of logAction()</error>
       <error line="129" code="50015">Argument $start is missing from the Docblock of fetchNews()</error>
       <error line="129" code="50015">Argument $for is missing from the Docblock of fetchNews()</error>
+      <error line="147" code="50015">Argument $ptime is missing from the Docblock of relativeTime()</error>
+      <error line="174" code="50015">Argument $str is missing from the Docblock of cleanse()</error>
     </parse_markers>
   </file>
-  <file path="class.courses.php" hash="02ffbb3102ed313d40b1d2e0fb609820" package="Default">
-    <class final="false" abstract="false" namespace="global" line="12" package="Default">
+  <file path="class.courses.php" hash="1862f52f0b18d5011b0166d19d322140" package="Default">
+    <class final="false" abstract="false" namespace="global" line="13" package="Phoenix">
       <extends/>
       <name>Courses</name>
       <full_name>\Courses</full_name>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="Default">
+      <docblock line="3">
+        <description>The Courses class contains features and methods
+to load multiple course data, teacher data and
+class data.</description>
+        <long-description></long-description>
+        <tag line="3" name="author" description="Yectep Studios &lt;info@yectep.hk&gt;"/>
+        <tag line="3" name="version" description="20930"/>
+        <tag line="3" name="package" description="Phoenix"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="19" package="Phoenix">
         <name>getRoomList</name>
         <full_name>getRoomList</full_name>
-        <docblock line="14">
+        <docblock line="15">
           <description>Returns an array of rooms available for use based on the rooms table.</description>
-          <long-description/>
-          <tag line="14" name="return" description="" type="mixed">
+          <long-description></long-description>
+          <tag line="15" name="return" description="" type="mixed">
             <type by_reference="false">mixed</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="36" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="37" package="Phoenix">
         <name>getApps</name>
         <full_name>getApps</full_name>
-        <docblock line="33">
+        <docblock line="34">
           <description>Gets all applications based on a certain status</description>
-          <long-description/>
+          <long-description></long-description>
         </docblock>
-        <argument line="36">
+        <argument line="37">
           <name>$status</name>
           <default>'submitted'</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="77" package="Phoenix">
+        <name>getAppDataById</name>
+        <full_name>getAppDataById</full_name>
+        <docblock line="73">
+          <description>Gets and returns a data array (similar to load app) for a particular submitted application based on ID</description>
+          <long-description></long-description>
+          <tag line="73" name="param" description="" type="int" variable="$id">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="77">
+          <name>$id</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="105" package="Phoenix">
+        <name>getSubjectName</name>
+        <full_name>getSubjectName</full_name>
+        <docblock line="101">
+          <description>Get name of subject</description>
+          <long-description></long-description>
+          <tag line="101" name="param" description="" type="string" variable="$code">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="105">
+          <name>$code</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="140" package="Phoenix">
+        <name>getCourseList</name>
+        <full_name>getCourseList</full_name>
+        <docblock line="137">
+          <description>Get list of courses</description>
+          <long-description></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="159" package="Phoenix">
+        <name>getClassesOfCourseById</name>
+        <full_name>getClassesOfCourseById</full_name>
+        <docblock line="156">
+          <description>Get course classes</description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="159">
+          <name>$id</name>
+          <default></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="173" package="Phoenix">
+        <name>getTeacherById</name>
+        <full_name>getTeacherById</full_name>
+        <docblock line="170">
+          <description>Get teacher info (email and display name)</description>
+          <long-description></long-description>
+        </docblock>
+        <argument line="173">
+          <name>$id</name>
+          <default></default>
           <type/>
         </argument>
       </method>
     </class>
     <parse_markers>
       <error line="0" code="50007">No page-level DocBlock was found in file class.courses.php</error>
-      <error line="12" code="50000">No DocBlock was found for \Courses</error>
-      <error line="33" code="50015">Argument $status is missing from the Docblock of getApps()</error>
+      <error line="34" code="50015">Argument $status is missing from the Docblock of getApps()</error>
+      <error line="156" code="50015">Argument $id is missing from the Docblock of getClassesOfCourseById()</error>
+      <error line="170" code="50015">Argument $id is missing from the Docblock of getTeacherById()</error>
     </parse_markers>
   </file>
   <file path="class.data.php" hash="4b04289d5b304c4c00913ca6ad22f8ea" package="Phoenix">
