@@ -201,6 +201,40 @@ class ACL extends Security {
         return $permsAllow;
     }
 
+    /**
+     * Sees if a teacher exists, if so, returns their Staff ID. If not, creates it and returns staff ID
+     * @param   str $email      Email address used to authenticate teacher
+     * @param   str $name       Teacher's name in case we need to create it in the Staff table
+     * @return  int             Staff ID of new/existing teacher. Returns FALSE if email doesn't correspond to a teacher
+     */
+    static public function addTeacherSafe($email, $name) {
+        $ssoObjId = ACL::checkSsoEmail($email, 'staff');
+        if (!$ssoObjId) {
+            ACL::makeSsoObject($email, $name, 'teacher', 'staff');
+            $ssoObjId = ACL::checkSsoEmail($email, 'staff');
+            // Simultaneously create their teacher account
+            $stmt = Data::prepare('INSERT INTO `staff` (`ObjID`, `StaffName`, `StaffLATS`, `StaffCTS`) VALUES (:objid, :name, NOW(), NOW())');
+            $stmt->bindParam('objid', $ssoObjId, PDO::PARAM_INT);
+            $stmt->bindParam('name', $name, PDO::PARAM_STR);
+            $stmt->execute();
+        } else {
+            $ssoObj = ACL::getSsoObject($ssoObjId);
+            $typeObj = ACL::getSsoType($ssoObj['ObjType']);
+            if ($typeObj['TypeName'] !== 'teacher') {
+                return false;
+            }
+        }
+
+        // Get teacher staff ID
+        $stmt = Data::prepare('SELECT `StaffID` FROM `staff` WHERE `ObjID` = :objid');
+        $stmt->bindParam('objid', $ssoObjId, PDO::PARAM_INT);
+        $stmt->execute();
+        $staff = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $staff['StaffID'];
+
+    }
+
     /* =============== INTERNAL PRIVATE FUNCTIONS ============== */
 
     static private function getSsoTypeByName($name) {

@@ -183,6 +183,14 @@ class Courses {
         }
     }
 
+    /**
+     * Get teacher info by email. Creates it and returns ID if necessary
+     */
+    static public function getTeacher($email, $name) {
+        // First check whether the teacher exists, if not create SSO and staff records
+        
+    }
+
 }
 
 

@@ -25,13 +25,6 @@ var courseJson = {{courseJson}}
 
 jQuery(document).ready(function ($) {
 
-    // Archive
-    $('.archiver').click(function() {
-        var archive = laoshi.rpc({method: 'archive_application', data: $(this).data('appid')});
-        laoshi.toast('Application successfully archived.');
-        $(this).parent().parent().remove();
-    });
-
     // Course building
     $.each(courseJson, function (i, c) {
         console.log(c);

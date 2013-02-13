@@ -62,6 +62,12 @@
                 <a href="javascript:;" data-copy="loi" class="copy">Copy language &raquo;</a>
             </p>
 
+            <p>
+                <strong>Difficulty</strong><br />
+                <em id="difficulty_default"></em><br />
+                <a href="javascript:;" data-copy="difficulty" class="copy">Copy difficulty &raquo;</a>
+            </p>
+
             <h3>Budget Information</h3>
             <div class="alert alert-yellow"><span class="badge badge-yellow">Note</span> This information won't be copied, however, you can add it to the internal comments by clicking Copy below.</div>
 
@@ -75,6 +81,12 @@
                 <strong>Expected Course Expenditure</strong> <em class="muted">in HKD</em><br />
                 <span class="featured red">${{course_cost_total}}</span>
             </p>
+
+            <h3>Course Flags</h3>
+
+            <div class="course-flag-nopointer" id="req-flag-computers"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course uses computers</div>
+            <div class="course-flag-nopointer" id="req-flag-instruments"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course uses musical instruments</div>
+            <div class="course-flag-nopointer" id="req-flag-activity"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Students perform physical activity</div>
 
         </div>
         <div class="col c5">
@@ -97,12 +109,12 @@
                     <option value="IBRV">IBRV - IBDP Revision</option>
                     <option value="SATS">SATS - SAT Subject Test Prep (SAT II)</option>
                     <option value="PATH">PATH - Career Pathways</option>
-                    <option value="UNIW">CISO - CIS 101</option>
+                    <option value="CISO">CISO - CIS 101</option>
                 </optgroup>
                 <optgroup label="Summer Program">
                     <option value="ARTS">ARTS - The Arts</option>
                     <option value="LANG">LANG - Languages</option>
-                    <option value="MACT">MSCT - Maths, Science and Technology</option>
+                    <option value="MSCT">MSCT - Maths, Science and Technology</option>
                     <option value="PHED">PHED - Physical Education</option>
                 </optgroup>
             </select>
@@ -162,12 +174,28 @@
                 <option value="ES">Spanish</option>
             </select>
 
+            <label for="course-difficulty" class="nested">Difficulty</label>
+            <select id="course-difficulty" class="required" name="course_difficulty">
+                <option value="9" selected="selected">Not applicable</option>
+                <option value="1">Beginner</option>
+                <option value="2">Intermediate</option>
+                <option value="3">Advanced</option>
+            </select>
+
 
             <h3>Budget &amp; Internal Audit Info</h3>
             <p>None of this information is shown to parents but can be edited or accessed by various staff.</p>
 
             <label for="course-comments" class="nested">Internal Comments <span class="muted">(Secretaries Eyes Only)</label>
             <textarea name="course_ic" id="course-comments" class="required" style="width:80%;height:15em;"></textarea>
+
+            <h3>Course Flags</h3>
+            <p>These are "yes/no" items that we think parents will enjoy quick access to understand what a course might include. These can't be copied - please activate them based on what the teacher has indicated, and from reading the applications.</p>
+
+            <div class="course-flag is-inactive" id="flag-computers"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course uses computers</div>
+            <div class="course-flag is-inactive" id="flag-instruments"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course uses musical instruments</div>
+            <div class="course-flag is-inactive" id="flag-activity"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Students perform physical activity</div>
+            <div class="course-flag is-inactive" id="flag-enforce-age"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course is age-enforced (PTE disabled)</div>
 
         </div>
     </div>
@@ -243,7 +271,11 @@
     <div class="form-row" id="max-size-row">
         <label for="max-size">Student Limit</label>
         <select id="max-size">
-            <option value="9">&lt;10 (put reason in comments)</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12" selected="selected">12</option>
@@ -253,7 +285,8 @@
             <option value="16">16</option>
             <option value="17">17</option>
             <option value="18">18</option>
-            <option value="19">&gt;18 (put reason in comments)</option>
+            <option value="19">19</option>
+            <option value="20">20/option>
         </select>
     </div>
 
@@ -291,10 +324,13 @@
         <p>
             <ol id="sanity_list">
             </ol>
+        </p>
+        <textarea id="result_box" style="width:80%;height:200px;margin-bottom:20px;" disabled="disabled">===== RESULTS BOX =====</textarea>
     </div>
 
     <button class="button button-green btn-submitable hide" type="button" id="btn_submit">Submit {{subject_code}} Course to Brochure</button>
     <button class="button button-red btn-submitable hide" type="button" id="btn_reset">Cancel Action: Reload Application</button>
+    <button class="button button-blue hide" type="button" id="btn_goback">Back to Applications</button>
 
 </div>
 </form>
@@ -305,11 +341,49 @@ var offerings = {{class_json}};
 var selProgram = courseJson.course_info.program;
 
 $(document).ready(function () {
+    if (courseJson.course_info.difficulty == '1') {
+        $('#difficulty_default').html('Beginner');
+    } else if (courseJson.course_info.difficulty == '2') {
+        $('#difficulty_default').html('Intermediate');
+    } else if (courseJson.course_info.difficulty == '3') {
+        $('#difficulty_default').html('Advanced');
+    } else if (courseJson.course_info.difficulty == '9') {
+        $('#difficulty_default').html('Not applicable');
+    } else {
+        $('#difficulty_default').html('None provided');
+    }
+
+    if (courseJson.course_info.use_computers == '1') {
+        $('#req-flag-computers').addClass('is-active');
+    } else {
+        $('#req-flag-computers').addClass('is-inactive');
+    }
+
+    if (courseJson.course_info.use_activity == '1') {
+        $('#req-flag-activity').addClass('is-active');
+    } else {
+        $('#req-flag-activity').addClass('is-inactive');
+    }
+
+    if (courseJson.course_info.use_instruments == '1') {
+        $('#req-flag-instruments').addClass('is-active');
+    } else {
+        $('#req-flag-instruments').addClass('is-inactive');
+    }
+
     if (selProgram == 'SP') {
         $('.sp-row').show();
     } else {
         $('.ap-row').show();
     }
+
+    $('.course-flag').click(function() {
+        if ($(this).hasClass('is-active')) {
+            $(this).removeClass('is-active').addClass('is-inactive');
+        } else {
+            $(this).removeClass('is-inactive').addClass('is-active');
+        }
+    });
 
     $('.copy').click(function() {
         // What are we copying?
@@ -335,6 +409,12 @@ $(document).ready(function () {
         } else if ($(this).data('copy') == 'budget') {
             // Course description
             $('#course-comments').append("\n=======BUDGET=======\n(Copied from course app)\n" + courseJson.course_info.course_costs + "\n");
+        } else if ($(this).data('copy') == 'loi') {
+            // Language of instruction
+            $('#course-loi').val(courseJson.course_info.loi);
+        } else if ($(this).data('copy') == 'difficulty') {
+            // Level of difficulty
+            $('#course-difficulty').val(courseJson.course_info.course_difficulty);
         } else if ($(this).data('copy') == 'all') {
             // Everything!
             $('#course-name').val(courseJson.course_info.course_name);
@@ -343,6 +423,8 @@ $(document).ready(function () {
             $('#course-desc').html(courseJson.course_info.course_desc);
             $('#course-outcomes').html(courseJson.course_info.course_outcomes);
             $('#course-prereqs').html(courseJson.course_info.course_prereqs);
+            $('#course-loi').val(courseJson.course_info.loi);
+            $('#course-difficulty').val(courseJson.course_info.course_difficulty);
             $('#course-comments').append("\n=====WEEKLY PLAN=====\n(Copied from course app)\n" + courseJson.course_info.course_plan + "\n");
             $('#course-comments').append("\n=======BUDGET=======\n(Copied from course app)\n" + courseJson.course_info.course_costs + "\n");
             laoshi.toast('Everything successfully copied. <strong>Remember to review!</strong>')
@@ -376,6 +458,51 @@ $(document).ready(function () {
         redrawClasses();
     });
 
+    // Addition thread
+    $('#btn_submit').click(function (e) {
+        e.preventDefault();
+        $('#result_box').append("\n\n--- Submitting Application ---\n");
+        $('#result_box').append("- Caught POST signal, compiling request to send to server.\n");
+        var appData = {
+            "course_data": {
+                "subject": $('#course-subject').val(),
+                "name": $('#course-name').val(),
+                "synopsis": $('#course-synop').val(),
+                "description": $('#course-desc').val(),
+                "outcomes": $('#course-outcomes').val(),
+                "prereqs": $('#course-prereqs').val(),
+                "difficulty": $('#course-difficulty').val(),
+                "extra_fees": $('#course-fee-extra').val(),
+                "lang": $('#course-loi').val(),
+                "ic": $('#course-comments').val(),
+                "teacher_email": $('#email').val(),
+            },
+            "flags": {
+                "use_computers": (($('#flag-computers').hasClass('is-active')) ? 1 : 0),
+                "use_instruments": (($('#flag-instruments').hasClass('is-active')) ? 1 : 0),
+                "use_activity": (($('#flag-activity').hasClass('is-active')) ? 1 : 0),
+                "enforce_age": (($('#flag-enforce-age').hasClass('is-active')) ? 1: 0)
+            },
+            "class_data": offerings,
+            "app_id": {{app_id}},
+            "teachers": {
+                "lead_name": "{{teacher_name}}",
+                "lead_email": "{{teacher_email}}",
+                "supplementary": "{{real_teacher_suppl}}"
+            }
+        }
+        $('#result_box').append("- appData compilation successful, sending data to server. DO NOT PRESS BACK.\n");
+        $('#result_box').append("- Awaiting response from server...\n");
+
+        var addJson = jQuery.getJSON('/staff/laoshi_rpc.php', {"method": "add_course", "data": JSON.stringify(appData)}, function (data) {
+            $('#result_box').append("\n--- RESULT ---\n[" + data.status + "] " + data.msg);
+            $('.btn-submitable').hide();
+            $('#btn_goback').fadeIn();
+        });
+
+        return false;
+    });
+
     $('#btn_validate').click(function (e) {
         e.preventDefault();
         runSanityCheck();
@@ -384,6 +511,10 @@ $(document).ready(function () {
 
     $('#btn_reset').click(function () {
         location.reload();
+    });
+
+    $('#btn_goback').click(function () {
+        window.location='/staff/manage/applications.php';
     });
 
     redrawClasses();
@@ -427,7 +558,7 @@ function runSanityCheck() {
     ((!check('#course-synop')) ? insane = missing('<strong>Brief Synopsis</strong> seems to be missing.') : pass('<strong>Synopsis</strong> is all set.')); 
     ((!check('#course-desc')) ? insane = missing('<strong>Course Description</strong> seems to be missing.') : pass('<strong>Course Description</strong> is all set.')); 
     ((!check('#course-outcomes')) ? insane = missing('<strong>Expected Outcomes</strong> seems to be missing.') : pass('<strong>Expected Outcomes</strong> are all set.')); 
-    ((!check('#course-prereqs')) ? insane = missing('<strong>Course Description</strong> seems to be missing.') : pass('<strong>Course Description</strong> is all set.'));  
+    ((!check('#course-prereqs')) ? insane = pass('<strong>Course Prerequisites</strong> is missing: ensure none are required.') : pass('<strong>Course Prerequisites</strong> is all set.'));  
     ((offerings.length == 0) ? insane = missing('<strong>No classes are offered!</strong> You must offer at least one timeslot for this course.') : pass('<strong>' + offerings.length + '</strong> times offered for this course. Good to go.')); 
     $('#sanity_results').slideDown();
 

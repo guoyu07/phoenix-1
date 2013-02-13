@@ -18,7 +18,7 @@
 
             <p>The information manual contains valuable information on the application process as well as important and helpful items for during the program.</p>
 
-            <div class="alert">If you have any questions, please email us at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a></div>
+            <div class="alert">If you have any questions, please email us at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a>. Please note that applications will close <strong>promptly on February 10 at 7pm HKT</strong>.</div>
             
             <p><button type="button" class="button" id="btn_load_app">Load Saved Application</button> <button type="button" class="button button-green" id="btn_new_app">Start New Application&hellip;</button></p>
 
@@ -96,6 +96,8 @@
         <div id="form-basic" class="col c7">
             
             <h2>Instructor Information</h2>
+
+            <div class="alert alert-red"><span class="badge badge-red">Pro-Tip</span> Protect your work - consider saving a Word copy of your application in case any errors occur. If our server doesn't receive a proper request, we can't save any info!</div>
             
             <div class="form-row" id="i-name-row">
                 <label for="instructor-name">Lead Instructor Name <strong class="red">*</strong></label>
@@ -163,7 +165,7 @@
                 <select id="sp-subject" name="sp_subject">
                     <option value="ARTS" selected="selected">ARTS - The Arts</option>
                     <option value="LANG">LANG - Languages</option>
-                    <option value="MACT">MSCT - Maths, Science and Technology</option>
+                    <option value="MSCT">MSCT - Maths, Science and Technology</option>
                     <option value="PHED">PHED - Physical Education</option>
                 </select>
             </div>
@@ -693,6 +695,12 @@ $('#submission-cancel').click(function (e) {
     return false;
 });
 
+$('#application_announce').click(function() {
+    $('#application_status').hide();
+    $('#application_content').show();
+    $('#application_start').show();
+})
+
 $('#submission-confirm').click(function (e) {
     e.preventDefault();
     var continueSubmit = true;
@@ -720,8 +728,9 @@ $('#submission-confirm').click(function (e) {
                 $('#application_announce').removeClass('announce-red announce-green').addClass('announce-green').html('Thank you for submitting your application.<br />You should soon receive an email which serves as a notification that we have received your course details.');
                 $('#application_status').fadeIn('fast');
             } else {
-                $('#application_announce').removeClass('announce-red announce-green').addClass('announce-red').html('Sorry, an error seems to have occured during submission. Refresh the page and try again.');
+                $('#application_announce').removeClass('announce-red announce-green').addClass('announce-red').html('Sorry, an error seems to have occured during submission. Click this message to revert to your application in its last form.');
                 $('#application_status').fadeIn('fast');
+
             }
         });
     } else {

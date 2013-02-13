@@ -36,11 +36,6 @@ $app_data = Courses::getAppDataById($_REQUEST['id']);
 if (!$app_data) {
     header('Location: ./applications.php');
     exit();
-} else {
-	echo "<!--";
-    var_dump($app_data);
-    echo "-->";
-    // exit();
 }
 
 // Triage and get default staff page
@@ -53,11 +48,13 @@ echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 
 // Specified page items
 $p = $app_data['course_info'];
+$p['real_teacher_suppl'] = $p['teacher_suppl'];
 $p['teacher_suppl'] = (($p['teacher_suppl'] == "") ? '<em class="muted">None specified</em>' : $p['teacher_suppl']);
 $p['subject_code'] = (($p['program'] == 'AP') ? $p['ap_subject'] : $p['sp_subject']);
 $p['subject_name'] = Courses::getSubjectName($p['subject_code']);
 $p['class_json'] = json_encode($app_data['class_info']);
 $p['course_json'] = json_encode($app_data);
+$p['app_id'] = $_REQUEST['id'];
 
 // Get roomlist
 $rooms = Courses::getRoomList();

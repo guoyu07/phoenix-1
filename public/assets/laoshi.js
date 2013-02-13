@@ -1,8 +1,13 @@
 function laoshi() {
 
 	this.rpc = function (data) {
-		jQuery.getJSON('/staff/laoshi_rpc.php', data);
-		return true;
+        var whatToRtn = {};
+		jQuery.getJSON('/staff/laoshi_rpc.php', data, function(retInfo) {
+            whatToRtn = {"status": retInfo.status,
+                        "msg": retInfo.msg,
+                        "code": retInfo.code};
+            return whatToRtn;
+        });
 	};
 
 	this.toast = function (msg, fadetime) {

@@ -45,7 +45,7 @@ foreach($courses as $num => $course) {
     $courses[$num]['ClassCount'] = (string) sizeof($classes);
     $courses[$num]['CourseDescription'] = Common::cleanse($course['CourseDescription']);
     $courses[$num]['CourseCode'] = strtoupper($course['CourseSubj']).str_pad($course['CourseID'], 3, '0', STR_PAD_LEFT);
-    $courses[$num]['TeacherData'] = Courses::getTeacherById($course['TeacherID']);
+    $courses[$num]['TeacherData'] = Courses::getTeacherById($course['TeacherLead']);
 
     $totalEnrolled = 0;
     $totalSpaces = 0;
