@@ -26,6 +26,9 @@
                 <h3>How do I create an account and register my child for the CIS Summer Program?</h3>
                 <p>Use our online registration platform, which is in many ways the same as last year's. Every family can create an account, and register as many children as they like under that one single account, including a single "running-total" invoice. Click the Register button up top to begin.</p>
 
+                <h3>I registered last year and would like to keep my batch number and priority. What can I do?</h3>
+                <p>Our system this year has been revamped. Because of the new way we process accounts, we did not keep last year's parent and student registration accounts for security and privacy purposes. Additionally, there will be no batch processing this year: parents will be able to create a family account and enroll children at the same time if they so choose. Changes can be made up until a certain deadline depending on the week in question, so it will be easier for everyone. You <strong>will require a new account</strong>, and there is no longer any need for priority batches!</p>
+
                 <h3>I created my account but cannot find my confirmation email. What can I do?</h3>
                 <p>To protect other users and yourself, our system will require you to validate the email address you give us. We do so by sending you a confirmation email which contains a link that you can click (or copy and paste into your web browser) that will automatically activate your account. Please check your spam and trash mailboxes in case our email is filtered by accident. If you cannot find it, please send us an email: our contact details are on the front page.</p>
 
@@ -73,11 +76,21 @@
                 <h3>May I make a special request to pay by bank transfer or credit card?</h3>
                 <p>At this time, CIS unfortunately does not offer payment by credit/debit card, money order or traveler's cheques, and this is school policy that applies to both the Summer Program and regular day school. If you are an international family and do not have a Hong Kong bank account or cheques, please contact our office as soon as possible to arrange an electronic funds transfer.</p>
 
+                <h3>What happens if my payment is late?</h3>
+                <p>If <strong>full payment</strong> has not been made by the close of business (5pm Hong Kong time) of the due date, all of your children's courses for that due date will be temporarily dropped and will be available for enrollment by other parents. Upon payment, we will attempt to re-enroll your children as given in the schedule, however, we cannot guarantee that spaces have not been filled.</p>
+
             </div>
 
             <div id="summer-program" class="hide faq_content">
                 <h2>FAQ: Summer Program</h2>
-                <p class="muted">Coming soon.</p>
+
+                <p class="muted">More answers coming son. If you have any questions, please don't hesitate to <a href="mailto:summerprogram@cis.edu.hk">email our secretaries</a>!</p>
+
+                <h3>Is the Summer Program open to all children?</h3>
+                <p><strong>Yes!</strong> The CIS Summer Program is, and always has been, open to CIS and non-CIS students aged 4-15. In the past we have catered to students from other international schools, local schools and from outside Hong Kong. If you'd like to find out more, please see our <a href="/program.php">Program Details</a> page.</p>
+
+                <h3>Do I have to sign up for all four periods/all four weeks?</h3>
+                <p><strong>No.</strong> Parents may sign up for as many periods and for as many weeks as they like. The same schedule in any one week is the same Monday thru Friday. We do require, however, that schedules must be a single continuous block of attendance: you will not be allowed to enroll a child whose schedule has period-long breaks. For example: you may not sign up for Periods 1, 2 and 4 while leaving Period 3 empty. You may, however, sign up for Periods 2, 3, and 4 only, leaving Period 1 empty.</p>
             </div>
 
             <div id="academic-program" class="hide faq_content">
@@ -103,11 +116,22 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    if ($('#' + window.location.hash.split('/')[1]).length) {
+        var item = window.location.hash.split('/')[1];
+        $('.faq_content').hide();
+        $('li.active').removeClass('active');
+        $('li[data-activate=' + item + ']').addClass('active');
+        $('#' + item).fadeIn();
+        window.location.hash = '/' + item;
+    }
+
     $('.faq_menu > li').click(function () {
         $('.faq_content').hide();
         $('li.active').removeClass('active');
         $(this).addClass('active');
         $('#' + $(this).data('activate')).fadeIn();
+        window.location.hash = '/' + $(this).data('activate');
     });
 })
+
 </script>

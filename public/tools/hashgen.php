@@ -2,23 +2,35 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-header('Content-Type: text/plain');
-
-echo "HASHDUMP\n";
-
 require_once('../../private/php/class.security.php');
 require_once('../../private/php/class.acl.php');
 
-$pass = ACL::getHash($_GET['password']);
+if (isset($_POST['password'])) {
+    header('Content-Type: text/plain');
 
-print_r($pass);
+    echo "HASHDUMP\n";
 
-echo "\n\nReverse password check:\n";
+    $pass = ACL::getHash($_POST['password']);
 
-if (ACL::checkHash($_GET['password'], $pass)) echo 'Hash is okay';
-else echo 'Has is not okay';
-echo "\n";
+    print_r($pass);
 
-die();
+    echo "\n\nReverse password check:\n";
+
+    if (ACL::checkHash($_POST['password'], $pass)) echo 'Hash is okay';
+    else echo 'Has is not okay';
+    echo "\n";
+
+    die();
+} else {
+    header('Content-Type: text/html');
+
+}
 
 ?>
+<!DOCTYPE html>
+<body>
+    <form action="./hashgen.php" method="post">
+        <label style="font-size:14px;">Enter password: <input type="password" style="width:200px;font-size:14px;padding:4px;" name="password"></label>
+        <button type="submit">Encrypt!</button>
+    </form>
+</body>
