@@ -62,7 +62,7 @@ if (array_key_exists('msg', $_GET)) {
 			$error = '<div class="alert alert-red"><img src="/assets/icons/cross.png" title="[!]" /> The password you entered doesn\'t match the one we have on file. Please try again. If you forgot your password, use the Forgot Password link.</div>';
 		break;
 		case 'error_nologin':
-			$error = '<div class="alert alert-red">Please login to access this resource.</div>';
+			$error = '<div class="alert alert-red">Please login to access this resource. You\'ll be automatically redirected.</div>';
 		break;
 		default:
 			$error = '<div class="alert alert-yellow">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.</div>';

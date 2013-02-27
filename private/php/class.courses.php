@@ -145,12 +145,30 @@ class Courses {
         $subjectText = '"'.implode('", "', $subjects).'"';
         
         try {
-            $stmt = Data::query('SELECT * FROM `courses` WHERE `CourseSubj` IN ('.$subjectText.') ORDER BY `CourseTitle` ASC');
+            $stmt = Data::query('SELECT * FROM `courses` WHERE `CourseSubj` IN ('.$subjectText.') ORDER BY `CourseSubj` ASC, `CourseID` ASC');
         } catch (PDOException $e) {
             Common::throwNiceDataException($e);
         }
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Get information on a single course based on ID
+     * @param   int     $cid    Course ID number to lookup data for
+     * @return  mixed
+     */
+    static public function getCourseById($cid) {
+        $stmt = Data::prepare('SELECT * FROM `courses` WHERE `CourseID` = :cid LIMIT 1');
+        $stmt->bindParam('cid', $cid, PDO::PARAM_INT);
+        $stmt->execute();
+        $info = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (sizeof($info) > 1) {
+            return $info;
+        } else {
+            return false;
+        }
     }
 
     /**

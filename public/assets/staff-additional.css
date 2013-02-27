@@ -6,7 +6,6 @@ div.dashblock {
     margin: 1em;
     display: inline-block;
     vertical-align: top;
-    float: left;
 }
 
 div.dashblock > div.dashblock-title {
