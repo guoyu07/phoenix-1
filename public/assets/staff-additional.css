@@ -12,7 +12,7 @@ div.dashblock > div.dashblock-title {
     background-color: #7a0032;
     font-weight: 700;
     color: #fff;
-    padding: 0.3em 0.6em;
+    padding: 0.5em 0.6em;
     border: 1px solid #7a0032;
 }
 
@@ -92,4 +92,33 @@ div.course-flag-nopointer.is-active > img.inactive {
 
 div.course-flag-nopointer.is-inactive > img.active {
     display: none;
+}
+
+.pseudolink:hover {
+    cursor: pointer;
+}
+
+.compact td, .compact th {
+    padding: 0.4em 0.6em;
+    font-size: 1em;
+    vertical-align: top;
+}
+
+.compact td input, .compact td textarea, .compact td select {
+    width: 85%;
+    padding: 0.3em 0.5em;
+    -ms-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    -o-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    -webkit-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    -moz-border-radius: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+}
+
+pre.faux-div {
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: 'Open Sans', 'Helvetica Neue', Tahoma, sans-serif;
+    font-size: 1em;
+    color: rgb(102, 102, 102);
 }

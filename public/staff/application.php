@@ -43,9 +43,11 @@ echo UX::makeHead($h, $n, 'common/header_staff', 'common/nav_public_staff');
 echo UX::makeBreadcrumb(array(	'Staff Portal'		=> '/staff/index.php', 'Course Application' => '/staff/application.php'));
 
 $earliest = "2013-02-26 11:00:00+0800";
-$latest = "2013-03-08 21:00:00+0800";
+$latest = "2013-03-12 19:00:00+0800";
 
-if ((time() > strtotime($latest)) || (time() < strtotime($earliest))) {
+if ($_SERVER['QUERY_STRING'] == 'bypass') {
+    echo UX::grabPage('staff/application', $p, true);
+} elseif ((time() > strtotime($latest)) || (time() < strtotime($earliest))) {
     $p['curtime'] = date(DATETIME_FULL, time());
     $p['maxtime'] = date(DATETIME_FULL, strtotime($latest));
     $p['mintime'] = date(DATETIME_FULL, strtotime($earliest));

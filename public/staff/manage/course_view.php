@@ -35,11 +35,44 @@ $course['TeacherData'] = Courses::getTeacherById($course['TeacherLead']);
 $course['ClassData'] = Courses::getClassesOfCourseById($_REQUEST['cid']);
 $course['CourseDecription'] = Common::cleanse($course['CourseDescription']);
 
-//var_dump($course);
+$p['offerings'] = '';
+
+// Build offerings table
+foreach($course['ClassData'] as $class) {
+    $teacher = Courses::getTeacherById($class['TeacherID']);
+    $p['offerings'] .= "<tr data-classnum=\"".$class['ClassID']."\"><td>".$course['CourseID'].".".$class['ClassID']."</td>
+    <td>".$teacher['TeacherName']."</td>
+    <td>".$class['ClassWeek']."</td>
+    <td>".(($class['ClassPeriodBegin'] == $class['ClassPeriodEnd']) ? $class['ClassPeriodBegin'] : $class['ClassPeriodBegin']."-".$class['ClassPeriodEnd'])."</td>
+    <td>".$class['RoomID']."</td>
+    <td><strong>".$class['EnrollCount']."</strong><span class=\"muted\">/".$class['ClassEnrollMax']."</td>
+    <td>".$class['ClassHtmlStatus']."</td>
+    <td><a href=\"./class_edit.php?cid=".$class['ClassID']."\">Edit</a>".(($class['EnrollCount'] > 0) ? "" : " | <a href=\"./class_edit.php?cid=".$class['ClassID']."&action=cancel\">Cancel</a>")."</td></tr>";
+}
 
 $h['title'] = $course['CourseTitle'] . ' | Course View';
 $n['management'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
+
+// Course info
+$p['course_subject'] = $course['CourseSubj'];
+$p['course_formatted_id'] = str_pad($course['CourseID'], 3, '0', STR_PAD_LEFT);
+$p['course_id'] = $course['CourseID'];
+$p['course_title'] = $course['CourseTitle'];
+$p['course_rmks'] = $course['CourseRemarks'];
+$p['course_desc'] = $course['CourseDescription'];
+$p['course_synop'] = ((strlen($course['CourseSynop']) == 0) ? '(None provided)' : $course['CourseSynop']);
+$p['course_prereqs'] = ((strlen($course['CoursePrereqs']) == 0) ? '(None provided)' : $course['CoursePrereqs']);
+$p['course_outcomes'] = ((strlen($course['CourseOutcomes']) == 0) ? '(None provided)' : $course['CourseOutcomes']);
+$p['lead_instructor_name'] = $course['TeacherData']['TeacherName'];
+$p['lead_instructor_email'] = $course['TeacherData']['TeacherEmail'];
+$p['computers_active'] = (($course['CourseComputers'] == 0) ? 'inactive' : 'active');
+$p['instruments_active'] = (($course['CourseInstruments'] == 0) ? 'inactive' : 'active');
+$p['activity_active'] = (($course['CourseActivity'] == 0) ? 'inactive' : 'active');
+$p['age_active'] = (($course['CourseEnforceAge'] == 0) ? 'inactive' : 'active');
+$p['enroll_active'] = (($course['CourseEnforceEnroll'] == 0) ? 'inactive' : 'active');
+$p['public_active'] = (($course['CourseFlagsPublic'] == 0) ? 'inactive' : 'active');
+$p['addon_active'] = (($course['CourseFeeAddon'] == 0) ? 'inactive' : 'active');
 
 // Include header section
 echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());

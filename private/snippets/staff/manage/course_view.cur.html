@@ -1,0 +1,159 @@
+<div id="course_list" class="content-row spaced body-emulate">
+    <h2>Course Editor &raquo; {{course_subject}}{{course_formatted_id}}</h2>
+    <h3>Basic Course Information</h3>
+    <p>Click to edit a field - all data is saved automatically when you exit the input boxes (just click outside of them). A confirmation message will notify you of update results.</p>
+    <table class="compact">
+        <tr>
+            <td style="width:15%;"><strong>Lead Teacher</strong></td>
+            <td style="width:35%;">{{lead_instructor_name}} &lt;<a href="mailto:{{lead_instructor_email}}">{{lead_instructor_email}}</a>&gt;</td>
+            <td style="width:15%;"><strong>Other Instructors</strong></td>
+            <td style="width:35%;"><em class="muted">Field not calculated</em></td>
+        </tr>
+        <tr>
+            <td><strong>Course Title</strong></td>
+            <td>
+                <span class="editable pseudolink" id="course-name">{{course_title}}</span>
+                <input type="text" class="editfield" class="hide" id="course-name-edit" data-db-item="CourseTitle" />
+            </td>
+            <td><strong>Synopsis</strong></td>
+            <td>
+                <span class="editable pseudolink" id="course-synop">{{course_synop}}</span>
+                <textarea class="editfield" class="hide" id="course-synop-edit" data-db-item="CourseSynop"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Description</strong></td>
+            <td colspan="3">
+                <pre class="editable pseudolink faux-div" id="course-desc">{{course_desc}}</pre>
+                <textarea class="editfield" class="hide" id="course-desc-edit" data-db-item="CourseDescription"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Course Outcomes</strong></td>
+            <td>
+                <span class="editable pseudolink" id="course-outcomes">{{course_outcomes}}</span>
+                <textarea class="editfield" class="hide" id="course-outcomes-edit" data-db-item="CourseOutcomes"></textarea>
+            </td>
+            <td><strong>Pre-Requisites</strong></td>
+            <td>
+                <span class="editable pseudolink" id="course-prereqs">{{course_prereqs}}</span>
+                <textarea class="editfield" class="hide" id="course-prereqs-edit" data-db-item="CoursePrereqs"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Private Comments</strong><br /><span class="muted small">Secretaries' Eyes Only</span></td>
+            <td colspan="3">
+                <pre class="editable pseudolink faux-div" id="course-rmks">{{course_rmks}}</pre>
+                <textarea class="editfield" class="hide" id="course-rmks-edit" data-db-item="CourseRemarks"></textarea>
+            </td>
+        </tr>
+    </table>
+
+
+
+    <h3>Course Options &amp; Flags</h3>
+
+    <p>Click to enable or disable these values. They are saved automatically and immediately. Policies given as follows:</p>
+
+    <p>
+        <ul>
+            <li>Computer usage or musical instrument usage <strong>doesn't not imply</strong> $50 fee</li>
+            <li>Physical activity required - use only if strenous activity (eg sports roundabout) will occur</li>
+            <li>Age-enforced: <strong>ALL</strong> science lab classes are enforced</li>
+            <li>Waitlist: Enable by default unless certain circumstances exist.</li>
+            <li>Viewing ability: Whenever enabled, parents will be able to see it!</li>
+        </ul>
+    </p>
+
+    <div style="display:table;width:100%;">
+        <div style="display:table-row;">
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{computers_active}}" data-db-item="CourseComputers" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Computer usage</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{instruments_active}}" data-db-item="CourseInstruments" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Uses musical instruments</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{addon_active}}" data-db-item="CourseFeeAddon" data-active-val="50" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> $50 Insurance Fee</div>
+            </div>
+        </div>
+        <div style="display:table-row;">
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{activity_active}}" data-db-item="CourseActivity" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Physical activity required</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{age_active}}" data-db-item="CourseEnforceAge" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Age-enforced (disallow PTEs)</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{enroll_active}}" data-db-item="CourseEnforceEnroll" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Enable waitlist?</div>
+            </div>
+        </div>
+        <div style="display:table-row;">
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{public_active}}" data-db-item="CourseFlagsPublic" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Viewing availability</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="course-flag is-inactive" id="flag-computers"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course uses computers</div> -->
+
+    <h3>Course Offerings</h3>
+    <p>As with the above, click to edit, including teacher. If you need to add a teacher, please go to the <a href="javascript:;">Teacher Management</a> module first.</p>
+
+    <table id="offerings" class="compact">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Teacher</th>
+                <th>Week</th>
+                <th>Period</th>
+                <th>Room</th>
+                <th>Enrollment</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{offerings}}
+        </tbody>
+    </table>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('.editfield').each(function () {
+        $(this).hide();
+    });
+});
+
+$('.editable').click(function () {
+    var val = $(this).html();
+    $(this).hide();
+    $('#' + $(this).attr('id') + '-edit').val(val).show();
+    $('#' + $(this).attr('id') + '-edit').focus();
+});
+
+$('.editfield').blur(function () {
+    $(this).hide();
+    if ($('#' + $(this).attr('id').replace('-edit', '')).html() == $(this).val()) {
+        laoshi.toast('No changes were made.');
+    } else {
+        laoshi.pushUpdate($(this).data('db-item'), $(this).val(), {{course_id}});
+    }
+
+    $('#' + $(this).attr('id').replace('-edit', '')).html($(this).val()).show();
+});
+
+$('.course-flag').click(function () {
+    if ($(this).hasClass('is-inactive')) {
+        $(this).removeClass('is-inactive').addClass('is-active');
+        laoshi.pushUpdate($(this).data('db-item'), $(this).data('active-val'), {{course_id}});
+    } else {
+        // Already active, make it inactive
+        $(this).removeClass('is-active').addClass('is-inactive');
+        laoshi.pushUpdate($(this).data('db-item'), $(this).data('inactive-val'), {{course_id}});
+    }
+})
+
+</script>

@@ -40,10 +40,13 @@ echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 $p["courses_submitted"] = '';
 $p["courses_saved"] = '';
 
-$submitted = Courses::getApps('submitted');
+if (!isset($_GET['type'])) $type = 'submitted';
+else $type = $_GET['type'];
+$submitted = Courses::getApps($type);
 $p["count_submitted"] = ((!$submitted) ? 0 : sizeof($submitted));
 $saved = Courses::getApps('saved');
 $p["count_saved"] = ((!$saved) ? 0 : sizeof($saved));
+$p["type"] = ucfirst($type);
 
 foreach($submitted as $course) {
     $p["courses_submitted"] .= UX::grabPage('staff/manage/apps_submitted', $course, true);

@@ -172,14 +172,36 @@ class Courses {
     }
 
     /**
+     * Get information on a single class based on ID
+     * @param   int     $cid    Class ID number to lookup data for
+     * @return  mixed
+     */
+    static public function getClassById($cid) {
+        $stmt = Data::prepare('SELECT `classes`.*, `courses`.`CourseTitle` FROM `classes`, `courses` WHERE `classes`.`ClassID` = :cid AND `classes`.`CourseID` = `courses`.`CourseID` LIMIT 1');
+        $stmt->bindParam('cid', $cid, PDO::PARAM_INT);
+        $stmt->execute();
+        $info = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (sizeof($info) > 1) {
+            return $info;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Get course classes
      */
     static public function getClassesOfCourseById($id) {
         try {
-            $stmt = Data::prepare('SELECT `classes`.*, (SELECT count(`enrollment`.`EnrollID`) FROM `enrollment` WHERE `enrollment`.`ClassID` = `classes`.`ClassID` and `enrollment`.`EnrollStatus` = "enrolled") as `EnrollCount` FROM `classes` where `classes`.`CourseID` = :cid');
+            $stmt = Data::prepare('SELECT `classes`.*, (SELECT count(`enrollment`.`EnrollID`) FROM `enrollment` WHERE `enrollment`.`ClassID` = `classes`.`ClassID` and `enrollment`.`EnrollStatus` = "enrolled") as `EnrollCount` FROM `classes` where `classes`.`CourseID` = :cid ORDER BY `classes`.`ClassWeek` ASC, `classes`.`ClassPeriodBegin` ASC');
             $stmt->bindParam('cid', $id, PDO::PARAM_INT);
             $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($classes as $index => $class) {
+                $classes[$index]['ClassHtmlStatus'] = self::getHtmlStatus($class['ClassStatus']);
+            }
+            return $classes;
         } catch (PDOException $e) {
             Common::throwNiceDataException($e);
         }
@@ -207,6 +229,29 @@ class Courses {
     static public function getTeacher($email, $name) {
         // First check whether the teacher exists, if not create SSO and staff records
         
+    }
+
+    /**
+     * Returns an HTML-friendly status based on class status
+     */
+    static public function getHtmlStatus($status = 'unknown') {
+        switch ($status) {
+            case 'active':
+                return '<img src="/assets/icons/tick-white.png" /> Open';
+            break;
+            case 'full':
+                return '<img src="/assets/icons/cross.png" /> <strong class="red">Class full</strong>';
+            break;
+            case 'closed':
+                return '<img src="/assets/icons/exclamation.png" /> <span class="red">Closed</span>';
+            break;
+            case 'cancelled':
+                return '<img src="/assets/icons/exclamation.png" /> <span class="muted">Cancelled</span>';
+            break;
+            default:
+                return '<img src="/assets/icons/exclamation.png" /> <span class="muted">Status unknown</span>';
+            break;
+        }
     }
 
 }

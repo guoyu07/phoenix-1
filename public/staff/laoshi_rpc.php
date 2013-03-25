@@ -159,6 +159,52 @@ if (!ACL::checkLogin('staff')) {
                 $result['msg'] = $e->getMessage();
             }
         break;
+        case 'update_course':
+            if (!isset($_REQUEST['value']) || !isset($_REQUEST['field']) || !isset($_REQUEST['courseid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                $value = urldecode($_REQUEST['value']);
+                try {
+                    $stmt = Data::prepare('UPDATE `courses` SET `'.$_REQUEST['field'].'` = :value WHERE `CourseID` = :courseid');
+                    $stmt->bindParam('value', $value, PDO::PARAM_STR);
+                    $stmt->bindParam('courseid', $_REQUEST['courseid'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Update was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+            }
+        break;
+        case 'update_class':
+            if (!isset($_REQUEST['value']) || !isset($_REQUEST['field']) || !isset($_REQUEST['classid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                $value = urldecode($_REQUEST['value']);
+                try {
+                    $stmt = Data::prepare('UPDATE `classes` SET `'.$_REQUEST['field'].'` = :value WHERE `ClassID` = :classid');
+                    $stmt->bindParam('value', $value, PDO::PARAM_STR);
+                    $stmt->bindParam('classid', $_REQUEST['classid'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Update was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+            }
+        break;
     	default:
 			$result['status'] = 'failure';
 			$result['code'] = 2404;

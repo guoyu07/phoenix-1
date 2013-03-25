@@ -1,7 +1,16 @@
 <div id="course_list" class="content-row spaced body-emulate">
-    <h1>Course Applications</h1>
+    <h1>Course Applications ({{type}})</h1>
     <p>All saved and submitted applications will be shown below. Saved items are muted and italicized: they cannot be clicked into since the teacher might not have finished filling things out yet. Submitted items are ranked by submission date and time.</p>
-    <div class="alert alert-yellow">Approved applications (those already added to the <a href="/staff/manage/courses.php">Course List</a>) are <strong>not shown</strong> in this list.</div>
+
+    <p>View applications marked:
+        <select id="type">
+            <option value="">(Viewing {{type}})</option>
+            <option value="submitted">Submitted (unaudited)</option>
+            <option value="inserted">Inserted (already in brochure)</option>
+            <option value="archived">Archived (cancelled apps)</option>
+        </select>
+    </p>
+    <!-- <div class="alert alert-yellow">Approved applications (those already added to the <a href="/staff/manage/courses.php">Course List</a>) are <strong>not shown</strong> in this list.</div> -->
 
     <p>Total application count: <strong>{{count_submitted}}</strong> submitted and <strong>{{count_saved}}</strong> pending (saved) courses.</p>
 
@@ -31,6 +40,10 @@ jQuery(document).ready(function ($) {
         var archive = laoshi.rpc({method: 'archive_application', data: $(this).data('appid')});
         laoshi.toast('Application successfully archived.');
         $(this).parent().parent().remove();
+    });
+
+    $('#type').change(function () {
+        window.location='/staff/manage/applications.php?type='+$(this).val();
     });
 
 });
