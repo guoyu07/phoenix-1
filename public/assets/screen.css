@@ -315,99 +315,63 @@ button {
     
     background: #e3e3e3;
     border: 1px solid #ccc;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
-    -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
-    box-shadow: inset 0 0 1px 1px #f6f6f6;*/
     color: #333;
     text-shadow: 0 1px 0 #fff;
 }
 
 button:hover {
     background: #d9d9d9;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
-    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
-    box-shadow: inset 0 0 1px 1px #eaeaea;*/
     color: #222;
     cursor: pointer;
 }
 
 button:active {
     background: #d0d0d0;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
-    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
-    box-shadow: inset 0 0 1px 1px #e3e3e3;*/
 }
 
 button.button-green {
     color: #fff;
     background: #47b438;
     border: 1px solid #52b345;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #8ecc85;
-    -moz-box-shadow: inset 0 0 1px 1px #8ecc85;
-    box-shadow: inset 0 0 1px 1px #8ecc85;*/
     text-shadow: 0 1px 0 #258916;
 }
 
 button.button-green:hover {
     background: #3daa2c;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #8ecc85;
-    -moz-box-shadow: inset 0 0 1px 1px #8ecc85;
-    box-shadow: inset 0 0 1px 1px #8ecc85;*/
 }
 
 button.button-green:active {
     background: #3c9c2f;
-   /* -webkit-box-shadow: inset 0 0 1px 1px #6fc561;
-    -moz-box-shadow: inset 0 0 1px 1px #6fc561;
-    box-shadow: inset 0 0 1px 1px #6fc561;*/
 }
 
 button.button-red {
     color: #fff;
     background: #b72e2e;
     border: 1px solid #d66666;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #bf6666;
-    -moz-box-shadow: inset 0 0 1px 1px #bf6666;
-    box-shadow: inset 0 0 1px 1px #bf6666;*/
     text-shadow: 0 1px 0 #8d1d1d;
 }
 
 button.button-red:hover {
     background: #a71818;
- /*   -webkit-box-shadow: inset 0 0 1px 1px #aa4a4a;
-    -moz-box-shadow: inset 0 0 1px 1px #aa4a4a;
-    box-shadow: inset 0 0 1px 1px #aa4a4a;*/
 }
 
 button.button-red:active {
     background: #972525;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #9c4242;
-    -moz-box-shadow: inset 0 0 1px 1px #9c4242;
-    box-shadow: inset 0 0 1px 1px #9c4242;*/
 }
 
 button.button-blue {
     color: #fff;
     background: #127ac9;
     border: 1px solid #4573c6;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #669ed6;
-    -moz-box-shadow: inset 0 0 1px 1px #669ed6;
-    box-shadow: inset 0 0 1px 1px #669ed6;*/
     text-shadow: 0 1px 0 #11377c;
 }
 
 button.button-blue:hover {
     background: #0c70b7;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #5690c9;
-    -moz-box-shadow: inset 0 0 1px 1px #5690c9;
-    box-shadow: inset 0 0 1px 1px #5690c9;*/
 }
 
 button.button-blue:active {
     background: #1267a4;
-    /*-webkit-box-shadow: inset 0 0 1px 1px #4e82b6;
-    -moz-box-shadow: inset 0 0 1px 1px #4e82b6;
-    box-shadow: inset 0 0 1px 1px #4e82b6;*/
 }
 
 /* Tables */
@@ -1116,8 +1080,36 @@ div.course-colorbox {
 	height: 10px;
 }
 
+div.course-cb-arts {
+    background-color: #116900;
+}
+
+div.course-cb-lang {
+    background-color: #694F00;
+}
+
 div.course-cb-msct {
-	background-color: #003669;
+    background-color: #003669;
+}
+
+div.course-cb-phed {
+	background-color: #691600;
+}
+
+div.course-cb-ciso {
+    background-color: #d16700;
+}
+
+div.course-cb-path {
+    background-color: #8c0064;
+}
+
+div.course-cb-ibtc {
+    background-color: #0b4eff;
+}
+
+div.course-cb-sats {
+    background-color: #108900;
 }
 
 /* Course waterfall tables */
@@ -1130,11 +1122,23 @@ table.courses th, table.courses td {
     border-color: transparent;
 }
 
+table.courses tr td:first-child {
+    border-left: none;
+}
+
+table.courses tr td:last-child {
+    border-right: none;
+}
+
 table.courses tr.metalink:hover td {
-	background-color: #fef6f6;
+	background-color: #fefafe;
 }
 
 table.courses tbody tr:hover {
+    -moz-box-shadow: 0 0 8px -2px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 0 0 6px #777;
+    -o-box-shadow: 0 0 8px -2px rgba(0, 0, 0, 0.4);
+    -ms-box-shadow: 0 0 8px -2px rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 8px -2px rgba(0, 0, 0, 0.4);
 }
 

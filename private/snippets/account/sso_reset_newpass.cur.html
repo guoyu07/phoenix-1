@@ -1,0 +1,73 @@
+<div class="content-row spaced">
+    <h1>Password Recovery Assistant</h1>
+</div>
+
+<div class="content-row spaced">
+    <div id="reg-start" class="body-emulate">
+        <h2>Enter New Password</h2>
+        <p>Thank you for verifying your identity with <strong>{{email}}</strong>. You may now enter a new password. Remember that passwords must be a minimum of 6 characters of your choice.</p>
+        <form class="validate" action="./sso_reset.php" method="post" id="login-form" enctype="multipart/form-data">
+            <div class="form-row" id="form-pass">
+                    <label for="pass-input">New password <span class="red strong">*</span></label>
+                    <input type="password" id="pass-input" name="pass" class="required" />
+                </div>
+                <div class="form-hint no-label muted">
+                    <p>Must be a minimum of 6 characters.</p>
+                </div>
+                
+                <div class="alert alert-red hide no-label" id="password-invalid"><img src="/assets/icons/cross.png" title="[X]" /> Your password must be a minimum of six characters. There are no further restrictions for your convenience.</div>
+                
+                <div class="form-row" id="form-confirm">
+                    <label for="confirm-input">Confirm new password <span class="red strong">*</span></label>
+                    <input type="password" id="confirm-input" name="confirm" class="required" />
+                </div>
+
+                <input type="hidden" name="rec_key" value="{{rec_key}}" />
+                <input type="hidden" name="ssoid" value="{{id}}" />
+                
+                <div class="alert alert-red hide no-label" id="confirm-invalid"><img src="/assets/icons/cross.png" title="[X]" /> Your passwords don't match.</div>
+
+                <div class="form-row no-label">
+                    <button type="submit" class="button button-green">Set New Password</button>
+                </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#pass-input').focus();
+
+    $('form').submit(function(e) {
+        $('input[name="pass"]').parent().removeClass('form-red');
+        $('#password-invalid').hide();
+        $('#confirm-invalid').hide();
+        $('#form-invalid').hide();
+        
+        if ($('input[name="pass"]').val().length < 6) {
+            $('input[name="pass"]').parent().addClass('form-red');
+            $.scrollTo('input[name="pass"]', 300, {offset: {top:-80}, onAfter: function() {
+                $('input[name="pass"]').parent().effect('pulsate', {times:2}, 400);
+                $('input[name="pass"]').focus();
+            } });
+            $('#password-invalid').show();
+            $('#form-invalid').show();
+            e.preventDefault();
+            return false;
+        }   
+        
+        $('input[name="confirm"]').parent().removeClass('form-red');
+        if ($('input[name="confirm"]').val() !== $('input[name="pass"]').val()) {
+            $('input[name="confirm"]').parent().addClass('form-red');
+            $.scrollTo('input[name="confirm"]', 300, {offset: {top:-80}, onAfter: function() {
+                $('input[name="confirm"]').parent().effect('pulsate', {times:2}, 400);
+                $('input[name="confirm"]').focus();
+            } });
+            $('#confirm-invalid').show();
+            $('#form-invalid').show();
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+</script>

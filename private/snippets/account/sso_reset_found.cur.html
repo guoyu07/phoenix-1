@@ -1,0 +1,21 @@
+<div class="content-row spaced">
+    <h1>Password Recovery Assistant</h1>
+</div>
+
+<div class="content-row spaced">
+    <div id="reg-start" class="body-emulate">
+        <h2>Enter Recovery Key</h2>
+        {{msg}}
+        <p>Copy the Verification Code from the email we just sent and insert it in the appropriate box below. Alternatively, you can use the link provided in the email to prove your identity. In the next step, we'll let you select a new password.</p>
+        <form class="validate" action="./sso_reset.php" method="post" id="login-form" enctype="multipart/form-data">
+            <div class="form-row" id="form-recovery">
+                <label for="recovery-input">Verification Code</label>
+                <input type="text" id="recovery-input" name="vericode" class="required" />
+                <input type="hidden" name="ssoid" value="{{id}}" />
+            </div>
+            <div class="form-row no-label">
+                <button type="submit" class="button-blue">Continue</button>
+            </div>
+        </form>
+    </div>
+</div>

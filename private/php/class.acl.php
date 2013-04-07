@@ -3,7 +3,7 @@
 /**
  * <p>The Security class provides security and access control services
  * to the entire package. Requires Common class.</p>
- * <p>ACL and Security class as of 04JAN13 require SSO access.</p>
+ * <p>ACL and Security class as of v30104 require SSO access.</p>
  *
  * @author      Yectep Studios <info@yectep.hk>
  * @version     30104
@@ -93,6 +93,32 @@ class ACL extends Security {
         return true;
 
     }
+
+    /**
+     * Updates SSO password and logs it
+     * @package     Phoenix
+     * @version     30405
+     */
+    static public function updatePassword($ssoid, $password) {
+        if (self::getSsoObject($ssoid)) {
+            // SSO object exists, set new password
+            $passhash = self::getHash($password);
+
+            try {
+                $stmt = Data::prepare('UPDATE `sso_objects` SET `ObjHash` = :hash, `ObjPassUpdateTS` = NOW() WHERE `ObjID` = :ssoid LIMIT 1');
+                $stmt->bindParam('hash', $passhash, PDO::PARAM_STR);
+                $stmt->bindParam('ssoid', $ssoid, PDO::PARAM_INT);
+                $stmt->execute();
+
+                Common::logAction('backend.subroutine.acl.updatePassword', 'success', 'SSOID='.$ssoid, 'updated password');
+
+                return true;
+            } catch (PDOException $e) {
+                Common::niceException('Failed to update SsoObject in ACL::updatePassword');
+            }
+        }
+    }
+
 
     /**
      * Verifies SSO authentication, generate and store session information

@@ -6,45 +6,54 @@
         <tr>
             <td style="width:15%;"><strong>Lead Teacher</strong></td>
             <td style="width:35%;">{{lead_instructor_name}} &lt;<a href="mailto:{{lead_instructor_email}}">{{lead_instructor_email}}</a>&gt;</td>
-            <td style="width:15%;"><strong>Other Instructors</strong></td>
-            <td style="width:35%;"><em class="muted">Field not calculated</em></td>
+            <td style="width:15%;"><strong>Course Difficulty</strong></td>
+            <td style="width:35%;">
+                <span class="editable pseudolink" id="course-diff">{{course_diff_text}}</span>
+                <select id="course-diff-edit" class="editfield hide" data-db-item="CourseDifficulty">
+                    <option value="{{course_diff}}" selected="selected">(Leave unchanged)</option>
+                    <option value="9">Not applicable</option>
+                    <option value="1">Beginner</option>
+                    <option value="2">Intermediate</option>
+                    <option value="3">Advanced</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><strong>Course Title</strong></td>
             <td>
                 <span class="editable pseudolink" id="course-name">{{course_title}}</span>
-                <input type="text" class="editfield" class="hide" id="course-name-edit" data-db-item="CourseTitle" />
+                <input type="text" class="editfield hide" id="course-name-edit" data-db-item="CourseTitle" />
             </td>
             <td><strong>Synopsis</strong></td>
             <td>
                 <span class="editable pseudolink" id="course-synop">{{course_synop}}</span>
-                <textarea class="editfield" class="hide" id="course-synop-edit" data-db-item="CourseSynop"></textarea>
+                <textarea class="editfield hide" id="course-synop-edit" data-db-item="CourseSynop"></textarea>
             </td>
         </tr>
         <tr>
             <td><strong>Description</strong></td>
             <td colspan="3">
                 <pre class="editable pseudolink faux-div" id="course-desc">{{course_desc}}</pre>
-                <textarea class="editfield" class="hide" id="course-desc-edit" data-db-item="CourseDescription"></textarea>
+                <textarea class="editfield hide" id="course-desc-edit" data-db-item="CourseDescription"></textarea>
             </td>
         </tr>
         <tr>
             <td><strong>Course Outcomes</strong></td>
             <td>
                 <span class="editable pseudolink" id="course-outcomes">{{course_outcomes}}</span>
-                <textarea class="editfield" class="hide" id="course-outcomes-edit" data-db-item="CourseOutcomes"></textarea>
+                <textarea class="editfield hide" id="course-outcomes-edit" data-db-item="CourseOutcomes"></textarea>
             </td>
             <td><strong>Pre-Requisites</strong></td>
             <td>
                 <span class="editable pseudolink" id="course-prereqs">{{course_prereqs}}</span>
-                <textarea class="editfield" class="hide" id="course-prereqs-edit" data-db-item="CoursePrereqs"></textarea>
+                <textarea class="editfield hide" id="course-prereqs-edit" data-db-item="CoursePrereqs"></textarea>
             </td>
         </tr>
         <tr>
             <td><strong>Private Comments</strong><br /><span class="muted small">Secretaries' Eyes Only</span></td>
             <td colspan="3">
                 <pre class="editable pseudolink faux-div" id="course-rmks">{{course_rmks}}</pre>
-                <textarea class="editfield" class="hide" id="course-rmks-edit" data-db-item="CourseRemarks"></textarea>
+                <textarea class="editfield hide" id="course-rmks-edit" data-db-item="CourseRemarks"></textarea>
             </td>
         </tr>
     </table>
@@ -100,7 +109,7 @@
     <h3>Course Offerings</h3>
     <p>As with the above, click to edit, including teacher. If you need to add a teacher, please go to the <a href="javascript:;">Teacher Management</a> module first.</p>
 
-    <table id="offerings" class="compact">
+    <table id="offerings" class="hiden">
         <thead>
             <tr>
                 <th>#</th>
@@ -118,14 +127,91 @@
         </tbody>
     </table>
 
+    <h3>Add a Class</h3>
+    <p>Make any necessary changes - these will be updated automatically when you click outside the edit field on any other part of the page.</p>
+
+    <div class="form-row">
+        <label for="room">Room</label>
+        <div class="form-help">
+            <select id="room" name="room" class="edit" data-db-item="RoomID">
+                {{rooms}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <label for="week">Week Offered</label>
+        <select id="week" name="week" data-db-item="ClassWeek" class="edit">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="pbegin">Period Begins</label>
+        <select id="pbegin" name="pbegin" data-db-item="ClassPeriodEnd" class="edit">
+            <optgroup label="Summer Programme">
+                <option value="1">Period 1</option>
+                <option value="2">Period 2</option>
+                <option value="3">Period 3</option>
+                <option value="4">Period 4</option>
+            </optgroup>
+            <optgroup label="Academic Programme">
+                <option value="A">Session A</option>
+                <option value="B">Session B</option>
+                <option value="C">Session C</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="pend">Period Ends</label>
+        <select id="pend" name="pend" data-db-item="ClassPeriodEnd" class="edit">
+            <optgroup label="Summer Programme">
+                <option value="1">Period 1</option>
+                <option value="2">Period 2</option>
+                <option value="3">Period 3</option>
+                <option value="4">Period 4</option>
+            </optgroup>
+            <optgroup label="Academic Programme">
+                <option value="A">Session A</option>
+                <option value="B">Session B</option>
+                <option value="C">Session C</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="minage">Minimum Age (4-16)</label>
+        <input type="text" class="edit" id="minage" data-db-item="ClassAgeMin" name="minage" value="5" />
+    </div>
+
+    <div class="form-row">
+        <label for="maxage">Maximum Age (4-16)</label>
+        <input type="text" class="edit" id="maxage" data-db-item="ClassAgeMax" name="maxage" value="18" />
+    </div>
+
+    <div class="form-row">
+        <label for="enrollmax">Maximum Enrollment (0-30)</label>
+        <input type="text" class="edit" id="enrollmax" data-db-item="ClassEnrollMax" name="enrollmax" value="20" />
+    </div>
+
+    <div class="form-row no-label">
+        <button type="button" id="btn-add-course" class="button button-blue">Add Course</button>
+    </div>
+
+    <div id="class_msg" class="hide alert alert-green"><img src="/assets/icons/tick.png" /> <strong>Class added successfully.</strong> Additions to class offerings will be shown when you <a href="./course_view.php?cid={{course_id}}">refresh this page</a>.</div>
+
 </div>
 
 <script type="text/javascript">
-$(document).ready(function () {
-    $('.editfield').each(function () {
-        $(this).hide();
-    });
-});
+// $(document).ready(function () {
+//     $('.editfield').each(function () {
+//         $(this).hide();
+//     });
+// });
 
 $('.editable').click(function () {
     var val = $(this).html();
@@ -142,7 +228,14 @@ $('.editfield').blur(function () {
         laoshi.pushUpdate($(this).data('db-item'), $(this).val(), {{course_id}});
     }
 
-    $('#' + $(this).attr('id').replace('-edit', '')).html($(this).val()).show();
+    if ($(this).attr('id') !== 'course-diff-edit') {
+        $('#' + $(this).attr('id').replace('-edit', '')).html($(this).val()).show();
+    } else {
+        if ($(this).val() == '1') $('#' + $(this).attr('id').replace('-edit', '')).html('Beginner').show();
+        else if ($(this).val() == '2') $('#' + $(this).attr('id').replace('-edit', '')).html('Intermediate').show();
+        else if ($(this).val() == '3') $('#' + $(this).attr('id').replace('-edit', '')).html('Advanced').show();
+        else if ($(this).val() == '9') $('#' + $(this).attr('id').replace('-edit', '')).html('Not applicable').show();
+    }
 });
 
 $('.course-flag').click(function () {
@@ -154,6 +247,20 @@ $('.course-flag').click(function () {
         $(this).removeClass('is-active').addClass('is-inactive');
         laoshi.pushUpdate($(this).data('db-item'), $(this).data('inactive-val'), {{course_id}});
     }
+});
+
+$('#btn-add-course').click(function () {
+    var sendObj = {'method': 'add_class', 'cid': {{course_id}},'tid': {{lead_instructor_id}}, 'room': $('#room').val(), 'week': $('#week').val(), 'pbegin': $('#pbegin').val(), 'pend': $('#pend').val(), 'agemin': $('#minage').val(), 'agemax': $('#maxage').val(), 'maxenroll': $('#enrollmax').val()};
+    laoshi.rpc(sendObj);
+    laoshi.toast('Class added successfully. <strong>Refresh to view changes.</strong>');
+    $('#class_msg').fadeIn('fast');
+});
+
+$('.cancel-class').click(function () {
+    var cid = $(this).parent().parent().data('classnum');
+    laoshi.rpc({'method': 'cancel_class', 'classid': cid});
+    $("#status-"+cid).html('<img src="/assets/icons/exclamation.png" /> <span class="muted">Cancelled</span>');
+    return false;
 })
 
 </script>

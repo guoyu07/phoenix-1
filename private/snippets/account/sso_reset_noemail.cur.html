@@ -1,0 +1,20 @@
+<div class="content-row spaced">
+    <h1>Password Recovery Assistant</h1>
+</div>
+
+<div class="content-row spaced">
+    <div id="reg-start" class="body-emulate">
+        <h2>Account Not Found</h2>
+        <div class="alert alert-red"><strong>Oops!</strong> It looks like the email you're using, {{email}}, can't be found in our {{type}} accounts database. Please try entering the email associated with a registered account.</div>
+        <form class="validate" action="./sso_reset.php" method="post" id="login-form" enctype="multipart/form-data">
+            <div class="form-row" id="form-email">
+                <label for="email-input">Email address</label>
+                <input type="email" id="email-input" name="email" class="required" />
+            </div>
+            <input type="hidden" name="type" value="{{type}}" />
+            <div class="form-row no-label">
+                <button type="submit" class="button-blue">Try Again</button>
+            </div>
+        </form>
+    </div>
+</div>

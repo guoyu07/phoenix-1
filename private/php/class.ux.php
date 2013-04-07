@@ -15,7 +15,7 @@ class UX {
     private	$env;			// Environment variable
     private $env_reset;		// For development use
     
-    public	$head;			// Basically the output buffer
+    public	$head;			// Flushable output buffer
     
 	/*
 	* Class does not need initialization. Constructor and destructor disabled.
@@ -33,12 +33,14 @@ class UX {
 	* @param string $snippet The snippet name, stored in private/snippets/: based on environment
 	* @param string $vars Variable array to be replaced accordingly by SMARTY-style {} braces.
 	* @param bool $nice I forgot what this does...
-	* @note All logic is done via the PHP page. Replce lang strings with {}, no logic! (Easier for i89n)
+	* @note All logic is done via the PHP page. Replce lang strings with {}, no logic! (Easier for i18n)
 	* @return string|false Returns false if the snippet file is not found and don't force nice errors
 	*/
     public function grabPage($snippet, $vars = array(), $nice = true) {
     
-        $headers = UX::getallheaders();
+        $headers = self::getallheaders();
+        $display = "cur";
+
     	if (array_key_exists('X-Yectep-Dev', $headers)) {
     	    
             // If a development page doesn't exist, make sure we headify it to notify the dev
@@ -48,12 +50,13 @@ class UX {
                 header("X-Yectep-Dev: Development file does not exist");
                 die("Missing a development file: ".PTR."snippets/".$snippet.".dev.html");
             } else {
+                $display = "dev";
                 header("X-Yectep-Dev: Using development display");
             }
     	}
     	
         
-        if (file_exists(PTP."snippets/".$snippet.".cur.html")) {
+        if (file_exists(PTP."snippets/".$snippet.".".$display.".html")) {
             // First we get the page
             $unparsed = file_get_contents(PTP."snippets/".$snippet.".cur.html");
             
@@ -107,13 +110,13 @@ class UX {
     					break;
     			}
     			
-    			$an_html .= UX::grabPage('public/announce', array('class' => $class, 'text' => $announcement['AnnounceText']), false)."\n";
+    			$an_html .= self::grabPage('public/announce', array('class' => $class, 'text' => $announcement['AnnounceText']), false)."\n";
     		}
     	}
     	
     	$passToNav['announce'] = $an_html;
     	
-    	return UX::grabPage($ovrHeader, $passToHeader, true).UX::grabPage($ovrNav, $passToNav, true);
+    	return self::grabPage($ovrHeader, $passToHeader, true).self::grabPage($ovrNav, $passToNav, true);
     }
     
     /**
@@ -129,7 +132,7 @@ class UX {
     		$bc .= "    	    <a href=\"".$url."\" title=\"".$name."\">".$name."</a>".(($i == sizeof($crumb)) ? "\n" : " /\n");
     		$i++;
     	}
-    	$bc_html = UX::grabPage('common/breadcrumb_basic', array('extras' => $bc), false);
+    	$bc_html = self::grabPage('common/breadcrumb_basic', array('extras' => $bc), false);
     	return $bc_html;
     	
     }
@@ -140,7 +143,7 @@ class UX {
      * @version     20819
      */
     public function makeNews($newsItem) {
-        $news_html = UX::grabPage('common/news_article',
+        $news_html = self::grabPage('common/news_article',
                         array(  'title'     => $newsItem['NewsTitle'],
                                 'content'   => $newsItem['NewsContent'],
                                 'ts_short'  => date(DATE_FULL, strtotime($newsItem['NewsLETS'])),
@@ -151,7 +154,7 @@ class UX {
         
     }
     
-    /*
+    /**
      * Flushes the buffer as well as the UX push buffer
      *
      */
@@ -160,8 +163,8 @@ class UX {
     }
     
     /**
-    * Placeholder for < PHP 5.4.0 under FastCGI
-    */
+     * Placeholder for < PHP 5.4.0 under FastCGI
+     */
     private function getallheaders() 
     {
        foreach ($_SERVER as $name => $value) 

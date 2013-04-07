@@ -11,11 +11,24 @@
 			<label for="pass-input">Password</label>
 			<input type="password" id="pass-input" name="pass" class="required" />
 		</div>
-		<div id="pass-hint" class="form-row no-label"><p class="muted">If you've forgotten your password, complete the email address field and then click the Reset Password button below.</p></div>
 		<div class="form-row no-label">
 			<input type="hidden" name="redirect" value="{{redirect}}" />
 			<button type="submit" class="button-green">Sign In</button>
-			<!--<button type="button" id="button-pass-reset">Reset Password</button>-->
+			<button type="button" id="button-pass-reset">Forgot Password?</button>
+		</div>
+	</form>
+
+	<form class="forgot hide" action="/sso_reset.php" method="post" id="passreset-form" enctype="multipart/form-data">
+		<div id="pass-hint" class="form-row no-label"><p>Forgot your password? No problem, just enter the email address associated with your account and we'll send you a link to reset your password with.</p></div>
+		<div class="form-row" id="reset-email">
+			<label for="reset-input">Email address</label>
+			<input type="email" id="reset-input" name="email" class="required" />
+			<input type="hidden" name="type" value="staff" />
+		</div>
+		<div class="form-row no-label">
+			<input type="hidden" name="redirect" value="{{redirect}}" />
+			<button type="submit" class="button-green">Email me recovery link</button>
+			<button type="button" id="button-cancel-reset">Cancel</button>
 		</div>
 	</form>
 </div>
@@ -24,7 +37,15 @@
 $(document).ready(function() {
 	$('#email-input').focus();
 	$('#button-pass-reset').click(function () {
-	   forgotPassword();
+	   $('.validate').hide();
+	   $('.forgot').fadeIn();
+	   $('#reset-input').focus();
+	});
+	$('#button-cancel-reset').click(function () {
+		$('#reset-input').val('');
+		$('.forgot').hide();
+		$('.validate').fadeIn();
+		$('#email-input').focus();
 	})
 });
 </script>

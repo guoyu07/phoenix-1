@@ -1,21 +1,21 @@
 <div id="course_list" class="content-row spaced body-emulate">
     <h1>Program Course Listing</h1>
     
-    <p><button class="button button-blue">Create a Course</button></p>
+    <p><input id="search" type="text" style="width:200px;" placeholder="Enter search term&hellip;" /> <button class="button button-blue">Create a Course</button></p>
 
-    <table class="courses">
+    <table class="courses hiden">
         <thead>
             <tr>
                 <th style="width:10%;" class="tipped" title="Course Code">CC</th>
                 <th style="width:30%;">Course Name</th>
                 <th style="width:20%;">Lead Instructor</th>
-                <th style="width:10%;" class="tipped" title="Enrolled Students/Available Spaces">E/A</th>
-                <th style="width:15%;">Popularity</th>
-                <th style="width:15%;">Flags</th>
+                <th style="width:6%;" class="tipped" title="Enrolled Students/Available Spaces">E/A</th>
+                <th style="width:8%;">Popularity</th>
+                <th style="width:6%;" class="tipped" title="Language of Instruction">LOI</th>
+                <th style="width:20%;">Flags</th>
             </tr>
         </thead>
-        <tbody>
-{{course_rows}}            
+        <tbody> 
         </tbody>
     </table>
 </div>
@@ -28,14 +28,26 @@ jQuery(document).ready(function ($) {
     // Course building
     $.each(courseJson, function (i, c) {
         console.log(c);
-        $('table.courses>tbody').append('<tr class="course" data-course-id="' + c.CourseID + '" data-subject="' + c.CourseSubj + '">' +
+        $('table.courses>tbody').append('<tr class="course" data-course-id="' + c.CourseID + '" data-subject="' + c.CourseSubj + '" data-status="' + ((c.CourseFlagsPublic == 1) ? 'public' : 'incomplete') + '">' +
             '<td>' + c.CourseCode + '</td>' +
             '<td class="tipped" title="' + c.CourseSynop + '"><a href="./course_view.php?cid=' + c.CourseID + '">' + c.CourseTitle + '</a></td>' +
             '<td><a href="mailto:' + c.TeacherData.TeacherEmail + '">' + c.TeacherData.TeacherName + '</a></td>' +
             '<td class="tipped" title="Over ' + ((c.ClassData.length == 1) ?  'a single timeslot' : c.ClassData.length + ' total timeslots' ) + '"><span style="font-weight:700;">' + c.TotalEnrollCount + '</span>/<span class="muted">' + c.TotalSpacesAvailable + '</span></td>' + 
-            '<td><em class="muted">Not displayed</em></td>' +
-            '<td></td>' +
+            '<td><em class="muted">Unknown</em></td>' +
+            '<td><img src="/assets/icons/' + c.CourseLOI + '.png" style="height:16px;" /></td>' +
+            '<td>' + ((c.CourseFlagsPublic == 1) ? '<em class="muted"><img src="/assets/icons/tick.png" /> Completed</em>' : '<img src="/assets/icons/exclamation.png" /> Action Required') + '</td>' +
             '</tr>');
+    });
+
+    // Bind search
+    var $rows = $('.courses tbody tr');
+    $('#search').keyup(function() {
+        var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+        $rows.show().filter(function() {
+            var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+            return !~text.indexOf(val);
+        }).hide();
     });
 
 });

@@ -122,3 +122,13 @@ pre.faux-div {
     font-size: 1em;
     color: rgb(102, 102, 102);
 }
+
+/* High density info */
+span.hiden {
+    font-size: 0.97em;
+}
+
+table.hiden, table.hiden td, table.hiden th {
+    font-size: 0.97em;
+    padding: 0.4em;
+}

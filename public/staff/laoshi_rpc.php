@@ -38,6 +38,31 @@ if (!ACL::checkLogin('staff')) {
     		$result['code'] = 2000;
     		$result['msg'] = '[OK] '.$stmt->rowCount().' rows affected.';
     	break;
+        case 'add_class':
+            $_laoshi->perms(6,7);
+
+            // Direct insertion
+            try {
+                $stmt = Data::prepare("INSERT INTO `classes` (`CourseID`, `TeacherID`, `RoomID`, `ClassWeek`, `ClassPeriodBegin`, `ClassPeriodEnd`, `ClassAgeMin`, `ClassAgeMax`, `ClassEnrollMax`, `ClassLastUpdate`, `ClassStatus`) VALUES (:cid, :tid, :room, :week, :pbegin, :pend, :agemin, :agemax, :enrollmax, NOW(), 'closed')");
+                $stmt->bindParam('cid', $_REQUEST['cid'], PDO::PARAM_INT);
+                $stmt->bindParam('tid', $_REQUEST['tid'], PDO::PARAM_INT);
+                $stmt->bindParam('room', $_REQUEST['room'], PDO::PARAM_INT);
+                $stmt->bindParam('week', $_REQUEST['week'], PDO::PARAM_INT);
+                $stmt->bindParam('pbegin', $_REQUEST['pbegin'], PDO::PARAM_INT);
+                $stmt->bindParam('pend', $_REQUEST['pend'], PDO::PARAM_INT);
+                $stmt->bindParam('agemin', $_REQUEST['agemin'], PDO::PARAM_INT);
+                $stmt->bindParam('agemax', $_REQUEST['agemax'], PDO::PARAM_INT);
+                $stmt->bindParam('enrollmax', $_REQUEST['maxenroll'], PDO::PARAM_INT);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2200;
+                $result['msg'] = 'Class inserted';
+            } catch (PDOException $e) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = $e->getMessage();
+            }
+        break;
         case 'add_course':
             $_laoshi->perms(6, 7);
             $receive = json_decode($_REQUEST['data'], true);
@@ -167,7 +192,7 @@ if (!ACL::checkLogin('staff')) {
             } else {
                 $value = urldecode($_REQUEST['value']);
                 try {
-                    $stmt = Data::prepare('UPDATE `courses` SET `'.$_REQUEST['field'].'` = :value WHERE `CourseID` = :courseid');
+                    $stmt = Data::prepare('UPDATE `courses` SET `'.$_REQUEST['field'].'` = :value WHERE `CourseID` = :courseid LIMIT 1');
                     $stmt->bindParam('value', $value, PDO::PARAM_STR);
                     $stmt->bindParam('courseid', $_REQUEST['courseid'], PDO::PARAM_INT);
                     $stmt->execute();
@@ -190,8 +215,29 @@ if (!ACL::checkLogin('staff')) {
             } else {
                 $value = urldecode($_REQUEST['value']);
                 try {
-                    $stmt = Data::prepare('UPDATE `classes` SET `'.$_REQUEST['field'].'` = :value WHERE `ClassID` = :classid');
+                    $stmt = Data::prepare('UPDATE `classes` SET `'.$_REQUEST['field'].'` = :value WHERE `ClassID` = :classid LIMIT 1');
                     $stmt->bindParam('value', $value, PDO::PARAM_STR);
+                    $stmt->bindParam('classid', $_REQUEST['classid'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Update was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+            }
+        break;
+        case 'cancel_class':
+            if (!isset($_REQUEST['classid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                try {
+                    $stmt = Data::prepare('UPDATE `classes` SET `ClassStatus` = "cancelled" WHERE `ClassID` = :classid LIMIT 1');
                     $stmt->bindParam('classid', $_REQUEST['classid'], PDO::PARAM_INT);
                     $stmt->execute();
 

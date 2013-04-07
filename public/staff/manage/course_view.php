@@ -36,6 +36,11 @@ $course['ClassData'] = Courses::getClassesOfCourseById($_REQUEST['cid']);
 $course['CourseDecription'] = Common::cleanse($course['CourseDescription']);
 
 $p['offerings'] = '';
+$rooms = Courses::getRoomList();
+$p['rooms'] = '';
+foreach($rooms as $roomid => $rm) {
+    $p['rooms'] .= '<option value="'.$roomid.'">'.$rm['name'].'</option>'."\n";
+}
 
 // Build offerings table
 foreach($course['ClassData'] as $class) {
@@ -46,8 +51,8 @@ foreach($course['ClassData'] as $class) {
     <td>".(($class['ClassPeriodBegin'] == $class['ClassPeriodEnd']) ? $class['ClassPeriodBegin'] : $class['ClassPeriodBegin']."-".$class['ClassPeriodEnd'])."</td>
     <td>".$class['RoomID']."</td>
     <td><strong>".$class['EnrollCount']."</strong><span class=\"muted\">/".$class['ClassEnrollMax']."</td>
-    <td>".$class['ClassHtmlStatus']."</td>
-    <td><a href=\"./class_edit.php?cid=".$class['ClassID']."\">Edit</a>".(($class['EnrollCount'] > 0) ? "" : " | <a href=\"./class_edit.php?cid=".$class['ClassID']."&action=cancel\">Cancel</a>")."</td></tr>";
+    <td id=\"status-".$class['ClassID']."\">".$class['ClassHtmlStatus']."</td>
+    <td><a href=\"./class_edit.php?cid=".$class['ClassID']."\">Edit</a>".(($class['EnrollCount'] > 0) ? "" : " | <a href=\"./class_edit.php?cid=".$class['ClassID']."&action=cancel\" class=\"cancel-class\">Cancel</a>")."</td></tr>";
 }
 
 $h['title'] = $course['CourseTitle'] . ' | Course View';
@@ -59,11 +64,14 @@ $p['course_subject'] = $course['CourseSubj'];
 $p['course_formatted_id'] = str_pad($course['CourseID'], 3, '0', STR_PAD_LEFT);
 $p['course_id'] = $course['CourseID'];
 $p['course_title'] = $course['CourseTitle'];
+$p['course_diff'] = $course['CourseDifficulty'];
+$p['course_diff_text'] = Courses::getDifficulty($course['CourseDifficulty']);
 $p['course_rmks'] = $course['CourseRemarks'];
 $p['course_desc'] = $course['CourseDescription'];
 $p['course_synop'] = ((strlen($course['CourseSynop']) == 0) ? '(None provided)' : $course['CourseSynop']);
 $p['course_prereqs'] = ((strlen($course['CoursePrereqs']) == 0) ? '(None provided)' : $course['CoursePrereqs']);
 $p['course_outcomes'] = ((strlen($course['CourseOutcomes']) == 0) ? '(None provided)' : $course['CourseOutcomes']);
+$p['lead_instructor_id'] = $course['TeacherData']['TeacherID'];
 $p['lead_instructor_name'] = $course['TeacherData']['TeacherName'];
 $p['lead_instructor_email'] = $course['TeacherData']['TeacherEmail'];
 $p['computers_active'] = (($course['CourseComputers'] == 0) ? 'inactive' : 'active');

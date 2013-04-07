@@ -64,6 +64,9 @@ if (array_key_exists('msg', $_GET)) {
 		case 'error_nologin':
 			$error = '<div class="alert alert-red">Please login to access this resource. You\'ll be automatically redirected.</div>';
 		break;
+        case 'pass_change':
+            $error = '<div class="alert alert-green">Your new password was saved successfully. Please login with your new password.</div>';
+        break;
 		default:
 			$error = '<div class="alert alert-yellow">This computer system is restricted to authorized users only. All access attempts are logged and unauthorized accesses are strictly forbidden.</div>';
 		break;

@@ -211,7 +211,7 @@ class Courses {
      * Get teacher info (email and display name)
      */
     static public function getTeacherById($id) {
-        $stmt = Data::prepare('SELECT `staff`.`StaffName` as "TeacherName", `sso_objects`.`ObjEmail` as "TeacherEmail" FROM `staff`, `sso_objects` WHERE `sso_objects`.`ObjID` = `staff`.`ObjID` AND `staff`.`StaffID` = :sid');
+        $stmt = Data::prepare('SELECT `staff`.`StaffID` as "TeacherID", `staff`.`StaffName` as "TeacherName", `sso_objects`.`ObjEmail` as "TeacherEmail" FROM `staff`, `sso_objects` WHERE `sso_objects`.`ObjID` = `staff`.`ObjID` AND `staff`.`StaffID` = :sid');
         $stmt->bindParam('sid', $id, PDO::PARAM_INT);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -251,6 +251,26 @@ class Courses {
             default:
                 return '<img src="/assets/icons/exclamation.png" /> <span class="muted">Status unknown</span>';
             break;
+        }
+    }
+
+    /**
+     * Translates difficulty level to text
+     */
+    static public function getDifficulty($dLevel) {
+        switch ($dLevel) {
+            case 1:
+                return 'Beginner';
+                break;
+            case 2:
+                return 'Intermediate';
+                break;
+            case 3:
+                return 'Advanced';
+                break;
+            default:
+                return 'Not applicable';
+                break;
         }
     }
 

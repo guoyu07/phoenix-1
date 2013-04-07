@@ -1,50 +1,51 @@
 <div id="top_filters" class="content-row spaced">
     <div id="content">
-    	<h1>Course Offering 2013</h1>
+        <h1>Course Offering 2013</h1>
     </div>
 </div>
 
 <div id="course_list" class="content-row spaced">
-	<div class="col-row">
-	<div class="col c7" style="vertical-align:top;padding:0em;">
-		<table class="courses">
-			<thead>
-				<tr>
-					<th style="width:15%;">Code</th>
-					<th style="width:60%;">Course Name</th>
-					<th style="width:25%;">Instructor(s)</th>
-				</tr>
-			</thead>
-			<tbody id="courselist_body">			
-			</tbody>
-		</table>
-	</div>
-	<div class="col c3" style="">
-		<form class="inline">
-			<div id="scroller-anchor"></div>
-			<div id="scroller"> 
-				<div id="search" style="width:250px;">
-					<h3 style="margin-top:0.5em;">Course Search</h3>
-					<p>Now showing <strong id="course_count">0</strong> courses.<br /><a href="#">Return to top</a></p>
-					<input type="text" style="width:80%;" placeholder="Search by course or instructor..." />
-				</div>
-				<div id="filters" style="width:250px;">
-					<h3>Select Your Filters</h3>
-					<p>I'll show courses that match the checked criteria.</p>
+    <div class="col-row">
+    <div class="col c7" style="vertical-align:top;padding:0em;">
+        <table class="courses">
+            <thead>
+                <tr>
+                    <th style="width:15%;">Code</th>
+                    <th style="width:60%;">Course Name</th>
+                    <th style="width:25%;">Instructor(s)</th>
+                </tr>
+            </thead>
+            <tbody id="courselist_body">            
+            </tbody>
+        </table>
+    </div>
+    <div class="col c3" style="">
+        <form class="inline">
+            <div id="scroller-anchor"></div>
+            <div id="scroller"> 
+                <div id="search" style="width:250px;">
+                    <h3 style="margin-top:0.5em;">Course Search</h3>
+                    <p>Now showing <strong id="course_count">0</strong> courses.<br /><a href="#">Return to top</a></p>
+                    <input type="text" style="width:80%;" placeholder="Search by course or instructor..." />
+                </div>
+                <div id="filters" style="width:250px;">
+                    <h3>Select Your Filters</h3>
+                    <p>I'll show courses that match the checked criteria.</p>
                     <select id="program">
                         <option value="SP" selected="selected">Summer Program</option>
                         <option value="AP">Academic Program</option>
                     </select>
 
                     <div id="sp-selectors">
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Maths, Science &amp; Technology">MSCT</acronym></label>
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
+                        <label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
+                        <label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
+                        <label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Maths, Science &amp; Technology">MSCT</acronym></label>
+                        <label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
 
                         <p style="margin-top:1em;"><span style="margin-right:0.5em;">For age:</span>
                             <select style="width:auto;">
                                 <option selected="selected" value="all">(All ages)</option>
+                                <option>3.5-4</option>
                                 <option>4</option>
                                 <option>5</option>
                                 <option>6</option>
@@ -68,11 +69,11 @@
                         <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #108900;"></div> <acronym class="tipped" title="SAT Subject Test Prep">SATS</acronym></label>
                         <p class="muted" style="margin-top:1em;">Academic Program courses are year-based. <a href="/faq.php#/academic-program">View FAQ</a>.</p>
                     </div>
-				</div>
-			</div>
-		</form>
-	</div>
-	</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -169,5 +170,5 @@ $('#program').change(function () {
 });
 
 moveScroller();
-	
+    
 </script>
