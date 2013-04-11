@@ -1,0 +1,108 @@
+<div id="top_filters" class="content-row spaced">
+    <div id="content">
+        <h1>{{course_title}}</h1>
+    </div>
+</div>
+
+<div id="course_list" class="content-row spaced">
+    <div class="col-row">
+        <div class="col c7" style="vertical-align:top;">
+            <p><a href="/courses.php">&laquo; Return to course list</a></p>
+            {{note}}
+            <div class="alert alert-yellow">During registration, you'll have more options including adding this course to your children's schedules! We're planning to open registration on <strong>April 22</strong>.</div>
+            <h2>About This Course</h2>
+            <blockquote>
+                {{course_synop}}
+            </blockquote>
+            <h3>Course Description</h3>
+            <p>{{course_desc}}</p>
+            <h3>Lead Instructor</h3>
+            <p>{{lead_instructor_name}}</p>
+
+            <h3>Expected Outcomes</h3>
+            <p>{{course_outcomes}}</p>
+
+            <h3>Recommended Prior Knowledge (Pre-Requisites)</h3>
+            <p>{{course_prereqs}}</p>
+
+            <!-- <h2>Class Tags and Statuses</h2>
+            <p>For this section, any item in green is enabled and parents are advised to take note.</p>
+            <div style="display:table;width:100%;">
+                <div style="display:table-row;">
+                    <div style="display:table-cell;width:49%;padding:2px;">
+                        <div class="course-flag is-{{computers_active}}" data-db-item="CourseComputers" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Computer usage</div>
+                    </div>
+                    <div style="display:table-cell;width:49%;padding:2px;">
+                        <div class="course-flag is-{{instruments_active}}" data-db-item="CourseInstruments" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Musical instrument usage</div>
+                    </div>
+                </div>
+                <div style="display:table-row;">
+                    <div style="display:table-cell;width:49%;padding:2px;">
+                        <div class="course-flag is-{{addon_active}}" data-db-item="CourseFeeAddon" data-active-val="50" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Additional fees</div>
+                    </div>
+                    <div style="display:table-cell;width:49%;padding:2px;">
+                        <div class="course-flag is-{{activity_active}}" data-db-item="CourseActivity" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Physical activity required</div>
+                    </div>
+                </div>
+                <div style="display:table-row;">
+                    <div style="display:table-cell;width:49%;padding:2px;">
+                        <div class="course-flag is-{{age_active}}" data-db-item="CourseEnforceAge" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Age-enforced class (no <a href="/faq.php#/enrollment">PTE</a> allowed)</div>
+                    </div>
+                    <div style="display:table-cell;width:49%;padding:2px;">
+                        <div class="course-flag is-{{enroll_active}}" data-db-item="CourseEnforceEnroll" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Waitlist available</div>
+                    </div>
+                </div>
+            </div> -->
+
+            <h2>Offered Timeslots</h2>
+            <p>The table here shows when this class will be offered. More information will be available during the registration stage.</p>
+
+            <table id="offerings">
+                <thead>
+                    <tr>
+                        <th>Class #</th>
+                        <th>Teacher</th>
+                        <th>Week</th>
+                        <th>Period</th>
+                        <th>Ages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{offerings}}
+                </tbody>
+            </table>
+            <p><a href="/courses.php">&laquo; Return to course list</a></p>
+        </div>
+        <div class="col c3" style="background-color:#fafafa;">
+            <h3><div class="course-colorbox course-cb-{{course_subj_lc}}"></div> {{course_subject}}{{course_formatted_id}}</h3>
+            <h3>Program</h3>
+            <p>{{course_program}}</p>
+            <h3>Difficulty rating</h3>
+            <p>{{course_diff_text}}</p>
+            <h3>Class is taught in...</h3>
+            <p><img src="/assets/icons/{{course_loi}}.png" style="height:18px;" /> {{course_loi_text}}</p>
+            <h3>Course Notes</h3>
+            <div class="alert alert-blue">Parents please take note of these following items regarding this course.</div>
+            <div class="{{computers_active}}">
+                <p><strong>Computer usage:</strong> Students in this course will use school computers extensively for the duration of the class.</p>
+            </div>
+            <div class="{{instruments_active}}">
+                <p><strong>Musical instrument usage:</strong> This class will require students to use school musical instruments, such as guitars or keyboards.</p>
+            </div>
+            <div class="{{addon_active}}">
+                <p><strong>Additional fees:</strong> An addition fee may apply to students registering in this class.</p>
+            </div>
+            <div class="{{activity_active}}">
+                <p><strong>Physical activity:</strong> Students will be required to perform physical activity in this course, and are recommended to wear comfortable, loose-fitting, sporty clothing.</p>
+            </div>
+            <div class="{{age_active}}">
+                <p><strong>Age enforcement:</strong> Students who do not meet the age range for this course cannot register due to safety or other operational reasons. <a href="/faq.php#/enrollment">PTE's are disabled</a> for this course as a result.</p>
+            </div>
+            <div class="{{enroll_active}}">
+                <p><strong>Waitlist available:</strong> In the event that this course fills up, you will be allowed to select this course on a waitlist basis and may be enrolled if another student drops the course.</p>
+            </div>
+
+            <button type="button" id="btn-notify" class="button-link button-green" data-blank-url="http://eepurl.com/u_T19">Get Notified to Register!</button>
+        </div>
+    </div>
+</div>

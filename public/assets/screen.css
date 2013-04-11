@@ -1146,3 +1146,84 @@ table.courses div.course-synopsis {
 	font-size: 0.95em;
 	color: #444;
 }
+
+/** Table recolor **/
+table tr.even td {
+    background-color: #fef6f6 !important;
+    border: 1px inset #dadada;
+}
+
+table tr.odd td {
+    background-color: #fff !important;
+    border: 1px inset #dadada;
+}
+
+div.course-flag {
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #eee;
+    border-radius: 4px 4px 4px 4px;
+}
+
+div.course-flag > img {
+    display: none;
+}
+
+div.course-flag.is-active {
+    background-color: #c5ffc8;
+}
+
+div.course-flag.is-inactive {
+    background-color: #ffd5d5;
+}
+
+div.course-flag.is-active > img.active {
+    display: inline;
+}
+
+div.course-flag.is-inactive > img.inactive {
+    display: inline;
+}
+
+div.course-flag.is-active > img.inactive {
+    display: none;
+}
+
+div.course-flag.is-inactive > img.active {
+    display: none;
+}
+
+div.course-flag-nopointer {
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #eee;
+    border-radius: 4px 4px 4px 4px;
+}
+
+div.course-flag-nopointer > img {
+    display: none;
+}
+
+div.course-flag-nopointer.is-active {
+    background-color: #c5ffc8;
+}
+
+div.course-flag-nopointer.is-inactive {
+    background-color: #ffd5d5;
+}
+
+div.course-flag-nopointer.is-active > img.active {
+    display: inline;
+}
+
+div.course-flag-nopointer.is-inactive > img.inactive {
+    display: inline;
+}
+
+div.course-flag-nopointer.is-active > img.inactive {
+    display: none;
+}
+
+div.course-flag-nopointer.is-inactive > img.active {
+    display: none;
+}

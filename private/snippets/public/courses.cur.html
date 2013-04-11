@@ -1,49 +1,51 @@
 <div id="top_filters" class="content-row spaced">
     <div id="content">
-    	<h1>Course Offering 2013</h1>
+        <h1>Course Offering 2013</h1>
     </div>
 </div>
 
 <div id="course_list" class="content-row spaced">
-	<div class="col-row">
-	<div class="col c7" style="vertical-align:top;padding:0em;">
-		<table class="courses">
-			<thead>
-				<tr>
-					<th style="width:15%;">Code</th>
-					<th style="width:60%;">Course Name</th>
-					<th style="width:25%;">Instructor(s)</th>
-				</tr>
-			</thead>
-			<tbody id="courselist_body">			
-			</tbody>
-		</table>
-	</div>
-	<div class="col c3" style="">
-		<form class="inline">
-			<div id="scroller-anchor"></div>
-			<div id="scroller"> 
-				<div id="search" style="width:250px;">
-					<h3 style="margin-top:0.5em;">Course Search</h3>
-					<p>Now showing <strong id="course_count">0</strong> courses.<br /><a href="#">Return to top</a></p>
-					<input type="text" style="width:80%;" placeholder="Search by course or instructor..." />
-				</div>
-				<div id="filters" style="width:250px;">
-					<h3>Select Your Filters</h3>
-					<p>I'll show courses that match the checked criteria.</p>
+    <div class="col-row">
+    <div class="col c7" style="vertical-align:top;padding:0em;">
+        <table class="courses">
+            <thead>
+                <tr>
+                    <th style="width:15%;">Code</th>
+                    <th style="width:60%;">Course Name</th>
+                    <th style="width:25%;">Instructor(s)</th>
+                </tr>
+            </thead>
+            <tbody id="courselist_body">            
+            </tbody>
+        </table>
+    </div>
+    <div class="col c3" style="">
+        <form class="inline">
+            <div id="scroller-anchor"></div>
+            <div id="scroller"> 
+                <div id="search" style="width:250px;">
+                    <h3 style="margin-top:0.5em;">Course Search</h3>
+                    <p>Showing <strong id="course_count">0</strong> courses total. <a href="#">Return to top</a></p>
+                    <input type="text" style="width:80%;" id="search_input" placeholder="Search by course or instructor..." />
+                </div>
+                <div id="filters" style="width:250px;">
+                    <h3>Select Your Filters</h3>
+                    <p>I'll show courses that match the checked criteria.</p>
+
+                    <div class="alert alert-yellow">Academic Program courses will be available soon.</div>
                     <select id="program">
                         <option value="SP" selected="selected">Summer Program</option>
                         <option value="AP">Academic Program</option>
                     </select>
 
                     <div id="sp-selectors">
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Maths, Science &amp; Technology">MSCT</acronym></label>
-    					<label><input type="checkbox" checked="checked" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
+                        <label><input type="checkbox" checked="checked" class="subject" id="show-arts" value="ARTS" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #116900;"></div> <acronym class="tipped" title="The Arts">ARTS</acronym></label>
+                        <label><input type="checkbox" checked="checked" class="subject" id="show-lang" value="LANG" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #694F00;"></div> <acronym class="tipped" title="Languages">LANG</acronym></label>
+                        <label><input type="checkbox" checked="checked" class="subject" id="show-msct" value="MSCT" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #003669;"></div> <acronym class="tipped" title="Maths, Science &amp; Technology">MSCT</acronym></label>
+                        <label><input type="checkbox" checked="checked" class="subject" id="show-phed" value="PHED" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #691600;"></div> <acronym class="tipped" title="Physical Education">PHED</acronym></label>
 
                         <p style="margin-top:1em;"><span style="margin-right:0.5em;">For age:</span>
-                            <select style="width:auto;">
+                            <select style="width:auto;" id="agefilter">
                                 <option selected="selected" value="all">(All ages)</option>
                                 <option>4</option>
                                 <option>5</option>
@@ -62,28 +64,22 @@
                     </div>
 
                     <div id="ap-selectors" class="hide">
-                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #d16700;"></div> <acronym class="tipped" title="CIS 101">CISO</acronym></label>
-                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #8c0064;"></div> <acronym class="tipped" title="Career Pathways">PATH</acronym></label>
-                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #0b4eff;"></div> <acronym class="tipped" title="IBDP Taster Courses">IBTC</acronym></label>
-                        <label><input type="checkbox" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #108900;"></div> <acronym class="tipped" title="SAT Subject Test Prep">SATS</acronym></label>
+                        <label><input type="checkbox" id="show-ciso" class="subject" value="CISO" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #d16700;"></div> <acronym class="tipped" title="CIS 101">CISO</acronym></label>
+                        <label><input type="checkbox" id="show-path" class="subject" value="PATH" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #8c0064;"></div> <acronym class="tipped" title="Career Pathways">PATH</acronym></label>
+                        <label><input type="checkbox" id="show-ibtc" class="subject" value="IBTC" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #0b4eff;"></div> <acronym class="tipped" title="IBDP Taster Courses">IBTC</acronym></label>
+                        <label><input type="checkbox" id="show-sats" class="subject" value="SATS" /> <div style="display: inline-block; width:10px; height:10px; vertical-align:center; background-color: #108900;"></div> <acronym class="tipped" title="SAT Subject Test Prep">SATS</acronym></label>
                         <p class="muted" style="margin-top:1em;">Academic Program courses are year-based. <a href="/faq.php#/academic-program">View FAQ</a>.</p>
                     </div>
-				</div>
-			</div>
-		</form>
-	</div>
-	</div>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
 </div>
 
 <script type="text/javascript">
 $(document).ready(function () {
-    $.getJSON('/rpc.php', {'method': 'loadCourses'}, function (ret) {
-        $('#courselist_body').html('');
-        $.each(ret.data, function (ii, val) {
-            pushRow(val.cid, val.subject, val.lead_instructor, val.title, val.synopsis, val.minage, val.maxage);
-        });
-        updateCount();
-    });
+    loadCourses('ARTS,PHED,MSCT,LANG', 'all');
 });
 
 function moveScroller() {
@@ -109,12 +105,35 @@ function moveScroller() {
     move();
 }
 
+function reloadCourses() {
+    var loadSubj = new Array();
+    $.each($('input.subject:checked'), function (i, tickbox) {
+        loadSubj.push($(tickbox).val());
+    });
+
+    var subjStr = loadSubj.join(',');
+    var ageStr = (($('#program').val()) ? $('#agefilter').val() : 'all');
+
+    loadCourses(subjStr, ageStr);
+}
+
 function pushRow(id, subj, lead, title, synop, agemin, agemax) {
-    $('#courselist_body').append('<tr class="metalink course-row hideable-' + subj.toLowerCase() + '" data-courseid="' + id + '"><td><div class="course-colorbox course-cb-' + subj.toLowerCase() + '"></div> ' + subj.toUpperCase() + pad(id.toString(), 3, '0', STR_PAD_LEFT) + '</td><td><div class="course-title"><span class="badge">Ages ' + agemin + '-' + agemax + '</span> <a href="/view_course.php?id=' + id + '"><strong>' + title + '</strong></a></div><div id="courseid-' + id + '-synop" class="hide course-synopsis courseexpand-' + id + '">' + synop + '<br /><a href="/view_course.php?id=' + id + '">View course in detail&hellip;</a></div></td><td>' + lead + '</td></tr>');
+    if ((subj == 'ARTS') || (subj == 'PHED') || (subj == 'LANG') || (subj == 'MSCT')) var sp = true;
+    else var sp = false; 
+
+    $('#courselist_body').append('<tr class="metalink course-row is-' + subj.toLowerCase() + '" data-courseid="' + id + '" data-agemin="' + agemin + '" data-agemax="' + agemax + '"><td><div class="course-colorbox course-cb-' + subj.toLowerCase() + '"></div> ' + subj.toUpperCase() + pad(id.toString(), 3, '0', STR_PAD_LEFT) + '</td><td><div class="course-title">' + ((sp) ? '<span class="badge">Ages ' + agemin + '-' + agemax + '</span> ' : '') + '<a href="/view_course.php?id=' + id + '"><strong>' + title + '</strong></a></div><div id="courseid-' + id + '-synop" class="hide course-synopsis courseexpand-' + id + '">' + synop + '<br /><a href="/view_course.php?id=' + id + '">View course in detail&hellip;</a></div></td><td>' + lead + '</td></tr>');
 }
 
 function updateCount() {
-    $('#course_count').html($('#courselist_body>tr').length.toString());
+    $('#course_count').html($('#courselist_body>tr:visible').length.toString());
+
+    var $allRows = $('tr:visible');
+    var $oddRows = $allRows.filter(':odd');
+    var $evenRows = $allRows.filter(':even');
+
+    // Remove old classes, then add new ones.
+    $oddRows.removeClass('even').addClass('odd');
+    $evenRows.removeClass('odd').addClass('even');
 }
 
 var STR_PAD_LEFT = 1;
@@ -146,6 +165,50 @@ function pad(str, len, pad, dir) {
     return str;
 }
 
+function loadCourses(passSubj, passAge) {
+    $.getJSON('/rpc.php', {'method': 'loadCourses', 'subjects': passSubj, 'age': passAge}, function (ret) {
+        $('#courselist_body').html('');
+        $.each(ret.data, function (ii, val) {
+            pushRow(val.cid, val.subject, val.lead_instructor, val.title, val.synopsis, val.minage, val.maxage);
+        });
+        updateCount();
+
+        // Bind search
+        var $rows = $('.courses tbody tr');
+        $('#search_input').keyup(function() {
+            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+
+            $rows.show().filter(function() {
+                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                return !~text.indexOf(val);
+            }).hide();
+            updateCount();
+        });
+
+        $('#agefilter').change(function () {
+            if ($(this).val() == 'all') {
+                $('.hidden-due-age').show().removeClass('hidden-due-age');
+            } else {
+                var testAge = $(this).val();
+                $.each($('.course-row'), function (ii, course) {
+                    if ($(course).data('agemin') > testAge) {
+                        $(course).hide().addClass('hidden-due-age');
+                    } else if ($(course).data('agemax') < testAge) {
+                        $(course).hide().addClass('hidden-due-age');
+                    } else {
+                        $(course).show().removeClass('hidden-due-age');
+                    }
+                });
+            }
+            updateCount();
+        });
+
+        $('input.subject').change(function() {
+            reloadCourses();
+        });
+    });
+}
+
 $('.course-row').live("click", function () {
 
     /* Hide it all */
@@ -159,15 +222,26 @@ $('.course-row').live("click", function () {
 });
 
 $('#program').change(function () {
+    $('input:checkbox').prop('checked', false);
+    $('#agefilter').val('all');
     if ($(this).val() == 'SP') {
         $('#ap-selectors').hide();
         $('#sp-selectors').fadeIn();
+        $('#show-arts').prop('checked', true);
+        $('#show-lang').prop('checked', true);
+        $('#show-phed').prop('checked', true);
+        $('#show-msct').prop('checked', true);
     } else {
         $('#sp-selectors').hide();
         $('#ap-selectors').fadeIn();
+        $('#show-ciso').prop('checked', true);
+        $('#show-sats').prop('checked', true);
+        $('#show-ibtc').prop('checked', true);
+        $('#show-path').prop('checked', true);
     }
+    reloadCourses();
 });
 
 moveScroller();
-	
+    
 </script>

@@ -52,7 +52,7 @@ if (isset($_REQUEST['method'])) {
             }
 
             // Age filter
-            if (array_key_exists('age', $_REQUEST)) {
+            if (array_key_exists('age', $_REQUEST) && ($_REQUEST['age'] !== 'all')) {
                 $agemin = (int) $_REQUEST['age'];
                 $agemax = (int) $_REQUEST['age'];
             } else {
@@ -70,7 +70,7 @@ if (isset($_REQUEST['method'])) {
             // Build query
             $stmt = Data::prepare("SELECT c.CourseID as cid, c.CourseSubj as `subject`, c.CourseTitle as title, c.CourseSynop as synopsis, MIN(l.ClassAgeMin) as minage, MAX(l.ClassAgeMax) as maxage, (SELECT staff.StaffName from staff WHERE staff.StaffID = c.TeacherLead) as lead_instructor FROM `courses` c
     INNER JOIN `classes` l USING(CourseID)
-    WHERE l.ClassAgeMin <= :agemin AND l.ClassAgeMax >= :agemax AND c.CourseTitle LIKE ".$title." AND c.CourseSubj IN (".$subj.")
+    WHERE l.ClassAgeMin <= :agemin AND l.ClassAgeMax >= :agemax AND c.CourseTitle LIKE ".$title." AND c.CourseSubj IN (".$subj.") AND c.CourseFlagsPublic = 1
     GROUP BY c.CourseID
     ORDER BY c.CourseTitle ASC");
             $stmt->bindParam('agemin', $agemin);
