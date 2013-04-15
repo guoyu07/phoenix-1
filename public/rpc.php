@@ -67,10 +67,23 @@ if (isset($_REQUEST['method'])) {
                 $title = "'%%'";
             }
 
+            // Week and period search
+            if (array_key_exists('week', $_REQUEST)) {
+                $classweek = '"'.implode('","', explode(':', $_REQUEST['week'])).'"';
+            } else {
+                $classweek = '1,2,3,4';
+            }
+
+            if (array_key_exists('period', $_REQUEST)) {
+                $classperiod = '"'.implode('","', explode(':', $_REQUEST['period'])).'"';
+            } else {
+                $classperiod = '"1","2","3","4","A","B","C"';
+            }
+
             // Build query
             $stmt = Data::prepare("SELECT c.CourseID as cid, c.CourseSubj as `subject`, c.CourseTitle as title, c.CourseSynop as synopsis, MIN(l.ClassAgeMin) as minage, MAX(l.ClassAgeMax) as maxage, (SELECT staff.StaffName from staff WHERE staff.StaffID = c.TeacherLead) as lead_instructor FROM `courses` c
     INNER JOIN `classes` l USING(CourseID)
-    WHERE l.ClassAgeMin <= :agemin AND l.ClassAgeMax >= :agemax AND c.CourseTitle LIKE ".$title." AND c.CourseSubj IN (".$subj.") AND c.CourseFlagsPublic = 1
+    WHERE l.ClassAgeMin <= :agemin AND l.ClassAgeMax >= :agemax AND c.CourseTitle LIKE ".$title." AND c.CourseSubj IN (".$subj.") AND c.CourseFlagsPublic = 1 AND l.ClassWeek IN (".$classweek.") AND l.ClassPeriodBegin IN (".$classperiod.")
     GROUP BY c.CourseID
     ORDER BY c.CourseTitle ASC");
             $stmt->bindParam('agemin', $agemin);
