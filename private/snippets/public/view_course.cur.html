@@ -25,35 +25,6 @@
             <h3>Recommended Prior Knowledge (Pre-Requisites)</h3>
             <p>{{course_prereqs}}</p>
 
-            <!-- <h2>Class Tags and Statuses</h2>
-            <p>For this section, any item in green is enabled and parents are advised to take note.</p>
-            <div style="display:table;width:100%;">
-                <div style="display:table-row;">
-                    <div style="display:table-cell;width:49%;padding:2px;">
-                        <div class="course-flag is-{{computers_active}}" data-db-item="CourseComputers" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Computer usage</div>
-                    </div>
-                    <div style="display:table-cell;width:49%;padding:2px;">
-                        <div class="course-flag is-{{instruments_active}}" data-db-item="CourseInstruments" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Musical instrument usage</div>
-                    </div>
-                </div>
-                <div style="display:table-row;">
-                    <div style="display:table-cell;width:49%;padding:2px;">
-                        <div class="course-flag is-{{addon_active}}" data-db-item="CourseFeeAddon" data-active-val="50" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Additional fees</div>
-                    </div>
-                    <div style="display:table-cell;width:49%;padding:2px;">
-                        <div class="course-flag is-{{activity_active}}" data-db-item="CourseActivity" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Physical activity required</div>
-                    </div>
-                </div>
-                <div style="display:table-row;">
-                    <div style="display:table-cell;width:49%;padding:2px;">
-                        <div class="course-flag is-{{age_active}}" data-db-item="CourseEnforceAge" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Age-enforced class (no <a href="/faq.php#/enrollment">PTE</a> allowed)</div>
-                    </div>
-                    <div style="display:table-cell;width:49%;padding:2px;">
-                        <div class="course-flag is-{{enroll_active}}" data-db-item="CourseEnforceEnroll" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Waitlist available</div>
-                    </div>
-                </div>
-            </div> -->
-
             <h2>Offered Timeslots</h2>
             <p>The table here shows when this class will be offered. More information will be available during the registration stage.</p>
 
@@ -71,14 +42,19 @@
                     {{offerings}}
                 </tbody>
             </table>
-            <p><a href="/courses.php">&laquo; Return to course list</a></p>
+            <p style="margin-top:1em;"><a href="/courses.php">&laquo; Return to course list</a></p>
         </div>
         <div class="col c3" style="background-color:#fafafa;">
             <h3><div class="course-colorbox course-cb-{{course_subj_lc}}"></div> {{course_subject}}{{course_formatted_id}}</h3>
             <h3>Program</h3>
             <p>{{course_program}}</p>
             <h3>Difficulty rating</h3>
-            <p>{{course_diff_text}}</p>
+            <p>
+                <div class="course-flag is-{{course_beginner_active}}"><img src="/assets/icons/tick.png" class="active"> No/little prior knowledge required</div>
+                <div class="course-flag is-{{course_inter_active}}"><img src="/assets/icons/tick.png" class="active"> Some experience recommended</div>
+                <div class="course-flag is-{{course_adv_active}}"><img src="/assets/icons/tick.png" class="active"> For experienced learners</div>
+                <div class="course-flag is-{{course_applicable_active}}"><img src="/assets/icons/tick.png" class="active"> Not applicable</div>
+            </p>
             <h3>Class is taught in...</h3>
             <p><img src="/assets/icons/{{course_loi}}.png" style="height:18px;" /> {{course_loi_text}}</p>
             <h3>Course Notes</h3>

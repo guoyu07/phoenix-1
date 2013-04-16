@@ -10,8 +10,8 @@
         <table class="courses">
             <thead>
                 <tr>
-                    <th style="width:15%;">Code</th>
-                    <th style="width:60%;">Course Name</th>
+                    <th style="width:18%;">Code</th>
+                    <th style="width:57%;">Course Name</th>
                     <th style="width:25%;">Instructor(s)</th>
                 </tr>
             </thead>
@@ -141,15 +141,20 @@ function reloadCourses() {
     var ageStr = (($('#program').val()) ? $('#agefilter').val() : 'all');
     var weekStr = loadWeek.join(':');
     var periodStr = loadPeriod.join(':');
-    console.log('Attempting to load courses with arguments: '+subjStr+' and '+ageStr+' with weekStr='+weekStr+' and periodStr='+periodStr);
+    
     loadCourses(subjStr, ageStr, weekStr, periodStr);
 }
 
-function pushRow(id, subj, lead, title, synop, agemin, agemax) {
+function pushRow(id, subj, lead, title, synop, agemin, agemax, loi) {
     if ((subj == 'ARTS') || (subj == 'PHED') || (subj == 'LANG') || (subj == 'MSCT')) var sp = true;
     else var sp = false; 
 
-    $('#courselist_body').append('<tr class="metalink course-row is-' + subj.toLowerCase() + '" data-courseid="' + id + '" data-agemin="' + agemin + '" data-agemax="' + agemax + '"><td><div class="course-colorbox course-cb-' + subj.toLowerCase() + '"></div> ' + subj.toUpperCase() + pad(id.toString(), 3, '0', STR_PAD_LEFT) + '</td><td><div class="course-title">' + ((sp) ? '<span class="badge">Ages ' + agemin + '-' + agemax + '</span> ' : '') + '<a href="/view_course.php?id=' + id + '"><strong>' + title + '</strong></a></div><div id="courseid-' + id + '-synop" class="hide course-synopsis courseexpand-' + id + '">' + synop + '<br /><a href="/view_course.php?id=' + id + '">View course in detail&hellip;</a></div></td><td>' + lead + '</td></tr>');
+    // Language flag
+    if (loi == 'en') var loiStr = 'Taught in English';
+    else if (loi == 'zh') var loiStr = 'Taught in Putonghua (Mandarin)';
+    else var loiStr = 'Taught in both English and Putonghua';
+
+    $('#courselist_body').append('<tr class="metalink course-row is-' + subj.toLowerCase() + '" data-courseid="' + id + '" data-agemin="' + agemin + '" data-agemax="' + agemax + '"><td><div class="course-colorbox course-cb-' + subj.toLowerCase() + '"></div> ' + subj.toUpperCase() + pad(id.toString(), 3, '0', STR_PAD_LEFT) + '</td><td><div class="course-title">' + ((sp) ? '<span class="badge">Ages ' + agemin + '-' + agemax + '</span> ' : '') + '<a href="/view_course.php?id=' + id + '"><strong>' + title + '</strong></a></div><div id="courseid-' + id + '-synop" class="hide course-synopsis courseexpand-' + id + '">' + synop + '<br /><span class="badge badge-blue"><img src="/assets/icons/' + loi + '.png" style="vertical-align:absmiddle;top:1px;height:16px;" /> ' + loiStr + '</span> &nbsp; <a href="/view_course.php?id=' + id + '">Detailed view &raquo;</a></div></td><td>' + lead + '</td></tr>');
 }
 
 function updateCount() {
@@ -199,7 +204,7 @@ function loadCourses(passSubj, passAge, passWeeks, passPeriods) {
     $.getJSON('/rpc.php', {'method': 'loadCourses', 'subjects': passSubj, 'age': passAge, 'week': passWeeks, 'period': passPeriods}, function (ret) {
         $('#courselist_body').html('');
         $.each(ret.data, function (ii, val) {
-            pushRow(val.cid, val.subject, val.lead_instructor, val.title, val.synopsis, val.minage, val.maxage);
+            pushRow(val.cid, val.subject, val.lead_instructor, val.title, val.synopsis, val.minage, val.maxage, val.loi);
         });
         updateCount();
 
@@ -244,17 +249,19 @@ function loadCourses(passSubj, passAge, passWeeks, passPeriods) {
         $('input.period').change(function() {
             reloadCourses();
         });
+
+        $('.tipped').tipTip({delay: 100});
     });
 }
 
 $('.course-row').live("click", function () {
 
     /* Hide it all */
-    $('.course-synopsis').slideUp();
+    $('.course-synopsis').slideUp('fast');
     
     /* Toggle content */
     var courseid = $(this).data('courseid');
-    $('#courseid-' + courseid + '-synop').slideToggle();
+    $('#courseid-' + courseid + '-synop').slideToggle('fast');
     return true;
     
 });
