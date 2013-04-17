@@ -42,6 +42,20 @@ class ACL extends Security {
         // Should always return true
         return true;
     }
+
+    /**
+     * Sees if an associated family account is activated. True if active, false otherwise
+     * @param   int $id     Single sign-on user ID number
+     */
+    static public function checkActive($id) {
+        $stmt = Data::prepare('SELECT `FamilyAccountStatus` from `families` WHERE ObjID = :id');
+        $stmt->bindParam('id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!array_key_exists('FamilyAccountStatus', $result) || ($result['FamilyAccountStatus'] !== '1')) return false;
+        else return true;
+    }
     
     /**
      * Looks up SSO object ID by email and (optionally) object type. Success returns SSOID.

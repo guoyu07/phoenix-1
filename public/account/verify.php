@@ -23,12 +23,14 @@ if (!isset($_GET['email']) || !isset($_GET['v'])) {
 }
 
 // No such email?
-if (ACL::checkEmail($_GET['email'])) {
-    $famInfo = ACL::getUserData($_GET['email']);
-    if (sha1($famInfo['password']) == $_GET['v']) {
+$objid = ACL::checkSsoEmail($_GET['email']);
+if ($objid) {
+    $obj = ACL::getSsoObject($objid);
+
+    if (sha1($obj['ObjHash']) == $_GET['v']) {
         try {
-            $stmt = Data::prepare('UPDATE `families` SET `FamilyAccountStatus` = 1 WHERE `FamilyEmail` = :email AND `FamilyAccountStatus` = 0');
-            $stmt->bindParam('email', $famInfo['email']);
+            $stmt = Data::prepare('UPDATE `families` SET `FamilyAccountStatus` = 1 WHERE `ObjID` = :objid AND `FamilyAccountStatus` = 0');
+            $stmt->bindParam('objid', $objid, PDO::PARAM_INT);
             $stmt->execute();
         } catch (PDOException $e) {
             Common::throwNiceDataException($e);

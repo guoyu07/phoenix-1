@@ -11,7 +11,6 @@
 
 define('PTP',   '../../private/');
 define('PHX_SCRIPT_TYPE',   'HTML');
-define('PHX_NEWS',      true);
 define('PHX_UX',        true);
 
 
@@ -22,26 +21,28 @@ require_once(PTP . 'php/ignition.php');
 if (isset($_POST['email']) && isset($_POST['pass'])) {
     
     // Does email address exist in the database?
-    if (!ACL::checkEmail($_POST['email'])) {
+    if (!ACL::checkSsoEmail($_POST['email'])) {
         Common::logAction('http.post.login', 'failed', 'EMAIL='.$_POST['email'], 'inexistent account');
         header('Location: ./login.php?msg=error_email');
         exit();
+    } else {
+        $oid = ACL::checkSsoEmail($_POST['email']);
     }
     
     // Check password
-    $login_check = ACL::checkLogin($_POST['email'], $_POST['pass']);
-    
+    $login_check = ACL::login($_POST['email'], $_POST['pass'], 'public');
+
     if ($login_check === false) {
         header('Location: ./login.php?msg=error_pass');
         exit();
-    } elseif ($login_check == 0) {
+    } elseif (!ACL::checkActive($login_check)) {
         // Account is inactive
         header('Location: ./login.php?msg=error_inactive');
         exit();
     }
     
     // Everything's good, set session info and we're good to transfer to dashboard
-    ACL::generateSession($login_check);
+    ACL::genSession($oid);
     header('Location: ./dashboard.php');
     
 }
@@ -68,6 +69,9 @@ if (array_key_exists('msg', $_GET)) {
 		case 'error_inactive':
 			$error = '<div class="alert alert-red">Your account is not yet active. To activate your account, please refer to the original welcome email we sent to your account when you registered.</div>';
 		break;
+        case 'pass_change':
+            $error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> Your password was successfully changed. Please login to continue.</div>';
+        break;
 		default:
 			$error = '';
 		break;

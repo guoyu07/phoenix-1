@@ -23,6 +23,18 @@
 					<button type="button" id="button-pass-reset">Reset Password</button>
 				</div>
 			</form>
+            <form class="short validate hide" action="/sso_reset.php" method="post" id="reset-form" enctype="multipart/form-data">
+                <p>Forgot your password? No worries: to begin the account recovery process, enter your family account's registered email address. If your account already exists, we'll send you an email with instructions on recovering your account.</p>
+                <div class="form-row" id="form-email">
+                    <label for="email-res-input">Email address</label>
+                    <input type="email" id="email-res-input" name="email" class="required" />
+                </div>
+                <input type="hidden" name="type" value="public" />
+                <div class="form-row no-label">
+                    <button type="submit" class="button-blue">Restore My Account</button>
+                    <button type="button" id="button-reset-cancel">Cancel</button>
+                </div>
+            </form>
 		</div>
 		<div id="login-container" class="col c4" style="border: 1px solid #ccc;border-left: 0;background-color: #fafafa;">
 			<h2>Don't have an account?</h2>
@@ -53,28 +65,17 @@
 $(document).ready(function() {
 	$('#email-input').focus();
 	$('#button-pass-reset').click(function () {
-	   forgotPassword();
-	})
-});
+        $('#email-input').val('');
+        $('#login-form').hide();
+        $('#reset-form').fadeIn('fast');
+        $('#email-res-input').focus();
+	});
+    $('#button-reset-cancel').click(function () {
+        $('#email-res-input').val('');
+        $('#reset-form').hide();
+        $('#login-form').fadeIn('fast');
+        $('#email-input').focus();
 
-function forgotPassword() {
-    if ($('#email-input').val() == '') {
-        $('#pass-hint').hide().removeClass('alert alert-green alert-red').addClass('alert alert-red').html('Oops! Enter your email address first so we can look your account up. If you\'ve forgotten that too, send an email to <a href="mailto:tech@summer.cis.edu.hk">tech@summer.cis.edu.hk</a> for assistance.').fadeIn('fast');
-        $('#email-input').focus().removeClass('alert alert-green alert-red').html('Looking up your account, please wait...').fadeIn('fast');
-    } else {
-        // RPC it
-        $('#pass-hint').hide();
-        $('#form-pass').hide();
-        
-        $.getJSON('/rpc.php', 'method=resetAccount&data='+$('#email-input').val(), function (res) {
-            if (res.responseCode == 2200) {
-                // Valid response
-                $('#pass-hint').hide().removeClass('alert alert-green alert-red').addClass('alert alert-green').html('We just sent you a link to reset your password to that email address. If after checking your junk mailbox, you cannot locate this email, please contact <a href="mailto:tech@summer.cis.edu.hk">tech@summer.cis.edu.hk</a> after 15 minutes.').fadeIn('fast');
-            } else {
-                $('#pass-hint').hide().removeClass('alert alert-green alert-red').addClass('alert alert-red').html(res.error).fadeIn('fast');
-            }
-        });
-        var reset = setTimeout(function (){ $('#form-pass').slideDown(); }, 3000);
-    }
-}
+    });
+});
 </script>
