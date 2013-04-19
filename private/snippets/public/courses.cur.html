@@ -2,6 +2,8 @@
     <div id="content">
         <h1>Course Offering 2013</h1>
     </div>
+
+    <div class="alert alert-yellow">Please note that no swimming courses are offered this year due to ongoing renovations. For more information, visit <a href="/faq.php#/summer-program">our Frequently Asked Questions</a> page.</div>
 </div>
 
 <div id="course_list" class="content-row spaced">
@@ -20,7 +22,7 @@
         </table>
     </div>
     <div class="col c3" style="">
-        <form class="inline">
+        <form class="inline" method="post">
             <div id="scroller-anchor"></div>
             <div id="scroller"> 
                 <div id="search" style="width:250px;">
@@ -97,7 +99,30 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-    loadCourses('ARTS,PHED,MSCT,LANG', 'all', '1:2:3:4', '1:2:3:4:A:B:C');
+    if (location.hash == '#!/show:AP') {
+        $('#program').val('AP');
+        $('#program').trigger('change');
+    } else loadCourses('ARTS,PHED,MSCT,LANG', 'all', '1:2:3:4', '1:2:3:4:A:B:C');
+
+    $('form').submit(function (e) {
+        e.preventDefault();
+        return false;
+    });
+
+    // Hashbang watch
+    if ("onhashchange" in window) {
+        $(window).bind('hashchange', function () {
+            if (location.hash == '#!/show:AP') {
+                $('#program').val('AP');
+                $('#program').trigger('change');
+            } else if (location.hash == '#!/show:SP') {
+                $('#program').val('SP');
+                $('#program').trigger('change');
+            } else {
+                return false;
+            }
+        });
+    }
 });
 
 function moveScroller() {
@@ -267,7 +292,6 @@ $('.course-row').live("click", function () {
 });
 
 $('#program').change(function () {
-    console.log('Program change occured');
     $('.subject').prop('checked', false);
     $('.period').prop('checked', false);
     if ($(this).val() == 'SP') {

@@ -69,6 +69,9 @@ if (array_key_exists('msg', $_GET)) {
 		case 'error_inactive':
 			$error = '<div class="alert alert-red">Your account is not yet active. To activate your account, please refer to the original welcome email we sent to your account when you registered.</div>';
 		break;
+        case 'error_nologin':
+            $error = '<div class="alert alert-yellow">You are not signed in. Please login to continue.</div>';
+        break;
         case 'pass_change':
             $error = '<div class="alert alert-green"><img src="/assets/icons/tick.png" title="[OK]" /> Your password was successfully changed. Please login to continue.</div>';
         break;

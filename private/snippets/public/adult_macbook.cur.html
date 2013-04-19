@@ -1,0 +1,48 @@
+<div id="body" class="content-row spaced">
+    <div id="content" style="padding:0.5em;">
+    	<h1 class="clear">Adult Macbook Course</h1>
+        <h2>What is it?</h2>
+        <p>At CIS, we understand that many parents are still getting accustomed to their children's seemingly heroic Mac and iDevice manipulation skills. This year, we're offering <strong>CIS parents and guardians exclusive access</strong> to an Beginner Adult Summer Course for Macbook usage, taught by our own Anita Chen!</p>
+
+        <div class="alert alert-blue">Parents are required to bring their own Macbooks to the course as school computers will not be provided.</div>
+        
+        <p>In this course, you will learn to master your Macbook so you can support your child’s learning at home. Learn more about iTunes, iPhoto and iMovie and support home learning. Anita Chen is the ICT Facilitator (Primary) at CIS. She is an Apple Distinguished Educator (ADE).</p>
+
+        <h2>
+    </div>
+</div>
+
+<div class="content-row spaced" id="body-registernow" style="font-size: 1.3em;">
+    <div style="padding-left: 1em;">
+        <h3>Download the Brochure to Register</h3>
+        <p>Any CIS parent is invited to attend this great opportunity to find out what, and how, your children are learning cutting edge technologies straight from a CIS teacher!</p>
+        <p class="no-bottom">
+            <button type="button" id="btn-register" class="button-link button-green" data-url="/assets/files/adult-macbook-summer-course.pdf">Download Registration Packet</button>
+        </p>
+    </div>
+</div>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var mapOptions = {
+        scrollwheel: false,
+		zoom: 15,
+		center: new google.maps.LatLng(22.286, 114.198066),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	
+	var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+	
+	info_cis = new google.maps.InfoWindow({content: '<strong>Chinese International School</strong><br />1 Hau Yuen Path<br />Braemar Hill, North Point<br />Hong Kong<br />香港寶馬山校園徑一號漢基國際學校<br /><br /><a href="https://maps.google.com/maps?daddr=1+Hau+Yuen+Path,+Braemar+Hill,+Hong+Kong&hl=en" onclick="window.open(this.href);">Find driving directions</a>'});
+	
+	var cis = new google.maps.Marker({
+		position: new google.maps.LatLng(22.283352,114.198066),
+		map: map,
+		title: 'Chinese International School'
+	});
+	google.maps.event.addListener(cis, 'click', function() { info_cis.open(map,cis)});
+	info_cis.open(map,cis);
+});
+</script>
