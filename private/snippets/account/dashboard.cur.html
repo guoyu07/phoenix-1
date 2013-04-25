@@ -1,0 +1,55 @@
+<div class="content-row spaced body-emulate">
+
+    <h1>My Dashboard</h1>
+
+    {{status}}
+
+    <p>Welcome to your dashboard! If you have any questions, or are confused about any part of this process, please visit our <a href="/faq.php" onclick="window.open(this.href);return false;"><strong>Frequently Asked Questions</strong></a> page. If you feel something has gone wrong or need to change a submitted schedule, please <a href="/account/support/new_thread.php" onclick="window.open(this.href);return false;"><strong>start a support request</strong></a>.</p>
+        
+    <div class="dashblock">
+        <div class="dashblock-title">
+            <h4 style="color:#fff;">My Children's Schedules ({{child_count}})</h4>
+        </div>
+        <div class="dashblock-content">
+            <p>Click a child's box below to edit that child's schedule and information. You can also submit, withdraw, and view payments by clicking on any child's box.</p>
+
+{{children}}
+
+            <button class="button-link button-blue" type="button" data-url="/account/add_child.php">Add a Child</button>
+        </div>
+    </div>
+
+    <div class="dashblock">
+        <div class="dashblock-title">
+            <h4 style="color:#fff;">My Invoice &amp; Support/PTE</h4>
+        </div>
+        <div class="dashblock-content">
+            <h4>My Invoice</h4>
+
+            <p>We will begin issuing payment instructions in late May - we will email you when we are ready for your payment.</p>
+
+            <div class="alert alert-green tipped" title="Click to view invoice details">
+                <p>Current Balance: HK<strong style="font-size:1.5em;">$0</strong></p>
+                <p class="no-bottom">Last payment received: <strong>$0</strong> (cheque)</p>
+            </div>
+
+            <h4>My PTE Requests</h4>
+            <em class="muted">You currently have no PTE requests pending. Request one via one of your children's schedules.</em>
+
+            <!-- <h4 style="margin-top:10px;">My Support Requests</h4>
+            <em class="muted">No have made no support requests. If you need urgent help, feel free to <a href="/account/support/new_thread.php">lodge a request</a>.</em> -->
+
+            <h4 style="margin-top:10px;">Jackson Bus Service</h4>
+            <p>As stated in our <a href="/program.php" onclick="window.open(this.href);return false;">Program Outline</a> page, CIS' day school bus operator will continue to provide school bus service for Summer and Senior Academic Program students. Return service is available for Summer Program students, and Academic Program students are free to sign up for buses to school.</p>
+
+            <div class="alert alert-blue">The Jackson Coach signup forms are independent of the CIS Summer Program. Please download, fill out, and mail/hand in these forms as instructed. For enquiries, please see the downloaded contact information.</div>
+
+            <button class="button-link" data-url="/assets/files/bus-brochure-2013.pdf" type="button">Download Bus Application</button>
+
+        </div>
+    </div>
+
+
+    <div class="clear"></div>
+
+</div>

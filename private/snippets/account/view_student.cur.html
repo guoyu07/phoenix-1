@@ -1,0 +1,137 @@
+<div id="student_info" class="content-row spaced">
+    <div class="col-row">
+        <div class="col c6" style="vertical-align:top;">
+            <h1>{{name}}</h1>
+            {{note}}
+            
+            <h2>Current Schedule </h2>
+
+            <p>This schedule was last updated at <strong>{{last_update}}</strong> HKT.</span></p>
+
+            {{submit_note}}
+
+            <p>Click on any course to change or unenroll. <strong>To add a class</strong>, click "Add a Class" below and we will take you to the enrollment brochure.</p>
+
+            <button type="button" class="button-link button-blue" data-url="/account/courses.php/#!/show:{{suggest_program}}">Add Classes to Schedule</button> 
+            
+            <h3>Week 1: June 24-28</h3>
+            <table id="w1">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_1}}
+                </tbody>
+            </table>
+
+            <h3>Week 2: July 2-5</h3>
+            <div class="alert alert-yellow">There is no school (and no fees charged) for the July 1 public holiday.</div>
+            <table id="w2">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_2}}
+                </tbody>
+            </table>
+
+            <h3>Week 3: July 8-12</h3>
+            <table id="w3">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_3}}
+                </tbody>
+            </table>
+
+            <h3>Week 4: July 15-19</h3>
+            <table id="w4">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_4}}
+                </tbody>
+            </table>
+
+            <h2>Student Profile</h2>
+
+            <form id="profile_form" method="post" class="validate short" action="/account/edit_student.php" enctype="multipart/form-data">
+                <p>You may edit basic information using this form. To change your Date of Birth or Gender, please contact us via email instead at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a> as we may require an ID copy.</p>
+                <div class="form-row" id="form-fname">
+                    <label for="fname-input">Student's First Name <span class="red strong">*</span></label>
+                    <input type="text" id="fname-input" name="fname" class="required" value="{{first_name}}" />
+                </div>
+                <div class="form-row" id="form-pname">
+                    <label for="lname-input">Prefered Name</label>
+                    <input type="text" id="pname-input" name="pname" value="{{preferred_name}}" />
+                </div>
+                <div class="form-row" id="form-lname">
+                    <label for="lname-input">Student's Last Name <span class="red strong">*</span></label>
+                    <input type="text" id="lname-input" name="lname" class="required" value="{{last_name}}" />
+                </div>
+                <div class="form-row" id="form-med-cond">
+                <label for="med-cond-input">Pre-Existing Medical Conditions</label>
+                <textarea id="med-cond-input" name="med_cond" placeholder="(None)">{{med_cond}}</textarea>
+                </div>
+                <div class="form-hint muted no-label">Please include all allergies</div>
+
+                <div class="form-row" id="form-med-cond">
+                    <label for="med-meds-input">Student's Medications</label>
+                    <textarea id="med-meds-input" name="med_mds" placeholder="(None)">{{med_meds}}</textarea>
+                </div>
+                <div class="no-label"><button type="submit" class="button-green">Update Profile</button></div>
+            </form>
+        </div>
+        <div class="col c4">
+            <h2>Checklist</h2>
+            <p>Use this checklist to see whether your child's schedule and profile are ready. If all items are checked, then you're all set until the summer!</p>
+            <h3>Student Profile</h3>
+            <p>
+                <div class="course-flag is-active"><img src="/assets/icons/tick.png" class="active"> Basic student information received</div>
+                <div class="course-flag is-active"><img src="/assets/icons/tick.png" class="active"> Medical &amp; emergency information received</div>
+                <div class="course-flag is-active"><img src="/assets/icons/tick.png" class="active"> Parent's information received</div>
+            </p>
+
+            <h3>Scheduling</h3>
+            <p>
+                {{week_1_status}}
+                {{week_2_status}}
+                {{week_3_status}}
+                {{week_4_status}}
+            </p>
+
+            <h3>Payments</h3>
+            <p>
+                <div class="course-flag is-inactive"><img src="/assets/icons/cross.png" class="inactive"> Invoices issued</div>
+                <div class="course-flag is-inactive"><img src="/assets/icons/cross.png" class="inactive"> All enrollments are paid for</div>
+                <div class="course-flag is-active"><img src="/assets/icons/tick.png" class="active"> You have no refunds to collect</div>
+            
+            <h3>Final Checks</h3>
+            <p>
+                <div class="course-flag is-active"><img src="/assets/icons/tick.png" class="active"> PTE Requests: <strong>0</strong> pending</div>
+                <div class="course-flag is-active"><img src="/assets/icons/tick.png" class="active"> Waitlist: <strong>0</strong> pending</div>
+            </p>
+
+            <h3>Cancel Registration</h3>
+            <p>To cancel this student's registrations, simply drop all of the classes they are currently enrolled in, even if you have submitted your schedule.</p>
+        </div>
+    </div>
+</div>

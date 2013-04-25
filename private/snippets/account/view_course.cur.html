@@ -7,10 +7,10 @@
 <div id="course_list" class="content-row spaced">
     <div class="col-row">
         <div class="col c7" style="vertical-align:top;">
-            <p><a href="/courses.php">&laquo; Return to course list</a></p>
+            <p><a href="/account/courses.php">&laquo; Return to course list</a></p>
             {{note}}
-            <div class="alert alert-yellow">During registration, you'll have more options including adding this course to your children's schedules! We're planning to open registration on <strong>April 22</strong>.</div>
-            <h2>About This Course</h2>
+            <div class="alert alert-blue">You are registering for <strong>{{student_name}}</strong>.</div>
+            <h2>About <div class="course-colorbox course-cb-{{course_subj_lc}}" style="width:20px;height:20px;"></div> {{course_subject}}{{course_formatted_id}}</h2>
             <blockquote>
                 {{course_synop}}
             </blockquote>
@@ -25,27 +25,11 @@
             <h3>Recommended Prior Knowledge (Pre-Requisites)</h3>
             <p>{{course_prereqs}}</p>
 
-            <h2>Offered Timeslots</h2>
-            <p>The table here shows when this class will be offered. More information will be available during the registration stage.</p>
-
-            <table id="offerings">
-                <thead>
-                    <tr>
-                        <th>Class #</th>
-                        <th>Teacher</th>
-                        <th>Week</th>
-                        <th>Period</th>
-                        <th>{{age_term}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{offerings}}
-                </tbody>
-            </table>
-            <p style="margin-top:1em;"><a href="/courses.php">&laquo; Return to course list</a></p>
+            
+            <button type="button" class="button button" onclick="history.go(-1);">Back to Course Listing</button>
+            <button type="button" class="button-link" data-url="/account/view_student.php?sid={{sid}}">Return to Student Schedule/Profile</button>
         </div>
         <div class="col c3" style="background-color:#fafafa;">
-            <h3><div class="course-colorbox course-cb-{{course_subj_lc}}"></div> {{course_subject}}{{course_formatted_id}}</h3>
             <h3>Program</h3>
             <p>{{course_program}}</p>
             <h3>Difficulty rating</h3>
@@ -77,8 +61,29 @@
             <!-- <div class="{{enroll_active}}">
                 <p><strong>Waitlist available:</strong> In the event that this course fills up, you will be allowed to select this course on a waitlist basis and may be enrolled if another student drops the course.</p>
             </div> -->
-
-            <button type="button" id="btn-notify" class="button-link button-green" data-blank-url="http://eepurl.com/u_T19">Get Notified to Register!</button>
         </div>
     </div>
+</div>
+
+<div id="offerings" class="content-row body-emulate">
+    <h2>Add to Schedule</h2>
+    <div class="alert alert-red">We will enable <a href="/faq.php#/enrollment" onclick="window.open(this.href);return false">PTE Requests</a> on May 1 - this is to ensure that parents of eligible parents are given priority to register for classes.</div>
+    <p>To add a class to the schedule for <strong>{{student_name}}</strong>, click the "Add to Schedule" link on an appropriate class below. If you have already registered a class during that timeslot, you may not add another unless you are on waitlist during that time.</p>
+
+    
+    <table id="offerings">
+        <thead>
+            <tr>
+                <th>Class #</th>
+                <th>Teacher</th>
+                <th>Week</th>
+                <th>Period</th>
+                <th>{{age_term}}</th>
+                <th>Enroll</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{offerings}}
+        </tbody>
+    </table>
 </div>

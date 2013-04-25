@@ -24,7 +24,7 @@ $h['title'] = 'Create an Account';
 $n['register'] = 'active';
 
 // Is reg closed?
-if (!REGISTRATION_OPEN) {
+if (!REGISTRATION_OPEN && !array_key_exists('override', $_GET)) {
     // Include header section
     echo UX::makeHead($h, $n);
     

@@ -1,0 +1,11 @@
+<div class="content-row spaced body-emulate">
+    <h1>Confirm drop class action</h1>
+    <div class="alert alert-red">
+        <h3>You are about to drop a class!</h3>
+        <p>You are about to drop <strong>{{course_title}}</strong> from the schedule of your child, <strong>{{student_name}}</strong>. Please confirm that you wish to drop this class - you will lose your registration in this course.</p>
+        <p>
+            <button type="button" class="button-red button-link" data-url="/account/enroll.php?act=confirm_drop&eid={{eid}}&key={{confirm_string}}">Yes - DROP this class</button>
+            <button type="button" class="button" onclick="window.location='/account/view_student.php?sid={{sid}}';">Cancel - Back to student profile/schedule</button>
+        </p>
+    </div>
+</div>

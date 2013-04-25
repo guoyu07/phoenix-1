@@ -1,0 +1,12 @@
+<div class="content-row spaced body-emulate">
+    <h1>Enrollment result for {{student_name}}</h1>
+    <h2>Error: Age requirments not met</h2>
+    <div class="alert alert-red">
+        <h3>{{student_name}} doesn't meet the age requirements</h3>
+        <p>Sorry, it seems like this student does not meet the minimum (or exceeds the maximum) age requirement for this course. You can try submitting a PTE from the course page (use the gray button below), however, note that some courses do not offer PTE requests due to safety and regulations. Also, PTE requests will be enabled from May 1 onward, only, to allow sufficient time for parents of eligible children to register first.</p>
+        <p>
+            <button type="button" class="button-red button-link" data-url="/account/view_student.php?sid={{sid}}">Return to Student Schedule/Profile</button>
+            <button type="button" class="button" onclick="history.go(-1);">Back to Course Page</button>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,172 @@
+<form class="validate" action="/account/add_child.php?act=submit" method="post" id="ac-form" enctype="multipart/form-data">
+
+<div class="content-row spaced" style="display:table;">
+	<div class="col-row" id="basic-info">
+		
+		<!-- Form block -->
+		<div id="form-basic" class="col c7">
+			<h1>Add a Child</h1>
+			
+			{{error}}
+			
+			<p>Fields with a red asterisk (<span class="red strong">*</span>) are required. Once you have entered in all the information, we will take you to the course selection page. These details can be edited in the future.</p>
+
+            <h2>Student Profile</h2>
+			
+				<div class="form-row" id="form-fname">
+                    <label for="fname-input">Student's First Name <span class="red strong">*</span></label>
+                    <input type="text" id="fname-input" name="fname" class="required" />
+                </div>
+                <div class="form-row" id="form-pname">
+                    <label for="lname-input">Prefered Name</label>
+                    <input type="text" id="pname-input" name="pname" placeholder="(Skip if same as First Name)" />
+                </div>
+                <div class="form-row" id="form-lname">
+					<label for="lname-input">Student's Last Name <span class="red strong">*</span></label>
+					<input type="text" id="lname-input" name="lname" class="required" />
+				</div>
+				<div class="form-row" id="form-dob">
+                    <label for="dob-input">Date of Birth <span class="red strong">*</span></label>
+                    <input type="text" id="dob-input" name="dob" class="required" placeholder="YYYY-MM-DD" />
+                </div>
+                <div class="no-label muted form-hint">Format: YYYY-MM-DD</div>
+
+                <div class="alert alert-red hide" id="dob-invalid">DOB should be in YYYY-MM-DD format (e.g.: 2001-03-27 for March 27, 2001).</div>
+
+                <div class="form-row" id="form-school">
+                    <label for="school-input">Day School <span class="red strong">*</span></label>
+                    <select class="required" id="school-input" name="school_base">
+                        <option value="CIS" selected="selected">Chinese International School</option>
+                        <option value="other">Other (please specify below)</option>
+                    </select>
+                </div>
+
+                <div class="form-row hide" id="form-school-addl">
+                    <label for="school-addl-input">School Name<span class="red strong">*</span></label>
+                    <input type="text" name="school_name" id="school-addl-input" class="required" placeholder="(Enter day school name)" value="Chinese International School" />
+                </div>
+
+                <div class="form-row" id="form-gender">
+                <label for="gender-input">Gender <span class="red strong">*</span></label>
+                <select id="gender-input" name="gender" class="required">
+                    <option value="F" selected="selected">Female</option>
+                    <option value="M">Male</option>
+                </select>
+            </div>
+		</div>
+		
+		<!-- Help block -->
+		<div id="help-basic" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h2>Need help?</h2>
+            <h3>First Name</h3>
+            <p>Please enter the student's full first name (as on an official travel document).</p>
+            <h3>Prefered Name</h3>
+            <p>Enter the name that your child is typically called. If this is the same as the first name, feel free to leave this field blank.</p>
+            <h3>Date of Birth</h3>
+            <p>Enter the child's date of birth in YYYY-MM-DD format.</p>
+		</div>
+		
+	</div>
+
+	<div class="col-row" id="contact-info" style="margin-top:1em;">
+		
+		<!-- Form block -->
+		<div id="form-emergency" class="col c7">
+			<h2>Medical Form &amp; Emergency Contacts</h2>
+            <p>This information will be accessible by our school nurse and will be used in an emergency. We already have parental contact details in your primary account data: please enter a non-parental emergency contact (i.e.: other family member or family doctor)</p>
+
+            <div class="alert alert-blue">CIS is a peanut-free school. Please refrain from bringing snacks or foods that contains peanuts or peanut derivatives.</div>
+			
+			<div class="form-row" id="form-med-cond">
+				<label for="med-cond-input">Pre-Existing Medical Conditions</label>
+				<textarea id="med-cond-input" name="med_cond" placeholder="(None)"></textarea>
+			</div>
+            <div class="form-hint muted no-label">Please include all allergies</div>
+
+            <div class="form-row" id="form-med-cond">
+                <label for="med-meds-input">Student's Medications</label>
+                <textarea id="med-meds-input" name="med_mds" placeholder="(None)"></textarea>
+            </div>
+            <div class="form-hint muted no-label">Include the dosage and times to be taken</div>
+            
+            <div class="form-row" id="form-emer-name">
+            	<label for="ename-input">Emergency Contact Name <span class="red strong">*</span></label>
+            	<input type="text" id="ename-input" name="ename" class="required" />
+            </div>
+            <div class="form-row" id="form-emer-phone">
+                <label for="ephone-input">Emergency Contact Phone <span class="red strong">*</span></label>
+                <input type="text" id="ephone-input" name="ephone" class="required" />
+            </div>
+            <div class="form-row" id="form-emer-rel">
+                <label for="erel-input">Relationship to Child <span class="red strong">*</span></label>
+                <input type="text" id="erel-input" name="erel" class="required" />
+            </div>
+			
+		</div>
+		
+		<!-- Help block -->
+		<div id="help-contact" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h3>Medical Conditions and Medications</h3>
+            <p>If your child has any pre-existing medical conditions, such as allergies, or needs to take medications on schedule or in certain circumstances, please let our staff nurse know in these relevant input boxes.</p>
+            <h3>Emergency Contact Information</h3>
+            <p>Enter details of one non-parental contact, such as a close relative, family doctor, helper or close trusted friend. By joining the Summer Program, you authorize CIS and its staff to release this information to this personal emergency contact.</p>
+		</div>
+	</div>
+
+	{{cos}}
+
+    <div class="col-row" id="submit-buttons" style="margin-top:1em;">
+        <!-- Form block -->
+        <div id="form-prefs" class="col c7">
+            <div class="form-row" id="form-buttons" style="margin-top: 3em;">
+                <p>
+                    <button type="submit" class="button-green" style="float: right;">Add Child to Account</button>
+                    <button type="reset" class="button" style="float: left;">Reset Form</button>
+                </p>
+                <div class="clear buffer">&nbsp;</div>
+            </div>
+        </div>
+
+        <!-- Help block -->
+        <div class="col c3 hide-smartphone" style="background-color: #fafafa;">
+        </div>
+    </div>
+</div>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $('select[name="school_base"]').change(function () {
+        $('input[name="school_name"]').val('');
+
+        if ($(this).val() == "other") {
+            $('#form-school-addl').slideDown();
+            $('input[name="school_name"]').focus();
+        } else {
+            // CIS
+            $('#form-school-addl').hide();
+            $('input[name="school_name"]').val('Chinese International School');
+        }
+    });
+    
+    $('input[name="fname"]').focus();
+    
+    $('form').submit(function(e) {
+
+        $('#dob-invalid').hide();
+        
+        if (!$('input[name="dob"]').val().match(/^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/)) {
+            $('input[name="dob"]').parent().addClass('form-red');
+            $.scrollTo('input[name="dob"]', 300, {offset: {top:-80}, onAfter: function() {
+                $('input[name="dob"]').parent().effect('pulsate', {times:2}, 400);
+                $('input[name="dob"]').focus();
+            } });
+            $('#dob-invalid').show();
+            e.preventDefault();
+            return false;
+        }   
+        
+    });
+});
+</script>

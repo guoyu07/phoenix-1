@@ -1,0 +1,12 @@
+<div class="content-row spaced body-emulate">
+    <h1>Enrollment result for {{student_name}}</h1>
+    <h2>Error: Class is full</h2>
+    <div class="alert alert-red">
+        <h3>Oops - sorry, it seems like the class filled up!</h3>
+        <p>We're very sorry to tell you that the class you tried to sign up for seems to have filled up. This may happen if you have left the enrollment page for a long time and during that time, the last few spots were taken.</p>
+        <p>
+            <button type="button" class="button-red button-link" data-url="/account/view_student.php?sid={{sid}}">Return to Student Schedule/Profile</button>
+            <button type="button" class="button" onclick="history.go(-1);">Back to Course Page</button>
+        </p>
+    </div>
+</div>

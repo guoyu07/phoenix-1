@@ -209,7 +209,7 @@ class ACL extends Security {
     /**
      * Verifies an active SSO session information including IP and UA validation
      */
-    static public function checkLogin($portal = 'families') {
+    static public function checkLogin($portal = 'public') {
         $stmt = Data::prepare('SELECT ObjHash FROM `sso_objects` WHERE ObjID = :id AND ObjPortal = :portal');
         $stmt->bindValue('portal', $portal);
         $stmt->bindValue('id', $_SESSION['SSOID']);

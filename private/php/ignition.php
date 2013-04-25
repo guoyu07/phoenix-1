@@ -24,6 +24,7 @@ define('SITE_DISABLED',     false);     // set to turn on site out message
 define('REGISTRATION_OPEN', true);      // set to false to disable registration
 define('MAILER_SENDMAIL',   true);      // set to false to disable Mandrill emailing
 define('MANDRILL_KEY',      'd4fd5695-5805-43fa-8fd7-2a2f0c30fa9b');    // set to Mandrill API key
+define('MAILCHIMP_KEY',     '833ac505565545e81168363505355ad6-us5');    // Mailchimp API key
 
 // Define official security hashing algorithms
 define('AUTH_ALGORITHM',    'sha256');
@@ -42,9 +43,19 @@ if (defined('PHX_UX')) require_once('class.ux.php');
 if (defined('PHX_COURSES')) require_once('class.courses.php');
 if (defined('PHX_ENROL')) require_once('class.enrolment.php');
 if (defined('PHX_LAOSHI')) require_once('class.laoshi.php');
-if (defined('PHX_MAILER')) require_once('class.mailer.php');
+if (defined('PHX_MAILER')) {
+    require_once('class.mailer.php');
+    require_once('class.mailchimp.php');
+}
 if (defined('PHX_STUDENT')) require_once('class.student.php');
 if (defined('PHX_STAFF')) require_once('class.staff.php');
+
+// DEPCREATED: Configure dates
+define('WEEK_1',    '2013-06-24 12:00:00');
+define('WEEK_2',    '2013-07-02 12:00:00');
+define('WEEK_3',    '2013-07-08 12:00:00');
+define('WEEK_4',    '2013-07-15 12:00:00');
+
 
 // Everybody needs the common class
 $_PHX = new Common(PHX_SCRIPT_TYPE);

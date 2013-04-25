@@ -177,7 +177,7 @@ class Courses {
      * @return  mixed
      */
     static public function getClassById($cid) {
-        $stmt = Data::prepare('SELECT `classes`.*, `courses`.`CourseTitle` FROM `classes`, `courses` WHERE `classes`.`ClassID` = :cid AND `classes`.`CourseID` = `courses`.`CourseID` LIMIT 1');
+        $stmt = Data::prepare('SELECT `classes`.*, `courses`.`CourseTitle`, `courses`.`CourseSubj` FROM `classes`, `courses` WHERE `classes`.`ClassID` = :cid AND `classes`.`CourseID` = `courses`.`CourseID` LIMIT 1');
         $stmt->bindParam('cid', $cid, PDO::PARAM_INT);
         $stmt->execute();
         $info = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -187,6 +187,19 @@ class Courses {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Get enrollments for a single class
+     * @param   int $cid    Class ID
+     * @return  mixed
+     */
+    static public function getClassEnrollment($cid) {
+        $stmt = Data::prepare('SELECT s.`StudentID`, CONCAT(s.`StudentNamePreferred`, " ", s.`StudentNameLast`) FROM `students` s, `enrollment` e WHERE e.`ClassID` = :cid AND e.`EnrollStatus` = "enrolled" AND e.`StudentID` = s.`StudentID`');
+        $stmt->bindParam('cid', $cid, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -205,6 +218,30 @@ class Courses {
         } catch (PDOException $e) {
             Common::throwNiceDataException($e);
         }
+    }
+
+    /**
+     * Gets the age of the student given the week
+     */
+    static public function getAgeAtWeek($week, $dob) {
+        $dobDo = new DateTime($dob);
+
+        switch($week) {
+            case 1:
+                $weekDo = new DateTime('2013-06-24 12:00:00');
+            break;
+            case 2:
+                $weekDo = new DateTime('2013-07-02 12:00:00');
+            break;
+            case 3:
+                $weekDo = new DateTime('2013-07-08 12:00:00');
+            break;
+            case 4:
+                $weekDo = new DateTime('2013-07-15 12:00:00');
+            break;
+        }
+
+        return (float) round(($weekDo->diff($dobDo)->y + ($weekDo->diff($dobDo)->m)/12), 1);
     }
 
     /**
@@ -229,6 +266,21 @@ class Courses {
     static public function getTeacher($email, $name) {
         // First check whether the teacher exists, if not create SSO and staff records
         
+    }
+
+    /**
+     * Gets active (enrolled) count for a given class ID
+     */
+    static public function getActiveEnrollmentCount($cid) {
+        try {
+            $stmt = Data::prepare("SELECT COUNT(EnrollID) as `count` FROM `enrollment` WHERE `ClassID` = :cid AND `EnrollStatus` = 'enrolled'");
+            $stmt->bindParam('cid', $cid, PDO::PARAM_INT);
+            $stmt->execute();
+            $rv = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $rv['count'];
+        } catch (PDOException $e) {
+            Common::throwNiceDataException($e);
+        }
     }
 
     /**

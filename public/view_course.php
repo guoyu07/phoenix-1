@@ -30,8 +30,10 @@ if ((!$course) || ($course['CourseFlagsPublic'] == '0')) {
 // Decide on program
 if (($course['CourseSubj'] == 'ARTS') || ($course['CourseSubj'] == 'LANG') || ($course['CourseSubj'] == 'MSCT') || ($course['CourseSubj'] == 'PHED')) {
     $course['CourseProgram'] = 'summer';
+    $p['age_term'] = 'Ages';
 } else {
     $course['CourseProgram'] = 'academic';
+    $p['age_term'] = 'Years';
 }
 
 $course['TeacherData'] = Courses::getTeacherById($course['TeacherLead']);

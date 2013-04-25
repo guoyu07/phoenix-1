@@ -22,7 +22,7 @@ class Common {
     
         // Turn on error reporting
         if (defined(BETA) && (BETA === true)) {
-            error_reporting(E_ALL | E_NOTICE);
+            error_reporting(E_ALL);
             ini_set('display_errors','On');
         } else {
             error_reporting(0);

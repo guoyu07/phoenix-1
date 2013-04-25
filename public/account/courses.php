@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Family dashboard
+ * Courses - with or without a selected child...
  *
  * @author  Yectep Studios <info@yectep.hk>
- * @version 30104
+ * @version 20825
  * @package Plume
  */
 
@@ -12,8 +12,8 @@
 define('PTP',   '../../private/');
 define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_UX',        true);
-define('PHX_STUDENT',    true);
-
+define('PHX_STUDENT',   true);
+define('PHX_COURSES',   true);
 
 // Include common ignition class
 require_once(PTP . 'php/ignition.php');
@@ -30,44 +30,42 @@ if (!ACL::checkLogin('public')) {
         exit();
     }
 
+    if (!array_key_exists('STUID', $_SESSION)) {
+        header('Location: /account/dashboard.php');
+        exit();
+    }
+
+    $_stu = new FamStu('student', $_SESSION['STUID']);
+    if ($_stu->data['FamilyID'] !== $_fam->fid) {
+        header('Location: /account/dashboard.php');
+        exit();
+    }
 }
+
 
 // Triage and get default staff page
-$h['title'] = 'My Dashboard';
-$n['dashboard'] = 'active';
+$h['title'] = 'Course Selection | '.$_stu->data['StudentNamePreferred'];
+$n['courses'] = 'active';
 $n['my_name'] = $_fam->data['FamilyName'];
 
-// Page variables
-$p['child_count'] = sizeof($_fam->children);
-$p['children'] = '';
-
-// Child additional
-foreach($_fam->children as $child) {
-    $dobDo = new DateTime($child['StudentDOB']);
-    $todayDo = new DateTime('00:00:00');
-
-    $i['name'] = $child['StudentNamePreferred'].' '.$child['StudentNameLast'];
-    $i['dob'] = $child['StudentDOB'];
-    $i['age'] = $todayDo->diff($dobDo)->y;
-    $i['sid'] = $child['StudentID'];
-
-    $p['children'] .= (($child['StudentSubmitted'] == 1) ? UX::grabPage('account/child_snippet_submitted', $i, false) : UX::grabPage('account/child_snippet', $i, false));
-}
-
+// Page replacements
+$p['student_name'] = $_stu->data['StudentNamePreferred'].' '.$_stu->data['StudentNameLast'];
+$p['age'] = $_stu->data['StudentAge'];
 
 // Include header section
 echo UX::makeHead($h, $n, 'common/header_public', 'common/nav_account');
 
 // Page info
-echo UX::makeBreadcrumb(array(  'My Family Dashboard' => "/account/dashboard.php"));
-echo UX::grabPage('account/dashboard', $p, true);
+echo UX::makeBreadcrumb(array(  'My Family' => "/account/dashboard.php", 'Active Student: '.$_stu->data['StudentNamePreferred'].' '.$_stu->data['StudentNameLast'] => "/account/view_student.php?sid=".$_stu->sid, 'Course Selection' => "/account/courses.php/#!/show:SP"));
 
 // Before footer grab time spent
 $t['end'] = microtime(true);
 $time = round(($t['end'] - $t['start']), 3);
 
+// Page output
+echo UX::grabPage('account/courses', $p, true);
+
 echo UX::grabPage('common/masthead', array('time' => $time), true);
 echo UX::grabPage('common/footer', null, true);
 
 ?>
-
