@@ -163,4 +163,28 @@ class FamStu {
         }
     }
 
+    /**
+     * Is the student reserved (status: anything but dropped) during a particular week/period?
+     * @param   string  $week   Week to look up.
+     * @param   string  $period Period to look up
+     */
+    public function isStudentReserved($week, $period) {
+        try {
+            $stmt = Data::prepare('SELECT e.* FROM `enrollment` e, `classes` c WHERE c.ClassWeek = :week AND (c.ClassPeriodBegin = :period OR c.ClassPeriodEnd = :period) AND c.ClassID = e.ClassID AND e.StudentID = :stuid  AND e.EnrollStatus IN ("waitlisted","pte_request")');
+            $stmt->bindParam('stuid', $this->sid, PDO::PARAM_INT);
+            $stmt->bindParam('period', $period, PDO::PARAM_INT);
+            $stmt->bindParam('week', $week, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            Common::logAction('FamStu::isStudentReserved', 'failed', 'StuID='.$this->sid, $e->getMessage());
+            return;
+        }
+
+        if (sizeof($stmt->fetchAll(PDO::FETCH_ASSOC)) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

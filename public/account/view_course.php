@@ -166,17 +166,25 @@ foreach($course['ClassData'] as $class) {
             $ageAtWeek = round(($weekDo->diff($bdayDo)->y + ($weekDo->diff($bdayDo)->m)/12), 1);
 
             if ((floor($ageAtWeek) > $class['ClassAgeMax']) || ($ageAtWeek < $class['ClassAgeMin'])) {
-                $enrollstring = '<img src="/assets/icons/cross.png" /> Out of age range';
+                if ($course["CourseEnforceAge"] == 1) {
+                    $enrollstring = '<img src="/assets/icons/cross.png" /> Out of age range<br /><em class="muted">No PTE available</em>';
+                } else {
+                    if ($_stu->isStudentReserved($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentReserved($class['ClassWeek'], $class['ClassPeriodEnd'])) {
+                        $enrollstring = '<img src="/assets/icons/cross.png" /> <acronym class="tipped" title="You cannot be on multiple waitlist or PTEs at the same period"> Already on waitlist/PTE</acronym>';
+                    } else {
+                        $enrollstring = '<img src="/assets/icons/exclamation-shield.png" /> <a href="/account/enroll.php?act=enroll_pte&cid='.$class['ClassID'].'"><strong>Request PTE</strong></a><br /><em class="muted">Verified manually</em>';
+                    }
+                }
             } else {
 
-                // Is student already full at that time?
+                // Is student already PTE'd?
                 if ($_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodEnd'])) {
                     $enrollstring = '<img src="/assets/icons/cross.png" /> Already registered at this time';
                 } else {
                     $enrollstring = '<a href="/account/enroll.php?act=enroll&cid='.$class['ClassID'].'"><img src="/assets/icons/plus.png" /> <strong>Enroll Now</strong></a>';
-                }
-                
+                }   
             }
+
         } else {
             // Ignore for summer program
             // Is student already full at that time?

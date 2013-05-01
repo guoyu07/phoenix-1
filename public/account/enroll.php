@@ -100,6 +100,40 @@ switch ($_GET['act']) {
         }
 
     break;
+    case 'enroll_pte':
+
+        $fail = false;
+
+        // Get class
+        $class = Courses::getClassById($_GET['cid']);
+        if (!$class) {
+            header('Location: /account/error.php?msg=access_violation');
+            exit();
+        }
+
+        // First check to see if course allows PTEs
+        $course = Courses::getCourseById($class['CourseID']);
+        if ($course['CourseEnforceAge'] == 1) {
+            $inc = 'account/enroll_pte_nopte';
+            $fail = true;
+        }
+
+        if (!$fail) {
+
+            try {
+                $stmt = Data::prepare("INSERT INTO `enrollment` (`StudentID`, `ClassID`, `EnrollStatus`, `EnrollCTS`, `EnrollLETS`) VALUES (:stuid, :cid, 'pte_request', NOW(), NOW())");
+                $stmt->bindParam('stuid', $_stu->sid, PDO::PARAM_INT);
+                $stmt->bindParam('cid', $class['ClassID'], PDO::PARAM_INT);
+                $stmt->execute();
+                $inc = 'account/enroll_pte_success';
+            } catch (PDOException $e) {
+                echo UX::grabPage('dev/error', array('pretext' => $e->getMessage()), false);
+                exit();
+            }
+
+        }
+
+    break;
     case 'drop':
 
         // Does this actually exist?

@@ -51,6 +51,8 @@ $sched[1] = $_stu->getStudentSchedule(1); $week_conflict[1] = false;
 $sched[2] = $_stu->getStudentSchedule(2); $week_conflict[2] = false;
 $sched[3] = $_stu->getStudentSchedule(3); $week_conflict[3] = false;
 $sched[4] = $_stu->getStudentSchedule(4); $week_conflict[4] = false;
+$pte_count = 0;
+$waitlist_count = 0;
 
 $p['week_1'] = ''; $p['week_2'] = ''; $p['week_3'] = ''; $p['week_4'] = '';
 $latest_update = strtotime($_stu->data['StudentCTS']);
@@ -134,6 +136,11 @@ foreach($sched as $i => $week) {
                 break;
                 case 'waitlisted':
                     $status  = '<img src="/assets/icons/exclamation.png" /> <strong>Waitlisted</strong>';
+                    $waitlist_count++;
+                break;
+                case 'pte_request':
+                    $status  = '<img src="/assets/icons/exclamation.png" /> On request (PTE)';
+                    $pte_count++;
                 break;
             }
 
@@ -193,6 +200,12 @@ $p['preferred_name'] = $_stu->data['StudentNamePreferred'];
 $p['last_name'] = $_stu->data['StudentNameLast'];
 $p['med_meds'] = $_stu->data['StudentMedMedications'];
 $p['med_cond'] = $_stu->data['StudentMedCondition'];
+$p['pte_count'] = $pte_count;
+$p['waitlist_count'] = $waitlist_count;
+$p['pte_active'] = (($pte_count == 0) ? 'active' : 'inactive');
+$p['waitlist_active'] = (($waitlist_count == 0) ? 'active' : 'inactive');
+$p['pte_img'] = (($pte_count == 0) ? 'tick' : 'cross');
+$p['waitlist_img'] = (($waitlist_count == 0) ? 'tick' : 'cross');
 
 // Include header section
 echo UX::makeHead($h, $n, 'common/header_public', 'common/nav_account');
