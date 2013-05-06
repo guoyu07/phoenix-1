@@ -187,4 +187,18 @@ class FamStu {
         }
     }
 
+    /**
+     * Returns a list of family data
+     */
+    static public function getFamilyList() {
+        try {
+            $stmt = Data::prepare('SELECT f.*, (SELECT COUNT(DISTINCT s.`StudentID`) FROM `students` s WHERE s.`FamilyID` = f.`FamilyID`) as `ChildCount` FROM `families` f ORDER BY f.`FamilyID` ASC');
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            Common::logAction('FamStu::getFamilyList', 'failed', 'UNK=Unknown', $e->getMessage());
+            return null;
+        }
+    }
+
 }

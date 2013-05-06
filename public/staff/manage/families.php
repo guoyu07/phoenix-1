@@ -27,11 +27,11 @@ if (!ACL::checkLogin('staff')) {
     exit();
 } else {
     $_laoshi = new Laoshi($_SESSION['SSOID']);
-    $_laoshi->perms(6, 7);
+    $_laoshi->perms(8, 9, 10, 11, 12);
 }
 
 // Set default info
-$h['title'] = 'Course List';
+$h['title'] = 'Families';
 $n['management'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
@@ -39,32 +39,13 @@ $n['my_name'] = $_laoshi->staff['StaffName'];
 echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 
 // Course list array
-$courses = Courses::getCourseList();
-foreach($courses as $num => $course) {
-    $classes = Courses::getClassesOfCourseById($course['CourseID']);
-    $courses[$num]['ClassData'] = $classes;
-    $courses[$num]['ClassCount'] = (string) sizeof($classes);
-    $courses[$num]['CourseDescription'] = Common::cleanse($course['CourseDescription']);
-    $courses[$num]['CourseCode'] = strtoupper($course['CourseSubj']).str_pad($course['CourseID'], 3, '0', STR_PAD_LEFT);
-    $courses[$num]['TeacherData'] = Courses::getTeacherById($course['TeacherLead']);
-
-    $totalEnrolled = 0;
-    $totalSpaces = 0;
-
-    foreach($classes as $class) {
-        $totalEnrolled += $class['EnrollCount'];
-        $totalSpaces += $class['ClassEnrollMax'];
-    }
-
-    $courses[$num]['TotalSpacesAvailable'] = (string) $totalSpaces;
-    $courses[$num]['TotalEnrollCount'] = (string) $totalEnrolled;
-}
-$p['number_of_courses'] = sizeof($courses);
-$p['courseJson'] = json_encode($courses);
+$families = FamStu::getFamilies();
+$p['family_json'] = json_encode($families);
+$p['number_of_families'] = sizeof($families);
 
 // Page info
-echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Course Listing' => "/staff/manage/courses.php"));
-echo UX::grabPage('staff/manage/courses', $p, true);
+echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Family Account List' => "/staff/manage/courses.php"));
+echo UX::grabPage('staff/manage/families', $p, true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);
