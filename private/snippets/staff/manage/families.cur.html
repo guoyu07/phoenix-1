@@ -1,16 +1,19 @@
 <div id="course_list" class="content-row spaced body-emulate">
     <h2>Family Accounts Listing</h2>
     
-    <p><input id="search" type="text" style="width:200px;" placeholder="Enter search term&hellip;" /> <button class="button button-blue">Create a Course</button></p>
+    <p><input id="search" type="text" style="width:200px;" placeholder="Enter search term&hellip;" />
+        <button type="button" class="button-link button-blue" data-url="/staff/manage/pte.php">View PTEs</button></p>
 
-    <table class="families hiden">
+    <table class="families">
         <thead>
             <tr>
-                <th style="width:10%;" class="tipped" title="Family ID Number">ID</th>
-                <th style="width:30%;" class="tipped" title="Click to edit family/child details">Parent Name</th>
-                <th style="width:20%;">Home Phone</th>
+                <th style="width:5%;" class="tipped" title="Family ID Number">ID</th>
+                <th style="width:20%;" class="tipped" title="Click to edit family/child details">Parent Name</th>
+                <th style="width:10%;">Phone (H)</th>
+                <th style="width:10%;">Phone (M)</th>
                 <th style="width:15%;" class="tipped" title="Enrolled Students/Available Spaces">Account Created</th>
-                <th style="width:15%;" class="tipped" title="Children count">Children</th>
+                <th style="width:10%;" class="tipped" title="Children count">Children</th>
+                <th style="width:20%;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -25,19 +28,27 @@ jQuery(document).ready(function ($) {
 
     // Course building
     $.each(famJson, function (i, f) {
-        $('table.courses>tbody').append('<tr class="course" data-course-id="' + c.CourseID + '" data-subject="' + c.CourseSubj + '" data-status="' + ((c.CourseFlagsPublic == 1) ? 'public' : 'incomplete') + '">' +
-            '<td>' + c.CourseCode + '</td>' +
-            '<td class="tipped" title="' + c.CourseSynop + '"><a href="./course_view.php?cid=' + c.CourseID + '">' + c.CourseTitle + '</a></td>' +
-            '<td><a href="mailto:' + c.TeacherData.TeacherEmail + '">' + c.TeacherData.TeacherName + '</a></td>' +
-            '<td class="tipped" title="Over ' + ((c.ClassData.length == 1) ?  'a single timeslot' : c.ClassData.length + ' total timeslots' ) + '"><span style="font-weight:700;">' + c.TotalEnrollCount + '</span>/<span class="muted">' + c.TotalSpacesAvailable + '</span></td>' + 
-            '<td><em class="muted">Unknown</em></td>' +
-            '<td><img src="/assets/icons/' + c.CourseLOI + '.png" style="height:16px;" /></td>' +
-            '<td>' + ((c.CourseFlagsPublic == 1) ? '<em class="muted"><img src="/assets/icons/tick.png" /> Completed</em>' : '<img src="/assets/icons/exclamation.png" /> Action Required') + '</td>' +
-            '</tr>');
+        if (f.FamilyAccountStatus == '1') {
+            $('table.families>tbody').append('<tr class="family" data-fam-id="' + f.FamilyID + '">' +
+                '<td>' + f.FamilyID + '</td>' +
+                '<td><a href="./family_view.php?fid=' + f.FamilyID + '">' + f.FamilyName + '</a></td>' +
+                '<td>' + f.FamilyPhoneHome + '</td>' +
+                '<td>' + f.FamilyPhoneMobile + '</td>' +
+                '<td>' + f.FamilyCTS + '</td>' + 
+                '<td>' + f.ChildCount + '</td>' +
+                '<td><a href="./pte.php?view=family&fid=' + f.FamilyID + '">View PTEs</a> | <a href="./view_family.php?fid=' + f.FamilyID + '">Family Profile</a></td>' + 
+                '</tr>');
+        } else {
+            $('table.families>tbody').append('<tr class="family" data-fam-id="' + f.FamilyID + '">' +
+                '<td><em class="muted">' + f.FamilyID + '</em></td>' +
+                '<td><em class="muted">' + f.FamilyName + '</em></td>' +
+                '<td colspan="5" class="muted"><em style="text-align:center;">Information hidden for privacy: Account not activated</em></td>' +
+                '</tr>');
+        }
     });
 
     // Bind search
-    var $rows = $('.courses tbody tr');
+    var $rows = $('.families tbody tr');
     $('#search').keyup(function() {
         var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 

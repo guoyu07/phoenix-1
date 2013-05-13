@@ -1,0 +1,33 @@
+<div id="course_list" class="content-row spaced body-emulate">
+    <h2>PTE Decision Maker</h2>
+    
+    <p><input id="search" type="text" style="width:200px;" placeholder="Enter search term&hellip;" />
+        <button type="button" class="button-link button-blue" data-url="/staff/manage/families.php">View families</button></p>
+
+    <table class="ptes hiden">
+        <thead>
+            <tr>
+                <th class="tipped" title="Format: Family ID.Student ID">ID</th>
+                <th>Student Name</th>
+                <th>DOB</th>
+                <th>Course Title</th>
+                <th>Enrolled</th>
+                <th>Age Range</th>
+                <th class="tipped" title="The student's age on Monday of that class week">Age</th>
+                <th>Difference</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{pte_table}}
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $('.tipped').tipTip();
+
+});
+</script>

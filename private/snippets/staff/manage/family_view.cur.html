@@ -1,0 +1,193 @@
+<div id="course_list" class="content-row spaced body-emulate">
+    <h2>Family Profile</h2>
+    <h3>Account Information</h3>
+    <p>Click to edit a field - all data is saved automatically when you exit the input boxes (just click outside of them). A confirmation message will notify you of update results.</p>
+    <table class="compact">
+        <tr>
+            <td style="width:15%;"><strong>Account Name</strong></td>
+            <td style="width:35%;">{{family_name}} &lt;<a href="mailto:{{lead_instructor_email}}">{{family_email}}</a>&gt;</td>
+            <td style="width:15%;"><strong>Account Created</strong></td>
+            <td style="width:35%;">{{family_cts}}</td>
+        </tr>
+        <tr>
+            <td><strong>Address</strong></td>
+            <td colspan="3">
+                <pre class="editable pseudolink faux-div" id="family-address">{{family_address}}</pre>
+                <input type="text" class="editfield hide" id="family-address-edit" data-db-item="FamilyAddress" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width:15%;"><strong>Last Login</strong></td>
+            <td style="width:35%;">{{family_llts}}</td>
+            <td style="width:15%;"><strong>Last Change</strong></td>
+            <td style="width:35%;">{{family_lats}}</td>
+        </tr>
+    </table>
+
+
+
+    <h3>Course Options &amp; Flags</h3>
+
+    <p>Click to enable or disable these values. They are saved automatically and immediately. Policies given as follows:</p>
+
+    <p>
+        <ul>
+            <li>Computer usage or musical instrument usage <strong>doesn't not imply</strong> $50 fee</li>
+            <li>Physical activity required - use only if strenous activity (eg sports roundabout) will occur</li>
+            <li>Age-enforced: <strong>ALL</strong> science lab classes are enforced</li>
+            <li>Waitlist: Enable by default unless certain circumstances exist.</li>
+            <li>Viewing ability: Whenever enabled, parents will be able to see it!</li>
+        </ul>
+    </p>
+
+    <div style="display:table;width:100%;">
+        <div style="display:table-row;">
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{computers_active}}" data-db-item="CourseComputers" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Computer usage</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{instruments_active}}" data-db-item="CourseInstruments" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Uses musical instruments</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{addon_active}}" data-db-item="CourseFeeAddon" data-active-val="50" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> $50 Insurance Fee</div>
+            </div>
+        </div>
+        <div style="display:table-row;">
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{activity_active}}" data-db-item="CourseActivity" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Physical activity required</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{age_active}}" data-db-item="CourseEnforceAge" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Age-enforced (disallow PTEs)</div>
+            </div>
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{enroll_active}}" data-db-item="CourseEnforceEnroll" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Enable waitlist?</div>
+            </div>
+        </div>
+        <div style="display:table-row;">
+            <div style="display:table-cell;width:33%;padding:2px;">
+                <div class="course-flag is-{{public_active}}" data-db-item="CourseFlagsPublic" data-active-val="1" data-inactive-val="0"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Viewing availability</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="course-flag is-inactive" id="flag-computers"><img src="/assets/icons/tick.png" class="active"><img src="/assets/icons/cross.png" class="inactive"> Course uses computers</div> -->
+
+    <h3>Course Offerings</h3>
+    <p>As with the above, click to edit, including teacher. If you need to add a teacher, please go to the <a href="javascript:;">Teacher Management</a> module first.</p>
+
+    <table id="offerings" class="hiden">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Teacher</th>
+                <th>Week</th>
+                <th>Period</th>
+                <th>Room</th>
+                <th>Enrollment</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{offerings}}
+        </tbody>
+    </table>
+
+    <h3>Add a Class</h3>
+    <p>Make any necessary changes - these will be updated automatically when you click outside the edit field on any other part of the page.</p>
+
+    <div class="form-row">
+        <label for="room">Room</label>
+        <div class="form-help">
+            <select id="room" name="room" class="edit" data-db-item="RoomID">
+                {{rooms}}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <label for="week">Week Offered</label>
+        <select id="week" name="week" data-db-item="ClassWeek" class="edit">
+            <option value="1">Week 1</option>
+            <option value="2">Week 2</option>
+            <option value="3">Week 3</option>
+            <option value="4">Week 4</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="pbegin">Period Begins</label>
+        <select id="pbegin" name="pbegin" data-db-item="ClassPeriodEnd" class="edit">
+            <optgroup label="Summer Programme">
+                <option value="1">Period 1</option>
+                <option value="2">Period 2</option>
+                <option value="3">Period 3</option>
+                <option value="4">Period 4</option>
+            </optgroup>
+            <optgroup label="Academic Programme">
+                <option value="A">Session A</option>
+                <option value="B">Session B</option>
+                <option value="C">Session C</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="pend">Period Ends</label>
+        <select id="pend" name="pend" data-db-item="ClassPeriodEnd" class="edit">
+            <optgroup label="Summer Programme">
+                <option value="1">Period 1</option>
+                <option value="2">Period 2</option>
+                <option value="3">Period 3</option>
+                <option value="4">Period 4</option>
+            </optgroup>
+            <optgroup label="Academic Programme">
+                <option value="A">Session A</option>
+                <option value="B">Session B</option>
+                <option value="C">Session C</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <label for="minage">Minimum Age (4-16)</label>
+        <input type="text" class="edit" id="minage" data-db-item="ClassAgeMin" name="minage" value="5" />
+    </div>
+
+    <div class="form-row">
+        <label for="maxage">Maximum Age (4-16)</label>
+        <input type="text" class="edit" id="maxage" data-db-item="ClassAgeMax" name="maxage" value="18" />
+    </div>
+
+    <div class="form-row">
+        <label for="enrollmax">Maximum Enrollment (0-30)</label>
+        <input type="text" class="edit" id="enrollmax" data-db-item="ClassEnrollMax" name="enrollmax" value="20" />
+    </div>
+
+    <div class="form-row no-label">
+        <button type="button" id="btn-add-course" class="button button-blue">Add Course</button>
+    </div>
+
+    <div id="class_msg" class="hide alert alert-green"><img src="/assets/icons/tick.png" /> <strong>Class added successfully.</strong> Additions to class offerings will be shown when you <a href="./course_view.php?cid={{course_id}}">refresh this page</a>.</div>
+
+</div>
+
+<script type="text/javascript">
+
+$('.editable').click(function () {
+    // var val = $(this).html();
+    // $(this).hide();
+    // $('#' + $(this).attr('id') + '-edit').val(val).show();
+    // $('#' + $(this).attr('id') + '-edit').focus();
+});
+
+$('.editfield').blur(function () {
+    $(this).hide();
+    if ($('#' + $(this).attr('id').replace('-edit', '')).html() == $(this).val()) {
+        //laoshi.toast('No changes were made.');
+    } else {
+        //laoshi.pushUpdate($(this).data('db-item'), $(this).val(), {{course_id}});
+    }
+});
+
+</script>
