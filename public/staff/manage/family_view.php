@@ -32,14 +32,33 @@ if (!ACL::checkLogin('staff')) {
 
 // Get course information
 $fam = FamStu::getFamilyById($_REQUEST['fid']);
-$p['child_block'] = '';
+$p['children'] = '';
 $p['family_name'] = $fam['family']['FamilyName'];
 $p['family_email'] = $fam['family']['FamilyEmail'];
 $p['family_cts'] = date(DATETIME_FULL, strtotime($fam['family']['FamilyCTS']));
 $p['family_address'] = $fam['family']['FamilyAddress'];
+$p['family_llts'] = date(DATETIME_FULL, strtotime($fam['family']['FamilyLLTS']));
+$p['family_lats'] = date(DATETIME_FULL, strtotime($fam['family']['FamilyLATS']));
+
+$today = new DateTime();
 
 foreach($fam['children'] as $student) {
-    $child .= UX::grabPage('staff/manager/family_view_stustub', $student, true);
+    $dobDo = new DateTime($student['StudentDOB']);
+    $s['preferred_name'] = $student['StudentNamePreferred'];
+    $s['last_name'] = $student['StudentNameLast'];
+    $s['given_name'] = $student['StudentNameGiven'];
+    $s['dob'] = date(DATE_FULL, strtotime($student['StudentDOB']));
+    $s['age'] = $dobDo->diff($today)->y;
+    $s['school'] = $student['StudentSchool'];
+    $s['created_date'] = date(DATETIME_FULL, strtotime($student['StudentCTS']));
+    $s['submitted_date'] = (($student['StudentSubmitted'] == 1) ? '<img src="/assets/icons/tick.png" /> Schedule has been submitted' : '<em class="muted">Schedule not submitted</em>');
+    $s['emer_name'] = $student['StudentECName'];
+    $s['emer_relation'] = $student['StudentECRelation'];
+    $s['emer_phone'] = $student['StudentECPhone'];
+    $s['med_meds'] = $student['StudentMedMedications'];
+    $s['med_cond'] = $student['StudentMedCondition'];
+    $s['cos'] = (($student['StudentCOS'] == 1) ? '<img src="/assets/icons/exclamation.png" /> Student is child of staff' : '<em class="muted">COS status not indicated</em>');
+    $p['children'] .= UX::grabPage('staff/manage/child_list_snippet', $s, true);
 }
 
 // Set default info

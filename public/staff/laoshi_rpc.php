@@ -13,6 +13,7 @@
 define('PTP',   '../../private/');
 define('PHX_SCRIPT_TYPE',   'JSON');
 define('PHX_COURSES', 	true);
+define('PHX_MAILER',    true);
 define('PHX_LAOSHI',    true);
 
 
@@ -249,6 +250,111 @@ if (!ACL::checkLogin('staff')) {
                     $result['code'] = 2500;
                     $result['msg'] = $e->getMessage();
                 }
+            }
+        break;
+        case 'pte_accept':
+            if (!isset($_REQUEST['eid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                try {
+                    $stmt = Data::prepare('SELECT * FROM `enrollment` WHERE `EnrollID` = :eid LIMIT 1');
+                    $stmt->bindParam('eid', $_REQUEST['eid'], PDO::PARAM_INT);
+                    $stmt->execute();
+                    $enrollment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    $class = Courses::getClassById($enrollment['ClassID']);
+
+                    // Drop other classes
+                    $stmt = Data::prepare('SELECT e.* FROM `enrollment` e, `classes` c WHERE c.ClassWeek = :week AND (c.ClassPeriodBegin = :period OR c.ClassPeriodEnd = :period) AND c.ClassID = e.ClassID AND e.StudentID = :stuid  AND e.EnrollStatus = "enrolled"');
+                    $stmt->bindParam('week', $class['ClassWeek']);
+                    $stmt->bindParam('period', $class['ClassPeriodBegin']);
+                    $stmt->bindParam('stuid', $enrollment['StudentID']);
+                    $stmt->execute();
+                    $period_begin = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach($period_begin as $i => $overlap) {
+                        $stmt = Data::prepare('UPDATE `enrollment` SET `EnrollStatus` = "dropped" WHERE `EnrollID` = :eid LIMIT 1');
+                        $stmt->bindParam('eid', $overlap['EnrollID']);
+                        $stmt->execute();
+                    }
+
+                    if ($class['ClassPeriodEnd'] !== $class['ClassPeriodBegin']) {
+                        $stmt = Data::prepare('SELECT e.* FROM `enrollment` e, `classes` c WHERE c.ClassWeek = :week AND (c.ClassPeriodBegin = :period OR c.ClassPeriodEnd = :period) AND c.ClassID = e.ClassID AND e.StudentID = :stuid  AND e.EnrollStatus = "enrolled"');
+                        $stmt->bindParam('week', $class['ClassWeek']);
+                        $stmt->bindParam('period', $class['ClassPeriodEnd']);
+                        $stmt->bindParam('stuid', $enrollment['StudentID']);
+                        $stmt->execute();
+                        $period_end = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        foreach($period_end as $i => $overlap) {
+                            $stmt = Data::prepare('UPDATE `enrollment` SET `EnrollStatus` = "dropped" WHERE `EnrollID` = :eid LIMIT 1');
+                            $stmt->bindParam('eid', $overlap['EnrollID']);
+                            $stmt->execute();
+                        }
+                    }
+
+                    // Now enroll
+                    $stmt = Data::prepare('UPDATE `enrollment` SET `EnrollStatus` = "enrolled" WHERE `EnrollID` = :eid LIMIT 1');
+                    $stmt->bindParam('eid', $_REQUEST['eid'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    // Get email
+                    $stmt = Data::prepare('SELECT o.ObjEmail, f.FamilyName FROM sso_objects o, students s, families f WHERE s.FamilyID = f.FamilyID AND f.ObjID = o.ObjID AND s.StudentID = :sid');
+                    $stmt->bindParam('sid', $enrollment['StudentID']);
+                    $stmt->execute();
+
+                    $email = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    Mailer::send(array('email' => $email['ObjEmail'], 'name' => $email['FamilyName']), '[CIS Summer] PTE Accepted', urldecode($_REQUEST['email']));
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'PTE accept was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+
+            }
+        break;
+        case 'pte_deny':
+            if (!isset($_REQUEST['eid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                try {
+                    $stmt = Data::prepare('SELECT * FROM `enrollment` WHERE `EnrollID` = :eid LIMIT 1');
+                    $stmt->bindParam('eid', $_REQUEST['eid'], PDO::PARAM_INT);
+                    $stmt->execute();
+                    $enrollment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    // Mark denied
+                    $stmt = Data::prepare('UPDATE `enrollment` SET `EnrollStatus` = "pte_denied" WHERE `EnrollID` = :eid LIMIT 1');
+                    $stmt->bindParam('eid', $_REQUEST['eid'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    // Get email
+                    $stmt = Data::prepare('SELECT o.ObjEmail, f.FamilyName FROM sso_objects o, students s, families f WHERE s.FamilyID = f.FamilyID AND f.ObjID = o.ObjID AND s.StudentID = :sid');
+                    $stmt->bindParam('sid', $enrollment['StudentID']);
+                    $stmt->execute();
+
+                    $email = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    Mailer::send(array('email' => $email['ObjEmail'], 'name' => $email['FamilyName']), '[CIS Summer] PTE Unsuccessful', urldecode($_REQUEST['email']));
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Deny request was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+
             }
         break;
     	default:

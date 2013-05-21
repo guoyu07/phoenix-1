@@ -47,17 +47,31 @@ foreach ($ptes as $pte) {
     $age = Courses::getAgeAtWeek($pte['ClassWeek'], $pte['StudentDOB']);
     $diff = FamStu::getAgeDifference($pte['ClassWeek'], $pte['StudentDOB'], $pte['ClassAgeMin']);
 
-    $p['pte_table'] .= "<tr>
-        <td>".$pte['FamilyID'].".".$pte['StudentID']."</td>
-        <td>".$pte['StudentName']."</td>
-        <td><span class=\"tipped\" title=\"".date(DATE_FULL, strtotime($pte['StudentDOB']))."\">".date(DATE_SHORT, strtotime($pte['StudentDOB']))."</span></td>
-        <td><a href=\"/staff/manage/course_view.php?cid=".$pte['CourseID']."\">".$pte['CourseTitle']."</a></td>
-        <td><strong>".$pte['EnrollCount']."</strong>/".$pte['ClassEnrollMax']."</td>
-        <td>".$pte['ClassAgeMin']."-".$pte['ClassAgeMax']."</td>
-        <td>".$age."</td>
-        <td>".$diff->y."y ".$diff->m."m ".$diff->d."d</td>
-        <td><a href=\"pte_act.php?eid=".$pte['EnrollID']."&action=accept\">Accept</a> | <a href=\"pte_act.php?eid=".$pte['EnrollID']."&action=deny\">Deny</a></td>
-    </tr>";
+    if ($pte['EnrollStatus'] == 'pte_denied') {
+        $p['pte_table'] .= "<tr>
+            <td>".$pte['FamilyID'].".".$pte['StudentID']."</td>
+            <td>".$pte['StudentName']."</td>
+            <td><span class=\"tipped\" title=\"".date(DATE_FULL, strtotime($pte['StudentDOB']))."\">".date(DATE_SHORT, strtotime($pte['StudentDOB']))."</span></td>
+            <td><a href=\"/staff/manage/course_view.php?cid=".$pte['CourseID']."\">".$pte['CourseTitle']."</a></td>
+            <td><strong>".$pte['EnrollCount']."</strong>/".$pte['ClassEnrollMax']."</td>
+            <td>".$pte['ClassAgeMin']."-".$pte['ClassAgeMax']."</td>
+            <td>".$age."</td>
+            <td>".$diff->y."y ".$diff->m."m ".$diff->d."d</td>
+            <td><em class=\"muted\">PTE was denied</em></td>
+        </tr>";
+    } else {
+        $p['pte_table'] .= "<tr>
+            <td>".$pte['FamilyID'].".".$pte['StudentID']."</td>
+            <td>".$pte['StudentName']."</td>
+            <td><span class=\"tipped\" title=\"".date(DATE_FULL, strtotime($pte['StudentDOB']))."\">".date(DATE_SHORT, strtotime($pte['StudentDOB']))."</span></td>
+            <td><a href=\"/staff/manage/course_view.php?cid=".$pte['CourseID']."\">".$pte['CourseTitle']."</a></td>
+            <td><strong>".$pte['EnrollCount']."</strong>/".$pte['ClassEnrollMax']."</td>
+            <td>".$pte['ClassAgeMin']."-".$pte['ClassAgeMax']."</td>
+            <td>".$age."</td>
+            <td>".$diff->y."y ".$diff->m."m ".$diff->d."d</td>
+            <td><a href=\"pte_act.php?eid=".$pte['EnrollID']."&action=accept\">Accept</a> | <a href=\"pte_act.php?eid=".$pte['EnrollID']."&action=deny\">Deny</a></td>
+        </tr>";
+    }
 }
 
 // Page info

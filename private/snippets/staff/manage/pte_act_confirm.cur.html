@@ -1,0 +1,53 @@
+<div class="content-row spaced body-emulate" id="topbody">
+    <h1>Confirm PTE {{action}} for {{student_name}}</h1>
+    <div class="alert alert-red">
+        <strong>Warning</strong><br />This action is final and cannot be undone without Chestervention.
+    </div>
+
+    <h2>Current Class Schedule</h2>
+    <p>The student in question, <strong>{{student_name}}</strong>, has the following classes that overlap with the class they're trying to PTE into. If you are accepting a PTE, these will be marked as "dropped" automatically and the PTE class will be marked as enrolled.</p>
+
+    <table id="w1">
+        <thead>
+            <tr>
+                <th style="width:20%;">Period/Session</th>
+                <th style="width:50%;">Course</th>
+                <th style="width:30%;">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{overlap}}
+        </tbody>
+    </table>
+
+    <h2>Edit Email Reply</h2>
+    <p>If you would like to change the email reply that will be sent to the parent in question, edit this template email below.</p>
+
+    <textarea id="email_content" style="width:90%;clear:both;margin-bottom:15px;height:300px;">{{default_text}}</textarea>
+    
+    <button type="button" class="button-link" data-url="/staff/manage/pte.php">Cancel</button>
+    <button type="button" class="button-red submit">Confirm {{action}}</button>
+</div>
+
+<div class="content-row spaced body-emulate hide" id="response">
+    <div class="alert alert-green">
+        <h1 style="color:#2ea100;">Submitted!</h1>
+        <p>All done. The monkey has sent the email to the parent. Enjoy!</p>
+    </div>
+    <button type="button" class="button-link" data-url="/staff/manage/pte.php">Return to PTE List</button>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $('.submit').click(function (e) {
+        e.preventDefault();
+        laoshi.rpc({'method': 'pte_{{act}}', 'email': encodeURIComponent($('#email_content').html()), 'eid': {{eid}}});
+        $('#topbody').hide();
+        $('#response').fadeIn('fast');
+        return false;
+    });
+
+});
+</script>

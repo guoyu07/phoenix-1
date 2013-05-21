@@ -192,7 +192,7 @@ class FamStu {
      */
     static public function getFamilyList() {
         try {
-            $stmt = Data::prepare('SELECT f.*, (SELECT COUNT(DISTINCT s.`StudentID`) FROM `students` s WHERE s.`FamilyID` = f.`FamilyID`) as `ChildCount` FROM `families` f ORDER BY f.`FamilyAccountStatus` DESC, f.`FamilyID` ASC');
+            $stmt = Data::prepare('SELECT f.*, (SELECT COUNT(DISTINCT s.`StudentID`) FROM `students` s WHERE s.`FamilyID` = f.`FamilyID`) as `ChildCount` FROM `families` f ORDER BY f.`FamilyName` ASC');
             $stmt->execute();
         } catch (PDOException $e) {
             Common::logAction('FamStu::getFamilyList', 'failed', 'UNK=Unknown', $e->getMessage());
@@ -243,7 +243,7 @@ class FamStu {
     static public function getPTEList($famId = false) {
         if ($famId) {
             try {
-                $stmt = Data::prepare("SELECT s.`StudentID`, s.`FamilyID`, CONCAT(s.`StudentNamePreferred`, ' ', s.`StudentNameLast`) as `StudentName`, s.`StudentDOB`, c.`CourseID`, c.`CourseTitle`, cl.`ClassAgeMin`, cl.`ClassAgeMax`, cl.`ClassWeek`, cl.`ClassPeriodBegin`, cl.`ClassPeriodEnd`, e.`EnrollID`, (SELECT COUNT(DISTINCT `EnrollID`) FROM `enrollment` WHERE `ClassID` = cl.`ClassID` AND `EnrollStatus` ='enrolled') as `EnrollCount`, cl.`ClassEnrollMax`, e.`EnrollCTS` FROM `enrollment` e, `students` s, `courses` c, `classes` cl WHERE e.`ClassID` = cl.`ClassID` AND c.`CourseID` = cl.`CourseID` AND e.`StudentID` = s.`StudentID` AND e.`EnrollStatus` LIKE '%pte%' AND s.`FamilyID` = :famid ORDER BY e.`EnrollCTS`");
+                $stmt = Data::prepare("SELECT s.`StudentID`, s.`FamilyID`, CONCAT(s.`StudentNamePreferred`, ' ', s.`StudentNameLast`) as `StudentName`, s.`StudentDOB`, c.`CourseID`, c.`CourseTitle`, cl.`ClassAgeMin`, cl.`ClassAgeMax`, cl.`ClassWeek`, cl.`ClassPeriodBegin`, cl.`ClassPeriodEnd`, e.`EnrollID`, e.`EnrollStatus`, (SELECT COUNT(DISTINCT `EnrollID`) FROM `enrollment` WHERE `ClassID` = cl.`ClassID` AND `EnrollStatus` ='enrolled') as `EnrollCount`, cl.`ClassEnrollMax`, e.`EnrollCTS` FROM `enrollment` e, `students` s, `courses` c, `classes` cl WHERE e.`ClassID` = cl.`ClassID` AND c.`CourseID` = cl.`CourseID` AND e.`StudentID` = s.`StudentID` AND e.`EnrollStatus` LIKE '%pte%' AND s.`FamilyID` = :famid ORDER BY s.`StudentNameLast` ASC, s.`StudentNamePreferred` ASC");
                 $stmt->bindParam('famid', $famId, PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $e) {
@@ -253,7 +253,7 @@ class FamStu {
         } else {
             // Return everyone's PTE
             try {
-                $stmt = Data::query("SELECT s.`StudentID`, s.`FamilyID`, CONCAT(s.`StudentNamePreferred`, ' ', s.`StudentNameLast`) as `StudentName`, s.`StudentDOB`, c.`CourseID`, c.`CourseTitle`, cl.`ClassAgeMin`, cl.`ClassAgeMax`, cl.`ClassWeek`, cl.`ClassPeriodBegin`, cl.`ClassPeriodEnd`, e.`EnrollID`, (SELECT COUNT(DISTINCT `EnrollID`) FROM `enrollment` WHERE `ClassID` = cl.`ClassID` AND `EnrollStatus` ='enrolled') as `EnrollCount`, cl.`ClassEnrollMax`, e.`EnrollCTS` FROM `enrollment` e, `students` s, `courses` c, `classes` cl WHERE e.`ClassID` = cl.`ClassID` AND c.`CourseID` = cl.`CourseID` AND e.`StudentID` = s.`StudentID` AND e.`EnrollStatus` LIKE '%pte%' ORDER BY e.`EnrollCTS`");
+                $stmt = Data::query("SELECT s.`StudentID`, s.`FamilyID`, CONCAT(s.`StudentNamePreferred`, ' ', s.`StudentNameLast`) as `StudentName`, s.`StudentDOB`, c.`CourseID`, c.`CourseTitle`, cl.`ClassAgeMin`, cl.`ClassAgeMax`, cl.`ClassWeek`, cl.`ClassPeriodBegin`, cl.`ClassPeriodEnd`, e.`EnrollID`, e.`EnrollStatus`, (SELECT COUNT(DISTINCT `EnrollID`) FROM `enrollment` WHERE `ClassID` = cl.`ClassID` AND `EnrollStatus` ='enrolled') as `EnrollCount`, cl.`ClassEnrollMax`, e.`EnrollCTS` FROM `enrollment` e, `students` s, `courses` c, `classes` cl WHERE e.`ClassID` = cl.`ClassID` AND c.`CourseID` = cl.`CourseID` AND e.`StudentID` = s.`StudentID` AND e.`EnrollStatus` LIKE '%pte%' ORDER BY s.`StudentNameLast` ASC, s.`StudentNamePreferred` ASC");
             } catch (PDOException $e) {
                 Common::logAction('FamStu::getPTEList', 'failed', 'UNK=Unknown', $e->getMessage());
                 return null;

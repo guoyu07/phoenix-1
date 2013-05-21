@@ -1,0 +1,40 @@
+    <h3>{{preferred_name}} {{last_name}}</h3>
+    <table class="compact">
+        <tr>
+            <td style="width:20%;"><strong>Last, First</strong></td>
+            <td style="width:30%;"><img src="/assets/icons/user.png" />{{last_name}}, {{given_name}}</td>
+            <td style="width:15%;"><strong>Preferred Name</strong></td>
+            <td style="width:35%;">{{preferred_name}}</td>
+        </tr>
+        <tr>
+            <td style="width:20%;"><strong>Date of Birth</strong></td>
+            <td style="width:30%;">{{dob}} <span class="muted right" style="float:right;">{{age}} years old</span></td>
+            <td style="width:15%;"><strong>Day School</strong></td>
+            <td style="width:35%;">{{day_school}}</td>
+        </tr>
+        <tr>
+            <td style="width:20%;"><strong>Student Added</strong></td>
+            <td style="width:30%;">{{created_date}}</td>
+            <td style="width:15%;"><strong>Submitted?</strong></td>
+            <td style="width:35%;">{{submitted_date}}</td>
+        </tr>
+        <tr>
+            <td style="width:20%;"><strong>Emergency Contact</strong></td>
+            <td style="width:30%;">{{emer_name}} <span class="muted right" style="float:right;">{{emer_relation}}</span></td>
+            <td style="width:15%;"><strong>Contact Number</strong></td>
+            <td style="width:35%;">{{emer_phone}}</td>
+        </tr>
+
+        <tr>
+            <td style="width:20%;"><strong>Medical Condition</strong></td>
+            <td style="width:30%;">{{med_cond}}</td>
+            <td style="width:15%;"><strong>Medications</strong></td>
+            <td style="width:35%;">{{med_meds}}</td>
+        </tr>
+        <tr>
+            <td style="width:20%;"><strong>Child of Staff Status</strong></td>
+            <td style="width:30%;">{{cos}}</td>
+            <td style="width:15%;"><strong>Links</strong></td>
+            <td style="width:35%;"><a href="/staff/manage/invoices.php?fid={{family_id}}">View family invoice account</a><br /><a href="/staff/manage/student_schedule.php?sid=3498">View/edit schedule</a></td>
+        </tr>
+    </table>

@@ -57,12 +57,37 @@ if (array_key_exists('action', $_GET) && array_key_exists('eid', $_GET)) {
             $period_begin[$i]['ClassData'] = Courses::getClassById($overlap['ClassID']);
         }
 
-        $stmt = Data::prepare('SELECT e.* FROM `enrollment` e, `classes` c WHERE c.ClassWeek = :week AND (c.ClassPeriodBegin = :period OR c.ClassPeriodEnd = :period) AND c.ClassID = e.ClassID AND e.StudentID = :stuid  AND e.EnrollStatus = "enrolled"');
-        $stmt->bindParam('week', $class['ClassWeek']);
-        $stmt->bindParam('period', $class['ClassPeriodEnd']);
-        $stmt->bindParam('stuid', $student['StudentID']);
-        $stmt->execute();
-        $period_end = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($class['ClassPeriodEnd'] !== $class['ClassPeriodBegin']) {
+            $stmt = Data::prepare('SELECT e.* FROM `enrollment` e, `classes` c WHERE c.ClassWeek = :week AND (c.ClassPeriodBegin = :period OR c.ClassPeriodEnd = :period) AND c.ClassID = e.ClassID AND e.StudentID = :stuid  AND e.EnrollStatus = "enrolled"');
+            $stmt->bindParam('week', $class['ClassWeek']);
+            $stmt->bindParam('period', $class['ClassPeriodEnd']);
+            $stmt->bindParam('stuid', $student['StudentID']);
+            $stmt->execute();
+            $period_end = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach($period_end as $i => $overlap) {
+                $period_end[$i]['ClassData'] = Courses::getClassById($overlap['ClassID']);
+            }
+        } else {
+            $period_end = array();
+        }
+
+        $p['overlap'] = '<tr>';
+
+        if ((sizeof($period_begin) == 0) && (sizeof($period_end) == 0)) {
+            $p['overlap'] .= '<td colspan="3"><em class="muted">No overlapping classes were found. If denying, please remind parent to select a replacement class!</em></td>';
+        } else {
+            foreach($period_begin as $c) {
+                $overlap = $c['ClassData'];
+                $p['overlap'] .= '<tr><td>Period '.(($overlap['ClassPeriodBegin'] == $overlap['ClassPeriodEnd']) ? $overlap['ClassPeriodBegin'] : $overlap['ClassPeriodBegin'].'-'.$overlap['ClassPeriodEnd']).'</td><td>'.$overlap['CourseTitle'].'</td><td>Enrolled</td></tr>';
+            }
+            foreach($period_end as $c) {
+                $overlap = $c['ClassData'];
+                $p['overlap'] .= '<tr><td>Period '.(($overlap['ClassPeriodBegin'] == $overlap['ClassPeriodEnd']) ? $overlap['ClassPeriodBegin'] : $overlap['ClassPeriodBegin'].'-'.$overlap['ClassPeriodEnd']).'</td><td>'.$overlap['CourseTitle'].'</td><td>Enrolled</td></tr>';
+            }
+        }
+
+        $p['overlap'] .= '</tr>';
 
         // Set default info
         $h['title'] = 'Confirm PTE';
@@ -70,9 +95,20 @@ if (array_key_exists('action', $_GET) && array_key_exists('eid', $_GET)) {
         $n['my_name'] = $_laoshi->staff['StaffName'];
 
         $p['var_dump'] = var_export($enrollment, true);
+        $p['eid'] = $_GET['eid'];
+        $p['act'] = $_GET['action'];
+        $p['action'] = ucfirst($_GET['action']);
 
         $p['pte_course_title'] = $class['CourseTitle'];
         $p['student_name'] = $student['StudentNamePreferred'].' '.$student['StudentNameLast'];
+
+        $s['preferred_name'] = $student['StudentNamePreferred'];
+        $s['last_name'] = $student['StudentNameLast'];
+        $s['class_name'] = $class['CourseTitle'];
+        $s['week'] = $class['ClassWeek'];
+        $s['period'] = (($class['ClassPeriodBegin'] == $class['ClassPeriodEnd']) ? ' '.$class['ClassPeriodEnd'] : 's '.$class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd']);
+
+        $p['default_text'] = UX::grabPage('text_snippets/email_pte_default_'.$p['act'], $s, true);
 
         $output = UX::grabPage('staff/manage/pte_act_confirm', $p, true);
 
