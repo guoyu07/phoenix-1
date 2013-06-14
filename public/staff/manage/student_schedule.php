@@ -9,9 +9,11 @@
  */
 
 
-define('PTP',   '../../private/');
+define('PTP',   '../../../private/');
 define('PHX_SCRIPT_TYPE',   'HTML');
 define('PHX_UX',        true);
+define('PHX_LAOSHI',    true);
+define('PHX_COURSES',   true);
 define('PHX_STUDENT',   true);
 
 
@@ -19,36 +21,24 @@ define('PHX_STUDENT',   true);
 require_once(PTP . 'php/ignition.php');
 
 // We require a staff login for this page
-if (!ACL::checkLogin('public')) {
-    header('Location: ./login.php?msg=error_nologin');
+if (!ACL::checkLogin('staff')) {
+    header('Location: /staff/index.php?msg=error_nologin');
     exit();
 } else {
-    $_fam = new FamStu('family', $_SESSION['SSOID']);
-    $_fam->getChildren();
-    if (sizeof($_fam->children) == 0) {
-        header('Location: /account/add_child.php?msg=new_acct');
-        exit();
-    }
-
-    $_stu = new FamStu('student', $_GET['sid']);
-    if ($_stu->data['FamilyID'] !== $_fam->fid) {
-        header('Location: /account/dashboard.php?msg=child_exception');
-        exit();
-    } else {
-        $_SESSION['STUID'] = $_GET['sid'];
-    }
+    $_laoshi = new Laoshi($_SESSION['SSOID']);
+    $_laoshi->perms(8, 9, 10, 11, 12);
 }
+
+$_stu = new FamStu('student', $_GET['sid']);
 
 // Has student submitted their schedule?
 if ($_stu->data['StudentSubmitted'] == '1') {
-    $p['submit_note'] = '<div class="alert alert-green"><h3 style="margin-top:0;">Schedule is submitted!</h3><p>Thank you for submitting this schedule. If you need to make changes, you must contact us via email at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a>. Fees may apply.</p><button class="button-link button-green" data-url="/account/submit.php">Review Terms and Conditions</button></div>';
-    $p['button'] = '<button type="button" class="button-link" data-url="/account/courses.php/#!/show:{{suggest_program}}">Show Class Schedule</button> ';
+    $p['submit_note'] = '<div class="alert alert-green">Schedule has been submitted.</div>';
 } else {
-    $p['submit_note'] = '<div class="alert alert-red"><h3 style="margin-top:0;">No schedule submitted</h3><p>You have not yet submitted this child\'s schedule. Any "enrolled" registrations are guaranteed, however, you must submit your schedule in order for us to process payment in the future.</p><p>Submitting a schedule is a formal step that lets us know you are committed to having your child attend the Summer Program. Once you submit, you can <strong>no longer edit profile information</strong> (but can still make changes to your schedule).</p><p>Use the "Submit My Registration" button at the bottom to begin the submission process!</p><button type="button" class="button-link button-red" data-url="/account/submit.php">Submit My Registration</button></div>';
-    $p['button'] = '<p>Click on any course to change or unenroll. <strong>To add a class</strong>, click "Add a Class" below and we will take you to the enrollment brochure.</p>
-
-            <button type="button" class="button-link button-blue" data-url="/account/courses.php/#!/show:{{suggest_program}}">Add Classes to Schedule</button> ';
+    $p['submit_note'] = '<div class="alert alert-red">Schedule hasn\'t been submitted.</div>';
 }
+
+$p['family_id'] = $stu->data['FamilyID'];
 
 // Get student's class schedule...
 $sched[1] = $_stu->getStudentSchedule(1); $week_conflict[1] = false;
@@ -154,7 +144,7 @@ foreach($sched as $i => $week) {
             // Check latest update...
             if (strtotime($e['EnrollLETS']) > $latest_update) $latest_update = strtotime($e['EnrollLETS']);
 
-            $p['week_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.(($_stu->data['StudentSubmitted'] == '1') ? '' : '<a href="/account/enroll.php?act=drop&eid='.$e['EnrollID'].'" class="tipped" title="Click cancel enrollment (will require confirmation)">').'<strong>'.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</strong>: '.$e['CourseTitle'].(($_stu->data['StudentSubmitted'] == '1') ? '' : '</a>').'</td><td>'.$status.'</td></tr>';
+            $p['week_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div><strong>'.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</strong>: '.$e['CourseTitle'].' (<a href="javascript:;" data-eid="'.$e['EnrollID'].'" class="tipped droppable" title="Click cancel enrollment (IMMEDIATE!)">Cancel</a>)</td><td>'.$status.'</td></tr>';
         }
     }
 }
@@ -187,12 +177,16 @@ $p['suggest_program'] = (($_stu->data['StudentAge'] > 15) ? 'AP' : 'SP');
 
 // Triage and get default staff page
 $h['title'] = 'Profile | '.$_stu->data['StudentNamePreferred'];
-$n['student'] = 'active';
-$n['my_name'] = $_fam->data['FamilyName'];
+
+$n['management'] = 'active';
+$n['my_name'] = $_laoshi->staff['StaffName'];
+
+// Include header section
+echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 
 // Page variables
 $p['name'] = $_stu->data['StudentNamePreferred'].' '.$_stu->data['StudentNameLast'];
-$p['dob'] = $_stu->data['StudentDOB'];
+$p['dob'] = date(DATE_FULL, strtotime($_stu->data['StudentDOB']));
 
 $todayDo = new DateTime('00:00:00');
 $dobDo = new DateTime($p['dob']);
@@ -211,18 +205,15 @@ $p['waitlist_active'] = (($waitlist_count == 0) ? 'active' : 'inactive');
 $p['pte_img'] = (($pte_count == 0) ? 'tick' : 'cross');
 $p['waitlist_img'] = (($waitlist_count == 0) ? 'tick' : 'cross');
 
-// Include header section
-echo UX::makeHead($h, $n, 'common/header_public', 'common/nav_account');
-
 // Page info
-echo UX::makeBreadcrumb(array(  'My Family' => "/account/dashboard.php", $_stu->data['StudentNamePreferred'].'\'s Profile &amp; Schedule' => "/account/view_student.php?sid=".$_GET['sid']));
-echo UX::grabPage('account/view_student', $p, true);
+echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Student List' => "/staff/manage/students.php", $_stu->data['StudentNamePreferred'].'\'s Profile &amp; Schedule' => "/staff/manage/student_schedule.php?sid=".$_GET['sid']));
+echo UX::grabPage('staff/manage/student_schedule', $p, true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);
 $time = round(($t['end'] - $t['start']), 3);
 
-echo UX::grabPage('common/masthead', array('time' => $time), true);
+echo UX::grabPage('common/masthead_staff', array('time' => $time), true);
 echo UX::grabPage('common/footer', null, true);
 
 ?>

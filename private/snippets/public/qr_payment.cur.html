@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- [v30413] -->
+<html lang="en-gb">
+<head>
+    
+    <!--[if lte IE 7]>
+    <link rel="shortcut icon" href="/favicon.ico"  type="image/x-icon"/>
+    <![endif]-->
+    <link rel="icon" href="/favicon.png" type="image/x-icon"/>
+    
+    <title>Payment Receipt</title>
+    
+    <link rel="stylesheet" href="/assets/qr.css?_=30416" media="all" type="text/css" />
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/jquery.ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="/assets/jquery.tiptip.min.js"></script>
+    <script type="text/javascript" src="/assets/plume.js?_=30121"></script>
+    
+    <!--[if lt IE 9]>
+    <script text="text/javascript" src="//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<body>
+    <p style="font-size:1.3em;color:#888;text-align:center;">KEEP 1 COPY, ATTACH 1 COPY<br />CONFIDENTIAL INFORMATION - ADDRESSEE ONLY</p>
+    <h1>CIS Summer Program 2013</h1>
+    <h2>Mailing Instructions</h2>
+    <p>Dear parent,<br />
+<br />
+Please read the following instructions carefully in order to ensure that your payment is done correctly. The invoice system is based on a running total this year and should you make any course changes the $50 charge will also be added to your total.</p>
+
+<p>1. All payment must be written in cheque form, made payable to "Chinese International School". Please ensure that your child(ren)'s names are written on the back of the cheque along with your family ID.</p>
+
+<p>2. The payment is to be mailed to the following address with "Attn: Summer Program office" written at the top. Alternatively, you may drop it off at our yellow box in the front of the business office:<br />
+<br />
+Chinese International School<br />
+1 Hau Yuen Path<br />
+Braemar Hill<br />
+North Point <br />
+Hong Kong</p>
+
+
+    <h2>Payment Details</h2>
+    <p>For office use only</p>
+    <p><strong>Credit to</strong><br />Family ID# {{family_id}}</p>
+    <p><strong>Crediting Bank &amp; Cheque Number</strong><br />{{desc}}</p>
+    <p><strong>Payment Made</strong><br />{{date}}</p>
+    <p><strong>Unique Identifier</strong><br />{{id}} </p>
+
+    <h2>Scanman</h2>
+    <p><strong>FOR OFFICE USE ONLY</strong></p>
+    <img src="{{img}}" />
+</body>
+</html>

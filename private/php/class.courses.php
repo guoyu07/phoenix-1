@@ -326,6 +326,29 @@ class Courses {
         }
     }
 
+    /**
+     * Get due date
+     */
+    static public function getDueDate($week) {
+        switch ($week) {
+            case 1:
+                return '19/6/2013';
+            break;
+            case 2:
+                return '26/6/2013';
+            break;
+            case 3:
+                return '3/7/2013';
+            break;
+            case 4:
+                return '10/7/2013';
+            break;
+            default:
+                return 'IMMEDIATE';
+            break;
+        }
+    }
+
 }
 
 

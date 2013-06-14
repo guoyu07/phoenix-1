@@ -357,6 +357,69 @@ if (!ACL::checkLogin('staff')) {
 
             }
         break;
+        case 'mark_student_verified':
+            if (!isset($_REQUEST['sid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                try {
+                    $stmt = Data::prepare('SELECT * FROM `students` WHERE `StudentID` = :sid LIMIT 1');
+                    $stmt->bindParam('sid', $_REQUEST['sid'], PDO::PARAM_INT);
+                    $stmt->execute();
+                    $stustatus = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    if ($stustatus['StudentIC'] == '1') {
+                        // Mark not approved
+                        $stmt = Data::prepare('UPDATE `students` SET `StudentIC` = "0" WHERE `StudentID` = :sid LIMIT 1');
+                        $stmt->bindParam('sid', $_REQUEST['sid'], PDO::PARAM_INT);
+                        $stmt->execute();
+                    } else {
+                        // Mark approved
+                        $stmt = Data::prepare('UPDATE `students` SET `StudentIC` = "1" WHERE `StudentID` = :sid LIMIT 1');
+                        $stmt->bindParam('sid', $_REQUEST['sid'], PDO::PARAM_INT);
+                        $stmt->execute();
+                    }
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Deny request was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+
+            }
+        break;
+        case 'cancel_class_email':
+            if (!isset($_REQUEST['cid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                try {
+                    $stmt = Data::prepare('select sso.ObjEmail as email, f.FamilyName as name from enrollment e, students s, families f, sso_objects sso where sso.ObjID = f.ObjID and f.FamilyID = s.FamilyID and s.StudentID = e.StudentID and e.ClassID = :cid and e.EnrollStatus = "enrolled"');
+                    $stmt->bindParam('cid', $_REQUEST['cid'], PDO::PARAM_INT);
+                    $stmt->execute();
+                    $parent_list = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    Mailer::send($parent_list, '[CIS Summer] Class Cancelation Notification', urldecode($_REQUEST['email']));
+
+                    $stmt = Data::prepare('UPDATE `enrollment` SET EnrollStatus = "dropped" WHERE ClassID = :cid');
+                    $stmt->bindParam('cid', $_REQUEST['cid'], PDO::PARAM_INT);
+                    $stmt->execute();
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Class canceled';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+
+            }
+        break;
     	default:
 			$result['status'] = 'failure';
 			$result['code'] = 2404;

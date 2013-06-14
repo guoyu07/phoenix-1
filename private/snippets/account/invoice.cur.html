@@ -1,0 +1,77 @@
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="basic-info">
+        
+        <!-- Form block -->
+        <div id="form-basic" class="col c7">
+            <h2>Your Invoice</h2>
+            
+            {{message}}
+            
+            <p>The CIS Summer Program runs a continuous invoicing program. Please ensure that you have paid for the classes by the due date specified on each line. For more information, hover over an item to view more about that.</p>
+
+            <h3>Your Tuition Statement</h3>
+            
+            <table class="">
+                <thead>
+                    <tr>
+                        <th style="width:5%;">#</th>
+                        <th style="width:15%;">Date</th>
+                        <th style="width:50%;">Item</th>
+                        <th style="width:15%;">Due</th>
+                        <th style="width:15%;text-align:right;">$HK</th>
+                    </tr>
+                </thead>
+                <tbody id="invoice_body">
+                    {{billed_lines}}
+                    <tr>
+                        <td colspan="4" style="text-align:right"><strong>Tuition Due to CIS</strong></td>
+                        <td style="text-align:right;"><strong>${{total_due}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Ancillary Charges &amp; Payments</h3>
+            
+            <table class="">
+                <thead>
+                    <tr>
+                        <th style="width:15%;">Method</th>
+                        <th style="width:20%;">Date</th>
+                        <th style="width:50%;">Item</th>
+                        <th style="width:15%;text-align:right;">$HK</th>
+                    </tr>
+                </thead>
+                <tbody id="payments_body">
+                    {{charge_lines}}
+                    <tr>
+                        <td colspan="3" style="text-align:right"><strong>Total Due to CIS</strong></td>
+                        <td style="text-align:right;"><strong>${{total_paid}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>    
+
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-basic" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h2>How to Pay</h2>
+            <h3>Self-Report/Mailed Cheque</h3>
+            <p><strong>The easiest method!</strong> Write your cheque for the Account Balance shown below, then click the "Report Payment" button below. Fill out the form, attach the payment slip and mail your cheque to our office (instructions will be available on the slip).</p>
+            <p>Cheques should be made payable to <strong>Chinese International School</strong>.</p>
+
+            <form action="/account/report_payment.php" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="timestamp" value="{{pay_timestamp}}" />
+                <p><button class="button button-green" type="submit">Report Payment</button></p>
+            </form>
+            
+            <h3>In Person</h3>
+            <p>You may also pay by cheque in person when our office opens. Receipts are available for in-person payments by request.</p>
+            <h3>Other Methods</h3>
+            <p>If your family is from outside Hong Kong, please <a href="mailto:summerprogram@cis.edu.hk">contact us</a> to arrange electronic funds payment. Fees may apply.</p>
+            <p class="muted">We do not accept credit card or cash payment for tuition. In-person cash payment is available for ancillary fees (late fees, change fees, etc&hellip;).</p>
+        </div>
+        
+    </div>
+
+    
+</div>

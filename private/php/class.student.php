@@ -127,7 +127,7 @@ class FamStu {
         else $weekIn = (int) $week;
 
         try {
-            $stmt = Data::prepare('SELECT e.*, c.*, cs.CourseTitle, cs.CourseSubj, cs.CourseID FROM `enrollment` e, `classes` c, `courses` cs WHERE e.StudentID = :stuid AND e.ClassID = c.ClassID AND c.CourseID = cs.CourseID AND c.ClassWeek IN ('.$weekIn.') AND e.EnrollStatus IN ("waitlisted", "pte_request", "enrolled", "pte_denied"'.(($getdropped) ? ', "dropped"' : '').') ORDER BY c.ClassWeek ASC, c.ClassPeriodBegin ASC');
+            $stmt = Data::prepare('SELECT e.*, c.*, cs.CourseTitle, cs.CourseSubj, cs.CourseID FROM `enrollment` e, `classes` c, `courses` cs WHERE e.StudentID = :stuid AND e.ClassID = c.ClassID AND c.CourseID = cs.CourseID AND c.ClassWeek IN ('.$weekIn.') AND e.EnrollStatus IN ("waitlisted", "pte_request", "enrolled"'.(($getdropped) ? ', "dropped"' : '').') ORDER BY c.ClassWeek ASC, c.ClassPeriodBegin ASC');
             $stmt->bindParam('stuid', $this->sid, PDO::PARAM_INT);
             $stmt->execute();
         } catch (PDOException $e) {

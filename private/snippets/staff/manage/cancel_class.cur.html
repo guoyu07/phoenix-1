@@ -1,0 +1,38 @@
+<div class="content-row spaced body-emulate" id="topbody">
+    <h1>Cancel Class #{{class_id}}: {{course_title}}</h1>
+    <div class="alert alert-red">
+        <strong>Warning</strong><br />This action is final and cannot be undone&hellip;even with Chestervention.
+    </div>
+
+    <h2>Email to Send</h2>
+    <p>You can edit the email you'd like to send to parents below.</p>
+
+
+    <textarea id="email_content" style="width:90%;clear:both;margin-bottom:15px;height:350px;">{{default_email}}</textarea>
+    
+    <button type="button" class="button-link" data-url="/staff/manage/class_edit.php?cid={{class_id}}">Cancel</button>
+    <button type="button" class="button-red submit">Confirm Cancelation</button>
+</div>
+
+<div class="content-row spaced body-emulate hide" id="response">
+    <div class="alert alert-green">
+        <h1 style="color:#2ea100;">Submitted!</h1>
+        <p>All done. The monkey has sent the email to {{enroll_size}} parents. Enjoy!</p>
+    </div>
+    <button type="button" class="button-link" data-url="/staff/manage/courses.php">Return to Course List</button>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $('.submit').click(function (e) {
+        e.preventDefault();
+        laoshi.rpc({'method': 'cancel_class_email', 'email': encodeURIComponent($('#email_content').html()), 'cid': {{class_id}}});
+        $('#topbody').hide();
+        $('#response').fadeIn('fast');
+        return false;
+    });
+
+});
+</script>

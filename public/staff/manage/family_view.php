@@ -34,6 +34,7 @@ if (!ACL::checkLogin('staff')) {
 $fam = FamStu::getFamilyById($_REQUEST['fid']);
 $p['children'] = '';
 $p['family_name'] = $fam['family']['FamilyName'];
+$p['family_id'] = $fam['family']['FamilyID'];
 $p['family_email'] = $fam['family']['FamilyEmail'];
 $p['family_cts'] = date(DATETIME_FULL, strtotime($fam['family']['FamilyCTS']));
 $p['family_address'] = $fam['family']['FamilyAddress'];
@@ -53,6 +54,7 @@ foreach($fam['children'] as $student) {
     $s['created_date'] = date(DATETIME_FULL, strtotime($student['StudentCTS']));
     $s['submitted_date'] = (($student['StudentSubmitted'] == 1) ? '<img src="/assets/icons/tick.png" /> Schedule has been submitted' : '<em class="muted">Schedule not submitted</em>');
     $s['emer_name'] = $student['StudentECName'];
+    $s['sid'] = $student['StudentID'];
     $s['emer_relation'] = $student['StudentECRelation'];
     $s['emer_phone'] = $student['StudentECPhone'];
     $s['med_meds'] = $student['StudentMedMedications'];

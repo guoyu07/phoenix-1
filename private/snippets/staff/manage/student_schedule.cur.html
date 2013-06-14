@@ -1,0 +1,132 @@
+<div id="student_info" class="content-row spaced">
+    <div class="col-row">
+        <div class="col c7" style="vertical-align:top;">
+            <h1>{{name}}</h1>
+            {{note}}
+            
+            <h2>Current Schedule </h2>
+
+            <p>This schedule was last updated at <strong>{{last_update}}</strong> HKT.</span></p>
+
+            {{submit_note}}
+            
+            <h3>Week 1: June 24-28</h3>
+            <table id="w1">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_1}}
+                </tbody>
+            </table>
+
+            <h3>Week 2: July 2-5</h3>
+            <div class="alert alert-yellow">There is no school (and no fees charged) for the July 1 public holiday.</div>
+            <table id="w2">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_2}}
+                </tbody>
+            </table>
+
+            <h3>Week 3: July 8-12</h3>
+            <table id="w3">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_3}}
+                </tbody>
+            </table>
+
+            <h3>Week 4: July 15-19</h3>
+            <table id="w4">
+                <thead>
+                    <tr>
+                        <th style="width:20%;">Period/Session</th>
+                        <th style="width:50%;">Course</th>
+                        <th style="width:30%;">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{week_4}}
+                </tbody>
+            </table>
+
+            
+            <h2>Student Profile</h2>
+            <div class="form-row" id="form-fname">
+                <label for="fname-input">Student's First Name <span class="red strong">*</span></label>
+                <input type="text" id="fname-input" disabled="disabled" name="fname" class="required" value="{{first_name}}" />
+            </div>
+            <div class="form-row" id="form-pname">
+                <label for="lname-input">Prefered Name</label>
+                <input type="text" id="pname-input" disabled="disabled" name="pname" value="{{preferred_name}}" />
+            </div>
+            <div class="form-row" id="form-lname">
+                <label for="lname-input">Student's Last Name <span class="red strong">*</span></label>
+                <input type="text" id="lname-input" disabled="disabled" name="lname" class="required" value="{{last_name}}" />
+            </div>
+
+        </div>
+        <div class="col c3">
+            <h2>Add a Class</h2>
+            <p>To search for a class to add, type it in the format SUBJ001,4,3. Enrollments past maximum class size will be done automatically but you will be warned if that's the case.</p>
+            <p>
+                <input type="text" id="class_input" placeholder="ARTS001,1,2" />
+            </p>
+            <div id="ci_response">
+            </div>
+
+            <h2>Student Profile</h2>
+            <p>
+                <strong>Full Name</strong><br />
+                {{last_name}}, {{first_name}}
+            </p>
+
+            <p>
+                <strong>DOB</strong><br />
+                {{dob}} <span class="muted">{{age}}</span>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#class_input').keydown(function() {
+        if (event.keyCode == 13) {
+            $('#ci_response').html('<span class="muted"><em>Searching, please wait&hellip;</em></span>');
+            $.getJSON('/staff/addclass_rpc.php', {'str': $('#class_input').val(), 'sid': {{sid}} }, function(ret) {
+                if (ret.full) {
+                    $('#ci_response').html('<div class="alert alert-yellow">Class is already full but I overrode it for you. To remove the class, refresh and drop it.</div>');
+                } else {
+                    $('#ci_response').html('<div class="alert alert-green">Class was successfully added! Refresh to see changes!</div>');
+                }
+            });
+        }
+    });
+
+    $('.droppable').click(function () {
+        var eid = $(this).data('eid');
+        $.getJSON('/staff/dropclass_rpc.php', {'eid': eid, 'sid': {{sid}} }, function(ret) {
+            laoshi.toast('Class dropped successfully. Refresh to see changes');
+        });
+    })
+});
+</script>

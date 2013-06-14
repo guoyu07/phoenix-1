@@ -34,7 +34,7 @@ $class = Courses::getClassById($_REQUEST['cid']);
 $class['TeacherData'] = Courses::getTeacherById($class['TeacherID']);
 
 // Make h array
-$h['title'] = 'Class #'.$class['ClassID'] . ' | Class View';
+$h['title'] = 'Cancel Class #'.$class['ClassID'];
 $n['management'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
@@ -44,27 +44,7 @@ $p['course_id'] = $class['CourseID'];
 $p['course_title'] = $class['CourseTitle'];
 $p['teacher_name'] = $class['TeacherData']['TeacherName'];
 $p['teacher_email'] = $class['TeacherData']['TeacherEmail'];
-$p['w'.$class['ClassWeek'].'_selected'] = ' selected="selected"';
-$p['pb'.strtolower($class['ClassPeriodBegin']).'_selected'] = ' selected="selected"';
-$p['pe'.strtolower($class['ClassPeriodEnd']).'_selected'] = ' selected="selected"';
-$p['minage'] = $class['ClassAgeMin'];
-$p['maxage'] = $class['ClassAgeMax'];
-$p['maxenroll'] = $class['ClassEnrollMax'];
-$p['status'] = $class['ClassStatus'];
-$p['curroom'] = $class['RoomID'];
 
-$rooms = Courses::getRoomList();
-$p['rooms'] = '';
-foreach($rooms as $roomid => $rm) {
-    $p['rooms'] .= '<option value="'.$roomid.'">'.$rm['name'].'</option>'."\n";
-}
-
-// Check greetings
-if (($class['ClassPeriodBegin'] == 0) || ($class['ClassPeriodEnd'] == 0)) {
-    $p['greeting'] = '<div class="alert alert-red"><span class="badge badge-red">Warning</span> I\'ve detected an error in this class form. Please double check to ensure that timeslots are correct. You can still release this class if required, but I can\'t guarantee seamless operation on the part of the parents.</div>';
-} else {
-    $p['greeting'] = '<div class="alert alert-green"><img src="/assets/icons/tick.png" /> This class looks perfect to me. If this class is public, parents will be able to sign up until it\'s full.</div>';
-}
 
 // Get enrollment
 $stmt = Data::prepare('SELECT s.StudentID, s.StudentNamePreferred, s.StudentNameLast, s.StudentDOB, e.EnrollLETS FROM `enrollment` e, `students` s WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
@@ -72,11 +52,8 @@ $stmt->bindParam('cid', $class['ClassID']);
 $stmt->execute();
 $enrollment = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$p['enroll_table'] = '';
-
-foreach ($enrollment as $stu) {
-    $p['enroll_table'] .= '<tr><td><a href="/staff/manage/student_schedule.php?sid='.$stu['StudentID'].'">'.$stu['StudentNamePreferred'].' '.$stu['StudentNameLast'].'</a></td><td>'.date(DATETIME_FULL, strtotime($stu['EnrollLETS'])).'</td><td>'.date(DATE_FULL, strtotime($stu['StudentDOB'])).'</td><td><em class="muted">None available</em></td></tr>';
-}
+$p['enroll_size'] = sizeof($enrollment);
+$p['default_email'] = UX::grabPage('text_snippets/email_cancel_class', $class, false);
 
 // Include header section
 echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
@@ -84,7 +61,7 @@ echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 // Page info
 echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Course Listing' => "/staff/manage/courses.php", $class['CourseTitle'] => "/staff/manage/course_view.php?cid=".$class['CourseID'],
     'Class #'.$class['ClassID'] => '/staff/manager/class_edit.php?cid='.$_REQUEST['cid']));
-echo UX::grabPage('staff/manage/class_edit', $p, true);
+echo UX::grabPage('staff/manage/cancel_class', $p, true);
 
 // Before footer grab time spent
 $t['end'] = microtime(true);

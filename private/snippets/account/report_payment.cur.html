@@ -1,0 +1,93 @@
+<form action="report_payment.php?sr" method="post" class="validate" enctype="multipart/form-data">
+<div class="content-row spaced" style="display:table;">
+    <div class="col-row" id="basic-info">
+        
+        <!-- Form block -->
+        <div id="form-basic" class="col c7">
+            <h2>Step 1: Write Your Cheque</h2>
+
+            <p>Your cheque should be written out in Hong Kong dollars to the balance shown below. Please remember that any cheques that have been reported but CIS has not received or processed yet <strong>are not shown in this balance</strong>. We strongly suggest you keep a separate print-out of your payment confirmation for your records.</p>
+
+            <p>Cheques should be made payable to <strong>CHINESE INTERNATIONAL SCHOOL</strong> and dated <strong>{{today}}</strong>.</p>
+            
+            {{message}}
+
+            <p>On the reverse side of your cheque, write <strong>Family #{{family_id}}</strong> and your registered account name, <strong>{{family_name}}</strong>. Please ensure that your child(ren)'s names are written on the back of the cheque as well. Then proceed to Step 2.</p>
+
+            <h2>Step 2: Record This Payment</h2>
+            <p>To expedite processing your cheque, please enter all the details below in regards to this particular cheque.</p>
+
+            <div class="form-row" id="form-name">
+                <label for="name-input">Bank name <span class="red strong">*</span></label>
+                <input type="text" id="name-input" name="bank_name" class="required" placeholder="e.g. HSBC, CitiBank, Hang Seng"/>
+            </div>
+            <div class="form-row" id="form-cnum">
+                <label for="chequenum-input">Cheque number <span class="red strong">*</span></label>
+                <input type="text" id="chequenum-input" name="cheque_num" class="required" placeholder="e.g. 1502"/>
+            </div>
+            <div class="form-row" id="form-value">
+                <label for="value-input">Cheque value <span class="red strong">*</span></label>
+                <input type="text" id="value-input" name="value" class="required" placeholder="e.g. 800"/>
+            </div>
+            <div class="form-hint no-label muted">
+                <p>Do not enter the dollar sign ($) or any formatting (commas, spaces, etc&hellip;)</p>
+            </div>
+
+            <h2>Step 3: Submit, Print and Mail</h2>
+            <p>When you hit the Submit button, we will enter the cheque details you gave us in Step 3 into our database for expedited processing. <strong>This does not constitute payment</strong>, but notifies our staff to start looking out for your cheque.</p>
+
+            <p>A window will pop-up: print <strong>two copies</strong> of this page (black and white is fine). Put one copy along with your cheque into an envelope and mail it to our office at the address below. Keep the other copy for your own records. You <strong>will not have access to this pop-up payment stub after you exit this page</strong>.</p>
+
+            <p>A mailing address will be provided on this pop-up payment stub.</p>
+
+            <div class="alert alert-yellow" id="info_bar">If a new window does not open, please disable your pop-up blocker!</div>
+
+            <p><button type="button" id="pay" class="button button-green">Record Incoming Payment</button>
+            <button type="button" id="return" class="button-link hide" data-url="/account/invoice.php">Return to Invoice</button>
+            <button type="button" id="reopen" class="button button-red hide" onclick="reopen_stub()">Reopen Payment Stub (to Print)</button></p>
+
+            <p>Please note that as of this point, any course changes not relevant to cancellations and any withdrawal from the first week will incur a cancellation charge.</p>
+
+            <p>Should you require any further assistance, please don't hesitate to call us at 2512-5961 (CIS ext. 961) or email us at <a href="mailto:summerprogram@cis.edu.hk">summerprogram@cis.edu.hk</a>.</p>
+
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-basic" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h2>Other Methods to Pay</h2>
+            <p>The self-reporting method is the easiest method to pay for your tuition balance to CIS. If however you prefer a different method, please use one of the following below.</p>
+            <h3>In Person</h3>
+            <p>You may also pay by cheque in person when our office opens. Receipts are available for in-person payments by request.</p>
+            <h3>Other Methods</h3>
+            <p>If your family is from outside Hong Kong, please <a href="mailto:summerprogram@cis.edu.hk">contact us</a> to arrange electronic funds payment. Fees may apply.</p>
+            <p class="muted">We do not accept credit card or cash payment for tuition. In-person cash payment is available for ancillary fees (late fees, change fees, etc&hellip;).</p>
+        </div>
+        
+    </div>
+
+</div>
+</form>
+
+<script type="text/javascript">
+var url = '';
+$(document).ready(function () {
+    $('#pay').click(function (e) {
+        e.preventDefault();
+        $.post('/account/pay.php', {"bank_name": $('#name-input').val(), "cheque_num": $('#chequenum-input').val(), "value": $('#value-input').val()}, function (data) {
+            if (data.result == 'success') {
+                window.open("/account"+data.msg,"_blank","width=600, height=400");
+                url = "/account"+data.msg;
+                $('#info_bar').html('Thank you, your payment has been recorded. The payment stub window should be opened. If not, disable your popup blocker and use the button below to reopen the stub.').removeClass('alert-yellow').addClass('alert-green');
+                $('#pay').prop('disabled', true).hide();
+                $('#reopen').show();
+                $('#return').show();
+            }
+        });
+        return false;
+    });
+});
+
+function reopen_stub() {
+    window.open(url,"_blank","width=600, height=400");
+}
+</script>

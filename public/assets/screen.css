@@ -1255,3 +1255,13 @@ div.dashblock > div.dashblock-content {
     border-top: 0;
     padding: 0.8em;
 }
+
+/* High density info */
+span.hiden {
+    font-size: 0.97em;
+}
+
+table.hiden, table.hiden td, table.hiden th {
+    font-size: 0.97em;
+    padding: 0.4em;
+}

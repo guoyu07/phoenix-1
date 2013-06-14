@@ -96,7 +96,25 @@
     <p><em class="muted">Sorry, you don't have permission to see that.</em></p>
 
     <h3>Roster</h3>
-    <p><em class="muted">Sorry, you don't have permission to see that.</em></p>
+    <p>
+        <table id="roster">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Time Enrolled</th>
+                    <th>Student DOB</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{enroll_table}}
+            </tbody>
+        </table>
+    </p>
+
+    <p>
+        <button class="button-link button-red" data-url="/staff/manage/cancel_class.php?cid={{class_id}}">Cancel This Class</button>
+    </p>
     
 
 
