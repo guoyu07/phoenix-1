@@ -35,10 +35,18 @@
                     </tr>
                 </thead>
                 <tbody id="payments_body">
-                    {{payments_line}}
                     <tr>
-                        <td colspan="3" style="text-align:right"><strong>Total Due to CIS</strong></td>
+                        <td colspan="3"><em>Balance carried from <strong>Items Due</strong></em></td>
+                        <td style="text-align:right;">${{total_due}}</td>
+                    </tr>
+                    {{charge_lines}}
+                    <tr>
+                        <td colspan="3" style="text-align:right"><strong>Total of Payments</strong></td>
                         <td style="text-align:right;"><strong>${{total_paid}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:right"><strong>Total Still Due to CIS</strong></td>
+                        <td style="text-align:right;"><strong>${{final_invoice}}</strong></td>
                     </tr>
                 </tbody>
             </table>            
@@ -78,6 +86,17 @@
     
 </div>
 <script type="text/javascript">
-function addPayment() {
-    
+function addFee() {
+    laoshi.rpc({"method": "add_charge", "fid": {{family_id}}, "val": $('#fee_amount').val(), "desc": $('#fee_desc').val()});
+    laoshi.toast('Payment request sent to invoices service. Refresh to see changes!');
+    $('#fee_amount').val('');
+    $('#fee_desc').val('');
 }
+
+function addPayment() {
+    laoshi.rpc({"method": "add_payment", "fid": {{family_id}}, "paytype": $('#pay_type').val(), "val": ($('#pay_amount').val() * -1), "desc": $('#pay_desc').val()});
+    laoshi.toast('Payment request sent to invoices service. Refresh to see changes!');
+    $('#pay_amount').val('');
+    $('#pay_desc').val('');
+}
+</script>

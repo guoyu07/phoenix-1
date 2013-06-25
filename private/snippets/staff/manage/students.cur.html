@@ -4,7 +4,7 @@
     <p><input id="search" type="text" style="width:200px;" placeholder="Enter search term&hellip;" />
         <button type="button" onclick="toggleFail();">Toggle Problem Schedules On/Off</button></p>
 
-    <table class="hiden students">
+    <table class="students">
         <thead>
             <tr>
                 <th style="width:7%;" class="tipped" title="Family ID Number">FID</th>
@@ -12,8 +12,6 @@
                 <th style="width:25%;" class="tipped" title="Click to edit family/child details">Student Name</th>
                 <th style="width:10%;">DOB</th>
                 <th style="width:15%;">Submit Date</th>
-                <th style="width:15%;">Enrollments</th>
-                <th style="width:20%;">Student Checked?</th>
             </tr>
         </thead>
         <tbody id="tb_student">
@@ -114,10 +112,10 @@ $(document).ready(function() {
             '<td>S' + stu.StudentID + '</td>' +
             '<td><a href="/staff/manage/student_schedule.php?sid=' + stu.StudentID + '">' + stu.StudentNamePreferred + ' ' + stu.StudentNameLast + '</a></td>' +
             '<td>' + stu.StudentDOB + '</td>' +
-            '<td>' + ((stu.StudentSubmitted == '1') ? stu.StudentSubmitTS : '<em class="muted">Not submitted</em>') + '</td>' +
+            '<td>' + ((stu.StudentSubmitted == '1') ? stu.StudentSubmitTS : '<em class="muted">Not submitted</em>') + '</td></tr>'); /* +
             '<td><em class="muted">Hidden</em></td>' +
-            '<td>' + ((stu.StudentSubmitted == '1') ? '<a href="javascript:;" onclick="toggleChecked(' + stu.StudentID + ');" id="stu-' + stu.StudentID + '-status">' + ((stu.StudentIC == 1) ? '<img src="/assets/icons/tick.png" /> Verified' : '<img src="/assets/icons/cross.png" /> Not verified' ) + '</a>' : '<em class="muted">Schedule not submitted</em>') + '</td>'
-        );
+            '<td>' + ((stu.StudentSubmitted == '1') ? '<a href="javascript:;" onclick="toggleChecked(' + stu.StudentID + ');" id="stu-' + stu.StudentID + '-status">' + ((stu.StudentIC == 1) ? '<img src="/assets/icons/tick.png" /> Verified' : '<img src="/assets/icons/cross.png" /> Not verified' ) + '</a>' : '<em class="muted">Schedule not submitted</em>') + '</td>' 
+        );*/
     });
 
     

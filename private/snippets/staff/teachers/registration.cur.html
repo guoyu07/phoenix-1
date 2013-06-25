@@ -1,0 +1,30 @@
+<div id="course_list" class="content-row spaced body-emulate">
+    <h2>Roster: Class #{{class_id}} ({{course_title}})</h2>
+    <p>The list of students enrolled in your class is as below.</p.
+    <p>
+        <table id="roster">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Parent's Name</th>
+                    <th>Registration</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{enroll_table}}
+            </tbody>
+        </table>
+    </p>
+    
+
+
+</div>
+
+<script type="text/javascript">
+function mark(state, sname, cid, sid) {
+    laoshi.rpc({"method": "registration", "sid": sid, "cid": cid, "status": state});
+    laoshi.toast('Marked <strong>'+sname+'</strong> as '+state);
+    $('#stureg-'+sid).html(state);
+}
+
+</script>

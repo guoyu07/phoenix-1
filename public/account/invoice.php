@@ -53,13 +53,14 @@ $charges = 0;
 foreach($invoice as $i => $line) {
     if (($line['CourseSubj'] == 'PHED') || ($line['CourseSubj'] == 'LANG') || ($line['CourseSubj'] == 'MSCT') || ($line['CourseSubj'] == 'ARTS')) {
         $amount = (($line['ClassPeriodBegin'] == $line['ClassPeriodEnd']) ? '800' : '1600');
-
-
-        if ($line['ClassWeek'] == 2) $amount = floor($amount*0.8);
-
-        $p['billed_lines'] .= '<tr><td>'.($i+1).'</td><td><span class="tipped" title="This is the date on which you enrolled your child">'.date(DATE_SHORT, strtotime($line['EnrollCTS'])).'</span></td><td>'.strtoupper($line['CourseSubj']).str_pad($line['CourseID'], 3, '0', STR_PAD_LEFT).' - W'.$line['ClassWeek'].'P'.$line['ClassPeriodBegin'].' <em class="muted small">Enrollment for '.$line['StudentNamePreferred'].' '.$line['StudentNameLast'].'</td><td>'.Courses::getDueDate($line['ClassWeek']).'</td><td style="text-align:right;">$'.number_format($amount).'</td></tr>';
-        $total += $amount;
+    } else {
+        $amount = 2500;
     }
+
+    if ($line['ClassWeek'] == 2) $amount = floor($amount*0.8);
+
+    $p['billed_lines'] .= '<tr><td>'.($i+1).'</td><td><span class="tipped" title="This is the date on which you enrolled your child">'.date(DATE_SHORT, strtotime($line['EnrollCTS'])).'</span></td><td>'.strtoupper($line['CourseSubj']).str_pad($line['CourseID'], 3, '0', STR_PAD_LEFT).' - W'.$line['ClassWeek'].'P'.$line['ClassPeriodBegin'].' <em class="muted small">Enrollment for '.$line['StudentNamePreferred'].' '.$line['StudentNameLast'].'</td><td>'.Courses::getDueDate($line['ClassWeek']).'</td><td style="text-align:right;">$'.number_format($amount).'</td></tr>';
+    $total += $amount;
 }
 
 $p['total_due'] = number_format($total);

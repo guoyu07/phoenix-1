@@ -59,20 +59,22 @@ foreach($invoice as $i => $line) {
 
     if ($line['ClassWeek'] == 2) $amount = floor($amount*0.8);
 
-    $p['billed_line'] .= '<tr><td><span class="tipped" title="This is the date on which you enrolled your child">'.date(DATE_SHORT, strtotime($line['EnrollCTS'])).'</span></td><td>'.strtoupper($line['CourseSubj']).str_pad($line['CourseID'], 3, '0', STR_PAD_LEFT).' - W'.$line['ClassWeek'].'P'.$line['ClassPeriodBegin'].' <em class="muted small">Enrollment for '.$line['StudentNamePreferred'].' '.$line['StudentNameLast'].'</td><td>'.Courses::getDueDate($line['ClassWeek']).'</td><td style="text-align:right;">$'.number_format($amount).'</td></tr>';
+    $p['billed_line'] .= '<tr><td>'.date(DATE_SHORT, strtotime($line['EnrollCTS'])).'</td><td>'.strtoupper($line['CourseSubj']).str_pad($line['CourseID'], 3, '0', STR_PAD_LEFT).' - W'.$line['ClassWeek'].'P'.$line['ClassPeriodBegin'].' <em class="muted small">Enrollment for '.$line['StudentNamePreferred'].' '.$line['StudentNameLast'].'</td><td>'.Courses::getDueDate($line['ClassWeek']).'</td><td style="text-align:right;">$'.number_format($amount).'</td></tr>';
     $total += $amount;
 }
 
 $p['total_due'] = number_format($total);
 
 foreach($payments as $i => $line) {
-    $p['charge_lines'] .= '<tr><td>'.$line['PayMethod'].'</span></td><td>'.date(DATE_SHORT, strtotime($line['PayCTS'])).'</td><td>'.$line['PayDesc'].'</td><td style="text-align:right;">'.(($line['PayVerified'] == 1) ? '$'.number_format($line['PayAmount']) : '<em class="muted">Pending</em>').'</td></tr>';
+    $p['charge_lines'] .= '<tr><td>'.$line['PayMethod'].'</span></td><td>'.date(DATE_SHORT, strtotime($line['PayCTS'])).'</td><td>'.(($line['PayVerified'] == 0) ? '<a href="/staff/manage/verify_invoice.php?pid='.$line['PayID'].'" class="tipped" title="Click to verify this reported payment">'.$line['PayDesc'].'</a>' : $line['PayDesc']).'</td><td style="text-align:right;">'.(($line['PayVerified'] == 1) ? '$'.number_format($line['PayAmount']) : '<em class="muted">Pending</em>').'</td></tr>';
     (($line['PayVerified'] == 1) ? $charges += $line['PayAmount'] : $charges = $charges);
 }
 
 $p['total_paid'] = number_format($charges);
+$p['family_id'] = $_REQUEST['fid'];
 
 $final_invoice = - $charges - $total;
+$p['final_invoice'] = number_format((-1)*($final_invoice));
 
 // Set default info
 $h['title'] = 'Running Invoice | Family #'.$_REQUEST['fid'];

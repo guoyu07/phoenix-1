@@ -195,7 +195,7 @@ class Courses {
      * @return  mixed
      */
     static public function getClassEnrollment($cid) {
-        $stmt = Data::prepare('SELECT s.`StudentID`, CONCAT(s.`StudentNamePreferred`, " ", s.`StudentNameLast`) FROM `students` s, `enrollment` e WHERE e.`ClassID` = :cid AND e.`EnrollStatus` = "enrolled" AND e.`StudentID` = s.`StudentID`');
+        $stmt = Data::prepare('SELECT s.`StudentID`, CONCAT(s.`StudentNamePreferred`, " ", s.`StudentNameLast`) FROM `students` s, `enrollment` e WHERE e.`ClassID` = :cid AND e.`EnrollStatus` = "enrolled" AND s.`StudentSubmitted` = 1 AND e.`StudentID` = s.`StudentID`');
         $stmt->bindParam('cid', $cid, PDO::PARAM_INT);
         $stmt->execute();
 

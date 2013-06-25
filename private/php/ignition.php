@@ -20,7 +20,7 @@ define('DATE_SHORT',		'd/m/y');
 
 // Define environmental constants
 define('BETA',              true);      // set to false to disable error outputting/debugging
-define('SITE_DISABLED',     false);     // set to turn on site out message
+define('SITE_DISABLED',     true);     // set to turn on site out message
 define('REGISTRATION_OPEN', true);      // set to false to disable registration
 define('MAILER_SENDMAIL',   true);      // set to false to disable Mandrill emailing
 define('MANDRILL_KEY',      'd4fd5695-5805-43fa-8fd7-2a2f0c30fa9b');    // set to Mandrill API key

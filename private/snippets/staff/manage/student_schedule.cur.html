@@ -3,12 +3,16 @@
         <div class="col c7" style="vertical-align:top;">
             <h1>{{name}}</h1>
             {{note}}
+
+            <p><button class="button-link" data-url="/staff/manage/family_view.php?fid={{family_id}}">Family Page</button></p>
             
             <h2>Current Schedule </h2>
 
             <p>This schedule was last updated at <strong>{{last_update}}</strong> HKT.</span></p>
 
             {{submit_note}}
+
+            <p style="margin-top:10px;"><button type="button" class="button-blue" onclick="window.open('/account/print_schedule.php?sid={{sid}}&v={{v}}');">Print Schedule</button></p>
             
             <h3>Week 1: June 24-28</h3>
             <table id="w1">
@@ -67,21 +71,6 @@
                 </tbody>
             </table>
 
-            
-            <h2>Student Profile</h2>
-            <div class="form-row" id="form-fname">
-                <label for="fname-input">Student's First Name <span class="red strong">*</span></label>
-                <input type="text" id="fname-input" disabled="disabled" name="fname" class="required" value="{{first_name}}" />
-            </div>
-            <div class="form-row" id="form-pname">
-                <label for="lname-input">Prefered Name</label>
-                <input type="text" id="pname-input" disabled="disabled" name="pname" value="{{preferred_name}}" />
-            </div>
-            <div class="form-row" id="form-lname">
-                <label for="lname-input">Student's Last Name <span class="red strong">*</span></label>
-                <input type="text" id="lname-input" disabled="disabled" name="lname" class="required" value="{{last_name}}" />
-            </div>
-
         </div>
         <div class="col c3">
             <h2>Add a Class</h2>
@@ -95,12 +84,24 @@
             <h2>Student Profile</h2>
             <p>
                 <strong>Full Name</strong><br />
-                {{last_name}}, {{first_name}}
+                {{last_name}}, {{first_name}}<br /><span class="muted">(Preferred: {{preferred_name}} {{last_name}})</span>
             </p>
 
             <p>
                 <strong>DOB</strong><br />
-                {{dob}} <span class="muted">{{age}}</span>
+                {{dob}} <span class="muted">(Age: {{age}})</span>
+            </p>
+
+            <h2>Emergency &amp; Medical</h2>
+
+            <p>
+                <strong>Medical Conditions</strong><br />
+                {{med_cond}}
+            </p>
+
+            <p>
+                <strong>Medications</strong><br />
+                {{med_meds}}
             </p>
 
         </div>
@@ -113,7 +114,10 @@ $(document).ready(function () {
         if (event.keyCode == 13) {
             $('#ci_response').html('<span class="muted"><em>Searching, please wait&hellip;</em></span>');
             $.getJSON('/staff/addclass_rpc.php', {'str': $('#class_input').val(), 'sid': {{sid}} }, function(ret) {
-                if (ret.full) {
+                // Was class valid?
+                if (ret.status == 'failure') {
+                    $('#ci_response').html('<div class="alert alert-red"><strong>An error occured!</strong><br />' + ret.msg + '</div>');
+                } else if (ret.full) {
                     $('#ci_response').html('<div class="alert alert-yellow">Class is already full but I overrode it for you. To remove the class, refresh and drop it.</div>');
                 } else {
                     $('#ci_response').html('<div class="alert alert-green">Class was successfully added! Refresh to see changes!</div>');
@@ -129,4 +133,9 @@ $(document).ready(function () {
         });
     })
 });
+
+function forceSubmit() {
+    laoshi.rpc({"method": "force_submit", "sid": {{sid}} });
+    laoshi.toast('Student schedule was submitted. Refresh to see changes.');
+}
 </script>

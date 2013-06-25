@@ -33,12 +33,12 @@ $_stu = new FamStu('student', $_GET['sid']);
 
 // Has student submitted their schedule?
 if ($_stu->data['StudentSubmitted'] == '1') {
-    $p['submit_note'] = '<div class="alert alert-green">Schedule has been submitted.</div>';
+    $p['submit_note'] = '<div class="alert alert-green">The parent has already submitted this schedule. The submission receipt timestamp is:<br /><strong>'.date(DATETIME_FULL, strtotime($_stu->data['StudentSubmitTS'])).'</strong></div>';
 } else {
-    $p['submit_note'] = '<div class="alert alert-red">Schedule hasn\'t been submitted.</div>';
+    $p['submit_note'] = '<div class="alert alert-red">Schedule hasn\'t been submitted.</div><p><button class="button" onclick="forceSubmit();" class="button-blue">Force Submit</button></p>';
 }
 
-$p['family_id'] = $stu->data['FamilyID'];
+$p['family_id'] = $_stu->data['FamilyID'];
 
 // Get student's class schedule...
 $sched[1] = $_stu->getStudentSchedule(1); $week_conflict[1] = false;
@@ -47,6 +47,9 @@ $sched[3] = $_stu->getStudentSchedule(3); $week_conflict[3] = false;
 $sched[4] = $_stu->getStudentSchedule(4); $week_conflict[4] = false;
 $pte_count = 0;
 $waitlist_count = 0;
+
+$p['v'] = sha1('cis_summer:'.$_GET['sid']);
+$p['sid'] = $_GET['sid'];
 
 $p['week_1'] = ''; $p['week_2'] = ''; $p['week_3'] = ''; $p['week_4'] = '';
 $latest_update = strtotime($_stu->data['StudentCTS']);
@@ -144,7 +147,7 @@ foreach($sched as $i => $week) {
             // Check latest update...
             if (strtotime($e['EnrollLETS']) > $latest_update) $latest_update = strtotime($e['EnrollLETS']);
 
-            $p['week_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div><strong>'.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</strong>: '.$e['CourseTitle'].' (<a href="javascript:;" data-eid="'.$e['EnrollID'].'" class="tipped droppable" title="Click cancel enrollment (IMMEDIATE!)">Cancel</a>)</td><td>'.$status.'</td></tr>';
+            $p['week_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'"> '.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$e['CourseID'].'" class="tipped" title="Go to course page"><strong>'.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</strong>: '.$e['CourseTitle'].'</a> (<a href="javascript:;" data-eid="'.$e['EnrollID'].'" class="tipped droppable" title="Click cancel enrollment (IMMEDIATE!)">Cancel</a>)</td><td>'.$status.'</td></tr>';
         }
     }
 }

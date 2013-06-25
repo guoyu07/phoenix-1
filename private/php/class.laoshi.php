@@ -34,6 +34,8 @@ class Laoshi {
             case 'administrator':
                 return 'staff/dash_admin';
             break;
+            case 'teacher':
+                return 'staff/dash_teacher';
             default:
                 return 'staff/dash_no_acl';
             break;

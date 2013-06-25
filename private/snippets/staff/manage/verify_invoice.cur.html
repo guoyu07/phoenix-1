@@ -1,0 +1,38 @@
+<form action="./verify_invoice.php" class="validate" method="post" enctype="multipart/form-data">
+<div class="content-row spaced body-emulate" id="topbody">
+    <h1>Payment Verification</h1>
+
+    <h2>Recorded Details</h2>
+    <p>Here is the information that the parent reported sending to CIS. If all the information presented below is correct, just hit Submit. Otherwise, make any changes necessary, then submit this page.</p>
+
+
+    <input type="hidden" name="pid" value="{{payment_id}}" />
+
+    <div class="form-row" id="pay-method-row">
+        <label for="method">Payment Method <strong class="red">*</strong></label>
+        <input type="text" id="method" name="method" class="required" value="{{method}}" />
+    </div>
+
+    <div class="form-row" id="pay-desc-row">
+        <label for="desc">Cheque Description <strong class="red">*</strong></label>
+        <input type="text" id="desc" name="desc" class="required" value="{{desc}}" />
+    </div>
+
+    <div class="form-row" id="pay-amount-row">
+        <label for="amount">Value <strong class="red">*</strong></label>
+        <input type="text" id="amount" name="amount" class="required" value="{{amount}}" />
+    </div>
+    
+    <button type="submit" class="button-green">Confirm Payment</button>
+    <button type="button" class="button-link" data-url="./invoices.php?fid={{family_id}}">Return to Invoice</button>
+</div>
+
+<div class="content-row spaced body-emulate hide" id="response">
+    <div class="alert alert-green">
+        <h1 style="color:#2ea100;">Submitted!</h1>
+        <p>All done. The monkey has sent the email to {{enroll_size}} parents. Enjoy!</p>
+    </div>
+    <button type="button" class="button-link" data-url="/staff/manage/courses.php">Return to Course List</button>
+
+</div>
+</form>

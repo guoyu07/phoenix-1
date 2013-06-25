@@ -1,0 +1,32 @@
+<div class="content-row spaced body-emulate" id="topbody">
+    <h1>Mobile Number Required</h1>
+    
+    <p>Oops! It seems like we don't have your mobile number on record. This is a one-step process - please simply enter your <strong>HK cell phone number</strong> in case we need to contact you.</p>
+
+    <p class="muted">Tip: There's no need to add dashes or 852</p>
+
+    <input type="text" id="cell_update" placeholder="Format: 91234567" />
+    
+    <button type="button" class="button-green submit" id="update">Update Cell Number</button>
+    <button type="button" disabled="disabled" id="wait" class="hide button">Please wait&hellip;</button>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    $('.submit').click(function (e) {
+        e.preventDefault();
+        if ($('#cell_update').val() == '') {
+            laoshi.toast('Please enter a valid cell phone number...we might need it in case of emergencies!');
+            return false;
+        } else {
+            $('#update').hide();
+            $('#wait').show();
+            laoshi.rpc({'method': 'update_cell', 'staff_id': {{staff_id}}, 'number': $('#cell_update').val()});
+            laoshi.toast('Thanks for updating your cell number. Taking you to your dashboard in 3 seconds!')
+            setTimeout("window.location='/staff/dashboard.php?msg=cell_update'", 3000);
+        }
+    });
+
+});
+</script>

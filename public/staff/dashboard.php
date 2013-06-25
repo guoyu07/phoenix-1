@@ -41,7 +41,30 @@ $d['type'] = $_laoshi->sso['ObjType']['TypeName'];
 $d['last_visit'] = Common::relativeTime(strtotime($_laoshi->sso['ObjLLTS']));
 $d['account_cts'] = Common::relativeTime(strtotime($_laoshi->sso['ObjCTS']));
 
+$stmt = Data::prepare("select co.*, cl.* from courses co, classes cl where co.CourseID = cl.CourseID and co.TeacherLead = :lead and cl.ClassStatus = 'active' order by cl.ClassWeek asc, cl.ClassPeriodBegin asc");
+$stmt->bindParam('lead', $_laoshi->staff['StaffID']);
+$stmt->execute();
+$classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$d['class_w1'] = '';
+$d['class_w2'] = '';
+$d['class_w3'] = '';
+$d['class_w4'] = '';
+
+$d['reg_w1'] = '';
+$d['reg_w2'] = '';
+$d['reg_w3'] = '';
+$d['reg_w4'] = '';
+
+foreach($classes as $class) {
+    $d['class_w'.$class['ClassWeek']] .= '<strong><span class="badge">Period '.$class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd'].'</span> <a href="/staff/teachers/view_roster.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a></strong><br />';
+    $d['reg_w'.$class['ClassWeek']] .= '<strong><span class="badge">Period '.$class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd'].'</span> <a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a></strong><br />';
+
+}
+
 $p['content'] = UX::grabPage($_laoshi->fetchDefaultPage(), $d);
+$p['staff_id'] = $_laoshi->staff['StaffID'];
+
 
 
 // Include header section
@@ -49,7 +72,12 @@ echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 
 // Page info
 echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/index.php', 'My Dashboard' => "/staff/dashboard.php"));
-echo UX::grabPage('staff/dashboard', $p, true);
+
+if ($_laoshi->staff['StaffCell'] == '0') {
+    echo UX::grabPage('staff/add_cell', $p, true);
+} else {
+    echo UX::grabPage('staff/dashboard', $p, true);
+}
 
 // Before footer grab time spent
 $t['end'] = microtime(true);

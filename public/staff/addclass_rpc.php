@@ -36,14 +36,20 @@ if (!ACL::checkLogin('staff')) {
         $str = explode(',', $_GET['str']);
         $result['return'] = $str;
         $cid = substr($str[0], 4);
-        $stmt = Data::prepare('SELECT co.*, c.* FROM courses co, classes c WHERE c.CourseID = co.CourseID AND c.CourseID = :courseid AND c.ClassWeek = :week AND c.ClassPeriodBegin = :period LIMIT 1');
-        $stmt->bindParam('courseid', $cid);
-        $stmt->bindParam('week', $str[1]);
-        $stmt->bindParam('period', $str[2]);
-        $stmt->execute();
-        $result['data_raw'] = $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            $stmt = Data::prepare('SELECT co.*, c.* FROM courses co, classes c WHERE c.CourseID = co.CourseID AND c.CourseID = :courseid AND c.ClassWeek = :week AND c.ClassPeriodBegin = :period LIMIT 1');
+            $stmt->bindParam('courseid', $cid);
+            $stmt->bindParam('week', $str[1]);
+            $stmt->bindParam('period', $str[2]);
+            $stmt->execute();
+            $result['data_raw'] = $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            $result['status'] = 'failure';
+            $result['code'] = $e->getCode();
+            $result['msg'] = $e->getMessage();
+        }
 
-        if (sizeof($result['data_raw']) < 1) {
+        if (!$result['data_raw']) {
             $result['status'] = 'failure';
             $result['code'] = 5400;
             $result['msg'] = 'Class does not exist!';
@@ -68,6 +74,7 @@ if (!ACL::checkLogin('staff')) {
             $stmt->execute();
 
             $result['status'] = 'success';
+            $result['status'] = 2400;
         }
 
     }

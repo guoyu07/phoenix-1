@@ -29,7 +29,70 @@ if (!ACL::checkLogin('staff')) {
     $_laoshi = new Laoshi($_SESSION['SSOID']);
 
     switch($_REQUEST['method']) {
-    	case 'archive_application':
+        case 'add_charge':
+            $_laoshi->perms(8,9,10,11,12);
+            try {
+                $stmt = Data::prepare('INSERT INTO `payments` (`FamilyID`, `PayMethod`, `PayAmount`, `PayCTS`, `PayDesc`, `PayVerified`)
+VALUES (:fid, "FrontDesk", :val, NOW(), :desc, 1)');
+                $stmt->bindParam('fid', $_REQUEST['fid'], PDO::PARAM_INT);
+                $stmt->bindParam('val', $_REQUEST['val'], PDO::PARAM_INT);
+                $stmt->bindParam('desc', $_REQUEST['desc'], PDO::PARAM_STR);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Charge successfully added to invoice.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
+        case 'update_cell':
+            try {
+                $stmt = Data::prepare('UPDATE `staff` SET `StaffCell` = :cell WHERE `StaffID` = :sid LIMIT 1');
+                $stmt->bindParam('cell', $_REQUEST['number']);
+                $stmt->bindParam('sid', $_REQUEST['staff_id']);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Successfully added cell.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
+    	case 'add_payment':
+            $_laoshi->perms(8,9,10,11,12);
+            try {
+                $stmt = Data::prepare('INSERT INTO `payments` (`FamilyID`, `PayMethod`, `PayAmount`, `PayCTS`, `PayDesc`, `PayVerified`)
+VALUES (:fid, :method, :val, NOW(), :desc, 1)');
+                $stmt->bindParam('fid', $_REQUEST['fid'], PDO::PARAM_INT);
+                $stmt->bindParam('method', $_REQUEST['paytype'], PDO::PARAM_STR);
+                $stmt->bindParam('val', $_REQUEST['val'], PDO::PARAM_INT);
+                $stmt->bindParam('desc', $_REQUEST['desc'], PDO::PARAM_STR);
+                $stmt->execute();
+
+                $e['desc'] = $_REQUEST['desc'];
+                $e['method'] = $_REQUEST['paytype'];
+                $e['amount_formatted'] = 'HK$'.number_format((-1)*$_REQUEST['val']);
+                $e['cts'] = date(DATETIME_FULL);
+                $e['rts'] = date(DATETIME_FULL);
+
+                $fam = FamStu::getFamilyById($_REQUEST['fid']);
+
+                Mailer::send(array('name' => $fam['family']['FamilyName'], 'email' => $fam['family']['FamilyEmail']), '[CIS Summer] Payment Confirmation', UX::grabPage('text_snippets/email_receipt', $e, true));
+                
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Payment successfully added to invoice.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
+        case 'archive_application':
     		$_laoshi->perms(6, 7, 8);
     		$stmt = Data::prepare('UPDATE `applications` SET `AppStatus` = "archived" WHERE `AppID` = :appid LIMIT 1');
     		$stmt->bindParam('appid', $_REQUEST['data'], PDO::PARAM_INT);
@@ -391,6 +454,29 @@ if (!ACL::checkLogin('staff')) {
 
             }
         break;
+        case 'force_submit':
+            if (!isset($_REQUEST['sid'])) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = 'Missing parameter.';
+            } else {
+                try {
+                    $stmt = Data::prepare('UPDATE `students` SET `StudentSubmitted` = 1, `StudentSubmitTS` = NOW() WHERE `StudentID` = :sid LIMIT 1');
+                    $stmt->bindParam('sid', $_REQUEST['sid'], PDO::PARAM_INT);
+                    $stmt->execute();
+                    $done = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                    $result['status'] = 'success';
+                    $result['code'] = 2400;
+                    $result['msg'] = 'Deny request was successful.';
+                } catch (PDOException $e) {
+                    $result['status'] = 'failure';
+                    $result['code'] = 2500;
+                    $result['msg'] = $e->getMessage();
+                }
+
+            }
+        break;
         case 'cancel_class_email':
             if (!isset($_REQUEST['cid'])) {
                 $result['status'] = 'failure';
@@ -418,6 +504,22 @@ if (!ACL::checkLogin('staff')) {
                     $result['msg'] = $e->getMessage();
                 }
 
+            }
+        break;
+        case 'registration':
+            try {
+                $stmt = Data::prepare('INSERT INTO `registration` (`ClassID`, `StudentID`, `RegStatus`, `RegDate`, `RegLATS`) VALUES (:cid, :sid, :status, NOW(), NOW());');
+                $stmt->bindParam('status', $_REQUEST['status']);
+                $stmt->bindParam('cid', $_REQUEST['cid']);
+                $stmt->bindParam('sid', $_REQUEST['sid']);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2400;
+                $result['msg'] = 'Marked';
+            } catch (PDOException $e) {
+                $result['status'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = $e->getMessage();
             }
         break;
     	default:
