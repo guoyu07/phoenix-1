@@ -60,7 +60,7 @@ foreach($rooms as $roomid => $rm) {
 }
 
 // Get enrollment
-$stmt = Data::prepare('SELECT s.StudentID, s.StudentNamePreferred, s.StudentNameLast, s.StudentDOB, f.FamilyName FROM `enrollment` e, `students` s, `families` f WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID AND f.FamilyID = s.FamilyID AND s.StudentSubmitted = 1 ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
+$stmt = Data::prepare('SELECT s.*, f.FamilyName FROM `enrollment` e, `students` s, `families` f WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID AND f.FamilyID = s.FamilyID AND s.StudentSubmitted = 1 ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
 $stmt->bindParam('cid', $class['ClassID']);
 $stmt->execute();
 $enrollment = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -69,7 +69,13 @@ $p['enroll_table'] = '';
 
 if (sizeof($enrollment) > 0) {
     foreach ($enrollment as $stu) {
-        $p['enroll_table'] .= '<tr><td>'.strtoupper($stu['StudentNameLast']).', '.$stu['StudentNamePreferred'].'</td><td>'.date(DATE_FULL, strtotime($stu['StudentDOB'])).'</td><td>'.ucwords($stu['FamilyName']).'</td></tr>';
+        // Check student medical condition
+        $condition = str_replace(array('none', 'n/a', 'nil'), array('', '', ''), $stu['StudentMedCondition']);
+        if (strlen(trim($condition)) == 0) {
+            $p['enroll_table'] .= '<tr><td>'.strtoupper($stu['StudentNameLast']).', '.$stu['StudentNamePreferred'].'</td><td>'.date(DATE_FULL, strtotime($stu['StudentDOB'])).'</td><td>'.ucwords($stu['FamilyName']).'</td></tr>';
+        } else {
+            $p['enroll_table'] .= '<tr><td><img src="/assets/icons/exclamation.png" /> '.strtoupper($stu['StudentNameLast']).', '.$stu['StudentNamePreferred'].'<br /><span class="badge badge-red">Medical Condition</span> <span class="red">'.$condition.'</span></td><td>'.date(DATE_FULL, strtotime($stu['StudentDOB'])).'</td><td>'.ucwords($stu['FamilyName']).'</td></tr>';
+        }
     }
 } else {
     $p['enroll_table'] = '<tr><td colspan="3"><em class="muted">Sorry, there are no students currently enrolled in this class.</em></td></tr>';

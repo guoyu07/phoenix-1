@@ -508,11 +508,30 @@ VALUES (:fid, :method, :val, NOW(), :desc, 1)');
         break;
         case 'registration':
             try {
-                $stmt = Data::prepare('INSERT INTO `registration` (`ClassID`, `StudentID`, `RegStatus`, `RegDate`, `RegLATS`) VALUES (:cid, :sid, :status, NOW(), NOW());');
-                $stmt->bindParam('status', $_REQUEST['status']);
+                // See if kid is already registered
+                $stmt = Data::prepare('SELECT * FROM `registration` WHERE `ClassID` = :cid AND `StudentID` = :sid AND `RegDate` = DATE(NOW())');
                 $stmt->bindParam('cid', $_REQUEST['cid']);
                 $stmt->bindParam('sid', $_REQUEST['sid']);
                 $stmt->execute();
+                $reg = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                if (sizeof($reg) == 0) {
+                    // Mark
+                    $stmt = Data::prepare('INSERT INTO `registration` (`ClassID`, `StudentID`, `RegStatus`, `RegDate`, `RegLATS`) VALUES (:cid, :sid, :status, NOW(), NOW());');
+                    $stmt->bindParam('status', $_REQUEST['status']);
+                    $stmt->bindParam('cid', $_REQUEST['cid']);
+                    $stmt->bindParam('sid', $_REQUEST['sid']);
+                    $stmt->execute();
+                } else {
+                    // Update
+                    $stmt = Data::prepare('UPDATE `registration` SET `RegStatus` = :status WHERE `ClassID` = :cid AND `StudentID` = :sid AND `RegDate` = DATE(NOW()) ORDER BY `RegLATS` DESC LIMIT 1');
+                    $stmt->bindParam('status', $_REQUEST['status']);
+                    $stmt->bindParam('cid', $_REQUEST['cid']);
+                    $stmt->bindParam('sid', $_REQUEST['sid']);
+                    $stmt->execute();
+                }
+
+                
                 $result['status'] = 'success';
                 $result['code'] = 2400;
                 $result['msg'] = 'Marked';

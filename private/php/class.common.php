@@ -178,6 +178,21 @@ class Common {
         $str = strip_tags($str, "<strong><em><blockquote>");
         return nl2br($str);
     }
+
+    /**
+     * Returns current week
+     */
+    static public function getCurrentWeek() {
+        if (time() < strtotime(WEEK_2)) {
+            return '1';
+        } elseif (time() < strtotime(WEEK_3)) {
+            return '2';
+        } elseif (time() < strtotime(WEEK_4)) {
+            return '3';
+        } else {
+            return '4';
+        }
+    }
 }
 
 ?>

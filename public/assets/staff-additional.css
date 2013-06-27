@@ -123,6 +123,13 @@ pre.faux-div {
     color: rgb(102, 102, 102);
 }
 
+button.mini {
+    margin: 2px 2px 2px 2px !important;
+    padding: 0.35em;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    font-size: 0.9em;
+}
+
 /* High density info */
 span.hiden {
     font-size: 0.97em;

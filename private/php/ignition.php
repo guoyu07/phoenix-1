@@ -20,7 +20,7 @@ define('DATE_SHORT',		'd/m/y');
 
 // Define environmental constants
 define('BETA',              true);      // set to false to disable error outputting/debugging
-define('SITE_DISABLED',     true);     // set to turn on site out message
+define('SITE_DISABLED',     false);     // set to turn on site out message
 define('REGISTRATION_OPEN', true);      // set to false to disable registration
 define('MAILER_SENDMAIL',   true);      // set to false to disable Mandrill emailing
 define('MANDRILL_KEY',      'd4fd5695-5805-43fa-8fd7-2a2f0c30fa9b');    // set to Mandrill API key
@@ -56,10 +56,20 @@ define('WEEK_2',    '2013-07-02 12:00:00');
 define('WEEK_3',    '2013-07-08 12:00:00');
 define('WEEK_4',    '2013-07-15 12:00:00');
 
+// Session timeout set
+ini_set('session.gc_maxlifetime', 28800);
+date_default_timezone_set('Asia/Hong_Kong');
+
 
 // Everybody needs the common class
 $_PHX = new Common(PHX_SCRIPT_TYPE);
 $_BD = new Browser();
+
+// Blacksite
+if (SITE_DISABLED) {
+    echo UX::grabPage('blacksite', null, true);
+    exit();
+}
 
 // Oh and...definitely no IE
 if (isset($_GET['forceie']) && ($_GET['forceie'] == 1)) {

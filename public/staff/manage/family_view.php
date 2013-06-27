@@ -36,6 +36,8 @@ $p['children'] = '';
 $p['family_name'] = $fam['family']['FamilyName'];
 $p['family_id'] = $fam['family']['FamilyID'];
 $p['family_email'] = $fam['family']['FamilyEmail'];
+$p['family_hphone'] = ((strlen($fam['family']['FamilyPhoneHome']) == 8) ? '<span class="muted">+852</span> '.substr($fam['family']['FamilyPhoneHome'], 0, 4).'-'.substr($fam['family']['FamilyPhoneHome'],4,4) : $fam['family']['FamilyPhoneHome'].' <em class="muted" style="float:right;">(International?)</em>');
+$p['family_mphone'] = ((strlen($fam['family']['FamilyPhoneMobile']) == 8) ? '<span class="muted">+852</span> '.substr($fam['family']['FamilyPhoneMobile'], 0, 4).'-'.substr($fam['family']['FamilyPhoneMobile'],4,4) : $fam['family']['FamilyPhoneMobile'].' <em class="muted" style="float:right;">(International?)</em>');
 $p['family_cts'] = date(DATETIME_FULL, strtotime($fam['family']['FamilyCTS']));
 $p['family_address'] = $fam['family']['FamilyAddress'];
 $p['family_llts'] = date(DATETIME_FULL, strtotime($fam['family']['FamilyLLTS']));

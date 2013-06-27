@@ -41,7 +41,7 @@ $d['type'] = $_laoshi->sso['ObjType']['TypeName'];
 $d['last_visit'] = Common::relativeTime(strtotime($_laoshi->sso['ObjLLTS']));
 $d['account_cts'] = Common::relativeTime(strtotime($_laoshi->sso['ObjCTS']));
 
-$stmt = Data::prepare("select co.*, cl.* from courses co, classes cl where co.CourseID = cl.CourseID and co.TeacherLead = :lead and cl.ClassStatus = 'active' order by cl.ClassWeek asc, cl.ClassPeriodBegin asc");
+$stmt = Data::prepare("select co.*, cl.* from courses co, classes cl where co.CourseID = cl.CourseID and cl.TeacherID = :lead and cl.ClassStatus = 'active' order by cl.ClassWeek asc, cl.ClassPeriodBegin asc");
 $stmt->bindParam('lead', $_laoshi->staff['StaffID']);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);

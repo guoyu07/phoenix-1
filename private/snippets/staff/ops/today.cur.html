@@ -1,0 +1,189 @@
+<div class="content-row spaced">
+    <h1>Operations Panel for {{today}}</h1>
+</div>
+
+<div id="today" class="content-row spaced">
+    <div class="col-row">
+        <div class="col c4" style="vertical-align:top;">
+            <h2>Student Absences</h2>
+
+            <h3 id="abs_p1">Period 1/1&amp;2 <span class="muted" style="font-weight:normal;">({{absize_p1}} absent)</span></h3>
+            <p>
+                <table class="absentlist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">Course</th>
+                            <th style="width:50%;">Student Name</th>
+                            <th style="width:30%;">Last Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{absences_p1}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="abs_p2">Period 2 <span class="muted" style="font-weight:normal;">({{absize_p2}} absent)</span></h3>
+            <p>
+                <table class="absentlist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">Course</th>
+                            <th style="width:50%;">Student Name</th>
+                            <th style="width:30%;">Last Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{absences_p2}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="abs_p3">Period 3/3&amp;4 <span class="muted" style="font-weight:normal;">({{absize_p3}} absent)</span></h3>
+            <p>
+                <table class="absentlist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">Course</th>
+                            <th style="width:50%;">Student Name</th>
+                            <th style="width:30%;">Last Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{absences_p3}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="abs_p4">Period 4 <span class="muted" style="font-weight:normal;">({{absize_p4}} absent)</span></h3>
+            <p>
+                <table class="absentlist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">Course</th>
+                            <th style="width:50%;">Student Name</th>
+                            <th style="width:30%;">Last Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{absences_p4}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="abs_aca">Academic Program <span class="muted" style="font-weight:normal;">({{absize_aca}} absent)</span></h3>
+            <p>
+                <table class="absentlist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:20%;">Course</th>
+                            <th style="width:50%;">Student Name</th>
+                            <th style="width:30%;">Last Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{absences_aca}}
+                    </tbody>
+                </table>
+            </p>
+
+        </div>
+        <div class="col c6" style="vertical-align:top;">
+            <h2>Today's Classes</h2>
+
+            <p>
+                <strong>Summer Program</strong>: <a href="#period_1" onclick="scrollToAnchor('period_1');return false;">Period 1</a> | <a href="#period_2" onclick="scrollToAnchor('period_2');return false;">Period 2</a> | <a href="#period_3"  onclick="scrollToAnchor('period_3');return false;">Period 3</a> | <a href="#period_4"  onclick="scrollToAnchor('period_4');return false;">Period 4</a><br />
+                <strong>Academic Program</strong>: <a href="#academic" class="scroll">All Classes</a>
+            </p>
+            
+            <h3 id="period_1">Period 1/1&amp;2 <span class="muted" style="font-weight:normal;">({{size_p1}} classes)</span></h3>
+            <p>
+                <table class="courselist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
+                            <th style="width:70%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{period_1}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="period_2">Period 2 <span class="muted" style="font-weight:normal;">({{size_p2}} classes)</span></h3>
+            <p>
+                <table class="courselist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
+                            <th style="width:70%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{period_2}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="period_3">Period 3/3&amp;4 <span class="muted" style="font-weight:normal;">({{size_p3}} classes)</span></h3>
+            <p>
+                <table class="courselist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
+                            <th style="width:70%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{period_3}} 
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="period_4">Period 4 <span class="muted" style="font-weight:normal;">({{size_p4}} classes)</span></h3>
+            <p>
+                <table class="courselist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
+                            <th style="width:70%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        {{period_4}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3 id="academic">Academic Program <span class="muted" style="font-weight:normal;">({{size_academic}} classes)</span></h3>
+            <p>
+                <table class="courselist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
+                            <th style="width:70%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{academic}} 
+                    </tbody>
+                </table>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+function scrollToAnchor(aid){
+    var aTag = $("a[name='"+ aid +"']");
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+}
+
+</script>

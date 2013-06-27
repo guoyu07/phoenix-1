@@ -1,30 +1,47 @@
-<div id="course_list" class="content-row spaced body-emulate">
-    <h2>Roster: Class #{{class_id}} ({{course_title}})</h2>
-    <p>The list of students enrolled in your class is as below.</p.
-    <p>
-        <table id="roster">
-            <thead>
-                <tr>
-                    <th>Student Name</th>
-                    <th>Parent's Name</th>
-                    <th>Registration</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{enroll_table}}
-            </tbody>
-        </table>
-    </p>
-    
+<div id="registration_list" class="content-row spaced">
+    <div class="col-row">
+        <div class="col c3">
+            <h3>Instructions</h3>
+            <p>Next to each student's name, you will see <strong>present, absent, tardy</strong> buttons. Clicking on one of these marks the student as a particular registered status for today's class.</p>
 
+            <p>If you have <strong>already taken attendance for this class today</strong>, the latest status will be automatically marked. To change a student's status (i.e.: they arrive to class late), simply click their new status and the corresponding status will be highlighted.</p>
 
+            <div class="alert alert-blue">Note: There is no need to refresh anymore to change a student's status.</div>
+            <button class="button-link button-blue" type="button" data-url="/staff/dashboard.php">Return to Dashboard</button>
+        </div>
+        <div class="col c7" style="vertical-align:top;">
+            <h2>Roster: Class #{{class_id}} ({{course_title}})</h2>
+            <div class="alert alert-red"><span class="badge badge-red">Important</span> We've changed the registration process just a little to make things easier on everybody and avoid confusion. <strong>Please read the instructions</strong> as the registration indicators have changed!</div>
+            
+            <h3>Take Registration</h3>
+            <p>You are now taking attendance for today, <strong>{{today}}</strong>. </p>
+            <p>
+                <table id="roster">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Parent</th>
+                            <th>Registration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{enroll_table}}
+                    </tbody>
+                </table>
+            </p>
+
+            <h3>Other Students in Class?</h3>
+            <p>If there is a student in your class that is <strong>NOT on your roster</strong>, please check their schedule or call to send them down to the Office (x961). Thank you!</p>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
 function mark(state, sname, cid, sid) {
     laoshi.rpc({"method": "registration", "sid": sid, "cid": cid, "status": state});
     laoshi.toast('Marked <strong>'+sname+'</strong> as '+state);
-    $('#stureg-'+sid).html(state);
+    $('.marker-'+sid).removeClass('button-green').removeClass('button-red').removeClass('button-blue');
+    $('.marker-'+sid+'.button-'+state).addClass('button-green');
 }
 
 </script>
