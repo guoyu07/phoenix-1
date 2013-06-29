@@ -139,3 +139,46 @@ table.hiden, table.hiden td, table.hiden th {
     font-size: 0.97em;
     padding: 0.4em;
 }
+
+/* Nav bar */
+.navrow {
+    background-color: #fff;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+    padding: 0.25em 0.25em 0.2em 0.25em;
+    border: 1px solid #ccc;
+}
+
+.navrow ul {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.navrow ul li {
+    display: inline;
+    line-height: 2em;
+    margin-right: 0.5em;
+}
+
+.navrow ul li a, .navrow ul li a:visited, .navrow ul li a:active {
+    padding: 1em 2.5em;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+}
+
+.navrow ul li a:hover {
+    background-color: rgba(201, 231, 255, 0.4);
+    text-decoration: none;
+    -webkit-box-shadow: 0 0 0.5em rgba(100, 100, 100, 0.4);
+    -moz-box-shadow:    0 0 0.5em rgba(100, 100, 100, 0.4);
+    box-shadow:         0 0 0.5em rgba(100, 100, 100, 0.4);
+}
+
+.navrow ul li a.active, .navrow ul li a.active:visited, .navrow ul li a.active:active {
+    background-color: rgba(255, 255, 255, 0.5);
+    -webkit-box-shadow: 0 0 0.5em rgba(100, 100, 100, 0.6);
+    -moz-box-shadow:    0 0 0.5em rgba(100, 100, 100, 0.6);
+    box-shadow:         0 0 0.5em rgba(100, 100, 100, 0.6);
+}

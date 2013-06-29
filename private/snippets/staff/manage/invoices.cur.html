@@ -99,4 +99,13 @@ function addPayment() {
     $('#pay_amount').val('');
     $('#pay_desc').val('');
 }
+
+function dropPayment(pid) {
+    if (confirm('Click OK to confirm you wish to delete this payment/charge item.')) {
+        laoshi.rpc({"method": "del_payment", "fid": {{family_id}}, "pid": pid});
+        laoshi.toast('Removed payment/charge line item. Refresh to see changes!');
+    } else {
+        laoshi.toast('Action canceled. I didn\'t remove anything :)');
+    }
+}
 </script>

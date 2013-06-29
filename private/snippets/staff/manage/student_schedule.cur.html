@@ -1,75 +1,129 @@
+<div class="content-row spaced">
+    <div class="navrow">
+        <ul>
+            <li><a href="#/schedule" class="active" data-activate="schedule">Current Schedule</a></li>
+            <li><a href="#/history" data-activate="history">Enrollment History</a></li>
+            <li><a href="#/registration" data-activate="registration">Program Attendance</a></li>
+        </ul>
+    </div>
+</div>
+
 <div id="student_info" class="content-row spaced">
     <div class="col-row">
         <div class="col c7" style="vertical-align:top;">
-            <h1>{{name}}</h1>
+            <h1>{{name}} (#{{sid}})</h1>
+
             {{note}}
 
-            <p><button class="button-link" data-url="/staff/manage/family_view.php?fid={{family_id}}">Family Page</button></p>
+            <p><button class="button-link" data-url="/staff/manage/family_view.php?fid={{family_id}}">Go to Family #{{family_id}}</button> <button class="button-link button-green" data-url="/staff/manage/invoices.php?fid={{family_id}}">View Family #{{family_id}} Invoice</button> <button type="button" class="button-blue" onclick="window.open('/account/print_schedule.php?sid={{sid}}&v={{v}}');">Print Schedule</button></p>
             
-            <h2>Current Schedule </h2>
+            <div id="schedule" class="nav_content">
+                <h2>Current Schedule </h2>
 
-            <p>This schedule was last updated at <strong>{{last_update}}</strong> HKT.</span></p>
+                <p>This schedule was last updated at <strong>{{last_update}}</strong> HKT.</span></p>
 
-            {{submit_note}}
+                {{submit_note}}
 
-            <p style="margin-top:10px;"><button type="button" class="button-blue" onclick="window.open('/account/print_schedule.php?sid={{sid}}&v={{v}}');">Print Schedule</button></p>
-            
-            <h3>Week 1: June 24-28</h3>
-            <table id="w1">
-                <thead>
-                    <tr>
-                        <th style="width:20%;">Period/Session</th>
-                        <th style="width:50%;">Course</th>
-                        <th style="width:30%;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{week_1}}
-                </tbody>
-            </table>
+                <table id="w1" class="hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:65%;">Course</th>
+                            <th style="width:18%;">Status</th>
+                            <th style="width:17%;">Drop</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 1: June 24-28</h3></td>
+                        </tr>
+                        {{week_1}}
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 2: July 2-5</h3></td>
+                        </tr>
+                        {{week_2}}
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 3: July 8-12</h3></td>
+                        </tr>
+                        {{week_3}}
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 4: July 15-19</h3></td>
+                        </tr>
+                        {{week_4}}
+                    </tbody>
+                </table>
+            </div>
 
-            <h3>Week 2: July 2-5</h3>
-            <div class="alert alert-yellow">There is no school (and no fees charged) for the July 1 public holiday.</div>
-            <table id="w2">
-                <thead>
-                    <tr>
-                        <th style="width:20%;">Period/Session</th>
-                        <th style="width:50%;">Course</th>
-                        <th style="width:30%;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{week_2}}
-                </tbody>
-            </table>
+            <div id="history" class="nav_content hide">
+                <h2>Enrollment History</h2>
 
-            <h3>Week 3: July 8-12</h3>
-            <table id="w3">
-                <thead>
-                    <tr>
-                        <th style="width:20%;">Period/Session</th>
-                        <th style="width:50%;">Course</th>
-                        <th style="width:30%;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{week_3}}
-                </tbody>
-            </table>
+                <table id="history_table" class="hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:80%;">Course</th>
+                            <th style="width:20%;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 1: June 24-28</h3></td>
+                        </tr>
+                        {{history_1}}
+                        <tr>
+                            <td colspan="2" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 2: July 2-5</h3></td>
+                        </tr>
+                        {{history_2}}
+                        <tr>
+                            <td colspan="2" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 3: July 8-12</h3></td>
+                        </tr>
+                        {{history_3}}
+                        <tr>
+                            <td colspan="2" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 4: July 15-19</h3></td>
+                        </tr>
+                        {{history_4}}
+                    </tbody>
+                </table>
 
-            <h3>Week 4: July 15-19</h3>
-            <table id="w4">
-                <thead>
-                    <tr>
-                        <th style="width:20%;">Period/Session</th>
-                        <th style="width:50%;">Course</th>
-                        <th style="width:30%;">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{week_4}}
-                </tbody>
-            </table>
+                <p style="margin-top:2em;"><a href="javascript:;" onclick="$('#hispre').toggle('fade');">Toggle ChesterData&reg;</a></p>
+                <pre id="hispre" class="hide">{{history_json}}</pre>
+
+            </div>
+
+
+            <div id="registration" class="nav_content hide">
+                <h2>Attendance History</h2>
+
+                <table id="registration_history">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;">Date</th>
+                            <th style="width:67%;">Course</th>
+                            <th style="width:18%;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 1: June 24-28</h3></td>
+                        </tr>
+                        {{reghis_1}}
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 2: July 2-5</h3></td>
+                        </tr>
+                        {{reghis_2}}
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 3: July 8-12</h3></td>
+                        </tr>
+                        {{reghis_3}}
+                        <tr>
+                            <td colspan="3" style="background-color:#fff;font-weight:bold;"><h3 style="margin-top:0;">Week 4: July 15-19</h3></td>
+                        </tr>
+                        {{reghis_4}}
+                    </tbody>
+                </table>
+
+                <p style="margin-top:2em;"><a href="javascript:;" onclick="$('#reghispre').toggle('fade');">Toggle ChesterData&reg;</a></p>
+                <pre id="reghispre" class="hide">{{test}}</pre>
+
+            </div>
 
         </div>
         <div class="col c3">
@@ -84,12 +138,22 @@
             <h2>Student Profile</h2>
             <p>
                 <strong>Full Name</strong><br />
-                {{last_name}}, {{first_name}}<br /><span class="muted">(Preferred: {{preferred_name}} {{last_name}})</span>
+                {{last_name}}, {{first_name}} <span class="muted">({{preferred_name}})</span>
             </p>
 
             <p>
-                <strong>DOB</strong><br />
-                {{dob}} <span class="muted">(Age: {{age}})</span>
+                <strong>Date of Birth</strong><br />
+                {{dob}} <span class="muted">(Aged {{age}})</span>
+            </p>
+
+            <p>
+                <strong>Gender</strong><br />
+                {{gender}}</span>
+            </p>
+
+            <p>
+                <strong>Day School</strong><br />
+                {{school}}</span>
             </p>
 
             <h2>Emergency &amp; Medical</h2>
@@ -102,6 +166,12 @@
             <p>
                 <strong>Medications</strong><br />
                 {{med_meds}}
+            </p>
+
+            <p>
+                <strong>Emergency Contact</strong><br />
+                {{emer_name}} <span class="muted">({{emer_relation}})</span><br />
+                <span class="red strong">{{emer_phone}}</span>
             </p>
 
         </div>
@@ -119,11 +189,30 @@ $(document).ready(function () {
                     $('#ci_response').html('<div class="alert alert-red"><strong>An error occured!</strong><br />' + ret.msg + '</div>');
                 } else if (ret.full) {
                     $('#ci_response').html('<div class="alert alert-yellow">Class is already full but I overrode it for you. To remove the class, refresh and drop it.</div>');
+                    $('#class_input').val('');
                 } else {
                     $('#ci_response').html('<div class="alert alert-green">Class was successfully added! Refresh to see changes!</div>');
+                    $('#class_input').val('');
                 }
             });
         }
+    });
+
+    if ($('#' + window.location.hash.split('/')[1]).length) {
+        var item = window.location.hash.split('/')[1];
+        $('.nav_content').hide();
+        $('a.active').removeClass('active');
+        $('a[data-activate=' + item + ']').addClass('active');
+        $('#' + item).fadeIn();
+        window.location.hash = '/' + item;
+    }
+
+    $('.navrow li a').click(function () {
+        $('.nav_content').hide();
+        $('a.active').removeClass('active');
+        $(this).addClass('active');
+        $('#' + $(this).data('activate')).fadeIn();
+        window.location.hash = '/' + $(this).data('activate');
     });
 
     $('.droppable').click(function () {

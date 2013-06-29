@@ -9,6 +9,8 @@
  * @subpackage Staff
  */
 
+header('Location: /staff/manage/family_view.php?fid='.$_REQUEST['fid'].'#/invoice');
+exit();
 
 define('PTP',   '../../../private/');
 define('PHX_SCRIPT_TYPE',   'HTML');
@@ -66,7 +68,7 @@ foreach($invoice as $i => $line) {
 $p['total_due'] = number_format($total);
 
 foreach($payments as $i => $line) {
-    $p['charge_lines'] .= '<tr><td>'.$line['PayMethod'].'</span></td><td>'.date(DATE_SHORT, strtotime($line['PayCTS'])).'</td><td>'.(($line['PayVerified'] == 0) ? '<a href="/staff/manage/verify_invoice.php?pid='.$line['PayID'].'" class="tipped" title="Click to verify this reported payment">'.$line['PayDesc'].'</a>' : $line['PayDesc']).'</td><td style="text-align:right;">'.(($line['PayVerified'] == 1) ? '$'.number_format($line['PayAmount']) : '<em class="muted">Pending</em>').'</td></tr>';
+    $p['charge_lines'] .= '<tr><td>'.$line['PayMethod'].'</span></td><td>'.date(DATE_SHORT, strtotime($line['PayCTS'])).'</td><td>'.(($line['PayVerified'] == 0) ? '<a href="/staff/manage/verify_invoice.php?pid='.$line['PayID'].'" class="tipped" title="Click to verify this reported payment">'.$line['PayDesc'].'</a>' : $line['PayDesc'].' (<a href="javascript:;" onclick="dropPayment('.$line['PayID'].');">Delete this line</a>)').'</td><td style="text-align:right;">'.(($line['PayVerified'] == 1) ? '$'.number_format($line['PayAmount']) : '<em class="muted">Pending</em>').'</td></tr>';
     (($line['PayVerified'] == 1) ? $charges += $line['PayAmount'] : $charges = $charges);
 }
 

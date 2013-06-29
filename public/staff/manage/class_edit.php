@@ -75,7 +75,7 @@ $enrollment = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $p['enroll_table'] = '';
 
 foreach ($enrollment as $stu) {
-    $p['enroll_table'] .= '<tr><td><a href="/staff/manage/student_schedule.php?sid='.$stu['StudentID'].'">'.$stu['StudentNamePreferred'].' '.$stu['StudentNameLast'].'</a></td><td>'.date(DATETIME_FULL, strtotime($stu['EnrollLETS'])).'</td><td>'.date(DATE_FULL, strtotime($stu['StudentDOB'])).'</td><td><em class="muted">None available</em></td></tr>';
+    $p['enroll_table'] .= '<tr><td><a href="/staff/manage/student_schedule.php?sid='.$stu['StudentID'].'">'.$stu['StudentNamePreferred'].' '.$stu['StudentNameLast'].'</a></td><td>'.date(DATETIME_SHORT, strtotime($stu['EnrollLETS'])).'</td><td>'.date(DATE_SHORT, strtotime($stu['StudentDOB'])).'</td></tr>';
 }
 
 // Include header section

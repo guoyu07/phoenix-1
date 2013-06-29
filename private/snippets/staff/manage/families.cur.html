@@ -7,13 +7,11 @@
     <table class="families">
         <thead>
             <tr>
-                <th style="width:5%;" class="tipped" title="Family ID Number">ID</th>
-                <th style="width:20%;" class="tipped" title="Click to edit family/child details">Parent Name</th>
-                <th style="width:10%;">Phone (H)</th>
-                <th style="width:10%;">Phone (M)</th>
-                <th style="width:15%;" class="tipped" title="Enrolled Students/Available Spaces">Account Created</th>
+                <th style="width:40%;" class="tipped" title="Click to edit family/child details">Parent Name</th>
+                <th style="width:15%;">Phone (H)</th>
+                <th style="width:15%;">Phone (M)</th>
+                <th style="width:20%;" class="tipped" title="Enrolled Students/Available Spaces">Account Created</th>
                 <th style="width:10%;" class="tipped" title="Children count">Children</th>
-                <th style="width:20%;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,19 +28,16 @@ jQuery(document).ready(function ($) {
     $.each(famJson, function (i, f) {
         if (f.FamilyAccountStatus == '1') {
             $('table.families>tbody').append('<tr class="family" data-fam-id="' + f.FamilyID + '">' +
-                '<td>' + f.FamilyID + '</td>' +
-                '<td><a href="./family_view.php?fid=' + f.FamilyID + '">' + f.FamilyName + '</a></td>' +
-                '<td>' + f.FamilyPhoneHome + '</td>' +
-                '<td>' + f.FamilyPhoneMobile + '</td>' +
+                '<td><a href="./family_view.php?fid=' + f.FamilyID + '">' + f.FamilyName + '</a> <span style="float:right;" class="small muted">#' + f.FamilyID + '</span></td>' +
+                '<td>' + ((f.FamilyPhoneHome.length == 8) ? f.FamilyPhoneHome.substr(0,4) + '-' + f.FamilyPhoneHome.substr(4,4) : f.FamilyPhoneHome) + '</td>' +
+                '<td>' + ((f.FamilyPhoneMobile.length == 8) ? f.FamilyPhoneMobile.substr(0,4) + '-' + f.FamilyPhoneMobile.substr(4,4) : f.FamilyPhoneMobile) + '</td>' +
                 '<td>' + f.FamilyCTS + '</td>' + 
                 '<td>' + f.ChildCount + '</td>' +
-                '<td><a href="./pte.php?view=family&fid=' + f.FamilyID + '">View PTEs</a> | <a href="./view_family.php?fid=' + f.FamilyID + '">Family Profile</a></td>' + 
                 '</tr>');
         } else {
             $('table.families>tbody').append('<tr class="family" data-fam-id="' + f.FamilyID + '">' +
-                '<td><em class="muted">' + f.FamilyID + '</em></td>' +
-                '<td><em class="muted">' + f.FamilyName + '</em></td>' +
-                '<td colspan="5" class="muted"><em style="text-align:center;">Information hidden for privacy: Account not activated</em></td>' +
+                '<td><a href="./family_view.php?fid=' + f.FamilyID + '" class="red"><em>' + f.FamilyName + '</em></a> <span style="float:right;" class="small muted">#' + f.FamilyID + '</span></td>' +
+                '<td colspan="4" class="muted"><em style="text-align:center;">Account has not been activated.</em></td>' +
                 '</tr>');
         }
     });

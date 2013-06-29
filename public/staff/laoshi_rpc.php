@@ -47,6 +47,22 @@ VALUES (:fid, "FrontDesk", :val, NOW(), :desc, 1)');
                 $result['msg'] = '[SQL] Error: '.$e->getMessage();
             }
         break;
+        case 'del_payment':
+            $_laoshi->perms(8,9,10,11,12);
+            try {
+                $stmt = Data::prepare('DELETE FROM `payments` WHERE `FamilyID` = :fid AND `PayID` = :pid');
+                $stmt->bindParam('fid', $_REQUEST['fid'], PDO::PARAM_INT);
+                $stmt->bindParam('pid', $_REQUEST['pid'], PDO::PARAM_INT);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Charge removed.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
         case 'update_cell':
             try {
                 $stmt = Data::prepare('UPDATE `staff` SET `StaffCell` = :cell WHERE `StaffID` = :sid LIMIT 1');

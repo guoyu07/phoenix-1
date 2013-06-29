@@ -31,7 +31,7 @@ if (!ACL::checkLogin('staff')) {
 
 // Set default info
 $h['title'] = 'Today';
-$n['management'] = 'active';
+$n['ops'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
 $week = Common::getCurrentWeek();
@@ -117,44 +117,44 @@ $abs_aca = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $p['absize_aca'] = sizeof($abs_aca);
 
 foreach($period1 as $class) {
-    $p['period_1'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/class_edit.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
+    $p['period_1'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
 }
 
 foreach($abs_p1 as $child) {
-    $p['absences_p1'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
+    $p['absences_p1'] .= '<tr class="check_child" data-student-id="'.$child['StudentID'].'"><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.$child['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($child['CourseSubj']).'"></div> '.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
 }
 
 foreach($period2 as $class) {
-    $p['period_2'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/class_edit.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
+    $p['period_2'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
 }
 
 foreach($abs_p2 as $child) {
-    $p['absences_p2'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
+    $p['absences_p2'] .= '<tr class="check_child" data-student-id="'.$child['StudentID'].'"><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.$child['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($child['CourseSubj']).'"></div> '.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
 }
 
 foreach($period3 as $class) {
-    $p['period_3'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/class_edit.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
+    $p['period_3'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
 }
 
 foreach($abs_p3 as $child) {
-    $p['absences_p3'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
+    $p['absences_p3'] .= '<tr class="check_child" data-student-id="'.$child['StudentID'].'"><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.$child['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($child['CourseSubj']).'"></div> '.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
 }
 
 
 foreach($period4 as $class) {
-    $p['period_4'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/class_edit.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
+    $p['period_4'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
 }
 
 foreach($abs_p4 as $child) {
-    $p['absences_p1'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
+    $p['absences_p4'] .= '<tr class="check_child" data-student-id="'.$child['StudentID'].'"><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.$child['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($child['CourseSubj']).'"></div> '.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
 }
 
 foreach($academic as $class) {
-    $p['academic'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><span class="badge badge-blue">Session '.$class['ClassPeriodBegin'].'</span> <a href="/staff/manage/class_edit.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
+    $p['academic'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><span class="badge badge-blue">Session '.$class['ClassPeriodBegin'].'</span> <a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : $class['RoomID']).'</td></tr>';
 }
 
 foreach($abs_aca as $child) {
-    $p['absences_aca'] .= '<tr><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</a></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
+    $p['absences_aca'] .= '<tr class="check_child" data-student-id="'.$child['StudentID'].'"><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.$child['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($child['CourseSubj']).'"></div> '.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
 }
 
 // Include header section

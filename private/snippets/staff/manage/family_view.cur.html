@@ -1,4 +1,18 @@
-<div id="course_list" class="content-row spaced body-emulate">
+<div class="content-row spaced">
+    <div class="navrow">
+        <ul>
+            <li><a href="#/profile" class="active" data-activate="profile">Family Profile</a></li>
+            <li><a href="#/children" data-activate="children">Children</a></li>
+            <li><a href="#/invoice" data-activate="invoice">Family Invoice</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="content-row spaced">
+    <h1>FID #{{family_id}}: {{family_name}}</h1>
+</div>
+
+<div id="profile" class="content-row spaced body-emulate nav_content">
     <h2>Family Profile</h2>
     <h3>Account Information</h3>
     <p>Click to edit a field - all data is saved automatically when you exit the input boxes (just click outside of them). A confirmation message will notify you of update results.</p>
@@ -30,20 +44,124 @@
         </tr>
     </table>
 
-    <p style="margin-top:10px;"><button class="button-link button-green" data-url="/staff/manage/invoices.php?fid={{family_id}}">View Invoice</button></p>
 
+</div>
 
-
+<div id="children" class="content-row spaced body-emulate nav_content hide">
     <h2>Children</h2>
 
     <p>Listed below are each of the children. Click on the child's Schedule link to view and/or edit their schedule.</p>
 
-{{children}}
+    {{children}}
+</div>
 
+<div id="invoice" class="content-row spaced nav_content hide">
+    <div class="col-row" id="basic-info">
+        
+        <!-- Form block -->
+        <div id="form-basic" class="col c7">
+            <h2>Items Due</h2>
+            
+            <table class="">
+                <thead>
+                    <tr>
+                        <th style="width:15%;">Date</th>
+                        <th style="width:50%;">Item</th>
+                        <th style="width:15%;">Due</th>
+                        <th style="width:15%;text-align:right;">$HK</th>
+                    </tr>
+                </thead>
+                <tbody id="invoice_body">
+                    {{billed_line}}
+                    <tr>
+                        <td colspan="3" style="text-align:right"><strong>Total Due to CIS</strong></td>
+                        <td style="text-align:right;"><strong>${{total_due}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <h2>Payments &amp; Ancillary Charges</h2>
+
+            <table class="">
+                <thead>
+                    <tr>
+                        <th style="width:15%;">Method</th>
+                        <th style="width:20%;">Date</th>
+                        <th style="width:50%;">Item</th>
+                        <th style="width:15%;text-align:right;">$HK</th>
+                    </tr>
+                </thead>
+                <tbody id="payments_body">
+                    <tr>
+                        <td colspan="3"><em>Balance carried from <strong>Items Due</strong></em></td>
+                        <td style="text-align:right;">${{total_due}}</td>
+                    </tr>
+                    {{charge_lines}}
+                    <tr>
+                        <td colspan="3" style="text-align:right"><strong>Total of Payments</strong></td>
+                        <td style="text-align:right;"><strong>${{total_paid}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align:right"><strong>Total Still Due to CIS</strong></td>
+                        <td style="text-align:right;"><strong>${{final_invoice}}</strong></td>
+                    </tr>
+                </tbody>
+            </table>            
+
+        </div>
+        
+        <!-- Help block -->
+        <div id="help-basic" class="col c3 hide-smartphone" style="background-color: #fafafa;">
+            <h2>Record a Payment</h2>
+            <h3>Self-Report/Mailed Cheque</h3>
+            <p>To verify a mailed cheque, open Scanman below, then scan the verification QR code.</p>
+
+            <button class="button-link button-green" type="button" data-url="/staff/scanman.php">Start Scanman</button></p>
+            
+            <h3>Manually Record Payment</h3>
+            
+            <p>
+                <select id="pay_type">
+                    <option value="Cash">Cash</option>
+                    <option value="Cheque">Cheque</option>
+                </select><br />
+                <input type="text" id="pay_amount" placeholder="Amount in HKD (e.g.: 2400)" /><br />
+                <input type="text" id="pay_desc" placeholder="Description (cheque num...)" /><br />
+                <button type="button" class="button" onclick="addPayment()">Record Payment</button>
+            </p>
+
+            <h2>Add a Charge</h2>
+            <p>
+                <input type="text" id="fee_amount" placeholder="Amount in HKD (e.g.: 2400)" /><br />
+                <input type="text" id="fee_desc" placeholder="Description (change fee, late fee)" /><br />
+                <button type="button" class="button" onclick="addFee()">Add Charge</button>
+            </p>
+        </div>
+        
+    </div>
+
+    
 </div>
 
 <script type="text/javascript">
+$(document).ready(function () {
+    if ($('#' + window.location.hash.split('/')[1]).length) {
+        var item = window.location.hash.split('/')[1];
+        $('.nav_content').hide();
+        $('a.active').removeClass('active');
+        $('a[data-activate=' + item + ']').addClass('active');
+        $('#' + item).fadeIn();
+        window.location.hash = '/' + item;
+    }
+
+    $('.navrow li a').click(function () {
+        $('.nav_content').hide();
+        $('a.active').removeClass('active');
+        $(this).addClass('active');
+        $('#' + $(this).data('activate')).fadeIn();
+        window.location.hash = '/' + $(this).data('activate');
+    });
+});
 
 $('.editable').click(function () {
     // var val = $(this).html();

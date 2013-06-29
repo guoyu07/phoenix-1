@@ -3,16 +3,14 @@
     
     <p><input id="search" type="text" style="width:200px;" placeholder="Enter search term&hellip;" /> <button class="button button-blue">Create a Course</button></p>
 
-    <table class="courses hiden">
+    <table class="courses">
         <thead>
             <tr>
-                <th style="width:10%;" class="tipped" title="Course Code">CC</th>
-                <th style="width:30%;">Course Name</th>
+                <th style="width:55%;">Course Name</th>
                 <th style="width:20%;">Lead Instructor</th>
-                <th style="width:6%;" class="tipped" title="Enrolled Students/Available Spaces">E/A</th>
-                <th style="width:8%;">Popularity</th>
-                <th style="width:6%;" class="tipped" title="Language of Instruction">LOI</th>
-                <th style="width:20%;">Flags</th>
+                <th style="width:8%;" class="tipped" title="Enrolled Students/Available Spaces">E/A</th>
+                <th style="width:7%;" class="tipped" title="Language of Instruction">LOI</th>
+                <th style="width:10%;">Flags</th>
             </tr>
         </thead>
         <tbody> 
@@ -29,13 +27,11 @@ jQuery(document).ready(function ($) {
     $.each(courseJson, function (i, c) {
         console.log(c);
         $('table.courses>tbody').append('<tr class="course" data-course-id="' + c.CourseID + '" data-subject="' + c.CourseSubj + '" data-status="' + ((c.CourseFlagsPublic == 1) ? 'public' : 'incomplete') + '">' +
-            '<td>' + c.CourseCode + '</td>' +
-            '<td class="tipped" title="' + c.CourseSynop + '"><a href="./course_view.php?cid=' + c.CourseID + '">' + c.CourseTitle + '</a></td>' +
+            '<td class="tipped" title="' + c.CourseSynop + '"><a href="./course_view.php?cid=' + c.CourseID + '">' + c.CourseTitle + '</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-' + c.CourseSubj.toLowerCase() + '"></div> ' + c.CourseCode + '</span></td>' +
             '<td><a href="mailto:' + c.TeacherData.TeacherEmail + '">' + c.TeacherData.TeacherName + '</a></td>' +
             '<td class="tipped" title="Over ' + ((c.ClassData.length == 1) ?  'a single timeslot' : c.ClassData.length + ' total timeslots' ) + '"><span style="font-weight:700;">' + c.TotalEnrollCount + '</span>/<span class="muted">' + c.TotalSpacesAvailable + '</span></td>' + 
-            '<td><em class="muted">Unknown</em></td>' +
             '<td><img src="/assets/icons/' + c.CourseLOI + '.png" style="height:16px;" /></td>' +
-            '<td>' + ((c.CourseFlagsPublic == 1) ? '<em class="muted"><img src="/assets/icons/tick.png" /> Completed</em>' : '<img src="/assets/icons/exclamation.png" /> Action Required') + '</td>' +
+            '<td>' + ((c.CourseFlagsPublic == 1) ? '<em class="muted"><img src="/assets/icons/tick.png" /></em>' : '<img src="/assets/icons/exclamation.png" />') + '</td>' +
             '</tr>');
     });
 
