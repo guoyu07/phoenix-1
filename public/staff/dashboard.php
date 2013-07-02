@@ -41,10 +41,12 @@ $d['type'] = $_laoshi->sso['ObjType']['TypeName'];
 $d['last_visit'] = Common::relativeTime(strtotime($_laoshi->sso['ObjLLTS']));
 $d['account_cts'] = Common::relativeTime(strtotime($_laoshi->sso['ObjCTS']));
 
-$stmt = Data::prepare("select co.*, cl.* from courses co, classes cl where co.CourseID = cl.CourseID and cl.TeacherID = :lead and cl.ClassStatus = 'active' order by cl.ClassWeek asc, cl.ClassPeriodBegin asc");
+$stmt = Data::prepare("select co.*, cl.* from courses co, classes cl where co.CourseID = cl.CourseID and cl.TeacherID = :lead and cl.ClassStatus IN ('active', 'full') order by cl.ClassWeek asc, cl.ClassPeriodBegin asc");
 $stmt->bindParam('lead', $_laoshi->staff['StaffID']);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$d['magic'] = var_export($classes, true);
 
 $d['class_w1'] = '';
 $d['class_w2'] = '';
@@ -61,6 +63,9 @@ foreach($classes as $class) {
     $d['reg_w'.$class['ClassWeek']] .= '<strong><span class="badge">Period '.$class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd'].'</span> <a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a></strong><br />';
 
 }
+
+$d['day'] = date('l');
+$d['week'] = Common::getCurrentWeek();
 
 $p['content'] = UX::grabPage($_laoshi->fetchDefaultPage(), $d);
 $p['staff_id'] = $_laoshi->staff['StaffID'];

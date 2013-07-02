@@ -1,0 +1,56 @@
+<div id="room_list" class="body-emulate content-row spaced">
+    <h1>Room {{rid}} Usage</h1>
+    <select id="room_select">
+        <option value="">(Select Another Room)</option>
+        {{rooms}}
+    </select>
+
+    <p>
+        <table class="roomuselist">
+            <thead>
+                <tr>
+                    <th style="width:20%;">Time</th>
+                    <th style="width:55%;">Course Name</th>
+                    <th style="width:25%;">Teacher</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3">
+                        <h3 id="week_1" style="margin-top:0;">Week 1</h3>
+                    </td>
+                </tr>
+                {{week_1}}
+                <tr>
+                    <td colspan="3">
+                        <h3 id="week_2" style="margin-top:0;">Week 2</h3>
+                    </td>
+                </tr>
+                {{week_2}}
+                <tr>
+                    <td colspan="3">
+                        <h3 id="week_3" style="margin-top:0;">Week 3</h3>
+                    </td>
+                </tr>
+                {{week_3}}
+                <tr>
+                    <td colspan="3">
+                        <h3 id="week_4" style="margin-top:0;">Week 4</h3>
+                    </td>
+                </tr>
+                {{week_4}}
+            </tbody>
+        </table>
+    </p>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#room_select').change(function () {
+        var rid = $('#room_select').val();
+        if (rid.length > 0) {
+            window.location='/staff/ops/room_use.php?rid=' + rid;
+        }
+    });
+});
+</script>

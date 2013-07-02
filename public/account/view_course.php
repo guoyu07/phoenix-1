@@ -161,6 +161,8 @@ foreach($course['ClassData'] as $class) {
 
         if ($enroll_count >= $class['ClassEnrollMax']) {
             $enrollstring = '<img src="/assets/icons/cross.png" /> Class is full (waitlist unavailable)';
+        } elseif ($class['ClassWeek'] < 2) {
+            $enrollstring = '<img src="/assets/icons/cross.png" /> No longer available';
         } else {
             if ($program == 'Period') {
                 // Calculate age

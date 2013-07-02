@@ -16,15 +16,13 @@
     <div class="col-row">
         <div class="col c10" style="vertical-align:top;">
             <h2>Student Absences</h2>
-
-            
             <p>
                 <table class="absentlist">
                     <thead>
                         <tr>
                             <th style="width:50%;">Course Name</th>
                             <th style="width:30%;">Student Name</th>
-                            <th style="width:20%;">Last Update</th>
+                            <th style="width:15%;">Last Update</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,21 +65,15 @@
 
 <div id="classes" class="today_content content-row spaced hide">
     <div class="col-row">
-        <div class="col c10" style="vertical-align:top;">
+        <div class="col c5" style="vertical-align:top;">
             <h2>Today's Classes</h2>
-
-            <p>
-                <strong>Summer Program</strong>: <a href="#period_1" onclick="scrollToAnchor('period_1');return false;">Period 1</a> | <a href="#period_2" onclick="scrollToAnchor('period_2');return false;">Period 2</a> | <a href="#period_3"  onclick="scrollToAnchor('period_3');return false;">Period 3</a> | <a href="#period_4"  onclick="scrollToAnchor('period_4');return false;">Period 4</a><br />
-                <strong>Academic Program</strong>: <a href="#academic" class="scroll">All Classes</a>
-            </p>
             
             <h3 id="period_1">Period 1/1&amp;2 <span class="muted" style="font-weight:normal;">({{size_p1}} classes)</span></h3>
             <p>
-                <table class="courselist">
+                <table class="courselist hiden">
                     <thead>
                         <tr>
-                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
-                            <th style="width:70%;">Course Name</th>
+                            <th style="width:85%;">Course Name</th>
                             <th style="width:15%;">Room</th>
                         </tr>
                     </thead>
@@ -91,13 +83,28 @@
                 </table>
             </p>
 
-            <h3 id="period_2">Period 2 <span class="muted" style="font-weight:normal;">({{size_p2}} classes)</span></h3>
+            <h3 id="period_3">Period 3/3&amp;4 <span class="muted" style="font-weight:normal;">({{size_p3}} classes)</span></h3>
             <p>
-                <table class="courselist">
+                <table class="courselist hiden">
                     <thead>
                         <tr>
-                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
-                            <th style="width:70%;">Course Name</th>
+                            <th style="width:85%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{period_3}} 
+                    </tbody>
+                </table>
+            </p>
+        </div>
+        <div class="col c5" style="vertical-align:top;">
+            <h3 id="period_2">Period 2 <span class="muted" style="font-weight:normal;">({{size_p2}} classes)</span></h3>
+            <p>
+                <table class="courselist hiden">
+                    <thead>
+                        <tr>
+                            <th style="width:85%;">Course Name</th>
                             <th style="width:15%;">Room</th>
                         </tr>
                     </thead>
@@ -107,29 +114,12 @@
                 </table>
             </p>
 
-            <h3 id="period_3">Period 3/3&amp;4 <span class="muted" style="font-weight:normal;">({{size_p3}} classes)</span></h3>
-            <p>
-                <table class="courselist">
-                    <thead>
-                        <tr>
-                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
-                            <th style="width:70%;">Course Name</th>
-                            <th style="width:15%;">Room</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{period_3}} 
-                    </tbody>
-                </table>
-            </p>
-
             <h3 id="period_4">Period 4 <span class="muted" style="font-weight:normal;">({{size_p4}} classes)</span></h3>
             <p>
-                <table class="courselist">
+                <table class="courselist hiden">
                     <thead>
                         <tr>
-                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
-                            <th style="width:70%;">Course Name</th>
+                            <th style="width:85%;">Course Name</th>
                             <th style="width:15%;">Room</th>
                         </tr>
                     </thead>
@@ -141,11 +131,10 @@
 
             <h3 id="academic">Academic Program <span class="muted" style="font-weight:normal;">({{size_academic}} classes)</span></h3>
             <p>
-                <table class="courselist">
+                <table class="courselist hiden">
                     <thead>
                         <tr>
-                            <th style="width:15%;" class="tipped" title="Course Code">CC</th>
-                            <th style="width:70%;">Course Name</th>
+                            <th style="width:85%;">Course Name</th>
                             <th style="width:15%;">Room</th>
                         </tr>
                     </thead>

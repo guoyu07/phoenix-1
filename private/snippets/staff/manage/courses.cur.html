@@ -7,9 +7,8 @@
         <thead>
             <tr>
                 <th style="width:55%;">Course Name</th>
-                <th style="width:20%;">Lead Instructor</th>
-                <th style="width:8%;" class="tipped" title="Enrolled Students/Available Spaces">E/A</th>
-                <th style="width:7%;" class="tipped" title="Language of Instruction">LOI</th>
+                <th style="width:25%;">Lead Instructor</th>
+                <th style="width:10%;" class="tipped" title="Enrolled Students/Available Spaces">E/A</th>
                 <th style="width:10%;">Flags</th>
             </tr>
         </thead>
@@ -28,10 +27,9 @@ jQuery(document).ready(function ($) {
         console.log(c);
         $('table.courses>tbody').append('<tr class="course" data-course-id="' + c.CourseID + '" data-subject="' + c.CourseSubj + '" data-status="' + ((c.CourseFlagsPublic == 1) ? 'public' : 'incomplete') + '">' +
             '<td class="tipped" title="' + c.CourseSynop + '"><a href="./course_view.php?cid=' + c.CourseID + '">' + c.CourseTitle + '</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-' + c.CourseSubj.toLowerCase() + '"></div> ' + c.CourseCode + '</span></td>' +
-            '<td><a href="mailto:' + c.TeacherData.TeacherEmail + '">' + c.TeacherData.TeacherName + '</a></td>' +
+            '<td><a href="/staff/manage/staff.php?tid=' + c.TeacherData.TeacherID + '">' + c.TeacherData.TeacherName + '</a> <span class="muted small" style="float:right;">' + ((c.TeacherData.TeacherCell == '0') ? '' : c.TeacherData.TeacherCell.substr(0, 4) + '-' + c.TeacherData.TeacherCell.substr(4)) + '</span></td>' +
             '<td class="tipped" title="Over ' + ((c.ClassData.length == 1) ?  'a single timeslot' : c.ClassData.length + ' total timeslots' ) + '"><span style="font-weight:700;">' + c.TotalEnrollCount + '</span>/<span class="muted">' + c.TotalSpacesAvailable + '</span></td>' + 
-            '<td><img src="/assets/icons/' + c.CourseLOI + '.png" style="height:16px;" /></td>' +
-            '<td>' + ((c.CourseFlagsPublic == 1) ? '<em class="muted"><img src="/assets/icons/tick.png" /></em>' : '<img src="/assets/icons/exclamation.png" />') + '</td>' +
+            '<td>' + ((c.CourseFlagsPublic == 1) ? '<em class="muted"><img src="/assets/icons/tick.png" /></em>' : '<img src="/assets/icons/exclamation.png" />') + ' <img src="/assets/icons/' + c.CourseLOI + '.png" style="height:16px;" /></td>' +
             '</tr>');
     });
 

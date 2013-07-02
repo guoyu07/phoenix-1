@@ -248,7 +248,7 @@ class Courses {
      * Get teacher info (email and display name)
      */
     static public function getTeacherById($id) {
-        $stmt = Data::prepare('SELECT `staff`.`StaffID` as "TeacherID", `staff`.`StaffName` as "TeacherName", `sso_objects`.`ObjEmail` as "TeacherEmail" FROM `staff`, `sso_objects` WHERE `sso_objects`.`ObjID` = `staff`.`ObjID` AND `staff`.`StaffID` = :sid');
+        $stmt = Data::prepare('SELECT `staff`.`StaffID` as "TeacherID", `staff`.`StaffCell` as "TeacherCell", `staff`.`StaffName` as "TeacherName", `sso_objects`.`ObjEmail` as "TeacherEmail" FROM `staff`, `sso_objects` WHERE `sso_objects`.`ObjID` = `staff`.`ObjID` AND `staff`.`StaffID` = :sid');
         $stmt->bindParam('sid', $id, PDO::PARAM_INT);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);

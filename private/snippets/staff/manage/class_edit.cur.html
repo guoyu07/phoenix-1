@@ -9,94 +9,96 @@
 
             <div class="alert alert-yellow hide" id="changed"><img src="/assets/icons/exclamation.png" /> Changes have been made. <a href="/staff/manage/class_edit.php?cid={{class_id}}">Refresh to see changes</a>.</div>
 
-            <h3>Class Timeslot</h3>
+            <h2>Offering Information</h2>
             <p>Make any necessary changes - these will be updated automatically when you click outside the edit field on any other part of the page.</p>
 
-            <div class="form-row">
-                <label for="room">Room</label>
-                <div class="form-help">
-                    <select id="room" name="room" class="edit" data-db-item="RoomID">
-                        <option value="">(Leave unchanged)</option>
-                        {{rooms}}
-                    </select>
-                    Currently: <strong style="color:#222;">{{curroom}}</strong>
+            <form class="reversed">
+                <div class="form-row">
+                    <label for="room">Room <span class="muted">(Currently: <strong style="color:#222;">{{curroom}}</strong>)</span>
+                        </label>
+                        <select id="room" name="room" class="edit" data-db-item="RoomID">
+                            <option value="">(Leave unchanged)</option>
+                            {{rooms}}
+                        </select>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <label for="week">Week Offered</label>
-                <select id="week" name="week" data-db-item="ClassWeek" class="edit">
-                    <option value="1"{{w1_selected}}>Week 1</option>
-                    <option value="2"{{w2_selected}}>Week 2</option>
-                    <option value="3"{{w3_selected}}>Week 3</option>
-                    <option value="4"{{w4_selected}}>Week 4</option>
-                </select>
-            </div>
-
-            <div class="form-row">
-                <label for="pbegin">Period Begins</label>
-                <select id="pbegin" name="pbegin" data-db-item="ClassPeriodBegin" class="edit">
-                    <optgroup label="Summer Programme">
-                        <option value="1"{{pb1_selected}}>Period 1</option>
-                        <option value="2"{{pb2_selected}}>Period 2</option>
-                        <option value="3"{{pb3_selected}}>Period 3</option>
-                        <option value="4"{{pb4_selected}}>Period 4</option>
-                    </optgroup>
-                    <optgroup label="Academic Programme">
-                        <option value="A"{{pba_selected}}>Session A</option>
-                        <option value="B"{{pbb_selected}}>Session B</option>
-                        <option value="C"{{pbc_selected}}>Session C</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="form-row">
-                <label for="pend">Period Ends</label>
-                <select id="pend" name="pend" data-db-item="ClassPeriodEnd" class="edit">
-                    <optgroup label="Summer Programme">
-                        <option value="1"{{pe1_selected}}>Period 1</option>
-                        <option value="2"{{pe2_selected}}>Period 2</option>
-                        <option value="3"{{pe3_selected}}>Period 3</option>
-                        <option value="4"{{pe4_selected}}>Period 4</option>
-                    </optgroup>
-                    <optgroup label="Academic Programme">
-                        <option value="A"{{pea_selected}}>Session A</option>
-                        <option value="B"{{peb_selected}}>Session B</option>
-                        <option value="C"{{pec_selected}}>Session C</option>
-                    </optgroup>
-                </select>
-            </div>
-
-            <div class="form-row">
-                <label for="minage">Minimum Age (4-16)</label>
-                <input type="text" class="edit" id="minage" data-db-item="ClassAgeMin" name="minage" value="{{minage}}" />
-            </div>
-
-            <div class="form-row">
-                <label for="maxage">Maximum Age (4-16)</label>
-                <input type="text" class="edit" id="maxage" data-db-item="ClassAgeMax" name="maxage" value="{{maxage}}" />
-            </div>
-
-            <div class="form-row">
-                <label for="enrollmax">Maximum Enrollment (0-30)</label>
-                <input type="text" class="edit" id="enrollmax" data-db-item="ClassEnrollMax" name="enrollmax" value="{{maxenroll}}" />
-            </div>
-
-            <div class="form-row">
-                <label for="status">Class Status</label>
-                <div class="form-help">
-                    <select id="status" class="edit" data-db-item="ClassStatus" name="status">
-                        <option value="">(Leave unchanged)</option>
-                        <option value="active">Active - parents are free to register until class is full</option>
-                        <option value="full">Full - arbitrarily make class full (waitlisted)</option>
-                        <option value="closed">Closed - class is invisible to parents</option>
+                <div class="form-row">
+                    <label for="week">Week Offered</label>
+                    <select id="week" name="week" data-db-item="ClassWeek" class="edit">
+                        <option value="1"{{w1_selected}}>Week 1</option>
+                        <option value="2"{{w2_selected}}>Week 2</option>
+                        <option value="3"{{w3_selected}}>Week 3</option>
+                        <option value="4"{{w4_selected}}>Week 4</option>
                     </select>
-                    Currently: <strong style="color:#222;">{{status}}</strong>
                 </div>
-            </div>
+
+                <div class="form-row">
+                    <label for="pbegin">Period Begins</label>
+                    <select id="pbegin" name="pbegin" data-db-item="ClassPeriodBegin" class="edit">
+                        <optgroup label="Summer Programme">
+                            <option value="1"{{pb1_selected}}>Period 1</option>
+                            <option value="2"{{pb2_selected}}>Period 2</option>
+                            <option value="3"{{pb3_selected}}>Period 3</option>
+                            <option value="4"{{pb4_selected}}>Period 4</option>
+                        </optgroup>
+                        <optgroup label="Academic Programme">
+                            <option value="A"{{pba_selected}}>Session A</option>
+                            <option value="B"{{pbb_selected}}>Session B</option>
+                            <option value="C"{{pbc_selected}}>Session C</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="pend">Period Ends</label>
+                    <select id="pend" name="pend" data-db-item="ClassPeriodEnd" class="edit">
+                        <optgroup label="Summer Programme">
+                            <option value="1"{{pe1_selected}}>Period 1</option>
+                            <option value="2"{{pe2_selected}}>Period 2</option>
+                            <option value="3"{{pe3_selected}}>Period 3</option>
+                            <option value="4"{{pe4_selected}}>Period 4</option>
+                        </optgroup>
+                        <optgroup label="Academic Programme">
+                            <option value="A"{{pea_selected}}>Session A</option>
+                            <option value="B"{{peb_selected}}>Session B</option>
+                            <option value="C"{{pec_selected}}>Session C</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <label for="minage">Minimum Age (4-16)</label>
+                    <input type="text" class="edit" id="minage" data-db-item="ClassAgeMin" name="minage" value="{{minage}}" />
+                </div>
+
+                <div class="form-row">
+                    <label for="maxage">Maximum Age (4-16)</label>
+                    <input type="text" class="edit" id="maxage" data-db-item="ClassAgeMax" name="maxage" value="{{maxage}}" />
+                </div>
+
+                <div class="form-row">
+                    <label for="enrollmax">Maximum Enrollment (0-30)</label>
+                    <input type="text" class="edit" id="enrollmax" data-db-item="ClassEnrollMax" name="enrollmax" value="{{maxenroll}}" />
+                </div>
+
+                <div class="form-row">
+                    <label for="status">Class Status <span class="muted">(Currently: <strong style="color:#222;">{{status}}</strong>)</span>
+                        </label>
+                        <select id="status" class="edit" data-db-item="ClassStatus" name="status">
+                            <option value="">(Leave unchanged)</option>
+                            <option value="active">Active - parents are free to register until class is full</option>
+                            <option value="full">Full - arbitrarily make class full (waitlisted)</option>
+                            <option value="closed">Closed - class is invisible to parents</option>
+                        </select>
+                </div>
+            </form>
         </div>
         <div class="col c5" style="vertical-align:top;">
-            <h3>Roster</h3>
+            <h2>Class Roster</h2>
+            <p>
+                <button class="button-blue" onclick="window.open('./class_edit.php?cid={{class_id}}&printable');return false;">Print Roster</button>
+                <button class="button-link button-red" data-url="/staff/manage/cancel_class.php?cid={{class_id}}">Cancel This Class</button>
+            </p>
             <p>
                 <table id="roster">
                     <thead>
@@ -110,10 +112,6 @@
                         {{enroll_table}}
                     </tbody>
                 </table>
-            </p>
-
-            <p>
-                <button class="button-link button-red" data-url="/staff/manage/cancel_class.php?cid={{class_id}}">Cancel This Class</button>
             </p>
         </div>
     </div>

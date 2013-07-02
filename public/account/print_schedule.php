@@ -83,31 +83,31 @@ foreach($sched as $i => $week) {
             switch ($e['ClassPeriodBegin']) {
                 case '1':
                     $time_start = '09:00';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case '2':
                     $time_start = '10:00';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case '3':
                     $time_start = '11:30';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case '4':
                     $time_start = '12:30';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case 'A':
                     $time_start = '09:30';
-                    $program = 'Session';
+                    $program = 'Sn';
                 break;
                 case 'B':
                     $time_start = '12:00';
-                    $program = 'Session';
+                    $program = 'Sn';
                 break;
                 case 'C':
                     $time_start = '14:30';
-                    $program = 'Session';
+                    $program = 'Sn';
                 break;
             }
 
@@ -141,7 +141,7 @@ foreach($sched as $i => $week) {
             // Check latest update...
             if (strtotime($e['EnrollLETS']) > $latest_update) $latest_update = strtotime($e['EnrollLETS']);
 
-            $p['week_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.(($_stu->data['StudentSubmitted'] == '1') ? '' : '<a href="/account/enroll.php?act=drop&eid='.$e['EnrollID'].'" class="tipped" title="Click cancel enrollment (will require confirmation)">').'<strong>'.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</strong>: '.$e['CourseTitle'].(($_stu->data['StudentSubmitted'] == '1') ? '' : '</a>').'</td><td>'.$e['RoomID'].'</td></tr>';
+            $p['week_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span> '.$time_start.'-'.$time_end.'</td><td>'.(($_stu->data['StudentSubmitted'] == '1') ? '' : '<a href="/account/enroll.php?act=drop&eid='.$e['EnrollID'].'" class="tipped" title="Click cancel enrollment (will require confirmation)">').'<strong>'.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</strong>: '.$e['CourseTitle'].(($_stu->data['StudentSubmitted'] == '1') ? '' : '</a>').'</td><td>'.$e['RoomID'].'</td></tr>';
         }
     }
 }

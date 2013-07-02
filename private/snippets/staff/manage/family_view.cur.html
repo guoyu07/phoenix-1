@@ -179,4 +179,27 @@ $('.editfield').blur(function () {
     }
 });
 
+function addFee() {
+    laoshi.rpc({"method": "add_charge", "fid": {{family_id}}, "val": $('#fee_amount').val(), "desc": $('#fee_desc').val()});
+    laoshi.toast('Payment request sent to invoices service. Refresh to see changes!');
+    $('#fee_amount').val('');
+    $('#fee_desc').val('');
+}
+
+function addPayment() {
+    laoshi.rpc({"method": "add_payment", "fid": {{family_id}}, "paytype": $('#pay_type').val(), "val": ($('#pay_amount').val() * -1), "desc": $('#pay_desc').val()});
+    laoshi.toast('Payment request sent to invoices service. Refresh to see changes!');
+    $('#pay_amount').val('');
+    $('#pay_desc').val('');
+}
+
+function dropPayment(pid) {
+    if (confirm('Click OK to confirm you wish to delete this payment/charge item.')) {
+        laoshi.rpc({"method": "del_payment", "fid": {{family_id}}, "pid": pid});
+        laoshi.toast('Removed payment/charge line item. Refresh to see changes!');
+    } else {
+        laoshi.toast('Action canceled. I didn\'t remove anything :)');
+    }
+}
+
 </script>

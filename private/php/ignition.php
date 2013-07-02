@@ -51,16 +51,16 @@ if (defined('PHX_STUDENT')) require_once('class.student.php');
 if (defined('PHX_STAFF')) require_once('class.staff.php');
 
 // Week date objects
-$_W[1] = '2013-06-24 12:00:00';
-$_W[2] = '2013-07-02 12:00:00';
-$_W[3] = '2013-07-08 12:00:00';
-$_W[4] = '2013-07-12 12:00:00';
+$_W[1] = '2013-06-24 00:00:00';
+$_W[2] = '2013-07-02 00:00:00';
+$_W[3] = '2013-07-08 00:00:00';
+$_W[4] = '2013-07-12 00:00:00';
 
 // DEPCREATED: Configure dates
-define('WEEK_1',    '2013-06-24 12:00:00');
-define('WEEK_2',    '2013-07-02 12:00:00');
-define('WEEK_3',    '2013-07-08 12:00:00');
-define('WEEK_4',    '2013-07-15 12:00:00');
+define('WEEK_1',    '2013-06-24 00:00:00');
+define('WEEK_2',    '2013-07-02 00:00:00');
+define('WEEK_3',    '2013-07-08 00:00:00');
+define('WEEK_4',    '2013-07-15 00:00:00');
 
 // Session timeout set
 ini_set('session.gc_maxlifetime', 28800);

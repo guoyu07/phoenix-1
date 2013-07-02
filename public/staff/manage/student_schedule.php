@@ -83,31 +83,31 @@ foreach($sched as $i => $week) {
             switch ($e['ClassPeriodBegin']) {
                 case '1':
                     $time_start = '09:00';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case '2':
                     $time_start = '10:00';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case '3':
                     $time_start = '11:30';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case '4':
                     $time_start = '12:30';
-                    $program = 'Period';
+                    $program = 'Pd';
                 break;
                 case 'A':
                     $time_start = '09:30';
-                    $program = 'Session';
+                    $program = 'Sn';
                 break;
                 case 'B':
                     $time_start = '12:00';
-                    $program = 'Session';
+                    $program = 'Sn';
                 break;
                 case 'C':
                     $time_start = '14:30';
-                    $program = 'Session';
+                    $program = 'Sn';
                 break;
             }
 

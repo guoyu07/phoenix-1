@@ -41,6 +41,9 @@ $n['my_name'] = $_laoshi->staff['StaffName'];
 // Make p array
 $p['class_id'] = $class['ClassID'];
 $p['course_id'] = $class['CourseID'];
+$p['week'] = $class['ClassWeek'];
+$p['program'] = (($class['CourseSubj'] == ('ARTS' || 'LANG' || 'MSCT' || 'PHED')) ? 'Period(s)' : 'Session');
+$p['period'] = (($class['ClassPeriodBegin'] == $class['ClassPeriodEnd']) ? $class['ClassPeriodEnd'] : $class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd']);
 $p['course_title'] = $class['CourseTitle'];
 $p['teacher_name'] = $class['TeacherData']['TeacherName'];
 $p['teacher_email'] = $class['TeacherData']['TeacherEmail'];
@@ -67,7 +70,7 @@ if (($class['ClassPeriodBegin'] == 0) || ($class['ClassPeriodEnd'] == 0)) {
 }
 
 // Get enrollment
-$stmt = Data::prepare('SELECT s.StudentID, s.StudentNamePreferred, s.StudentNameLast, s.StudentDOB, e.EnrollLETS FROM `enrollment` e, `students` s WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
+$stmt = Data::prepare('SELECT s.StudentID, s.StudentNamePreferred, s.StudentNameLast, s.StudentDOB, CONVERT_TZ(e.EnrollLETS, \'+00:00\', \'+08:00\') AS `EnrollLETS` FROM `enrollment` e, `students` s WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
 $stmt->bindParam('cid', $class['ClassID']);
 $stmt->execute();
 $enrollment = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -76,6 +79,12 @@ $p['enroll_table'] = '';
 
 foreach ($enrollment as $stu) {
     $p['enroll_table'] .= '<tr><td><a href="/staff/manage/student_schedule.php?sid='.$stu['StudentID'].'">'.$stu['StudentNamePreferred'].' '.$stu['StudentNameLast'].'</a></td><td>'.date(DATETIME_SHORT, strtotime($stu['EnrollLETS'])).'</td><td>'.date(DATE_SHORT, strtotime($stu['StudentDOB'])).'</td></tr>';
+}
+
+// Printable?
+if (strpos($_SERVER['QUERY_STRING'], 'printable')) {
+    echo UX::grabPage('staff/print_roster', $p, true);
+    exit();
 }
 
 // Include header section

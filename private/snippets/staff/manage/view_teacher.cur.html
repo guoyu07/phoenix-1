@@ -1,0 +1,72 @@
+<div class="content-row spaced">
+    <h1>Profile for {{staff_name}}</h1>
+</div>
+
+<div class="content-row spaced">
+    <div class="col-row">
+        <div class="col c7" style="vertical-align:top;">
+            <h2>Class List</h2>
+            <p>
+                <table class="classlist">
+                    <thead>
+                        <tr>
+                            <th style="width:15%;">Pd/Sn</th>
+                            <th style="width:70%;">Course Name</th>
+                            <th style="width:15%;">Room</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3">
+                                <h3 id="week_1" style="margin-top:0;">Week 1</h3>
+                            </td>
+                        </tr>
+                        {{week_1}}
+                        <tr>
+                            <td colspan="3">
+                                <h3 id="week_1" style="margin-top:0;">Week 2</h3>
+                            </td>
+                        </tr>
+                        {{week_2}}
+                        <tr>
+                            <td colspan="3">
+                                <h3 id="week_1" style="margin-top:0;">Week 3</h3>
+                            </td>
+                        </tr>
+                        {{week_3}}
+                        <tr>
+                            <td colspan="3">
+                                <h3 id="week_1" style="margin-top:0;">Week 4</h3>
+                            </td>
+                        </tr>
+                        {{week_4}}
+                        
+                    </tbody>
+                </table>
+            </p>
+        </div>
+        <div class="col c3" style="vertical-align:top;">
+            <h2>Account Info</h2>
+            
+            <p>
+                <strong>SSO Identifier</strong><br />
+                {{sso_id}}
+            </p>
+
+            <p>
+                <strong>Email Address</strong><br />
+                {{email}}
+            </p>
+
+            <p>
+                <strong>Mobile</strong><br />
+                {{cell}}
+            </p>
+
+            <p>
+                <button class="button-red" onclick="alert('Just joking, not working yet!');">Reset Password</button>
+            </p>
+
+        </div>
+    </div>
+</div>

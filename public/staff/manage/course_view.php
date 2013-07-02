@@ -49,7 +49,7 @@ foreach($course['ClassData'] as $class) {
     <td>".$teacher['TeacherName']."</td>
     <td>".$class['ClassWeek']."</td>
     <td>".(($class['ClassPeriodBegin'] == $class['ClassPeriodEnd']) ? $class['ClassPeriodBegin'] : $class['ClassPeriodBegin']."-".$class['ClassPeriodEnd'])."</td>
-    <td>".$class['RoomID']."</td>
+    <td><a href=\"/staff/ops/room_use.php?rid=".$class['RoomID']."\">".$class['RoomID']."</a></td>
     <td><strong>".$class['EnrollCount']."</strong><span class=\"muted\">/".$class['ClassEnrollMax']."</td>
     <td id=\"status-".$class['ClassID']."\">".$class['ClassHtmlStatus']."</td>
     <td><a href=\"./class_edit.php?cid=".$class['ClassID']."\">Edit</a>".(($class['EnrollCount'] > 0) ? "" : " | <a href=\"./class_edit.php?cid=".$class['ClassID']."&action=cancel\" class=\"cancel-class\">Cancel</a>")."</td></tr>";
