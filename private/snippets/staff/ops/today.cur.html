@@ -147,6 +147,30 @@
     </div>
 </div>
 
+<div id="helpers" class="today_content content-row spaced hide">
+    <div class="col-row">
+        <div class="col c10" style="vertical-align:top;">
+            <h2>Helper Checkin/Checkouts</h2>
+            
+            <p>
+                <table class="checkinlist">
+                    <thead>
+                        <tr>
+                            <th style="width:40%;">Helper Name</th>
+                            <th style="width:30%;">In Time</th>
+                            <th style="width:30%;">Out Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{checkins}}
+                    </tbody>
+                </table>
+            </p>
+
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -159,14 +183,20 @@ $(document).ready(function() {
         window.location.hash = '/' + item;
     }
 
-    $('.navrow li a').click(function () {
+    $(window).on('hashchange', function() {
+        var item = window.location.hash.split('/')[1];
         $('.today_content').hide();
         $('a.active').removeClass('active');
-        $(this).addClass('active');
-        $('#' + $(this).data('activate')).fadeIn();
-        window.location.hash = '/' + $(this).data('activate');
+        $('a[data-activate=' + item + ']').addClass('active');
+        $('#' + item).fadeIn();
+        window.location.hash = '/' + item;
     });
 
 });
+
+function signOut(siid) {
+    laoshi.rpc({'method': 'sign_out_helper', 'signin_id': siid});
+    laoshi.toast('Signed out successfully. Refresh now to see changes.');
+}
 
 </script>

@@ -114,14 +114,14 @@ foreach($classes as $e) {
     if ($e['ClassPeriodBegin'] == $e['ClassPeriodEnd']) $length = $e['ClassPeriodBegin'];
     else $length = $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd'];
 
-    $p['week_'.$e['ClassWeek']] .= '<tr><td>'.$length.'</td><td><a href="/staff/manage/class_edit.php?cid='.$e['ClassID'].'">'.$e['CourseTitle'].'</a> <span style="float:right;" class="muted"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/ops/room_use.php?rid='.$e['RoomID'].'">'.$e['RoomID'].'</a></td></tr>';
+    $p['week_'.$e['ClassWeek']] .= '<tr><td>'.$time_start.'-'.$time_end.' <span class="small muted" style="float:right;">'.$program.' '.$length.'</span></td><td><a href="/staff/manage/class_edit.php?cid='.$e['ClassID'].'">'.$e['CourseTitle'].'</a> <span style="float:right;" class="muted small"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'.'.$e['ClassID'].' (<span style="color:#222;">'.$e['EnrollCount'].'</span>/'.$e['ClassEnrollMax'].')</span></td><td><a href="/staff/ops/room_use.php?rid='.$e['RoomID'].'">'.$e['RoomID'].'</a></td></tr>';
 }
 
 // Include header section
 echo UX::makeHead($h, $n, 'common/header_staff', $_laoshi->fetchNavPage());
 
 // Page info
-echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Room '.$_GET['rid'].' Usage' => "/staff/ops/room_use.php?rid=".$_GET['rid']));
+echo UX::makeBreadcrumb(array(  'Staff Portal'      => '/staff/dashboard.php', 'Profile: '.$p['staff_name'] => "/staff/manage/view_teacher.php?tid=".$_GET['tid']));
 echo UX::grabPage('staff/manage/view_teacher', $p, true);
 
 // Before footer grab time spent

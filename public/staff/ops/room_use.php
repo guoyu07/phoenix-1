@@ -35,7 +35,7 @@ $n['ops'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
 try {
-    $stmt = Data::prepare('SELECT co.CourseSubj, cl.CourseID, cl.ClassID AS ClassID, co.CourseTitle, st.StaffName, st.StaffCell, cl.ClassWeek, cl.ClassPeriodBegin, cl.ClassPeriodEnd FROM courses co, classes cl, staff st WHERE co.CourseID = cl.CourseID AND cl.RoomID = :rid AND st.StaffID = cl.TeacherID AND cl.ClassStatus IN ("active", "full") ORDER BY cl.ClassWeek ASC, cl.ClassPeriodBegin ASC');
+    $stmt = Data::prepare('SELECT co.CourseSubj, cl.CourseID, cl.ClassID AS ClassID, co.CourseTitle, st.StaffName, st.StaffCell, cl.ClassWeek, cl.ClassPeriodBegin, cl.ClassPeriodEnd, cl.TeacherID FROM courses co, classes cl, staff st WHERE co.CourseID = cl.CourseID AND cl.RoomID = :rid AND st.StaffID = cl.TeacherID AND cl.ClassStatus IN ("active", "full") ORDER BY cl.ClassWeek ASC, cl.ClassPeriodBegin ASC');
     $stmt->bindParam('rid', $_GET['rid']);
     $stmt->execute();
     $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -110,7 +110,7 @@ foreach($classes as $e) {
     if ($e['ClassPeriodBegin'] == $e['ClassPeriodEnd']) $length = 'single';
     else $length = 'double';
 
-    $p['week_'.$e['ClassWeek']] .= '<tr><td>'.$time_start.'-'.$time_end.'<span class="small muted" style="float:right;">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><a href="/staff/manage/class_edit.php?cid='.$e['ClassID'].'">'.$e['CourseTitle'].'</a> <span class="small muted" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'.'.$e['ClassID'].'</span></td><td>'.$e['StaffName'].' <span class="muted" style="float:right;">'.((strlen($e['StaffCell']) == 8) ? substr($e['StaffCell'], 0, 4).'-'.substr($e['StaffCell'], 4, 4) : $e['StaffCell']).'</span></td></tr>';
+    $p['week_'.$e['ClassWeek']] .= '<tr><td>'.$time_start.'-'.$time_end.'<span class="small muted" style="float:right;">'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span></td><td><a href="/staff/manage/class_edit.php?cid='.$e['ClassID'].'">'.$e['CourseTitle'].'</a> <span class="small muted" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'.'.$e['ClassID'].'</span></td><td><a href="/staff/manage/view_teacher.php?tid='.$e['TeacherID'].'">'.$e['StaffName'].'</a> <span class="muted" style="float:right;">'.((strlen($e['StaffCell']) == 8) ? substr($e['StaffCell'], 0, 4).'-'.substr($e['StaffCell'], 4, 4) : $e['StaffCell']).'</span></td></tr>';
 }
 
 // Rooms

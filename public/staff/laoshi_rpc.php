@@ -63,6 +63,36 @@ VALUES (:fid, "FrontDesk", :val, NOW(), :desc, 1)');
                 $result['msg'] = '[SQL] Error: '.$e->getMessage();
             }
         break;
+        case 'toggle_payment_flag':
+            $_laoshi->perms(8,9,10,11,12);
+            try {
+                $stmt = Data::prepare('UPDATE `payments` SET `PayFlag` = :flag WHERE `PayID` = :pid LIMIT 1');
+                $stmt->bindParam('flag', $_REQUEST['flag'], PDO::PARAM_INT);
+                $stmt->bindParam('pid', $_REQUEST['pid'], PDO::PARAM_INT);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Charge removed.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
+        case 'sign_out_helper':
+            try {
+                $stmt = Data::prepare('UPDATE helpers_checkins SET CheckinTimeout = NOW() WHERE CheckinID = :cid LIMIT 1');
+                $stmt->bindParam('cid', $_REQUEST['signin_id'], PDO::PARAM_INT);
+                $stmt->execute();
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Charge removed.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
         case 'update_cell':
             try {
                 $stmt = Data::prepare('UPDATE `staff` SET `StaffCell` = :cell WHERE `StaffID` = :sid LIMIT 1');

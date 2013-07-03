@@ -41,7 +41,7 @@ $p['today'] = date('D').', Week '.$week.' ('.date(DATE_SHORT).')';
 $p['period_1'] = '';
 
 // Period 1
-$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 1 AND cl.ClassStatus IN ('active', 'full') ORDER BY co.CourseSubj ASC, co.CourseID ASC");
+$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.TeacherID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 1 AND cl.ClassStatus IN ('active', 'full') ORDER BY co.CourseSubj ASC, co.CourseID ASC");
 $stmt->bindParam('week', $week);
 $stmt->execute();
 
@@ -56,7 +56,7 @@ $p['absize_p1'] = sizeof($abs_p1);
 
 
 // Period 1
-$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 2 AND cl.ClassStatus = 'active' ORDER BY co.CourseSubj ASC, co.CourseID ASC");
+$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.TeacherID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 2 AND cl.ClassStatus = 'active' ORDER BY co.CourseSubj ASC, co.CourseID ASC");
 $stmt->bindParam('week', $week);
 $stmt->execute();
 
@@ -71,7 +71,7 @@ $p['absize_p2'] = sizeof($abs_p2);
 
 
 // Period 3
-$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 3 AND cl.ClassStatus = 'active' ORDER BY co.CourseSubj ASC, co.CourseID ASC");
+$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.TeacherID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 3 AND cl.ClassStatus = 'active' ORDER BY co.CourseSubj ASC, co.CourseID ASC");
 $stmt->bindParam('week', $week);
 $stmt->execute();
 
@@ -87,7 +87,7 @@ $p['absize_p3'] = sizeof($abs_p3);
 
 
 // Period 4
-$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 4 AND cl.ClassStatus = 'active' ORDER BY co.CourseSubj ASC, co.CourseID ASC");
+$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.TeacherID, cl.ClassID FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND cl.ClassPeriodBegin = 4 AND cl.ClassStatus = 'active' ORDER BY co.CourseSubj ASC, co.CourseID ASC");
 $stmt->bindParam('week', $week);
 $stmt->execute();
 
@@ -103,7 +103,7 @@ $p['absize_p4'] = sizeof($abs_p4);
 
 
 // Academic
-$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.ClassID, cl.ClassPeriodBegin, cl.ClassPeriodEnd FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND co.CourseSubj NOT IN ('PHED', 'ARTS', 'LANG', 'MSCT') AND cl.ClassStatus = 'active' ORDER BY cl.ClassPeriodBegin ASC, co.CourseSubj ASC, co.CourseID ASC");
+$stmt = Data::prepare("SELECT DISTINCT co.CourseID, co.CourseSubj, co.CourseTitle, st.StaffName, cl.RoomID, cl.TeacherID, cl.ClassID, cl.ClassPeriodBegin, cl.ClassPeriodEnd FROM classes cl, courses co, staff st WHERE cl.CourseID = co.CourseID AND st.StaffID = cl.TeacherID AND cl.ClassWeek = :week AND co.CourseSubj NOT IN ('PHED', 'ARTS', 'LANG', 'MSCT') AND cl.ClassStatus = 'active' ORDER BY cl.ClassPeriodBegin ASC, co.CourseSubj ASC, co.CourseID ASC");
 $stmt->bindParam('week', $week);
 $stmt->execute();
 
@@ -117,7 +117,7 @@ $abs_aca = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $p['absize_aca'] = sizeof($abs_aca);
 
 foreach($period1 as $class) {
-    $p['period_1'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
+    $p['period_1'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">(<a href="/staff/manage/view_teacher.php?tid='.$class['TeacherID'].'" style="color:#777;">'.$class['StaffName'].'</a>)</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
 }
 
 foreach($abs_p1 as $child) {
@@ -125,7 +125,7 @@ foreach($abs_p1 as $child) {
 }
 
 foreach($period2 as $class) {
-    $p['period_2'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
+    $p['period_2'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">(<a href="/staff/manage/view_teacher.php?tid='.$class['TeacherID'].'" style="color:#777;">'.$class['StaffName'].'</a>)</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
 }
 
 foreach($abs_p2 as $child) {
@@ -133,7 +133,7 @@ foreach($abs_p2 as $child) {
 }
 
 foreach($period3 as $class) {
-    $p['period_3'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
+    $p['period_3'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">(<a href="/staff/manage/view_teacher.php?tid='.$class['TeacherID'].'" style="color:#777;">'.$class['StaffName'].'</a>)</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
 }
 
 foreach($abs_p3 as $child) {
@@ -142,7 +142,7 @@ foreach($abs_p3 as $child) {
 
 
 foreach($period4 as $class) {
-    $p['period_4'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
+    $p['period_4'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">(<a href="/staff/manage/view_teacher.php?tid='.$class['TeacherID'].'" style="color:#777;">'.$class['StaffName'].'</a>)</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
 }
 
 foreach($abs_p4 as $child) {
@@ -150,11 +150,21 @@ foreach($abs_p4 as $child) {
 }
 
 foreach($academic as $class) {
-    $p['academic'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">('.$class['StaffName'].')</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
+    $p['academic'] .= '<tr><td><a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a> <span class="muted">(<a href="/staff/manage/view_teacher.php?tid='.$class['TeacherID'].'" style="color:#777;">'.$class['StaffName'].'</a>)</span> <span class="muted small" style="float:right;"><div class="course-colorbox course-cb-'.strtolower($class['CourseSubj']).'"></div> <a href="/staff/manage/course_view.php?cid='.$class['CourseID'].'" class="tipped" style="color:#777;" title="Click to view course details">'.strtoupper($class['CourseSubj']).str_pad($class['CourseID'], 3, '0', STR_PAD_LEFT).'</a></span></td><td>'.(($class['RoomID'] == 0) ? '<em class="muted">Unassigned</em>' : '<a href="/staff/ops/room_use.php?rid='.$class['RoomID'].'">'.$class['RoomID'].'</a>').'</td></tr>';
 }
 
 foreach($abs_aca as $child) {
     $p['absences_aca'] .= '<tr class="check_child" data-student-id="'.$child['StudentID'].'"><td><a href="/staff/manage/course_view.php?cid='.$child['CourseID'].'" class="tipped" title="Details for: '.$child['CourseTitle'].'">'.$child['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($child['CourseSubj']).'"></div> '.strtoupper($child['CourseSubj']).str_pad($child['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td><a href="/staff/manage/student_schedule.php?sid='.$child['StudentID'].'">'.$child['StudentName'].'</a> <span class="small muted" style="float:right;">#'.$child['StudentID'].'</span></td><td>'.date('g:ia', strtotime($child['RegLATS'])).'</td></tr>';
+}
+
+// Helper Checkins
+$stmt = Data::query("SELECT c.CheckinID, c.CheckinDay, CONVERT_TZ(c.CheckinTimeIn, '+00:00', '+08:00') as CheckIn, CONVERT_TZ(c.CheckinTimeout, '+00:00', '+08:00') as CheckOut, a.HelperName from helpers_checkins c, helpers_accounts a where c.HelperID = a.HelperID and c.CheckinDay = DATE(NOW()) order by HelperName asc, CheckinTimeout desc");
+$checkins = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$p['checkins'] = '';
+
+foreach($checkins as $c) {
+    $p['checkins'] .= '<tr><td>'.$c['HelperName'].'</td><td>'.date(DATETIME_FULL, strtotime($c['CheckIn'])).'</td><td>'.((date('Y', strtotime($c['CheckOut'])) == 1970) ? '<span class="muted">Still signed in (<a href="javascript:;" onclick="signOut('.$c['CheckinID'].');">Sign out</a>)</span>' : date(DATETIME_FULL, strtotime($c['CheckOut']))).'</td>';
 }
 
 // Include header section

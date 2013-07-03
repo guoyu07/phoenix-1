@@ -46,7 +46,7 @@ foreach($rooms as $roomid => $rm) {
 foreach($course['ClassData'] as $class) {
     $teacher = Courses::getTeacherById($class['TeacherID']);
     $p['offerings'] .= "<tr data-classnum=\"".$class['ClassID']."\"><td><div class=\"course-colorbox course-cb-".strtolower($course['CourseSubj'])."\"></div> ".$course['CourseID'].".".$class['ClassID']."</td>
-    <td>".$teacher['TeacherName']."</td>
+    <td><a href=\"/staff/manage/view_teacher.php?tid=".$teacher['TeacherID']."\">".$teacher['TeacherName']."</a></td>
     <td>".$class['ClassWeek']."</td>
     <td>".(($class['ClassPeriodBegin'] == $class['ClassPeriodEnd']) ? $class['ClassPeriodBegin'] : $class['ClassPeriodBegin']."-".$class['ClassPeriodEnd'])."</td>
     <td><a href=\"/staff/ops/room_use.php?rid=".$class['RoomID']."\">".$class['RoomID']."</a></td>
