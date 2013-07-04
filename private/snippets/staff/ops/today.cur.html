@@ -153,6 +153,13 @@
             <h2>Helper Checkin/Checkouts</h2>
             
             <p>
+                <strong>Manually sign helper in today:</strong>
+                <select id="checkin_select">
+                    {{helpers}}
+                </select>
+            </p>
+
+            <p>
                 <table class="checkinlist">
                     <thead>
                         <tr>
@@ -190,6 +197,10 @@ $(document).ready(function() {
         $('a[data-activate=' + item + ']').addClass('active');
         $('#' + item).fadeIn();
         window.location.hash = '/' + item;
+    });
+
+    $('#checkin_select').change(function () {
+        window.location='/staff/ops/today.php?checkin=' + $('#checkin_select').val() + '#/helpers';
     });
 
 });

@@ -114,7 +114,7 @@ foreach($classes as $e) {
     if ($e['ClassPeriodBegin'] == $e['ClassPeriodEnd']) $length = $e['ClassPeriodBegin'];
     else $length = $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd'];
 
-    $p['week_'.$e['ClassWeek']] .= '<tr><td>'.$time_start.'-'.$time_end.' <span class="small muted" style="float:right;">'.$program.' '.$length.'</span></td><td><a href="/staff/manage/class_edit.php?cid='.$e['ClassID'].'">'.$e['CourseTitle'].'</a> <span style="float:right;" class="muted small"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'.'.$e['ClassID'].' (<span style="color:#222;">'.$e['EnrollCount'].'</span>/'.$e['ClassEnrollMax'].')</span></td><td><a href="/staff/ops/room_use.php?rid='.$e['RoomID'].'">'.$e['RoomID'].'</a></td></tr>';
+    $p['week_'.$e['ClassWeek']] .= '<tr><td>'.$time_start.'-'.$time_end.' <span class="small muted" style="float:right;">'.$program.' '.$length.'</span></td><td><a href="/staff/manage/class_edit.php?cid='.$e['ClassID'].'">'.$e['CourseTitle'].'</a> in Room <a href="/staff/ops/room_use.php?rid='.$e['RoomID'].'">'.$e['RoomID'].'</a> <span style="float:right;" class="muted small"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).' (<span style="color:#222;">'.$e['EnrollCount'].'</span>/'.$e['ClassEnrollMax'].')</span></td></tr>';
 }
 
 // Include header section

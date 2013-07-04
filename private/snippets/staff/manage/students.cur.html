@@ -7,9 +7,7 @@
     <table class="students">
         <thead>
             <tr>
-                <th style="width:7%;" class="tipped" title="Family ID Number">FID</th>
-                <th style="width:8%;" class="tipped" title="Student ID Number">SID</th>
-                <th style="width:25%;" class="tipped" title="Click to edit family/child details">Student Name</th>
+                <th style="width:40%;" class="tipped" title="Click to edit family/child details">Student Name</th>
                 <th style="width:10%;">DOB</th>
                 <th style="width:15%;">Submit Date</th>
             </tr>
@@ -31,9 +29,7 @@ $(document).ready(function() {
     $.each(stuJson, function(i, stu) {
         
         $('#tb_student').append('<tr class="sched-pass">' +
-            '<td><a href="/staff/manage/family_view.php?fid=' + stu.FamilyID + '" onclick="window.open(this.href);return false;">' + stu.FamilyID + '</a></td>' +
-            '<td>S' + stu.StudentID + '</td>' +
-            '<td><a href="/staff/manage/student_schedule.php?sid=' + stu.StudentID + '">' + stu.StudentNameGiven + ' ' + stu.StudentNameLast + '</a>' + ((stu.StudentNamePreferred.trim().length > 0) ? '<span style="float:right;" class="muted">(' + stu.StudentNamePreferred.trim() + ')</span>' : '') + '</td>' +
+            '<td><a href="/staff/manage/student_schedule.php?sid=' + stu.StudentID + '">' + stu.StudentNameGiven + ' ' + stu.StudentNameLast + '</a>' + ((stu.StudentNamePreferred.trim().length > 0) ? ' <span class="muted">(' + stu.StudentNamePreferred.trim() + ')</span>' : '') + '<span class="small muted" style="float:right;">F#<a href="/staff/manage/family_view.php?fid=' + stu.FamilyID + '" onclick="window.open(this.href);return false;">' + stu.FamilyID + '</a>/S#' + stu.StudentID + '</span></td>' +
             '<td>' + stu.StudentDOB + '</td>' +
             '<td>' + ((stu.StudentSubmitted == '1') ? stu.StudentSubmitTS : '<em class="muted">Not submitted</em>') + '</td></tr>');
     });

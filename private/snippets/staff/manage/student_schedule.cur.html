@@ -15,7 +15,7 @@
 
             {{note}}
 
-            <p><button class="button-link" data-url="/staff/manage/family_view.php?fid={{family_id}}">Go to Family #{{family_id}}</button> <button class="button-link button-green" data-url="/staff/manage/invoices.php?fid={{family_id}}">View Family #{{family_id}} Invoice</button> <button type="button" class="button-blue" onclick="window.open('/account/print_schedule.php?sid={{sid}}&v={{v}}');">Print Schedule</button></p>
+            <p><button class="button-link" data-url="/staff/manage/family_view.php?fid={{family_id}}">Family #{{family_id}}</button> <button class="button-link button-green" data-url="/staff/manage/invoices.php?fid={{family_id}}">Family #{{family_id}} Invoice</button> <button type="button" class="button-blue" onclick="window.open('/account/print_schedule.php?sid={{sid}}&v={{v}}');">Print Schedule</button> <button type="button" class="button-red" onclick="forceAbsent();">Mark Absent</button></p>
             
             <div id="schedule" class="nav_content">
                 <h2>Current Schedule </h2>
@@ -226,5 +226,11 @@ $(document).ready(function () {
 function forceSubmit() {
     laoshi.rpc({"method": "force_submit", "sid": {{sid}} });
     laoshi.toast('Student schedule was submitted. Refresh to see changes.');
+}
+
+function forceAbsent() {
+    {{absent_ajax}}
+    laoshi.toast('Set student absent for all of today\'s classes. Auto-refresh in 3 seconds&hellip;');
+    setTimeout("location.reload()", 3000);
 }
 </script>

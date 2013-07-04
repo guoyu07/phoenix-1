@@ -1,3 +1,6 @@
+<div class="content-row spaced">
+    {{bdays}}
+</div>
 
 <div class="dashblock">
     <div class="dashblock-title">Administrative QuickLinks</div>
@@ -23,12 +26,44 @@
 </div>
 
 <div class="dashblock">
-    <div class="dashblock-title">My Account Information</div>
+    <div class="dashblock-title">Today is {{day}}, Week {{week}}</div>
     <div class="dashblock-content">
-        <p class="muted">Today is {{day}}, Week {{week}}</p>
+        <p>
+            Welcome, <strong>{{my_name}}</strong><br />
+            <a href="mailto:{{my_email}}">{{my_email}}</a><br />
+        </p>
+        <h4>I want to&hellip;</h4>
         <p class="no-bottom">
-            <strong>{{my_name}}</strong><br />
-            <a href="mailto:{{my_email}}">{{my_email}}</a><br /><br />
+            <select id="goto">
+                <option value="">(Do something!)</option>
+                <option value="/staff/ops/today.php#!/absences">See who's absent today</option>
+                <option value="/staff/ops/today.php#!/helpers">Today's helper check-ins</option>
+                <option value="/staff/manage/courses.php">View all courses</option>
+                <option value="/staff/manage/students.php">View all students</option>
+                <option value="/staff/magic.php">See how much money we're making</option>
+            </select>
+        </p>
+    </div>
+</div>
+
+<div class="dashblock">
+    <div class="dashblock-title">Downloads and Debugging</div>
+    <div class="dashblock-content">
+        <h4>Enrollment Downloads</h4>
+        <p class="no-bottom">
+            <button type="button" class="mini button-link button-red" data-url="/staff/evac.php">Week {{week}} Evacuation List</button><br />
+            <button type="button" class="mini button-link button" data-url="/staff/enrollment.php?week=1">Week 1</button>
+            <button type="button" class="mini button-link button" data-url="/staff/enrollment.php?week=2">Week 2</button><br />
+            <button type="button" class="mini button-link button" data-url="/staff/enrollment.php?week=3">Week 3</button>
+            <button type="button" class="mini button-link button" data-url="/staff/enrollment.php?week=4">Week 4</button>
+        </p>
+        <h4 style="margin-top:10px;">Debug Information</h4>
+        <p class="no-bottom">
+            <strong>Account Type:</strong> {{type}}</span><br />
+            <strong><acronym class="tipped" title="Password Encrypted Value">PEV</acronym>:</strong> <a href="javascript:;" onclick="$('#pev').toggle();">Show/Hide</a><br />
+            <pre id="pev" class="hide">{{pev}}</pre>
+        </p>
+        <p class="no-bottom">
             <strong>Account created:</strong> {{account_cts}}<br />
             <strong>Last login:</strong> <span id="last-visit">{{last_visit}}</span><br />
             <strong>Last password change:</strong> {{pass_age}}<br />
@@ -36,15 +71,12 @@
     </div>
 </div>
 
-<div class="dashblock">
-    <div class="dashblock-title">Account Debugging</div>
-    <div class="dashblock-content">
-        <p class="no-bottom">
-            <strong>Account Type:</strong> {{type}}</span><br />
-            <strong><acronym class="tipped" title="Password Encrypted Value">PEV</acronym>:</strong><br />
-            <pre>{{pev}}</pre>
-        </p>
-    </div>
-</div>
-
 <div class="clear"></div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#goto').change(function () {
+        window.location=$('#goto').val();
+    });
+});
+</script>

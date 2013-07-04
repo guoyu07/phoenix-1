@@ -52,6 +52,9 @@ class Common {
                 header('Content-Type: text/javascript');
             break;
             default:
+            case 'CSV':
+                header('Content-Type: text/csv');
+            break;
                 // Be safe, use plaintext
                 header('Content-Type: text/plain');
             break;

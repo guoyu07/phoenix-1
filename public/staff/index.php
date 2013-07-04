@@ -39,7 +39,7 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     // Everything's good, set session info and we're good to transfer to dashboard...or somewhere else if need be
     ACL::genSession($login);
     if ($_POST['redirect'] == '*')
-        header('Location: ./dashboard.php');
+        header('Location: ./dashboard.php/#!/session:'.session_id().'/crc:'.sprintf('%x', crc32(session_id())));
     else
         header('Location: '.$_POST['redirect']);
     exit();

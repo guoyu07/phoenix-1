@@ -46,6 +46,20 @@ $stmt->bindParam('lead', $_laoshi->staff['StaffID']);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$stmt = Data::query('SELECT CONCAT(StudentNamePreferred, " ", StudentNameLast) as StudentName FROM students WHERE MONTH(StudentDOB) = MONTH(NOW()) AND DAY(StudentDOB) = DAY(NOW()) ORDER BY StudentNamePreferred ASC');
+$bdays = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$d['bdays'] = '';
+
+if (sizeof($bdays) > 0) {
+    $d['bdays'] = '<div class="alert alert-blue">Today\'s birthdays: ';
+    foreach($bdays as $kid) {
+        $d['bdays'] .= $kid['StudentName'].', ';
+    }
+
+    $d['bdays'] = substr($d['bdays'], 0, -2).'</div>';
+}
+
+
 $d['magic'] = var_export($classes, true);
 
 $d['class_w1'] = '';
@@ -61,7 +75,6 @@ $d['reg_w4'] = '';
 foreach($classes as $class) {
     $d['class_w'.$class['ClassWeek']] .= '<strong><span class="badge">Period '.$class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd'].'</span> <a href="/staff/teachers/view_roster.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a></strong><br />';
     $d['reg_w'.$class['ClassWeek']] .= '<strong><span class="badge">Period '.$class['ClassPeriodBegin'].'-'.$class['ClassPeriodEnd'].'</span> <a href="/staff/teachers/registration.php?cid='.$class['ClassID'].'">'.$class['CourseTitle'].'</a></strong><br />';
-
 }
 
 $d['day'] = date('l');

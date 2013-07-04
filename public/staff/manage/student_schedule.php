@@ -33,7 +33,7 @@ $_stu = new FamStu('student', $_GET['sid']);
 
 // Has student submitted their schedule?
 if ($_stu->data['StudentSubmitted'] == '1') {
-    $p['submit_note'] = '<div class="alert alert-green">The parent has already submitted this schedule. The submission receipt timestamp is:<br /><strong>'.date(DATETIME_FULL, strtotime($_stu->data['StudentSubmitTS'])).'</strong></div>';
+    $p['submit_note'] = '<div class="alert alert-green">The parent has already submitted this schedule. The submission receipt timestamp is:<br /><strong>'.date(DATETIME_FULL, strtotime($_stu->data['StudentSubmitTS'])+28800).'</strong></div>';
 } else {
     $p['submit_note'] = '<div class="alert alert-red">Schedule hasn\'t been submitted.</div><p><button class="button" onclick="forceSubmit();" class="button-blue">Force Submit</button></p>';
 }
@@ -253,7 +253,7 @@ foreach($history as $i => $week) {
             // Check latest update...
             if (strtotime($e['EnrollLETS']) > $latest_update) $latest_update = strtotime($e['EnrollLETS']);
 
-            $p['history_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'"> '.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span> <a href="/staff/manage/course_view.php?cid='.$e['CourseID'].'" class="tipped" title="Go to course page">'.$e['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td class="metalink tipped" title="Last update: '.date(DATETIME_SHORT, strtotime($e['EnrollLETS'])).'">'.$status.'</td></tr>';
+            $p['history_'.$i] .= '<tr><td><span class="badge badge-blue tipped" title="'.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).': '.$time_start.'-'.$time_end.'"> '.$program.' '.(($length == 'single') ? $e['ClassPeriodBegin'] : $e['ClassPeriodBegin'].'-'.$e['ClassPeriodEnd']).'</span> <a href="/staff/manage/course_view.php?cid='.$e['CourseID'].'" class="tipped" title="Go to course page"'.(($e['EnrollStatus'] !== 'enrolled') ? ' style="color:#999;"' : '').'>'.$e['CourseTitle'].'</a> <span style="float:right;" class="small muted"><div class="course-colorbox course-cb-'.strtolower($e['CourseSubj']).'"></div> '.$e['CourseSubj'].str_pad($e['CourseID'], 3, '0', STR_PAD_LEFT).'</span></td><td class="metalink tipped" title="Last update: '.date(DATETIME_SHORT, strtotime($e['EnrollLETS'])).'"'.(($e['EnrollStatus'] !== 'enrolled') ? ' style="color:#999;"' : '').'>'.$status.'</td></tr>';
         }
     }
 }
@@ -278,7 +278,7 @@ foreach($registration as $week => $week_data) {
     foreach($week_data as $reg) {
         $prefix = (($reg['RegStatus'] == 'present') ? '<img src="/assets/icons/tick.png" />' : '<img src="/assets/icons/cross.png" />');
 
-        $reg_his[$week] .= '<tr><td style="padding-left:0.5em;padding-right:0.35em;" class="tipped" title="'.date('l, '.DATE_FULL, strtotime($reg['RegDate'])).'">'.date('D', strtotime($reg['RegDate'])).' <span class="badge" style="float:right;">P'.(($reg['ClassPeriodBegin'] == $reg['ClassPeriodEnd']) ? $reg['ClassPeriodBegin'] : $reg['ClassPeriodBegin'].'-'.$reg['ClassPeriodEnd']).'</span></td><td><a href="/manage/class_edit.php?cid='.$reg['ClassID'].'" class="tipped" title="View class roster">'.$reg['CourseTitle'].'</a> <span class="small muted" style="float:right;">'.strtoupper($reg['CourseSubj']).str_pad($reg['CourseID'], 3, '0', STR_PAD_LEFT).' <div class="course-colorbox course-cb-'.strtolower($reg['CourseSubj']).'"></div></span></td><td>'.$prefix.' '.ucfirst($reg['RegStatus']).'</td></tr>';
+        $reg_his[$week] .= '<tr><td style="padding-left:0.5em;padding-right:0.35em;" class="tipped" title="'.date('l, '.DATE_FULL, strtotime($reg['RegDate'])).'">'.date('D', strtotime($reg['RegDate'])).' <span class="badge" style="float:right;">P'.(($reg['ClassPeriodBegin'] == $reg['ClassPeriodEnd']) ? $reg['ClassPeriodBegin'] : $reg['ClassPeriodBegin'].'-'.$reg['ClassPeriodEnd']).'</span></td><td><a href="/staff/manage/class_edit.php?cid='.$reg['ClassID'].'" class="tipped" title="View class roster">'.$reg['CourseTitle'].'</a> <span class="small muted" style="float:right;">'.strtoupper($reg['CourseSubj']).str_pad($reg['CourseID'], 3, '0', STR_PAD_LEFT).' <div class="course-colorbox course-cb-'.strtolower($reg['CourseSubj']).'"></div></span></td><td>'.$prefix.' '.ucfirst($reg['RegStatus']).'</td></tr>';
     }
 }
 
@@ -289,6 +289,19 @@ $p['reghis_4'] = $reg_his[4];
 
 // Get suggested program
 $p['suggest_program'] = (($_stu->data['StudentAge'] > 15) ? 'AP' : 'SP');
+
+// Get absent today
+$stmt = Data::prepare('SELECT c.ClassID FROM enrollment e, classes c WHERE e.ClassID = c.ClassID AND e.EnrollStatus = "enrolled" AND c.ClassWeek = :week AND e.StudentID = :sid AND c.ClassStatus = "active"');
+$stmt->bindParam('sid', $_stu->data['StudentID']);
+$stmt->bindParam('week', Common::getCurrentWeek());
+$stmt->execute();
+$classes_today = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$p['absent_ajax'] = '';
+
+foreach($classes_today as $class_today) {
+    $p['absent_ajax'] .= 'laoshi.rpc({"method": "registration", "sid": '.$_stu->data['StudentID'].', "cid": '.$class_today['ClassID'].', "status": "absent"});'."\n";
+}
 
 // Triage and get default staff page
 $h['title'] = 'Profile | '.$_stu->data['StudentNamePreferred'];
@@ -307,7 +320,7 @@ $todayDo = new DateTime('00:00:00');
 $dobDo = new DateTime($p['dob']);
 $p['age'] = $todayDo->diff($dobDo)->y;
 $p['sid'] = $_stu->data['StudentID'];
-$p['last_update'] = date(DATETIME_FULL, $latest_update);
+$p['last_update'] = date(DATETIME_FULL, $latest_update+28800);
 $p['first_name'] = $_stu->data['StudentNameGiven'];
 $p['preferred_name'] = $_stu->data['StudentNamePreferred'];
 $p['last_name'] = $_stu->data['StudentNameLast'];

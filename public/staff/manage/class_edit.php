@@ -70,7 +70,7 @@ if (($class['ClassPeriodBegin'] == 0) || ($class['ClassPeriodEnd'] == 0)) {
 }
 
 // Get enrollment
-$stmt = Data::prepare('SELECT s.StudentID, s.StudentNamePreferred, s.StudentNameLast, s.StudentDOB, CONVERT_TZ(e.EnrollLETS, \'+00:00\', \'+08:00\') AS `EnrollLETS` FROM `enrollment` e, `students` s WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
+$stmt = Data::prepare('SELECT s.StudentID, s.StudentNamePreferred, s.StudentNameLast, s.StudentDOB, CONVERT_TZ(e.EnrollLETS, \'+00:00\', \'+08:00\') AS `EnrollLETS` FROM `enrollment` e, `students` s WHERE e.EnrollStatus = "enrolled" AND e.ClassID = :cid AND e.StudentID = s.StudentID AND s.StudentSubmitted = 1 ORDER BY s.StudentNamePreferred ASC, s.StudentNameLast ASC');
 $stmt->bindParam('cid', $class['ClassID']);
 $stmt->execute();
 $enrollment = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -78,7 +78,7 @@ $enrollment = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $p['enroll_table'] = '';
 
 foreach ($enrollment as $stu) {
-    $p['enroll_table'] .= '<tr><td><a href="/staff/manage/student_schedule.php?sid='.$stu['StudentID'].'">'.$stu['StudentNamePreferred'].' '.$stu['StudentNameLast'].'</a></td><td>'.date(DATETIME_SHORT, strtotime($stu['EnrollLETS'])).'</td><td>'.date(DATE_SHORT, strtotime($stu['StudentDOB'])).'</td></tr>';
+    $p['enroll_table'] .= '<tr><td><a href="/staff/manage/student_schedule.php?sid='.$stu['StudentID'].'">'.$stu['StudentNamePreferred'].' '.$stu['StudentNameLast'].'</a><span class="small muted" style="float:right;">#'.$stu['StudentID'].'</span></td><td>'.date(DATE_SHORT, strtotime($stu['EnrollLETS'])).'</td><td>'.date(DATE_SHORT, strtotime($stu['StudentDOB'])).'</td></tr>';
 }
 
 // Printable?
