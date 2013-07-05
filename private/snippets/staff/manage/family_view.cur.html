@@ -12,38 +12,52 @@
     <h1>FID #{{family_id}}: {{family_name}}</h1>
 </div>
 
-<div id="profile" class="content-row spaced body-emulate nav_content">
-    <h2>Family Profile</h2>
-    <h3>Account Information</h3>
-    <p>Click to edit a field - all data is saved automatically when you exit the input boxes (just click outside of them). A confirmation message will notify you of update results.</p>
-    <table class="compact">
-        <tr>
-            <td style="width:15%;"><strong>Account Name</strong></td>
-            <td style="width:35%;">{{family_name}} &lt;<a href="mailto:{{lead_instructor_email}}">{{family_email}}</a>&gt;</td>
-            <td style="width:15%;"><strong>Account Created</strong></td>
-            <td style="width:35%;">{{family_cts}}</td>
-        </tr>
-        <tr>
-            <td><strong>Address</strong></td>
-            <td colspan="3">
-                <pre class="editable pseudolink faux-div" id="family-address">{{family_address}}</pre>
-                <input type="text" class="editfield hide" id="family-address-edit" data-db-item="FamilyAddress" />
-            </td>
-        </tr>
-        <tr>
-            <td style="width:15%;"><strong>Home Phone</strong></td>
-            <td style="width:35%;">{{family_hphone}}</td>
-            <td style="width:15%;"><strong>Mobile Phone</strong></td>
-            <td style="width:35%;">{{family_mphone}}</td>
-        </tr>
-        <tr>
-            <td style="width:15%;"><strong>Last Login</strong></td>
-            <td style="width:35%;">{{family_llts}}</td>
-            <td style="width:15%;"><strong>Last Change</strong></td>
-            <td style="width:35%;">{{family_lats}}</td>
-        </tr>
-    </table>
+<div id="profile" class="content-row spaced nav_content">
+    <div class="col-row" id="basic-info">
+        
+        <div class="col c6">
+            <h2>Family Profile</h2>
+            <h3>Account Information</h3>
+            <p>Click to edit a field - all data is saved automatically when you exit the input boxes (just click outside of them). A confirmation message will notify you of update results.</p>
+            <table class="compact">
+                <tr>
+                    <td style="width:15%;"><strong>Name</strong></td>
+                    <td colspan="3">{{family_name}} <span style="float:right;"><a href="mailto:{{lead_instructor_email}}">{{family_email}}</a></span></td>
+                </tr>
+                <tr>
+                    <td style="width:15%;"><strong>Account Created</strong></td>
+                    <td colspan="3">{{family_cts}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Address</strong></td>
+                    <td colspan="3">
+                        <pre class="editable pseudolink faux-div" id="family-address">{{family_address}}</pre>
+                        <input type="text" class="editfield hide" id="family-address-edit" data-db-item="FamilyAddress" />
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:15%;"><strong>Home Phone</strong></td>
+                    <td style="width:35%;">{{family_hphone}}</td>
+                    <td style="width:15%;"><strong>Mobile Phone</strong></td>
+                    <td style="width:35%;">{{family_mphone}}</td>
+                </tr>
+                <tr>
+                    <td style="width:15%;"><strong>Last Login</strong></td>
+                    <td style="width:35%;">{{family_llts}}</td>
+                    <td style="width:15%;"><strong>Last Change</strong></td>
+                    <td style="width:35%;">{{family_lats}}</td>
+                </tr>
+            </table>
+        </div>
 
+        <div class="col c4" style="background-color:#fafafa;">
+            <h2>Internal Comments</h2>
+
+            <textarea id="family_ic_text" style="width:90%;border-radius:0.3em 0.3em 0.3em 0.3em;height:200px;font-size:0.9em;padding:0.3em;">{{family_comments}}</textarea>
+            <p><span class="muted">Last saved:</span> <span id="last_saved">not yet saved</span> <span style="float:right;"><button class="save button-blue mini">Save</button></span></p>
+        </div>
+
+    </div>
 
 </div>
 
@@ -160,6 +174,19 @@ $(document).ready(function () {
         $(this).addClass('active');
         $('#' + $(this).data('activate')).fadeIn();
         window.location.hash = '/' + $(this).data('activate');
+    });
+
+    $('.save').click(function () {
+        $.ajax({
+            url:    '/staff/upload_famic.php',
+            type:   'POST',
+            data:   {fid: {{family_id}}, ic: $('#family_ic_text').val()},
+            dataType:   'json',
+            beforeSend: function() { $('.save').removeClass('button-blue').html('Saving&hellip;'); },
+        }).done(function (retobj) {
+            $('.save').addClass('button-blue').html('Save');
+            $('#last_saved').html(retobj.timestr).effect('highlight');
+        });
     });
 });
 

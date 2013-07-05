@@ -11,7 +11,7 @@
         </div>
         <div class="col c7" style="vertical-align:top;">
             <h2>Roster: Class #{{class_id}} ({{course_title}})</h2>
-            <div class="alert alert-red"><span class="featured"><strong>Mark <span style="text-decoration:underline;">EVERY CHILD</span> either present, absent or tardy.</strong></span><br />You can make as many changes as you'd like at any time without having to refresh the page.</div>
+            <div class="alert alert-red pulsate"><span class="featured"><strong>Mark <span style="text-decoration:underline;">EVERY CHILD</span> either present, absent or tardy.</strong></span><br />You can make as many changes as you'd like at any time without having to refresh the page.</div>
             
             <h3>Take Registration</h3>
             <p>You are now taking attendance for today, <strong>{{today}}</strong>. </p>
@@ -43,4 +43,11 @@ function mark(state, sname, cid, sid) {
     $('.marker-'+sid+'.button-'+state).addClass('button-green');
 }
 
+$(document).ready(function () {
+    var p = $(".pulsate");
+    for(var i=0; i<10; i++) {
+        p.animate({opacity: 0}, 100, 'linear')
+         .animate({opacity: 1}, 100, 'linear');
+    }
+});
 </script>

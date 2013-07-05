@@ -40,7 +40,7 @@ $h['title'] = $teacher['StaffName'].' | Teacher Profile';
 $n['ops'] = 'active';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
-$stmt = Data::prepare("SELECT co.CourseSubj, co.CourseID, cl.ClassID, co.CourseTitle, cl.ClassWeek, cl.ClassPeriodBegin, cl.ClassPeriodEnd, cl.RoomID, (SELECT count(EnrollID) from enrollment where EnrollStatus = 'enrolled' AND ClassID = cl.ClassID) as EnrollCount, cl.ClassEnrollMax FROM courses co, classes cl WHERE cl.TeacherID = :tid AND co.CourseID = cl.CourseID AND cl.ClassStatus IN ('active', 'full')");
+$stmt = Data::prepare("SELECT co.CourseSubj, co.CourseID, cl.ClassID, co.CourseTitle, cl.ClassWeek, cl.ClassPeriodBegin, cl.ClassPeriodEnd, cl.RoomID, (SELECT count(EnrollID) from enrollment where EnrollStatus = 'enrolled' AND ClassID = cl.ClassID) as EnrollCount, cl.ClassEnrollMax FROM courses co, classes cl WHERE cl.TeacherID = :tid AND co.CourseID = cl.CourseID AND cl.ClassStatus IN ('active', 'full') ORDER BY cl.ClassWeek ASC, cl.ClassPeriodBegin");
 $stmt->bindParam('tid', $_GET['tid'], PDO::PARAM_INT);
 $stmt->execute();
 $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);

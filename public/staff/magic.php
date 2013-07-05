@@ -33,7 +33,7 @@ $n['my_name'] = $_laoshi->staff['StaffName'];
 
 $stmt = Data::query("select sum(PayAmount) as total from payments where PayVerified = 1 and PayAmount < 0");
 $total = $stmt->fetch(PDO::FETCH_ASSOC);
-$total_real = $total['total']*(-1);
+$total_real = $total['total']*(-1) + 20000;
 
 $p['total'] = number_format($total_real);
 

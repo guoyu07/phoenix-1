@@ -63,7 +63,7 @@ define('WEEK_3',    '2013-07-08 00:00:00');
 define('WEEK_4',    '2013-07-15 00:00:00');
 
 // Session timeout set
-ini_set('session.gc_maxlifetime', 28800);
+ini_set('session.gc_maxlifetime', 14400);
 
 
 // Everybody needs the common class

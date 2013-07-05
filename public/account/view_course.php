@@ -159,54 +159,56 @@ foreach($course['ClassData'] as $class) {
 
     
 
-        if ($enroll_count >= $class['ClassEnrollMax']) {
-            $enrollstring = '<img src="/assets/icons/cross.png" /> Class is full (waitlist unavailable)';
-        } elseif ($class['ClassWeek'] < 2) {
-            $enrollstring = '<img src="/assets/icons/cross.png" /> No longer available';
-        } else {
-            if ($program == 'Period') {
-                // Calculate age
-                $bdayDo = new DateTime($_stu->data['StudentDOB']);
-                $ageAtWeek = round(($weekDo->diff($bdayDo)->y + ($weekDo->diff($bdayDo)->m)/12), 1);
+    if ($class['ClassWeek'] < 3) {
+        $enrollstring = '<img src="/assets/icons/cross.png" /> <span class="muted">No longer available</span>';
+    } elseif ($class['ClassWeek'] == 3) {
+        $enrollstring = '<img src="/assets/icons/exclamation.png" /> Contact us';
+    } elseif ($enroll_count >= $class['ClassEnrollMax']) {
+        $enrollstring = '<img src="/assets/icons/cross.png" /> Class is full';
+    } else {
+        if ($program == 'Period') {
+            // Calculate age
+            $bdayDo = new DateTime($_stu->data['StudentDOB']);
+            $ageAtWeek = round(($weekDo->diff($bdayDo)->y + ($weekDo->diff($bdayDo)->m)/12), 1);
 
-                if ((floor($ageAtWeek) > $class['ClassAgeMax']) || ($ageAtWeek < $class['ClassAgeMin'])) {
-                    if ($course["CourseEnforceAge"] == 1) {
-                        $enrollstring = '<img src="/assets/icons/cross.png" /> Out of age range<br /><em class="muted">No PTE available</em>';
-                    } else {
-                        if ($_stu->isStudentReserved($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentReserved($class['ClassWeek'], $class['ClassPeriodEnd'])) {
-                            $enrollstring = '<img src="/assets/icons/cross.png" /> <acronym class="tipped" title="You cannot be on multiple waitlist or PTEs at the same period"> Already on waitlist/PTE</acronym>';
-                        } else {
-                            if ($_stu->data['StudentSubmitted'] !== '1') {
-                                $enrollstring = '<img src="/assets/icons/exclamation-shield.png" /> <a href="/account/enroll.php?act=enroll_pte&cid='.$class['ClassID'].'"><strong>Request PTE</strong></a><br /><em class="muted">Verified manually</em>';
-                            } else {
-                                $enrollstring = '<span class="muted">Contact us</span>';
-                            }
-                        }
-                    }
+            if ((floor($ageAtWeek) > $class['ClassAgeMax']) || ($ageAtWeek < $class['ClassAgeMin'])) {
+                if ($course["CourseEnforceAge"] == 1) {
+                    $enrollstring = '<img src="/assets/icons/cross.png" /> Out of age range<br /><em class="muted">No PTE available</em>';
                 } else {
-
-                    // Is student already PTE'd?
-                    if ($_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodEnd'])) {
-                        $enrollstring = '<img src="/assets/icons/cross.png" /> Already registered at this time';
+                    if ($_stu->isStudentReserved($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentReserved($class['ClassWeek'], $class['ClassPeriodEnd'])) {
+                        $enrollstring = '<img src="/assets/icons/cross.png" /> <acronym class="tipped" title="You cannot be on multiple waitlist or PTEs at the same period"> Already on waitlist/PTE</acronym>';
                     } else {
                         if ($_stu->data['StudentSubmitted'] !== '1') {
-                            $enrollstring = '<a href="/account/enroll.php?act=enroll&cid='.$class['ClassID'].'"><img src="/assets/icons/plus.png" /> <strong>Enroll Now</strong></a>';
+                            $enrollstring = '<img src="/assets/icons/exclamation-shield.png" /> <a href="/account/enroll.php?act=enroll_pte&cid='.$class['ClassID'].'"><strong>Request PTE</strong></a><br /><em class="muted">Verified manually</em>';
                         } else {
                             $enrollstring = '<span class="muted">Contact us</span>';
                         }
-                    }   
+                    }
                 }
-
             } else {
-                // Ignore for summer program
-                // Is student already full at that time?
+
+                // Is student already PTE'd?
                 if ($_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodEnd'])) {
                     $enrollstring = '<img src="/assets/icons/cross.png" /> Already registered at this time';
                 } else {
-                    $enrollstring = '<a href="/account/enroll.php?act=enroll&cid='.$class['ClassID'].'"><img src="/assets/icons/plus.png" /> <strong>Enroll Now</strong></a>';
-                }
+                    if ($_stu->data['StudentSubmitted'] !== '1') {
+                        $enrollstring = '<a href="/account/enroll.php?act=enroll&cid='.$class['ClassID'].'"><img src="/assets/icons/plus.png" /> <strong>Enroll Now</strong></a>';
+                    } else {
+                        $enrollstring = '<span class="muted">Contact us</span>';
+                    }
+                }   
+            }
+
+        } else {
+            // Ignore for summer program
+            // Is student already full at that time?
+            if ($_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodBegin']) || $_stu->isStudentEnrolled($class['ClassWeek'], $class['ClassPeriodEnd'])) {
+                $enrollstring = '<img src="/assets/icons/cross.png" /> Already registered at this time';
+            } else {
+                $enrollstring = '<a href="/account/enroll.php?act=enroll&cid='.$class['ClassID'].'"><img src="/assets/icons/plus.png" /> <strong>Enroll Now</strong></a>';
             }
         }
+    }
     
 
     if (($class['ClassStatus'] == 'active') || ($class['ClassStatus'] == 'full')) {
