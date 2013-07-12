@@ -235,4 +235,9 @@ function toggleFlag(pid, tbool) {
     laoshi.toast('Changed flag as requested. Refresh to see changes.');
 }
 
+function resendReceipt(pid) {
+    laoshi.rpc({"method": "resend_receipt", "pid": pid});
+    laoshi.toast('Emailed parent a new receipt.');
+}
+
 </script>

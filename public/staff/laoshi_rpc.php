@@ -138,6 +138,51 @@ VALUES (:fid, :method, :val, NOW(), :desc, 1)');
                 $result['msg'] = '[SQL] Error: '.$e->getMessage();
             }
         break;
+        case 'resend_receipt':
+            $_laoshi->perms(8,9,10,11,12);
+            try {
+                $stmt = Data::prepare('SELECT p.PayMethod, p.PayAmount*-1 as PayAmount, CONVERT_TZ(p.PayCTS, "+0:00", "+08:00") AS PayCTS, p.PayDesc, o.ObjEmail, f.FamilyName, f.FamilyID FROM `payments` p, `families` f, `sso_objects` o WHERE p.PayID = :pid AND f.FamilyID = p.FamilyID AND f.ObjID = o.ObjID LIMIT 1');
+                $stmt->bindParam('pid', $_REQUEST['pid'], PDO::PARAM_INT);
+                $stmt->execute();
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$text = "Dear parent,
+
+This is a courtesy reissue of receipt of payment to the CIS Summer Program. Please review the details of this receipt below.
+
+===== RECEIPT OF PAYMENT =====
+Account Credited
+Family ID ".$data['FamilyID']."
+
+Date of Receipt of Payment
+".date(DATETIME_FULL, strtotime($data['PayCTS']))."
+
+Payment Method
+".$data['PayMethod']."
+
+Payment Details
+".$data['PayDesc']."
+
+Amount Credited
+HK$".number_format($data['PayAmount'])."
+===============================
+
+Please note that the CIS Business Office will begin cashing cheques after the Summer Program has ended. If you receive this email, rest assured that we have your cheque in our possession. Should you require any further assistance or have any queries, please do not hesitate to contact us at 2512-5961 or via email.
+
+Best regards,
+Summer Program Office";
+
+                Mailer::send(array('name' => $data['FamilyName'], 'email' => $data['ObjEmail']), '[CIS Summer] Payment Receipt - Resend', $text);
+
+                $result['status'] = 'success';
+                $result['code'] = 2000;
+                $result['msg'] = '[OK] Resent receipt.';
+            } catch (PDOException $e) {
+                $result['stauts'] = 'failure';
+                $result['code'] = 2500;
+                $result['msg'] = '[SQL] Error: '.$e->getMessage();
+            }
+        break;
         case 'archive_application':
     		$_laoshi->perms(6, 7, 8);
     		$stmt = Data::prepare('UPDATE `applications` SET `AppStatus` = "archived" WHERE `AppID` = :appid LIMIT 1');

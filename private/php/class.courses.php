@@ -207,7 +207,7 @@ class Courses {
      */
     static public function getClassesOfCourseById($id) {
         try {
-            $stmt = Data::prepare('SELECT `classes`.*, (SELECT count(`enrollment`.`EnrollID`) FROM `enrollment` WHERE `enrollment`.`ClassID` = `classes`.`ClassID` and `enrollment`.`EnrollStatus` = "enrolled") as `EnrollCount` FROM `classes` where `classes`.`CourseID` = :cid ORDER BY `classes`.`ClassWeek` ASC, `classes`.`ClassPeriodBegin` ASC');
+            $stmt = Data::prepare('SELECT `classes`.*, (SELECT count(`enrollment`.`EnrollID`) FROM `enrollment`, `students` WHERE `enrollment`.`ClassID` = `classes`.`ClassID` and `enrollment`.`EnrollStatus` = "enrolled" and `enrollment`.`StudentID` = `students`.`StudentID` and `students`.`StudentSubmitted` = 1) as `EnrollCount` FROM `classes` where `classes`.`CourseID` = :cid ORDER BY `classes`.`ClassWeek` ASC, `classes`.`ClassPeriodBegin` ASC');
             $stmt->bindParam('cid', $id, PDO::PARAM_INT);
             $stmt->execute();
             $classes = $stmt->fetchAll(PDO::FETCH_ASSOC);

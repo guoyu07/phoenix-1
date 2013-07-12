@@ -43,7 +43,7 @@ if (!REGISTRATION_OPEN && !array_key_exists('override', $_GET)) {
 }
 
 // Default message
-$error = '<div class="alert"><strong>Hey kids!</strong> If you don\'t know how to fill out this form, let your parents help! They\'ll make sure you fill in everything correctly. Thanks!</div>';
+$error = '<div class="alert alert-blue">We are nearing the end of the program. We suggest that you visit our office to sign up on the spot as spaces are now extremely limited.</div>';
 
 // Check for POST data
 if ($_POST) {

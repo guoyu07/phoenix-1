@@ -36,11 +36,11 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">84</span></a></li>
+                <span class="label label-info">108</span></a></li>
 <li><a href="markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="deprecated.html"><i class="icon-stop"></i> Deprecated elements 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">2</span></a></li>
 </ul>
 </li>
 </ul></div>
@@ -65,6 +65,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li><a href="#class.courses.php"><i class="icon-file"></i>class.courses.php</a></li>
 <li><a href="#class.enrollment.php"><i class="icon-file"></i>class.enrollment.php</a></li>
 <li><a href="#class.laoshi.php"><i class="icon-file"></i>class.laoshi.php</a></li>
+<li><a href="#class.mailchimp.php"><i class="icon-file"></i>class.mailchimp.php</a></li>
 <li><a href="#class.mailer.php"><i class="icon-file"></i>class.mailer.php</a></li>
 <li><a href="#class.mandrill.php"><i class="icon-file"></i>class.mandrill.php</a></li>
 <li><a href="#class.qr.php"><i class="icon-file"></i>class.qr.php</a></li>
@@ -81,7 +82,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </ul>
 <div class="package-contents">
 <a name="class.acl.php" id="class.acl.php"></a><h3>
-<i class="icon-file"></i>class.acl.php<small style="float: right;padding-right: 10px;">18</small>
+<i class="icon-file"></i>class.acl.php<small style="float: right;padding-right: 10px;">16</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -97,87 +98,77 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>29</td>
-<td>Argument $id is missing from the Docblock of genSession()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>46</td>
-<td>Argument $email is missing from the Docblock of checkSsoEmail()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>46</td>
-<td>Argument $portalType is missing from the Docblock of checkSsoEmail()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>67</td>
+<td>80</td>
 <td>Argument $email is missing from the Docblock of makeSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>67</td>
+<td>80</td>
 <td>Argument $password is missing from the Docblock of makeSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>67</td>
+<td>80</td>
 <td>Argument $type is missing from the Docblock of makeSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>67</td>
+<td>80</td>
 <td>Argument $portal is missing from the Docblock of makeSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>98</td>
+<td>111</td>
+<td>Argument $ssoid is missing from the Docblock of updatePassword()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>111</td>
+<td>Argument $password is missing from the Docblock of updatePassword()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>137</td>
 <td>Argument $ssoid is missing from the Docblock of checkPassword()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>98</td>
+<td>137</td>
 <td>Argument $plainpass is missing from the Docblock of checkPassword()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>123</td>
+<td>162</td>
 <td>Argument $objId is missing from the Docblock of getSsoObject()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>133</td>
+<td>172</td>
 <td>Argument $typeId is missing from the Docblock of getSsoType()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>153</td>
+<td>192</td>
 <td>Argument $email is missing from the Docblock of login()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>153</td>
+<td>192</td>
 <td>Argument $plainpass is missing from the Docblock of login()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>153</td>
+<td>192</td>
 <td>Argument $portal is missing from the Docblock of login()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>170</td>
+<td>209</td>
 <td>Argument $portal is missing from the Docblock of checkLogin()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>188</td>
-<td>Argument $typeId is missing from the Docblock of getPermsByType()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>205</td>
+<td>280</td>
 <td>No DocBlock was found for method getSsoTypeByName()</td>
 </tr>
 </tbody>
@@ -270,52 +261,52 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>69</td>
 <td>Argument $action is missing from the Docblock of logAction()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>69</td>
 <td>Argument $result is missing from the Docblock of logAction()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>69</td>
 <td>Argument $user is missing from the Docblock of logAction()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>69</td>
 <td>Argument $remarks is missing from the Docblock of logAction()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>69</td>
 <td>Argument $ip is missing from the Docblock of logAction()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>66</td>
+<td>69</td>
 <td>Argument $ua is missing from the Docblock of logAction()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>129</td>
+<td>132</td>
 <td>Argument $start is missing from the Docblock of fetchNews()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>129</td>
+<td>132</td>
 <td>Argument $for is missing from the Docblock of fetchNews()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>147</td>
+<td>150</td>
 <td>Argument $ptime is missing from the Docblock of relativeTime()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>174</td>
+<td>177</td>
 <td>Argument $str is missing from the Docblock of cleanse()</td>
 </tr>
 </tbody>
@@ -323,7 +314,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </div>
 <div class="package-contents">
 <a name="class.courses.php" id="class.courses.php"></a><h3>
-<i class="icon-file"></i>class.courses.php<small style="float: right;padding-right: 10px;">4</small>
+<i class="icon-file"></i>class.courses.php<small style="float: right;padding-right: 10px;">12</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -344,13 +335,53 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>156</td>
+<td>205</td>
 <td>Argument $id is missing from the Docblock of getClassesOfCourseById()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>170</td>
+<td>223</td>
+<td>Argument $week is missing from the Docblock of getAgeAtWeek()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>223</td>
+<td>Argument $dob is missing from the Docblock of getAgeAtWeek()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>247</td>
 <td>Argument $id is missing from the Docblock of getTeacherById()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>263</td>
+<td>Argument $email is missing from the Docblock of getTeacher()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>263</td>
+<td>Argument $name is missing from the Docblock of getTeacher()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>271</td>
+<td>Argument $cid is missing from the Docblock of getActiveEnrollmentCount()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>286</td>
+<td>Argument $status is missing from the Docblock of getHtmlStatus()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>309</td>
+<td>Argument $dLevel is missing from the Docblock of getDifficulty()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>329</td>
+<td>Argument $week is missing from the Docblock of getDueDate()</td>
 </tr>
 </tbody>
 </table></div>
@@ -411,18 +442,102 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>43</td>
+<td>45</td>
 <td>No DocBlock was found for method fetchNavPage()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>60</td>
+<td>62</td>
 <td>No DocBlock was found for method perms()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>73</td>
+<td>75</td>
 <td>No DocBlock was found for method getStaff()</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="package-contents">
+<a name="class.mailchimp.php" id="class.mailchimp.php"></a><h3>
+<i class="icon-file"></i>class.mailchimp.php<small style="float: right;padding-right: 10px;">14</small>
+</h3>
+<div><table class="table markers table-bordered">
+<thead><tr>
+<th>Type</th>
+<th>Line</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="error">
+<td>error</td>
+<td>0</td>
+<td>No page-level DocBlock was found in file class.mailchimp.php</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>3</td>
+<td>No DocBlock was found for \MCAPI</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>4</td>
+<td>No DocBlock was found for property $version</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>5</td>
+<td>No DocBlock was found for property $errorMessage</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>6</td>
+<td>No DocBlock was found for property $errorCode</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>44</td>
+<td>No DocBlock was found for method setTimeout()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>50</td>
+<td>No DocBlock was found for method getTimeout()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>53</td>
+<td>No DocBlock was found for method useSecure()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>752</td>
+<td>Name of argument $since does not match with the DocBlock's name $start in campaignAbuseReports()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>752</td>
+<td>Name of argument $start does not match with the DocBlock's name $limit in campaignAbuseReports()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>752</td>
+<td>Name of argument $limit does not match with the DocBlock's name $since in campaignAbuseReports()</td>
+</tr>
+<tr class="notice">
+<td>notice</td>
+<td>2799</td>
+<td>Parameter  could not be found in callMethod()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>2809</td>
+<td>Argument $method is missing from the Docblock of callServer()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>2809</td>
+<td>Argument $params is missing from the Docblock of callServer()</td>
 </tr>
 </tbody>
 </table></div>
@@ -556,7 +671,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </div>
 <div class="package-contents">
 <a name="class.student.php" id="class.student.php"></a><h3>
-<i class="icon-file"></i>class.student.php<small style="float: right;padding-right: 10px;">1</small>
+<i class="icon-file"></i>class.student.php<small style="float: right;padding-right: 10px;">6</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -564,16 +679,43 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <th>Line</th>
 <th>Description</th>
 </tr></thead>
-<tbody><tr class="error">
+<tbody>
+<tr class="error">
 <td>error</td>
 <td>0</td>
 <td>No page-level DocBlock was found in file class.student.php</td>
-</tr></tbody>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>121</td>
+<td>Argument $getdropped is missing from the Docblock of getStudentSchedule()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>269</td>
+<td>Argument $week is missing from the Docblock of getAgeDifference()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>269</td>
+<td>Argument $dob is missing from the Docblock of getAgeDifference()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>269</td>
+<td>Argument $minage is missing from the Docblock of getAgeDifference()</td>
+</tr>
+<tr class="error">
+<td>error</td>
+<td>296</td>
+<td>Argument $stuid is missing from the Docblock of isStudentEnrolledStatic()</td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div class="package-contents">
 <a name="class.ux.php" id="class.ux.php"></a><h3>
-<i class="icon-file"></i>class.ux.php<small style="float: right;padding-right: 10px;">15</small>
+<i class="icon-file"></i>class.ux.php<small style="float: right;padding-right: 10px;">14</small>
 </h3>
 <div><table class="table markers table-bordered">
 <thead><tr>
@@ -624,38 +766,33 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>81</td>
+<td>84</td>
 <td>Argument $passToHeader is missing from the Docblock of makeHead()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>81</td>
+<td>84</td>
 <td>Argument $passToNav is missing from the Docblock of makeHead()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>81</td>
+<td>84</td>
 <td>Argument $ovrHeader is missing from the Docblock of makeHead()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>81</td>
+<td>84</td>
 <td>Argument $ovrNav is missing from the Docblock of makeHead()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>119</td>
+<td>122</td>
 <td>Argument $crumb is missing from the Docblock of makeBreadcrumb()</td>
 </tr>
 <tr class="error">
 <td>error</td>
-<td>137</td>
+<td>140</td>
 <td>Argument $newsItem is missing from the Docblock of makeNews()</td>
-</tr>
-<tr class="error">
-<td>error</td>
-<td>158</td>
-<td>No DocBlock was found for method flush()</td>
 </tr>
 </tbody>
 </table></div>
@@ -666,7 +803,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-28T19:39:27-08:00.<br></footer></div>
+            generated on 2013-07-08T11:54:10+08:00.<br></footer></div>
 </div>
 </body>
 </html>

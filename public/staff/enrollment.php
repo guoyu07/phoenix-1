@@ -27,7 +27,7 @@ header("Pragma: public");
  
 $fh = @fopen( 'php://output', 'w' );
 
-$stmt = Data::prepare("SELECT cl.ClassID as `Class ID`, co.CourseSubj as `Subject`, co.CourseID as `Course ID`, co.CourseTitle as `CourseTitle`, st.StaffName as `Teacher`, CONCAT(cl.ClassAgeMin, '-', cl.ClassAgeMax, ' yrs.') as `Age Range`, CONCAT('Period ', cl.ClassPeriodBegin, '-', cl.ClassPeriodEnd) as `Period`, CONCAT((SELECT COUNT(e.EnrollID) FROM enrollment e WHERE e.ClassID = cl.ClassID AND e.EnrollStatus = 'enrolled'), '/', cl.ClassEnrollMax, ' enrolled') as `EA` FROM classes cl, courses co, staff st WHERE st.StaffID = co.TeacherLead AND cl.CourseID = co.CourseID AND cl.ClassWeek = :week AND cl.ClassStatus = 'active' AND co.CourseSubj IN ('PHED', 'ARTS', 'MSCT', 'LANG') ORDER BY cl.ClassPeriodBegin ASC, co.CourseSubj ASC, co.CourseTitle ASC");
+$stmt = Data::prepare("SELECT cl.ClassID as `Class ID`, co.CourseSubj as `Subject`, co.CourseID as `Course ID`, co.CourseTitle as `CourseTitle`, st.StaffName as `Teacher`, CONCAT(cl.ClassAgeMin, '-', cl.ClassAgeMax, ' yrs.') as `Age Range`, CONCAT('Period ', cl.ClassPeriodBegin, '-', cl.ClassPeriodEnd) as `Period`, CONCAT((SELECT COUNT(e.EnrollID) FROM enrollment e, students s WHERE e.ClassID = cl.ClassID AND e.EnrollStatus = 'enrolled' AND s.StudentID = e.StudentID AND s.StudentSubmitted = 1), '/', cl.ClassEnrollMax, ' enrolled') as `EA` FROM classes cl, courses co, staff st WHERE st.StaffID = co.TeacherLead AND cl.CourseID = co.CourseID AND cl.ClassWeek = :week AND cl.ClassStatus = 'active' AND co.CourseSubj IN ('PHED', 'ARTS', 'MSCT', 'LANG') ORDER BY cl.ClassPeriodBegin ASC, co.CourseSubj ASC, co.CourseTitle ASC");
 $stmt->bindParam('week', $_GET['week']);
 $stmt->execute();
 

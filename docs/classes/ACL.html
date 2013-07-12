@@ -36,11 +36,11 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">84</span></a></li>
+                <span class="label label-info">108</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
-                <span class="label label-info">0</span></a></li>
+                <span class="label label-info">2</span></a></li>
 </ul>
 </li>
 </ul></div>
@@ -61,6 +61,8 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
+<li class="method public "><a href="#method_addTeacherSafe" title="addTeacherSafe :: Sees if a teacher exists, if so, returns their Staff ID."><span class="description">Sees if a teacher exists, if so, returns their Staff ID.</span><pre>addTeacherSafe()</pre></a></li>
+<li class="method public "><a href="#method_checkActive" title="checkActive :: Sees if an associated family account is activated."><span class="description">Sees if an associated family account is activated.</span><pre>checkActive()</pre></a></li>
 <li class="method public inherited"><a href="#method_checkHash" title="checkHash :: "><span class="description">checkHash()
         </span><pre>checkHash()</pre></a></li>
 <li class="method public "><a href="#method_checkLogin" title="checkLogin :: Verifies an active SSO session information including IP and UA validation"><span class="description">Verifies an active SSO session information including IP and UA validation</span><pre>checkLogin()</pre></a></li>
@@ -76,6 +78,7 @@ Copyright (C) 2008-2010 Chris Schuld  (chris@chrisschuld</a></li>
 <li class="method public "><a href="#method_login" title="login :: Performs an SSO login"><span class="description">Performs an SSO login</span><pre>login()</pre></a></li>
 <li class="method public "><a href="#method_logout" title="logout :: Logs a user out based on their session"><span class="description">Logs a user out based on their session</span><pre>logout()</pre></a></li>
 <li class="method public "><a href="#method_makeSsoObject" title="makeSsoObject :: Creates an SSO object of the specified type"><span class="description">Creates an SSO object of the specified type</span><pre>makeSsoObject()</pre></a></li>
+<li class="method public "><a href="#method_updatePassword" title="updatePassword :: Updates SSO password and logs it"><span class="description">Updates SSO password and logs it</span><pre>updatePassword()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
@@ -106,7 +109,7 @@ to the entire package.</p>
 <div class="details">
 <div class="long_description"><p>Requires Common class.</p></p>
 
-<p>ACL and Security class as of 04JAN13 require SSO access.</p></div>
+<p>ACL and Security class as of v30104 require SSO access.</p></div>
 <table class="table table-bordered">
 <tr>
 <th>author</th>
@@ -123,6 +126,38 @@ to the entire package.</p>
 </table>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
+<a id="method_addTeacherSafe"></a><div class="element clickable method public method_addTeacherSafe" data-toggle="collapse" data-target=".method_addTeacherSafe .collapse">
+<h2>Sees if a teacher exists, if so, returns their Staff ID.</h2>
+<pre>addTeacherSafe(\str $email, \str $name) : int</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>If not, creates it and returns staff ID</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$email</h4>
+<code>\str</code><p>Email address used to authenticate teacher</p></div>
+<div class="subelement argument">
+<h4>$name</h4>
+<code>\str</code><p>Teacher's name in case we need to create it in the Staff table</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>int</code>Staff ID of new/existing teacher. Returns FALSE if email doesn't correspond to a teacher</div>
+</div></div>
+</div>
+<a id="method_checkActive"></a><div class="element clickable method public method_checkActive" data-toggle="collapse" data-target=".method_checkActive .collapse">
+<h2>Sees if an associated family account is activated.</h2>
+<pre>checkActive(int $id) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"><p>True if active, false otherwise</p></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>Single sign-on user ID number</p>
+</div>
+</div></div>
+</div>
 <a id="method_checkHash"></a><div class="element clickable method public method_checkHash" data-toggle="collapse" data-target=".method_checkHash .collapse">
 <h2>checkHash()
         </h2>
@@ -174,33 +209,31 @@ to the entire package.</p>
 </div>
 <a id="method_checkSsoEmail"></a><div class="element clickable method public method_checkSsoEmail" data-toggle="collapse" data-target=".method_checkSsoEmail .collapse">
 <h2>Looks up SSO object ID by email and (optionally) object type.</h2>
-<pre>checkSsoEmail($email, $portalType) </pre>
+<pre>checkSsoEmail(string $email, string $portalType) </pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"><p>Success returns SSOID.</p></div>
-<table class="table table-bordered">
-<tr>
-<th>package</th>
-<td><a href="../packages/Phoenix.html">Phoenix</a></td>
-</tr>
-<tr>
-<th>version</th>
-<td>20820</td>
-</tr>
-</table>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$email</h4></div>
-<div class="subelement argument"><h4>$portalType</h4></div>
+<div class="subelement argument">
+<h4>$email</h4>
+<code>string</code><p>Email address to lookup SSO object by</p></div>
+<div class="subelement argument">
+<h4>$portalType</h4>
+<code>string</code><p>Portal type to authenticate against (eg: public, staff...)</p>
+</div>
 </div></div>
 </div>
 <a id="method_genSession"></a><div class="element clickable method public method_genSession" data-toggle="collapse" data-target=".method_genSession .collapse">
 <h2>Generates a session key based on UA and IP and logs the action</h2>
-<pre>genSession($id) </pre>
+<pre>genSession(int $id) </pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$id</h4></div>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code><p>Single-sign-on user ID number</p>
+</div>
 </div></div>
 </div>
 <a id="method_getHash"></a><div class="element clickable method public method_getHash" data-toggle="collapse" data-target=".method_getHash .collapse">
@@ -222,12 +255,17 @@ to the entire package.</p>
 </div>
 <a id="method_getPermsByType"></a><div class="element clickable method public method_getPermsByType" data-toggle="collapse" data-target=".method_getPermsByType .collapse">
 <h2>Get array of permissions allowed determined by the object type</h2>
-<pre>getPermsByType($typeId) </pre>
+<pre>getPermsByType(int $typeId) : mixed</pre>
 <div class="labels"><span class="label">Static</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$typeId</h4></div>
+<div class="subelement argument">
+<h4>$typeId</h4>
+<code>int</code><p>Group ID of permissions to look up as an array</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>Permissions array based on ID => name of permission</div>
 </div></div>
 </div>
 <a id="method_getSsoObject"></a><div class="element clickable method public method_getSsoObject" data-toggle="collapse" data-target=".method_getSsoObject .collapse">
@@ -313,6 +351,27 @@ to the entire package.</p>
 <div class="subelement argument"><h4>$portal</h4></div>
 </div></div>
 </div>
+<a id="method_updatePassword"></a><div class="element clickable method public method_updatePassword" data-toggle="collapse" data-target=".method_updatePassword .collapse">
+<h2>Updates SSO password and logs it</h2>
+<pre>updatePassword($ssoid, $password) </pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/Phoenix.html">Phoenix</a></td>
+</tr>
+<tr>
+<th>version</th>
+<td>30405</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument"><h4>$ssoid</h4></div>
+<div class="subelement argument"><h4>$password</h4></div>
+</div></div>
+</div>
 <a id="method_getSsoTypeByName"></a><div class="element clickable method private method_getSsoTypeByName" data-toggle="collapse" data-target=".method_getSsoTypeByName .collapse">
 <h2>getSsoTypeByName()
         </h2>
@@ -371,7 +430,7 @@ to the entire package.</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a12</a> and<br>
-            generated on 2013-01-28T19:39:27-08:00.<br></footer></div>
+            generated on 2013-07-08T11:54:10+08:00.<br></footer></div>
 </div>
 </body>
 </html>
