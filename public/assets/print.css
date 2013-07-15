@@ -15,3 +15,7 @@ body {
 .print-invisible {
     visibility: hidden !important;
 }
+
+div.navbar {
+    display: none;
+}
