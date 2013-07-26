@@ -31,9 +31,9 @@ if (!ACL::checkLogin('staff')) {
 $h['title'] = 'Magic Number';
 $n['my_name'] = $_laoshi->staff['StaffName'];
 
-$stmt = Data::query("select sum(PayAmount) as total from payments where PayVerified = 1 and PayAmount < 0");
+$stmt = Data::query("select sum(PayAmount) as total from payments where PayVerified = 1 and PayAmount < 0 and PayMethod = 'Cheque'");
 $total = $stmt->fetch(PDO::FETCH_ASSOC);
-$total_real = $total['total']*(-1) + 20000;
+$total_real = $total['total']*(-1);
 
 $p['total'] = number_format($total_real);
 

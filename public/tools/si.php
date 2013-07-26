@@ -10,6 +10,13 @@ define('PHX_MAILER',    true);
 // Include common ignition class
 require_once(PTP . 'php/ignition.php');
 
+
+
+if (preg_match('/^'.str_replace(array('\*','\?'),array('(.*?)','[0-9]'),preg_quote('218.188.*.*')).'$/',$_SERVER['REMOTE_ADDR']) == 0) {
+    echo UX::grabPage('text_snippets/qr_error', array('msg' => 'Don\'t even think about signing in outside of CIS.'), true);
+    exit();
+}
+
 // Check that current person exists
 if ($_SERVER['QUERY_STRING'] == 'magic') {
     setcookie('SignIn', 0, time()-3600, '/');
