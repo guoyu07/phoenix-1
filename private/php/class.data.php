@@ -10,17 +10,17 @@ define('DB_HOST',   '127.0.0.1');
 /**
  * @package     Phoenix
  */
-define('DB_USER',   'webuser');
+define('DB_USER',   ''); //removed
 
 /**
  * @package     Phoenix
  */
-define('DB_PASS',   'Ci$L1n0d3VPS');
+define('DB_PASS',   ''); // removed
 
 /**
  * @package     Phoenix
  */
-define('DB_NAME',   'phoenix2');
+define('DB_NAME',   ''); //removed
 
 /**
  * @package     Phoenix
